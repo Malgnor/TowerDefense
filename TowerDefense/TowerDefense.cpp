@@ -2,6 +2,7 @@
 #include "MapEditor.h"
 
 #include "TorreExemplo.h"
+#include "Torre2.h"
 #include "InimigoExemplo.h"
 
 #include <c2d2\chien2d2.h>
@@ -21,17 +22,28 @@ Tela* TowerDefense::proximaTela(){
 
 void TowerDefense::inicializar(){
 	mapa = Mapa();
+	tIndice = 0;
 	mapa.inicializar();
 	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -16, 304, 1));
 }
 void TowerDefense::atualizar(){
 	C2D2_Mouse* m = C2D2_PegaMouse();
 	C2D2_Botao* teclas = C2D2_PegaTeclas();
+	if (teclas[C2D2_1].pressionado) {
+		tIndice = 1;
+	}
+	if (teclas[C2D2_2].pressionado) {
+		tIndice = 0;
+	}
 	mouseX = m->x;
 	mouseY = m->y;
 	if(m->botoes[C2D2_MESQUERDO].ativo && mouseX < 576 && mouseY < 576 && mapa.conteudo(mouseX, mouseY) == 0){
 		mapa.construir(mouseX, mouseY);
-		gAtor.adicionar(new TorreExemplo(gAtor, mouseX, mouseY));
+		switch (tIndice) {
+		case 1:gAtor.adicionar(new Torre2(gAtor, mouseX, mouseY)); break;
+		case 0:gAtor.adicionar(new TorreExemplo(gAtor, mouseX, mouseY)); break;
+		}
+		
 	}
 	if(m->botoes[C2D2_MDIREITO].pressionado)
 		gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -16, 304, 1));
