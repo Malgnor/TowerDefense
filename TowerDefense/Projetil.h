@@ -7,6 +7,7 @@ class Projetil : public Ator
 {
 protected:
 	int posX, posY, vel;
+	int pSprite;
 	Ator& alvo;
 	bool alive;
 

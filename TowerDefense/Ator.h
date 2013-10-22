@@ -13,13 +13,13 @@ class Ator
 
 		virtual int x() = 0;
 		virtual int y() = 0;
+		virtual int l() = 0;
+		virtual int a() = 0;
 		virtual int sprite() = 0;
 		virtual int indice() = 0;
 
 		virtual Tipo tipo() = 0;
-
-		virtual bool primitiva() = 0;
-
+		
 		virtual void aoColidir(Ator* ator) = 0;
 
 		virtual bool estaNoJogo() = 0;

@@ -2,10 +2,8 @@
 
 #include "GerenteAtor.h"
 
-#include <c2d2\chien2d2primitivas.h>
 #include <c2d2\chien2d2.h>
 
-#include <iostream>
 #include <math.h>
 
 using namespace std;
@@ -23,23 +21,27 @@ int ProjetilExemplo::y(){
 	return posY;
 }
 
+int ProjetilExemplo::l(){
+	return 16;
+}
+
+int ProjetilExemplo::a(){
+	return 16;
+}
+
+
 int ProjetilExemplo::sprite(){
-	return 0;
+	return pSprite;
 }
 
 int ProjetilExemplo::indice(){
 	return 0;
 }
 
-bool ProjetilExemplo::primitiva(){
-	return true;
-}
-
-
 void ProjetilExemplo::aoColidir(Ator* ator){
-
+	if(ator->tipo() == INIMIGO)
+		alive = false;
 }
-
 
 bool ProjetilExemplo::estaNoJogo(){
 	return alive;
@@ -47,14 +49,10 @@ bool ProjetilExemplo::estaNoJogo(){
 
 
 void ProjetilExemplo::inicializar(){
+	pSprite = C2D2_CarregaSpriteSet("imgs/projE.png" , 0, 0);
 }
 		
 void ProjetilExemplo::atualizar(){
-	int size = 4;
-	if( ((posX >= alvo.x()-size && posY >= alvo.y()-size && posX <= alvo.x()+size && posY <= alvo.y()+size) || (!alvo.estaNoJogo())) ){
-		alive = false;
-		return;
-	}
 	int dx = posX-alvo.x();
 	int dy = posY-alvo.y();
 	float d = sqrt(dx*dx+dy*dy);
@@ -65,8 +63,8 @@ void ProjetilExemplo::atualizar(){
 }
 		
 void ProjetilExemplo::desenhar(){
-	C2D2P_RetanguloPintado(posX-3, posY-3, posX+3, posY+3, 0, 0, 255);
+	C2D2_DesenhaSpriteCentro(pSprite, 0, posX, posY, l(), a());
 }
 void ProjetilExemplo::finalizar(){
-
+	C2D2_RemoveSpriteSet(pSprite);
 }

@@ -114,11 +114,14 @@
     <ClInclude Include="TowerDefense.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="imgs\inimE.png" />
     <Image Include="imgs\map.png" />
     <Image Include="imgs\mouse.png" />
     <Image Include="imgs\OpenSymbol16.bmp" />
     <Image Include="imgs\OpenSymbol32.bmp" />
+    <Image Include="imgs\projE.png" />
     <Image Include="imgs\torre2.bmp" />
+    <Image Include="imgs\torreE.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

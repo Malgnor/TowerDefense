@@ -1,5 +1,6 @@
 #include "InimigoExemplo.h"
-#include <c2d2\chien2d2primitivas.h>
+
+#include <c2d2\chien2d2.h>
 
 InimigoExemplo::InimigoExemplo(GerenteAtor& _gerente, Mapa& _map, int _x, int _y, int _vel)
 	: Inimigo(_gerente, _map, _x, _y, _vel)
@@ -14,31 +15,32 @@ int InimigoExemplo::y(){
 	return posY;
 }
 
+int InimigoExemplo::l(){
+	return 30;
+}
+
+int InimigoExemplo::a(){
+	return 30;
+}
+
 int InimigoExemplo::sprite(){
-	return 0;
+	return iSprite;
 }
 
 int InimigoExemplo::indice(){
 	return 0;
 }
 
-bool InimigoExemplo::primitiva(){
-	return true;
-}
-
-
 void InimigoExemplo::aoColidir(Ator* ator){
 
 }
-
 
 bool InimigoExemplo::estaNoJogo(){
 	return alive;
 }
 
-
 void InimigoExemplo::inicializar(){
-
+	iSprite = C2D2_CarregaSpriteSet("imgs/inimE.png", 0, 0);
 }
 		
 void InimigoExemplo::atualizar(){
@@ -77,11 +79,10 @@ void InimigoExemplo::atualizar(){
 		passos = 32;
 }
 		
-void InimigoExemplo::desenhar(){		
-	C2D2P_RetanguloPintado(posX-8, posY-8, posX+8, posY+8, 155, 25, 25);
-	C2D2P_Retangulo(posX-8, posY-8, posX+8, posY+8, 50, 0, 0);
+void InimigoExemplo::desenhar(){
+	C2D2_DesenhaSpriteCentro(iSprite, 0, posX, posY, l(), a());
 }
 
 void InimigoExemplo::finalizar(){
-
+	C2D2_RemoveSpriteSet(iSprite);
 }

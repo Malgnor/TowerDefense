@@ -69,28 +69,19 @@ void GerenteAtor::atualizar()
 		if(atores[i]->tipo() == TORRE){
 
 		} else {
-			if(atores[i]->primitiva()){
-				//TODO: Colisão entre sprites e primitivas
-			}
-			else{
-				for (unsigned j = i+1; j < atores.size(); j++) 
-				{
-					if(atores[j]->tipo() == TORRE){
+			for (unsigned j = i+1; j < atores.size(); j++) 
+			{
+				if(atores[j]->tipo() == TORRE || atores[j]->tipo() == atores[i]->tipo()){
 
-					} else {
-						if(atores[j]->primitiva()){					
-							//TODO: Colisão entre sprites e primitivas
-						} else {
-							if (C2D2_ColidiuSprites(
-								atores[i]->sprite(), atores[i]->indice(),
-								atores[i]->x(), atores[i]->y(),
-								atores[j]->sprite(), atores[j]->indice(),
-								atores[j]->x(), atores[j]->y()))
-							{
-								atores[i]->aoColidir(atores[j]);
-								atores[j]->aoColidir(atores[i]);
-							}
-						}
+				} else {
+					if (C2D2_ColidiuSprites(
+						atores[i]->sprite(), atores[i]->indice(),
+						atores[i]->x()-atores[i]->l()/2, atores[i]->y()-atores[i]->a()/2,
+						atores[j]->sprite(), atores[j]->indice(),
+						atores[j]->x()-atores[j]->l()/2, atores[j]->y()-atores[j]->a()/2))
+					{
+						atores[i]->aoColidir(atores[j]);
+						atores[j]->aoColidir(atores[i]);
 					}
 				}
 			}
@@ -103,12 +94,7 @@ void GerenteAtor::desenhar()
 {
 	for (Ator* ator : atores) 
 	{
-		if(!ator->primitiva()){
-		C2D2_DesenhaSprite(ator->sprite(), ator->indice(),
-			ator->x(), ator->y());
-		} else {
 			ator->desenhar();
-		}
 	}
 }
 

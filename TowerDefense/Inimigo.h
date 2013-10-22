@@ -10,6 +10,7 @@ class Inimigo : public Ator
 {
 protected:
 	int posX, posY, passos, vel;
+	int iSprite;
 	iDirecao dir;
 	Mapa& mapa;
 	bool alive;

@@ -42,6 +42,13 @@ void MapEditor::atualizar()
 		mapa.save();
 	if(teclas[C2D2_D].pressionado)
 		mapa.load();
+	if(teclas[C2D2_N].pressionado){
+		for(int x = 0; x < 18; x++){
+			for(int y = 0; y < 18; y++){
+				mapa.construir(x*32, y*32, -1, 0);
+			}
+		}
+	}
 	if(teclas[C2D2_0].pressionado)
 		id = 0;
 	if(teclas[C2D2_1].pressionado)
@@ -101,7 +108,8 @@ void MapEditor::desenhar()
 	C2D2_DesenhaTexto(OpenSymbol16, 600, 482, "0-9 - Muda id", C2D2_TEXTO_ESQUERDA);
 	C2D2_DesenhaTexto(OpenSymbol16, 600, 498, "S - Salvar mapa", C2D2_TEXTO_ESQUERDA);
 	C2D2_DesenhaTexto(OpenSymbol16, 600, 514, "D - Carregar mapa", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(OpenSymbol16, 600, 530, "R - Reset", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(OpenSymbol16, 600, 530, "N - Novo mapa", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(OpenSymbol16, 600, 546, "R - Reset", C2D2_TEXTO_ESQUERDA);
 	C2D2_DesenhaSprite(mouseSprite, 0, mouseX, mouseY);
 }
 

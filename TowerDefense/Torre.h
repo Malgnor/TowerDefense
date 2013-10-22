@@ -12,6 +12,7 @@ class Torre : public Ator
 protected:
 	int posX, posY, alcance;
 	tESTADO estado;
+	int tSprite;
 
 	//Rate of Fire
 	int RoF;

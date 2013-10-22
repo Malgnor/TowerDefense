@@ -10,11 +10,11 @@ public:
 	
 	int x();
 	int y();
+	int l();
+	int a();
 	int sprite();
 	int indice();
-
-	bool primitiva();
-
+	
 	void aoColidir(Ator* ator);
 
 	bool estaNoJogo();

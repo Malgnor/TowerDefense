@@ -130,5 +130,14 @@
     <Image Include="imgs\OpenSymbol32.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="imgs\inimE.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="imgs\projE.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="imgs\torreE.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

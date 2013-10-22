@@ -10,10 +10,11 @@ public:
 	TorreExemplo(GerenteAtor& _gerente, int _x, int _y);
 	int x();
 	int y();
+	int l();
+	int a();
 	int sprite();
 	int indice();
 	
-	bool primitiva();
 
 	void aoColidir(Ator* ator);
 
