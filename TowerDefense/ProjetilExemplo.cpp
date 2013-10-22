@@ -53,6 +53,10 @@ void ProjetilExemplo::inicializar(){
 }
 		
 void ProjetilExemplo::atualizar(){
+	if(!alvo.estaNoJogo()){
+		alive = false;
+		return;
+	}
 	int dx = posX-alvo.x();
 	int dy = posY-alvo.y();
 	float d = sqrt(dx*dx+dy*dy);
