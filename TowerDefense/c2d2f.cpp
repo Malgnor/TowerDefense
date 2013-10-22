@@ -74,6 +74,8 @@ bool stringInput( string& x ){
 		x+="9";
 	if(teclas[C2D2_0].pressionado)
 		x+="0";
+	if(teclas[C2D2_ESPACO].pressionado)
+		x+=" ";
 	return true;
 }
 
@@ -159,6 +161,8 @@ bool stringFInput( string& x, char* txt)
 			x+="9";
 		if(teclas[C2D2_0].pressionado)
 			x+="0";
+		if(teclas[C2D2_ESPACO].pressionado)
+			x+=" ";
 		C2D2_DesenhaTexto(OpenSymbol16, 400, 280, txt, C2D2_TEXTO_CENTRALIZADO);
 		C2D2_DesenhaTexto(OpenSymbol16, 400, 300, x.c_str(), C2D2_TEXTO_CENTRALIZADO);
 		C2D2_DesenhaTexto(OpenSymbol16, 400, 320, "Pressione ENTER ou ESC", C2D2_TEXTO_CENTRALIZADO);
@@ -251,6 +255,8 @@ std::string stringFInput( char* txt )
 			x+="9";
 		if(teclas[C2D2_0].pressionado)
 			x+="0";
+		if(teclas[C2D2_ESPACO].pressionado)
+			x+=" ";
 		C2D2_DesenhaTexto(OpenSymbol16, 400, 280, txt, C2D2_TEXTO_CENTRALIZADO);
 		C2D2_DesenhaTexto(OpenSymbol16, 400, 300, x.c_str(), C2D2_TEXTO_CENTRALIZADO);
 		C2D2_DesenhaTexto(OpenSymbol16, 400, 320, "Pressione ENTER ou ESC", C2D2_TEXTO_CENTRALIZADO);
