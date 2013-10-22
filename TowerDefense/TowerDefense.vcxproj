@@ -90,6 +90,7 @@
     <ClCompile Include="Projetil.cpp" />
     <ClCompile Include="ProjetilExemplo.cpp" />
     <ClCompile Include="Torre.cpp" />
+    <ClCompile Include="Torre2.cpp" />
     <ClCompile Include="TorreExemplo.cpp" />
     <ClCompile Include="TowerDefense.cpp" />
   </ItemGroup>
@@ -106,11 +107,13 @@
     <ClInclude Include="ProjetilExemplo.h" />
     <ClInclude Include="Tela.h" />
     <ClInclude Include="Torre.h" />
+    <ClInclude Include="Torre2.h" />
     <ClInclude Include="TorreExemplo.h" />
     <ClInclude Include="TowerDefense.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="map\map.png" />
+    <Image Include="imgs\map.png" />
+    <Image Include="imgs\torre2.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

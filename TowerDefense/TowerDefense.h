@@ -10,6 +10,7 @@ class TowerDefense : public Tela
 private:
 	GerenteAtor gAtor;
 	Mapa mapa;
+	int tIndice;
 	int mouseX, mouseY;
 
 public:

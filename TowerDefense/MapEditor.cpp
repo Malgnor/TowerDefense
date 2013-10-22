@@ -21,8 +21,8 @@ Tela* MapEditor::proximaTela()
 
 void MapEditor::inicializar()
 {
-	mapSprite = C2D2_CarregaSpriteSet("map/map.png", 32, 32);
-	mouseSprite = C2D2_CarregaSpriteSet("mouse.png", 0, 0);
+	mapSprite = C2D2_CarregaSpriteSet("imgs/map.png", 32, 32);
+	mouseSprite = C2D2_CarregaSpriteSet("imgs/mouse.png", 0, 0);
 	mapa = Mapa();
 	mapa.inicializar();
 	id = 0;

@@ -7,9 +7,10 @@ class Torre2 : public Torre
 {
 private:
 	int image;
+	int ind;
 
 public:	
-	Torre2(GerenteAtor& _gerente, int _x, int _y);
+	Torre2(GerenteAtor& _gerente, int _x, int _y, int _ind);
 	int x();
 	int y();
 	int sprite();

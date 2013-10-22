@@ -5,9 +5,10 @@
 #include <c2d2\chien2d2.h>
 #include <c2d2\chien2d2primitivas.h>
 
-Torre2::Torre2(GerenteAtor& _gerente, int _x, int _y)
+Torre2::Torre2(GerenteAtor& _gerente, int _x, int _y, int _ind)
 	: Torre(_gerente, _x, _y)
 {
+	ind = _ind;
 }
 
 int Torre2::x(){
@@ -23,7 +24,7 @@ int Torre2::sprite(){
 }
 
 int Torre2::indice(){
-	return 0;
+	return ind;
 }
 
 bool Torre2::primitiva(){
@@ -42,7 +43,7 @@ void Torre2::inicializar(){
 	alcance = 100;
 	RoF = 40; // 1*segundos(60 frames)
 	cd = RoF;
-	image = C2D2_CarregaSpriteSet("map/torre2.bmp", 0, 0);
+	image = C2D2_CarregaSpriteSet("imgs/torre2.bmp", 32, 96);
 }
 
 void Torre2::atualizar(){
@@ -76,5 +77,5 @@ void Torre2::desenhar(){
 }
 
 void Torre2::finalizar(){
-
+	C2D2_RemoveSpriteSet(image);
 }
