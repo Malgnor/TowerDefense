@@ -11,7 +11,7 @@ class Inimigo : public Ator
 protected:
 	int posX, posY, passos, vel;
 	iDirecao dir;
-	Mapa& map;
+	Mapa& mapa;
 	bool alive;
 	
 public:

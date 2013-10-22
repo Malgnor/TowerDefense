@@ -6,9 +6,8 @@
 #include <c2d2\chien2d2primitivas.h>
 
 Torre2::Torre2(GerenteAtor& _gerente, int _x, int _y, int _ind)
-	: Torre(_gerente, _x, _y)
+	: Torre(_gerente, _x, _y), ind(_ind)
 {
-	ind = _ind;
 }
 
 int Torre2::x(){
@@ -43,7 +42,7 @@ void Torre2::inicializar(){
 	alcance = 100;
 	RoF = 40; // 1*segundos(60 frames)
 	cd = RoF;
-	image = C2D2_CarregaSpriteSet("imgs/torre2.bmp", 32, 96);
+	image = C2D2_CarregaSpriteSet("imgs/torre2.bmp", 32, 32);
 }
 
 void Torre2::atualizar(){

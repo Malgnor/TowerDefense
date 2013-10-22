@@ -10,6 +10,7 @@ private:
 	int mapSprite, mouseSprite;
 	int mouseX, mouseY;
 	int tile, id;
+	int OpenSymbol16, OpenSymbol32;
 	Mapa mapa;
 
 public:

@@ -60,6 +60,9 @@
     <ClCompile Include="Torre2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="c2d2f.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ator.h">
@@ -107,12 +110,24 @@
     <ClInclude Include="Torre2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="c2d2f.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="imgs\torre2.bmp">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="imgs\map.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="imgs\mouse.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="imgs\OpenSymbol16.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="imgs\OpenSymbol32.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

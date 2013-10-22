@@ -79,6 +79,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Ator.cpp" />
+    <ClCompile Include="c2d2f.cpp" />
     <ClCompile Include="GameLoop.cpp" />
     <ClCompile Include="GerenteAtor.cpp" />
     <ClCompile Include="GerenteTela.cpp" />
@@ -96,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ator.h" />
+    <ClInclude Include="c2d2f.h" />
     <ClInclude Include="GameLoop.h" />
     <ClInclude Include="GerenteAtor.h" />
     <ClInclude Include="GerenteTela.h" />
@@ -113,6 +115,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="imgs\map.png" />
+    <Image Include="imgs\mouse.png" />
+    <Image Include="imgs\OpenSymbol16.bmp" />
+    <Image Include="imgs\OpenSymbol32.bmp" />
     <Image Include="imgs\torre2.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

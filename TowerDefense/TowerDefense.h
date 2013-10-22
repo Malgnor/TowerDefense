@@ -12,6 +12,8 @@ private:
 	Mapa mapa;
 	int tIndice;
 	int mouseX, mouseY;
+	int mouseSprite;
+	int OpenSymbol16, OpenSymbol32;
 
 public:
 	Tela* proximaTela();

@@ -60,13 +60,13 @@ void InimigoExemplo::atualizar(){
 		}
 	} else {
 		passos = 32;
-		if(map.conteudo(posX + 32, posY) == 5 && dir != iESQUERDA)
+		if(mapa.conteudo(posX + 32, posY) == 5 && dir != iESQUERDA)
 			dir = iDIREITA;
-		else if(map.conteudo(posX - 32, posY) == 5 && dir != iDIREITA)
+		else if(mapa.conteudo(posX - 32, posY) == 5 && dir != iDIREITA)
 			dir = iESQUERDA;
-		else if(map.conteudo(posX, posY + 32) == 5 && dir != iCIMA)
+		else if(mapa.conteudo(posX, posY + 32) == 5 && dir != iCIMA)
 			dir = iBAIXO;
-		else if(map.conteudo(posX, posY - 32) == 5 && dir != iBAIXO)
+		else if(mapa.conteudo(posX, posY - 32) == 5 && dir != iBAIXO)
 			dir = iCIMA;
 		else
 			passos = 0;

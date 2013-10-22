@@ -1,5 +1,7 @@
 #include "Mapa.h"
 
+#include "c2d2f.h"
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -19,7 +21,7 @@ Mapa::Mapa()
 
 void Mapa::inicializar()
 {
-	sprite = C2D2_CarregaSpriteSet("map/map.png", 32, 32);
+	sprite = C2D2_CarregaSpriteSet("imgs/map.png", 32, 32);
 }
 
 
@@ -48,14 +50,12 @@ void Mapa::construir( int x, int y, int sprite, int id)
 {
 	sprite++;
 	map[x/32][y/32] = (sprite*10)+id;
-	cout << (sprite*10)+id << "\tid: " << id << "\ttile: " << sprite << endl;
 }
 
 void Mapa::save()
 {
 	string strmap = "";
-	cout << "Nome do mapa: ";
-	getline(cin, strmap);
+	stringFInput(strmap,"(SAVE)Nome do mapa:");
 	ofstream ofile("map/"+strmap+".map", ios_base::binary);
 	ofile.write((char*)this, sizeof(Mapa));
 	ofile.close();
@@ -63,12 +63,13 @@ void Mapa::save()
 
 void Mapa::load()
 {
+	C2D2_RemoveSpriteSet(sprite);
 	string strmap = "";
-	cout << "Nome do mapa: ";
-	getline(cin, strmap);
+	stringFInput(strmap, "(LOAD)Nome do mapa:");
 	ifstream ifile("map/"+strmap+".map", ios_base::binary);
 	ifile.read((char*)this, sizeof(Mapa));
 	ifile.close();
+	sprite = C2D2_CarregaSpriteSet("imgs/map.png", 32, 32);
 }
 
 void Mapa::finalizar()
