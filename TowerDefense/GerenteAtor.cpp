@@ -42,6 +42,8 @@ void GerenteAtor::atualizar()
 	}
 	mortos.clear();
 
+	if(atores.empty())
+		return;
 	//3. Atualiza a lógica do ator e, caso queira sair do jogo
 	//finaliza e move para a lista de mortos. Caso contrário,
 	//mantém o ator numa lista de vivos.
@@ -63,7 +65,10 @@ void GerenteAtor::atualizar()
 	//Substitui a lista de atores pela de vivos.
 	swap(atores, vivos);
 
-	//Testa a colisão entre os atores vivos
+	if(atores.empty())
+		return;
+
+	//Testa a colisão entre os atores vivos	
 	for (unsigned i = 0; i < atores.size() - 1; i++) 
 	{
 		if(atores[i]->tipo() == TORRE){
@@ -92,6 +97,8 @@ void GerenteAtor::atualizar()
 
 void GerenteAtor::desenhar()
 {
+	if(atores.empty())
+		return;
 	for (Ator* ator : atores) 
 	{
 			ator->desenhar();
@@ -118,6 +125,8 @@ Ator* GerenteAtor::maisPerto(int x, int y, int alcance, Tipo tipo){
 
 GerenteAtor::~GerenteAtor()
 {
+	if(atores.empty())
+		return;
 	for (Ator* ator : atores) 
 	{
 		delete ator;

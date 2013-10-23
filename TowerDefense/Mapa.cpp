@@ -21,7 +21,7 @@ Mapa::Mapa()
 
 void Mapa::inicializar()
 {
-	ifstream ifile("map/1.map", ios_base::binary);
+	ifstream ifile("map/2.map", ios_base::binary);
 	ifile.read((char*)this, sizeof(Mapa));
 	ifile.close();
 	sprite = C2D2_CarregaSpriteSet("imgs/map.png", 32, 32);

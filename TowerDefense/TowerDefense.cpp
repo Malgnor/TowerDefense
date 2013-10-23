@@ -29,7 +29,6 @@ void TowerDefense::inicializar(){
 	mapa = Mapa();
 	mapa.inicializar();
 	tIndice = 0;
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -16, 304, 1));
 }
 
 void TowerDefense::atualizar(){
