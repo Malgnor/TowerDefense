@@ -95,7 +95,7 @@ bool stringFInput( string& x, char* txt)
 		stringInput(x);
 		C2D2_DesenhaTexto(OpenSymbol16, 400, 280, txt, C2D2_TEXTO_CENTRALIZADO);
 		C2D2_DesenhaTexto(OpenSymbol16, 400, 300, x.c_str(), C2D2_TEXTO_CENTRALIZADO);
-		C2D2_DesenhaTexto(OpenSymbol16, 400, 320, "Shift + Espaço = Apaga um caracter", C2D2_TEXTO_CENTRALIZADO);
+		C2D2_DesenhaTexto(OpenSymbol16, 400, 320, "Shift + Espaï¿½o = Apaga um caracter", C2D2_TEXTO_CENTRALIZADO);
 		C2D2_DesenhaTexto(OpenSymbol16, 400, 340, "Pressione ENTER ou ESC para confimar", C2D2_TEXTO_CENTRALIZADO);
 		C2D2_Sincroniza(C2D2_FPS_PADRAO);
 	}
@@ -106,22 +106,5 @@ bool stringFInput( string& x, char* txt)
 std::string stringFInput( char* txt )
 {
 	string x = "";
-	bool m = false;
-	C2D2_Botao* teclas = C2D2_PegaTeclas();
-	int OpenSymbol16 = C2D2_CarregaFonte("imgs/OpenSymbol16.bmp", 16);
-	C2D2_Sincroniza(C2D2_FPS_PADRAO);
-	while(true){
-		C2D2_LimpaTela();
-		teclas = C2D2_PegaTeclas();
-		if(teclas[C2D2_ENTER].pressionado || teclas[C2D2_ESC].pressionado || teclas[C2D2_ENCERRA].pressionado)
-			break;
-		stringInput(x);
-		C2D2_DesenhaTexto(OpenSymbol16, 400, 280, txt, C2D2_TEXTO_CENTRALIZADO);
-		C2D2_DesenhaTexto(OpenSymbol16, 400, 300, x.c_str(), C2D2_TEXTO_CENTRALIZADO);
-		C2D2_DesenhaTexto(OpenSymbol16, 400, 320, "Shift + Espaço = Apaga um caracter", C2D2_TEXTO_CENTRALIZADO);
-		C2D2_DesenhaTexto(OpenSymbol16, 400, 340, "Pressione ENTER ou ESC para confimar", C2D2_TEXTO_CENTRALIZADO);
-		C2D2_Sincroniza(C2D2_FPS_PADRAO);
-	}
-	C2D2_RemoveFonte(OpenSymbol16);
-	return x;
+	return stringFInput(x, txt); ? x : "";
 }
