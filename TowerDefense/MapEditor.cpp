@@ -59,22 +59,10 @@ void MapEditor::atualizar()
 		id = 3;
 	if(teclas[C2D2_4].pressionado)
 		id = 4;
-	if(teclas[C2D2_5].pressionado)
-		id = 5;
-	if(teclas[C2D2_6].pressionado)
-		id = 6;
-	if(teclas[C2D2_7].pressionado)
-		id = 7;
-	if(teclas[C2D2_8].pressionado)
-		id = 8;
-	if(teclas[C2D2_9].pressionado)
-		id = 9;
 	if(m->botoes[C2D2_MESQUERDO].ativo && mouseX > 575){
-		for(int i = 0; i < 5; i++){
-			for(int j = 0; j < 2; j++){
-				if(C2D2_ColidiuSprites(mouseSprite, 0, mouseX, mouseY, mapSprite, i*2+j, 625+j*75, 100+i*75)){
-					tile = i*2+j;
-				}
+		for(int j = 0; j < 2; j++){
+			if(C2D2_ColidiuSprites(mouseSprite, 0, mouseX, mouseY, mapSprite, j, 625+j*75, 100)){
+				tile = j;
 			}
 		}
 	}
@@ -90,14 +78,12 @@ void MapEditor::atualizar()
 void MapEditor::desenhar()
 {
 	char txttile[50];
-	sprintf(txttile, "Tile:%d\tId:%d\t(%d,%d)\t(%d,%d)", tile, id, mouseX, mouseY, mouseX < 576 && mouseY < 576 ? mouseX/32 : 0, mouseY < 576 && mouseX < 576 ? mouseY/32 : 0);
+	sprintf(txttile, "Tile:%d\tId:%d\t(%d,%d)\t(%d,%d)[%d]", tile, id, mouseX, mouseY, mouseX < 576 && mouseY < 576 ? mouseX/32 : 0, mouseY < 576 && mouseX < 576 ? mouseY/32 : 0, mouseY < 576 && mouseX < 576 ? mapa.conteudo(mouseX, mouseY) : 0);
 	C2D2P_Linha(577, 0, 577, 577, 255, 255, 255);
 	C2D2P_Linha(0, 577, 577, 577, 255, 255, 255);
 	mapa.desenhar();
-	for(int i = 0; i < 5; i++){
-		for(int j = 0; j < 2; j++)
-			C2D2_DesenhaSprite(mapSprite, i*2+j, 625+j*75, 100+i*75);
-	}
+	for(int j = 0; j < 2; j++)
+		C2D2_DesenhaSprite(mapSprite, +j, 625+j*75, 100);
 	if(mouseX < 576 && mouseY < 576){
 		C2D2P_Retangulo((16+mouseX-mouseX%32)-16, (16+mouseY-mouseY%32)-16, (16+mouseX-mouseX%32)+16, (16+mouseY-mouseY%32)+16, 0, 255, 0);
 	}
@@ -105,7 +91,7 @@ void MapEditor::desenhar()
 	C2D2_DesenhaTexto(OpenSymbol16, 32, 580, txttile, C2D2_TEXTO_ESQUERDA);
 	C2D2_DesenhaTexto(OpenSymbol16, 600, 450, "Mouse Esquerdo - Coloca tile", C2D2_TEXTO_ESQUERDA);
 	C2D2_DesenhaTexto(OpenSymbol16, 600, 466, "Mouse Direiro - Remove Tile", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(OpenSymbol16, 600, 482, "0-9 - Muda id", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(OpenSymbol16, 600, 482, "0-4 - Muda id", C2D2_TEXTO_ESQUERDA);
 	C2D2_DesenhaTexto(OpenSymbol16, 600, 498, "S - Salvar mapa", C2D2_TEXTO_ESQUERDA);
 	C2D2_DesenhaTexto(OpenSymbol16, 600, 514, "D - Carregar mapa", C2D2_TEXTO_ESQUERDA);
 	C2D2_DesenhaTexto(OpenSymbol16, 600, 530, "N - Novo mapa", C2D2_TEXTO_ESQUERDA);

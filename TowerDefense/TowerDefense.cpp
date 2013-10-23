@@ -23,6 +23,7 @@ Tela* TowerDefense::proximaTela(){
 }
 
 void TowerDefense::inicializar(){
+	C2D2_TrocaCorLimpezaTela(10, 10, 10);
 	mouseSprite = C2D2_CarregaSpriteSet("imgs/mouse.png", 0, 0);
 	OpenSymbol16 = C2D2_CarregaFonte("imgs/OpenSymbol16.bmp", 16);
 	OpenSymbol32 = C2D2_CarregaFonte("imgs/OpenSymbol32.bmp", 32);
@@ -66,13 +67,13 @@ void TowerDefense::atualizar(){
 }
 void TowerDefense::desenhar(){
 	char txt[50];
-	sprintf(txt, "Indice torre:%d\t(%d,%d)\t(%d,%d)[%d]", tIndice, mouseX, mouseY, mouseX < 576 && mouseY < 576 ? mouseX/32 : 0, mouseY < 576 && mouseX < 576 ? mouseY/32 : 0, mouseY < 576 && mouseX < 576 ? mapa.conteudo(mouseX, mouseY) : 0);
+	sprintf(txt, "iTorre:%d\t(%d,%d)\t(%d,%d)[%d]", tIndice, mouseX, mouseY, mouseX < 576 && mouseY < 576 ? mouseX/32 : 0, mouseY < 576 && mouseX < 576 ? mouseY/32 : 0, mouseY < 576 && mouseX < 576 ? mapa.conteudo(mouseX, mouseY) : 0);
 
 	C2D2P_Linha(577, 0, 577, 577, 255, 255, 255);
 	C2D2P_Linha(0, 577, 577, 577, 255, 255, 255);
 	mapa.desenhar();
 	if(mouseX < 576 && mouseY < 576 && mapa.conteudo(mouseX, mouseY) == 0){
-		C2D2P_Retangulo((16+mouseX-mouseX%32)-16, (16+mouseY-mouseY%32)-16, (16+mouseX-mouseX%32)+16, (16+mouseY-mouseY%32)+16, 0, 255, 0);
+		C2D2P_Retangulo((16+mouseX-mouseX%32)-16, (16+mouseY-mouseY%32)-16, (16+mouseX-mouseX%32)+16, (16+mouseY-mouseY%32)+16, 0, 155, 0);
 	}
 	gAtor.desenhar();
 

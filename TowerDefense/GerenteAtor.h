@@ -4,7 +4,6 @@
 
 #include "Ator.h"
 
-
 class GerenteAtor
 {
 	private:

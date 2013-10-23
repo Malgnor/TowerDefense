@@ -21,9 +21,6 @@ Mapa::Mapa()
 
 void Mapa::inicializar()
 {
-	ifstream ifile("map/2.map", ios_base::binary);
-	ifile.read((char*)this, sizeof(Mapa));
-	ifile.close();
 	sprite = C2D2_CarregaSpriteSet("imgs/map.png", 32, 32);
 }
 
@@ -32,16 +29,14 @@ void Mapa::desenhar()
 {
 	for(int x = 0; x < 18; x++){
 			for(int y = 0; y < 18; y++){
-				if(map[x][y] > 9){
-					C2D2_DesenhaSprite(sprite, (map[x][y]/10)-1, x*32, y*32);
-				}
+				C2D2_DesenhaSprite(sprite, map[x][y]/5, x*32, y*32);
 		}
 	}
 }
 
 char Mapa::conteudo( int x, int y )
 {
-	return map[x/32][y/32]%10;
+	return map[x/32][y/32]%5;
 }
 
 void Mapa::construir( int x, int y )
@@ -51,17 +46,18 @@ void Mapa::construir( int x, int y )
 
 void Mapa::construir( int x, int y, int sprite, int id)
 {
-	sprite++;
-	map[x/32][y/32] = (sprite*10)+id;
+	map[x/32][y/32] = (sprite*5)+id;
 }
 
 void Mapa::save()
 {
+	C2D2_RemoveSpriteSet(sprite);
 	string strmap = "";
 	stringFInput(strmap,"(SAVE)Nome do mapa:");
 	ofstream ofile("map/"+strmap+".map", ios_base::binary);
 	ofile.write((char*)this, sizeof(Mapa));
 	ofile.close();
+	sprite = C2D2_CarregaSpriteSet("imgs/map.png", 32, 32);
 }
 
 void Mapa::load()

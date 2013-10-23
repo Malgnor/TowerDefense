@@ -3,7 +3,7 @@
 bool stringInput( string& x ){
 	C2D2_Botao* teclas = C2D2_PegaTeclas();
 	bool m = false;
-	m = teclas[C2D2_LSHIFT].ativo ? true : false;
+	m = teclas[C2D2_LSHIFT].ativo || teclas[C2D2_RSHIFT].ativo ? true : false;
 	if(teclas[C2D2_A].pressionado)
 		x+= m ? "A" : "a";
 	if(teclas[C2D2_B].pressionado)
@@ -90,12 +90,12 @@ bool stringFInput( string& x, char* txt)
 	while(true){
 		C2D2_LimpaTela();
 		teclas = C2D2_PegaTeclas();
-		if(teclas[C2D2_ENTER].pressionado || teclas[C2D2_ESC].pressionado)
+		if(teclas[C2D2_ENTER].pressionado || teclas[C2D2_ESC].pressionado || teclas[C2D2_ENCERRA].pressionado)
 			break;
 		stringInput(x);
 		C2D2_DesenhaTexto(OpenSymbol16, 400, 280, txt, C2D2_TEXTO_CENTRALIZADO);
 		C2D2_DesenhaTexto(OpenSymbol16, 400, 300, x.c_str(), C2D2_TEXTO_CENTRALIZADO);
-		C2D2_DesenhaTexto(OpenSymbol16, 400, 320, "LShift + Espaço = Apaga um caracter", C2D2_TEXTO_CENTRALIZADO);
+		C2D2_DesenhaTexto(OpenSymbol16, 400, 320, "Shift + Espaço = Apaga um caracter", C2D2_TEXTO_CENTRALIZADO);
 		C2D2_DesenhaTexto(OpenSymbol16, 400, 340, "Pressione ENTER ou ESC para confimar", C2D2_TEXTO_CENTRALIZADO);
 		C2D2_Sincroniza(C2D2_FPS_PADRAO);
 	}
@@ -113,12 +113,12 @@ std::string stringFInput( char* txt )
 	while(true){
 		C2D2_LimpaTela();
 		teclas = C2D2_PegaTeclas();
-		if(teclas[C2D2_ENTER].pressionado || teclas[C2D2_ESC].pressionado)
+		if(teclas[C2D2_ENTER].pressionado || teclas[C2D2_ESC].pressionado || teclas[C2D2_ENCERRA].pressionado)
 			break;
 		stringInput(x);
 		C2D2_DesenhaTexto(OpenSymbol16, 400, 280, txt, C2D2_TEXTO_CENTRALIZADO);
 		C2D2_DesenhaTexto(OpenSymbol16, 400, 300, x.c_str(), C2D2_TEXTO_CENTRALIZADO);
-		C2D2_DesenhaTexto(OpenSymbol16, 400, 320, "LShift + Espaço = Apaga um caracter", C2D2_TEXTO_CENTRALIZADO);
+		C2D2_DesenhaTexto(OpenSymbol16, 400, 320, "Shift + Espaço = Apaga um caracter", C2D2_TEXTO_CENTRALIZADO);
 		C2D2_DesenhaTexto(OpenSymbol16, 400, 340, "Pressione ENTER ou ESC para confimar", C2D2_TEXTO_CENTRALIZADO);
 		C2D2_Sincroniza(C2D2_FPS_PADRAO);
 	}
