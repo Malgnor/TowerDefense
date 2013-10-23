@@ -84,7 +84,6 @@ bool stringInput( string& x ){
 bool stringFInput( string& x, char* txt)
 {
 	C2D2_Botao* teclas = C2D2_PegaTeclas();
-	bool m = false;
 	int OpenSymbol16 = C2D2_CarregaFonte("imgs/OpenSymbol16.bmp", 16);
 	C2D2_Sincroniza(C2D2_FPS_PADRAO);
 	while(true){
