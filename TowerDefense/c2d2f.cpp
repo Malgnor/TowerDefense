@@ -105,5 +105,5 @@ bool stringFInput( string& x, char* txt)
 std::string stringFInput( char* txt )
 {
 	string x = "";
-	return stringFInput(x, txt); ? x : "";
+	return stringFInput(x, txt) ? x : "";
 }
