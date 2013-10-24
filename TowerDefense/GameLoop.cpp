@@ -1,9 +1,11 @@
+#include "globalDef.h"
+
 #include "GameLoop.h"
 
 #include "Tela.h"
 #include "GerenteTela.h"
 
-#include <iostream>
+#include <time.h>
 
 #include <c2d2\chien2d2.h>
 #include <c2d2\chienaudio2.h>
@@ -18,19 +20,29 @@ bool GameLoop::executar(char* titulo, int largura, int altura, bool primitivas, 
 {
 	if (!C2D2_Inicia(largura, altura, 
 		janela ? C2D2_JANELA : C2D2_TELA_CHEIA, 
-		C2D2_DESENHO_OPENGL, titulo)){			
-		std::cout << "Chien2d2 falhou!" << std::endl;
+		C2D2_DESENHO_OPENGL, titulo)){
+#ifdef LOG
+			addToLog("Chien2d2 falhou!(GameLoop.cpp)");
+#endif 
 		return false;
 	}
 
+#ifdef LOG
+	addToLog("Chien2D2 Iniciado!(GameLoop.cpp)\nTime", time(0));
+#endif
+
 	if (!CA2_Inicia()){
-		std::cout << "Audio falhou!" << std::endl;
+#ifdef LOG
+		addToLog("Chien2d2 Audio falhou!(GameLoop.cpp)");
+#endif 
 		return false;
 	}
 
 	if(primitivas){
 		if(C2D2P_Inicia()){
-			std::cout << "Primitivas falhou!" << std::endl;
+#ifdef LOG
+			addToLog("Chien2d2 Primitivas falhou!(GameLoop.cpp)");
+#endif 
 			return false;
 		}
 	}
@@ -46,6 +58,9 @@ bool GameLoop::executar(char* titulo, int largura, int altura, bool primitivas, 
 
 	CA2_Encerra();
 	C2D2_Encerra();
+#ifdef LOG
+	addToLog("Chien2D2 Encerrado!(GameLoop.cpp)\nTime", time(0));
+#endif
 	return true;
 }
 

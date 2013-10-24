@@ -1,5 +1,5 @@
 #pragma once
-
+#include "globalDef.h"
 class GerenteAtor;
 enum Tipo {TORRE, PROJETIL, INIMIGO};
 class Ator

@@ -1,3 +1,4 @@
+#include "globalDef.h"
 #include "GerenteTela.h"
 
 GerenteTela::GerenteTela(Tela* _tela)

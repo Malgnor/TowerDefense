@@ -47,6 +47,10 @@ void TorreExemplo::inicializar(){
 	alcance = 200;
 	RoF = 60; // 1*segundos(60 frames)
 	cd = RoF/10;
+#ifdef LOG
+	if(tSprite == 0)
+		addToLog("Falha ao carregar sprite da Torre!(TorreExemplo.cpp)");
+#endif
 }
 
 void TorreExemplo::atualizar(){

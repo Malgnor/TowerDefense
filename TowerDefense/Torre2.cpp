@@ -45,9 +45,13 @@ bool Torre2::estaNoJogo(){
 
 void Torre2::inicializar(){
 	alcance = 100;
-	RoF = 40; // 1*segundos(60 frames)
+	RoF = 40;
 	cd = RoF;
-	tSprite = C2D2_CarregaSpriteSet("imgs/torre2.bmp", 32, 32);
+	tSprite = C2D2_CarregaSpriteSet("imgs/torre2.bmp", 32, 32);	
+#ifdef LOG
+	if(tSprite == 0)
+		addToLog("Falha ao carregar sprite da Torre!(Torre2.cpp)");
+#endif
 }
 
 void Torre2::atualizar(){

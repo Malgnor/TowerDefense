@@ -1,3 +1,4 @@
+#include "globalDef.h"
 #include "GerenteAtor.h"
 
 #include <math.h>
