@@ -49,18 +49,8 @@ void TowerDefense::atualizar(){
 	mouseX = m->x;
 	mouseY = m->y;
 
-	if (teclas[C2D2_1].pressionado) {
-		tIndice = 0;
-	}
-	if (teclas[C2D2_2].pressionado) {
-		tIndice = 1;
-	}
-	if (teclas[C2D2_3].pressionado) {
-		tIndice = 2;
-	}
-	if (teclas[C2D2_4].pressionado) {
-		tIndice = 3;
-	}
+	m->botoes[C2D2_MMEIO].pressionado ? tIndice == 3 ? tIndice = 0 : tIndice++ : 0;
+
 	if(m->botoes[C2D2_MESQUERDO].ativo && mouseX < 576 && mouseY < 576 && mapa.conteudo(mouseX, mouseY) == 0){
 		mapa.construir(mouseX, mouseY);
 		if(tIndice != 3)
@@ -108,6 +98,7 @@ void TowerDefense::desenhar(){
 	C2D2_DesenhaTexto(OpenSymbol16, 580, 140, "Mouse Direito - Cria Inimigo", C2D2_TEXTO_ESQUERDA);
 	C2D2_DesenhaTexto(OpenSymbol16, 580, 200, "M - Map Editor", C2D2_TEXTO_ESQUERDA);
 	C2D2_DesenhaTexto(OpenSymbol16, 580, 220, "D - Carrega mapa", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(OpenSymbol16, 580, 240, "0-9 - Cria waves de inimigo", C2D2_TEXTO_ESQUERDA);
 #endif
 
 	C2D2P_Linha(577, 0, 577, 577, 255, 255, 255);
@@ -120,7 +111,7 @@ void TowerDefense::desenhar(){
 
 	C2D2_DesenhaTexto(OpenSymbol32, 580, 16, "Tower Defense", C2D2_TEXTO_ESQUERDA);
 	C2D2_DesenhaTexto(OpenSymbol16, 580, 120, "Mouse Esquerdo - Coloca Torre", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(OpenSymbol16, 580, 160, "1-4 - Muda torre", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(OpenSymbol16, 580, 160, "Mouse meio - Muda torre", C2D2_TEXTO_ESQUERDA);
 	C2D2_DesenhaTexto(OpenSymbol16, 580, 180, "R - Reset", C2D2_TEXTO_ESQUERDA);
 	C2D2_DesenhaSprite(mouseSprite, 0, mouseX, mouseY);
 }
