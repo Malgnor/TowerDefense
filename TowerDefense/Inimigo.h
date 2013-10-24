@@ -9,7 +9,7 @@ enum iDirecao { iCIMA, iBAIXO, iESQUERDA, iDIREITA };
 class Inimigo : public Ator
 {
 protected:
-	int posX, posY, passos, vel;
+	int posX, posY, passos, vel, vida;
 	int iSprite;
 	iDirecao dir;
 	Mapa& mapa;
@@ -17,7 +17,7 @@ protected:
 	
 public:
 
-	Inimigo(GerenteAtor& _gerente, Mapa& _map, int _x, int _y, int _vel);
+	Inimigo(GerenteAtor& _gerente, Mapa& _map, int _x, int _y, int _vel, int _vida);
 
 	Tipo tipo();
 

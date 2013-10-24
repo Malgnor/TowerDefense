@@ -21,6 +21,16 @@ public:
 	void inicializar();		
 	void atualizar();
 	void desenhar();
+	void wave();
+	void wave2();
+	void wave3();
+	void wave4();
+	void wave5();
+	void wave6();
+	void wave7();
+	void wave8();
+	void wave9();
+	void waveBoss();
 	void finalizar();
 };
 

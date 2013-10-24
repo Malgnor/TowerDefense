@@ -2,8 +2,10 @@
 
 #include <c2d2\chien2d2.h>
 
-InimigoExemplo::InimigoExemplo(GerenteAtor& _gerente, Mapa& _map, int _x, int _y, int _vel)
-	: Inimigo(_gerente, _map, _x, _y, _vel)
+#include <c2d2\chien2d2primitivas.h>
+
+InimigoExemplo::InimigoExemplo(GerenteAtor& _gerente, Mapa& _map, int _x, int _y, int _vel, int _vida)
+	: Inimigo(_gerente, _map, _x, _y, _vel, _vida)
 {
 }
 
@@ -84,7 +86,9 @@ void InimigoExemplo::atualizar(){
 }
 		
 void InimigoExemplo::desenhar(){
-	C2D2_DesenhaSpriteCentro(iSprite, 0, posX, posY, l(), a());
+	//C2D2_DesenhaSpriteCentro(iSprite, 0, posX, posY, l(), a());
+	C2D2P_RetanguloPintado(posX-8, posY-8, posX+8, posY+8, 155, 25, 25);
+	C2D2P_Retangulo(posX-8, posY-8, posX+8, posY+8, 50, 0, 0);
 }
 
 void InimigoExemplo::finalizar(){
