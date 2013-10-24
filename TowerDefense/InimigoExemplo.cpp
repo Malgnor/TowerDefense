@@ -18,11 +18,11 @@ int InimigoExemplo::y(){
 }
 
 int InimigoExemplo::l(){
-	return 30;
+	return 16;
 }
 
 int InimigoExemplo::a(){
-	return 30;
+	return 16;
 }
 
 int InimigoExemplo::sprite(){
@@ -86,9 +86,9 @@ void InimigoExemplo::atualizar(){
 }
 		
 void InimigoExemplo::desenhar(){
-	//C2D2_DesenhaSpriteCentro(iSprite, 0, posX, posY, l(), a());
-	C2D2P_RetanguloPintado(posX-8, posY-8, posX+8, posY+8, 155, 25, 25);
-	C2D2P_Retangulo(posX-8, posY-8, posX+8, posY+8, 50, 0, 0);
+	C2D2_DesenhaSpriteCentro(iSprite, 0, posX, posY, l(), a());
+	//C2D2P_RetanguloPintado(posX-8, posY-8, posX+8, posY+8, 155, 25, 25);
+	//C2D2P_Retangulo(posX-8, posY-8, posX+8, posY+8, 50, 0, 0);
 }
 
 void InimigoExemplo::finalizar(){
