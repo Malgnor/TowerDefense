@@ -5,6 +5,8 @@
 #include "GerenteAtor.h"
 #include "Mapa.h"
 
+enum tdEstado {PLAY, PAUSE};
+
 class TowerDefense : public Tela
 {
 private:
@@ -14,6 +16,7 @@ private:
 	int mouseX, mouseY;
 	int mouseSprite;
 	int tahoma16, tahoma32;
+	tdEstado estado;
 
 public:
 	Tela* proximaTela();
@@ -21,6 +24,7 @@ public:
 	void inicializar();		
 	void atualizar();
 	void desenhar();
+
 	void wave();
 	void wave2();
 	void wave3();
@@ -31,6 +35,7 @@ public:
 	void wave8();
 	void wave9();
 	void waveBoss();
+
 	void finalizar();
 };
 

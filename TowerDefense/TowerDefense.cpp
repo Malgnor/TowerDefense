@@ -14,12 +14,12 @@
 Tela* TowerDefense::proximaTela(){
 	C2D2_Botao* teclas = C2D2_PegaTeclas();
 	
-	if (teclas[C2D2_ENCERRA].pressionado || teclas[C2D2_ESC].pressionado)
+	if (teclas[C2D2_ENCERRA].pressionado)
 		return nullptr;	
-	if (teclas[C2D2_R].pressionado)
+	if (teclas[C2D2_R].pressionado && estado != PAUSE)
 		return new TowerDefense();
 #ifdef DEBUG
-	if (teclas[C2D2_M].pressionado)
+	if (teclas[C2D2_M].pressionado && estado != PAUSE)
 		return new MapEditor();
 #endif
 	return this;
@@ -27,9 +27,11 @@ Tela* TowerDefense::proximaTela(){
 
 void TowerDefense::inicializar(){
 	C2D2_TrocaCorLimpezaTela(25, 25, 25);
+	estado = PLAY;
 	mouseSprite = C2D2_CarregaSpriteSet("imgs/mouse.png", 0, 0);
 	tahoma16 = C2D2_CarregaFonte("imgs/tahoma16.bmp", 16);
 	tahoma32 = C2D2_CarregaFonte("imgs/tahoma32.bmp", 32);
+
 #ifdef LOG
 	if(mouseSprite == 0)
 		addToLog("Falha ao carregar sprite do mouse!(TowerDefense.cpp)");
@@ -38,6 +40,7 @@ void TowerDefense::inicializar(){
 	if(tahoma32 == 0)
 		addToLog("Falha ao carregar a fonte Tahoma de tamanho 32!(TowerDefense.cpp)");
 #endif
+
 	mapaTD = Mapa();
 	mapaTD.load("Default");
 	tIndice = 0;
@@ -49,71 +52,96 @@ void TowerDefense::atualizar(){
 	mouseX = m->x;
 	mouseY = m->y;
 
-	m->botoes[C2D2_MMEIO].pressionado ? tIndice == 3 ? tIndice = 0 : tIndice++ : 0;
+	estado = teclas[C2D2_P].pressionado || teclas[C2D2_ESC].pressionado ? estado == PLAY ? PAUSE : PLAY : estado;
 
-	if(m->botoes[C2D2_MESQUERDO].ativo && mouseX < 576 && mouseY < 576 && mapaTD.conteudo(mouseX, mouseY) == 0){
-		mapaTD.construir(mouseX, mouseY);
-		if(tIndice != 3)
-			gAtor.adicionar(new Torre2(gAtor, mouseX, mouseY, tIndice));
-		else
-			gAtor.adicionar(new TorreExemplo(gAtor, mouseX, mouseY));
-	
-	}
+	switch (estado)
+	{
+	case PLAY:
+		m->botoes[C2D2_MMEIO].pressionado ? tIndice == 3 ? tIndice = 0 : tIndice++ : 0;
+
+		if(m->botoes[C2D2_MESQUERDO].ativo && mouseX < 576 && mouseY < 576 && mapaTD.conteudo(mouseX, mouseY) == 0){
+			mapaTD.construir(mouseX, mouseY);
+			if(tIndice != 3)
+				gAtor.adicionar(new Torre2(gAtor, mouseX, mouseY, tIndice));
+			else
+				gAtor.adicionar(new TorreExemplo(gAtor, mouseX, mouseY));
+
+		}
+
 #ifdef DEBUG
-	if(m->botoes[C2D2_MDIREITO].pressionado)
-		gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -16, 304, 1, 50));
+		if(m->botoes[C2D2_MDIREITO].pressionado)
+			gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -16, 304, 1, 50));
 
-	if(teclas[C2D2_1].pressionado)
-		wave();
-	if(teclas[C2D2_2].pressionado)
-		wave2();
-	if(teclas[C2D2_3].pressionado)
-		wave3();
-	if(teclas[C2D2_4].pressionado)
-		wave4();
-	if(teclas[C2D2_5].pressionado)
-		wave5();
-	if(teclas[C2D2_6].pressionado)
-		wave6();
-	if(teclas[C2D2_7].pressionado)
-		wave7();
-	if(teclas[C2D2_8].pressionado)
-		wave8();
-	if(teclas[C2D2_9].pressionado)
-		wave9();
-	if(teclas[C2D2_0].pressionado)
-		waveBoss();
+		if(teclas[C2D2_1].pressionado)
+			wave();
+		if(teclas[C2D2_2].pressionado)
+			wave2();
+		if(teclas[C2D2_3].pressionado)
+			wave3();
+		if(teclas[C2D2_4].pressionado)
+			wave4();
+		if(teclas[C2D2_5].pressionado)
+			wave5();
+		if(teclas[C2D2_6].pressionado)
+			wave6();
+		if(teclas[C2D2_7].pressionado)
+			wave7();
+		if(teclas[C2D2_8].pressionado)
+			wave8();
+		if(teclas[C2D2_9].pressionado)
+			wave9();
+		if(teclas[C2D2_0].pressionado)
+			waveBoss();
 
-	if(teclas[C2D2_D].pressionado)
-		mapaTD.load();
+		if(teclas[C2D2_D].pressionado)
+			mapaTD.load();
 #endif
-	gAtor.atualizar();
+
+		gAtor.atualizar();
+		break;
+	case PAUSE:
+		break;
+	}
 
 }
 
 void TowerDefense::desenhar(){
+	int ytxt = 5;
+
+	C2D2_DesenhaTexto(tahoma32, 580, 16, "Tower Defense", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(tahoma16, 580, ytxt++*20, "Mouse Esquerdo - Coloca Torre", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(tahoma16, 580, ytxt++*20, "Mouse meio - Muda torre", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(tahoma16, 580, ytxt++*20, "P/ESC - Pausa/Despausa", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(tahoma16, 580, ytxt++*20, "R - Reset", C2D2_TEXTO_ESQUERDA);
+
 #ifdef DEBUG
 	char txt[50];
 	sprintf_s(txt, "indiceTorre:%d\t(%d,%d)\t(%d,%d)[%d]", tIndice, mouseX, mouseY, mouseX < 576 && mouseY < 576 ? mouseX/32 : 0, mouseY < 576 && mouseX < 576 ? mouseY/32 : 0, mouseY < 576 && mouseX < 576 ? mapaTD.conteudo(mouseX, mouseY) : 0);
 	C2D2_DesenhaTexto(tahoma16, 32, 580, txt, C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(tahoma16, 580, 140, "Mouse Direito - Cria Inimigo", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(tahoma16, 580, 200, "M - Map Editor", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(tahoma16, 580, 220, "D - Carrega mapa", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(tahoma16, 580, 240, "0-9 - Cria waves de inimigo", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(tahoma16, 580, ytxt++*20, "Mouse Direito - Cria Inimigo", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(tahoma16, 580, ytxt++*20, "M - Map Editor", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(tahoma16, 580, ytxt++*20, "D - Carrega mapa", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(tahoma16, 580, ytxt++*20, "0-9 - Cria waves de inimigo", C2D2_TEXTO_ESQUERDA);
 #endif
 
 	C2D2P_Linha(577, 0, 577, 577, 255, 255, 255);
 	C2D2P_Linha(0, 577, 577, 577, 255, 255, 255);
 	mapaTD.desenhar();
-	if(mouseX < 576 && mouseY < 576 && mapaTD.conteudo(mouseX, mouseY) == 0){
-		C2D2P_Retangulo((16+mouseX-mouseX%32)-16, (16+mouseY-mouseY%32)-16, (16+mouseX-mouseX%32)+16, (16+mouseY-mouseY%32)+16, 0, 155, 0);
-	}
 	gAtor.desenhar();
 
-	C2D2_DesenhaTexto(tahoma32, 580, 16, "Tower Defense", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(tahoma16, 580, 120, "Mouse Esquerdo - Coloca Torre", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(tahoma16, 580, 160, "Mouse meio - Muda torre", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(tahoma16, 580, 180, "R - Reset", C2D2_TEXTO_ESQUERDA);
+	switch (estado)
+	{
+	case PLAY:
+		if(mouseX < 576 && mouseY < 576 && mapaTD.conteudo(mouseX, mouseY) == 0){
+			C2D2P_Retangulo((16+mouseX-mouseX%32)-16, (16+mouseY-mouseY%32)-16, (16+mouseX-mouseX%32)+16, (16+mouseY-mouseY%32)+16, 0, 155, 0);
+		}
+		break;
+	case PAUSE:
+		C2D2P_RetanguloPintadoAlfa(0, 0, 800, 600, 25, 25, 25, 200);
+		C2D2_DesenhaTexto(tahoma32, 400-32, 150, "PAUSE", C2D2_TEXTO_CENTRALIZADO);
+		break;
+	}
+
 	C2D2_DesenhaSprite(mouseSprite, 0, mouseX, mouseY);
 }
 

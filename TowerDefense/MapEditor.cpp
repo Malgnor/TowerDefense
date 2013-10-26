@@ -101,17 +101,17 @@ void MapEditor::desenhar()
 	if(mouseX < 576 && mouseY < 576){
 		C2D2P_Retangulo((16+mouseX-mouseX%32)-16, (16+mouseY-mouseY%32)-16, (16+mouseX-mouseX%32)+16, (16+mouseY-mouseY%32)+16, 0, 255, 0);
 	}
-
+	int ytxt = 15;
 	C2D2_DesenhaTexto(tahoma32, 600, 32, "Map Editor", C2D2_TEXTO_ESQUERDA);
 	C2D2_DesenhaTexto(tahoma16, 32, 580, txttile, C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(tahoma16, 600, 450, "Mouse Esquerdo - Coloca tile", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(tahoma16, 600, 466, "Mouse Direiro - Remove Tile", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(tahoma16, 600, 482, "0-4 - Muda id", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(tahoma16, 600, 498, "S - Salvar mapa", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(tahoma16, 600, 514, "D - Carregar mapa", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(tahoma16, 600, 530, "N - Novo mapa", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(tahoma16, 600, 546, "R - Reset", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(tahoma16, 600, 562, "M - Retorna ao TD", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(tahoma16, 600, ytxt++*20, "Mouse Esquerdo - Coloca tile", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(tahoma16, 600, ytxt++*20, "Mouse Direiro - Remove Tile", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(tahoma16, 600, ytxt++*20, "0-4 - Muda id", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(tahoma16, 600, ytxt++*20, "S - Salvar mapa", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(tahoma16, 600, ytxt++*20, "D - Carregar mapa", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(tahoma16, 600, ytxt++*20, "N - Novo mapa", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(tahoma16, 600, ytxt++*20, "R - Reset", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(tahoma16, 600, ytxt++*20, "M - Retorna ao TD", C2D2_TEXTO_ESQUERDA);
 	C2D2_DesenhaSprite(mouseSprite, 0, mouseX, mouseY);
 }
 
