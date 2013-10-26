@@ -103,7 +103,7 @@
       <Filter>Source Files\Atores</Filter>
     </ClCompile>
     <ClCompile Include="TorreDemo.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Atores</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -179,11 +179,11 @@
     <ClInclude Include="InimigoDemo.h">
       <Filter>Header Files\Atores</Filter>
     </ClInclude>
-    <ClInclude Include="TorreDemo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="dirent.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TorreDemo.h">
+      <Filter>Header Files\Atores</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
