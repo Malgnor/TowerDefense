@@ -106,6 +106,7 @@
   <ItemGroup>
     <ClInclude Include="Ator.h" />
     <ClInclude Include="c2d2f.h" />
+    <ClInclude Include="dirent.h" />
     <ClInclude Include="GameLoop.h" />
     <ClInclude Include="GerenteAtor.h" />
     <ClInclude Include="GerenteTela.h" />

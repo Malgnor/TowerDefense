@@ -1,5 +1,7 @@
 #include "globalDef.h"
 
+#include "dirent.h"
+
 #include "MenuInicial.h"
 #include "TowerDefense.h"
 #include "MapEditor.h"
@@ -12,8 +14,13 @@
 #include "TorreDemo.h"
 #include "Mapa.h"
 
+#include <iostream>
+#include <string>
+
 #include <c2d2/chien2d2.h>
 #include <c2d2/chien2d2primitivas.h>
+
+using namespace std;
 
 Tela* MenuInicial::proximaTela()
 {
@@ -90,7 +97,27 @@ void MenuInicial::desenhar()
 	for(Menu* menu : menus){
 		menu->desenhar();
 	}
-
+	/*
+	string buffer = "";
+	DIR* dir = opendir("map");
+	dirent* dent;
+	int ytxt = 5;
+	while(dir){
+		if((dent = readdir(dir)) != NULL){
+			buffer = dent->d_name;
+			if(buffer.size() > 4){
+				buffer.pop_back(); //p
+				buffer.pop_back(); //a
+				buffer.pop_back(); //m
+				buffer.pop_back(); //.
+				C2D2_DesenhaTexto(tahoma16, 100, ytxt++*16, buffer.c_str(), C2D2_TEXTO_ESQUERDA);
+			}
+		} else {
+			break;
+		}
+	}
+	closedir(dir);
+	*/
 	C2D2_DesenhaSprite(mouseSprite, 0, mouseX, mouseY);
 }
 
