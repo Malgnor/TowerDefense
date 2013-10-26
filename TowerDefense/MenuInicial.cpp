@@ -90,7 +90,7 @@ void MenuInicial::inicializar()
 				buffer.pop_back(); //a
 				buffer.pop_back(); //m
 				buffer.pop_back(); //.
-				menusMS.push_back(new MenuButton(buffer, 350+xpos++%2*75, 250+(xpos % 2 != 0 ? ypos++ : ypos)*75, tahoma32));
+				menusMS.push_back(new MenuButton(buffer, 200+xpos++%3*125, 50+(xpos % 3 == 0 ? ++ypos : ypos)*75, tahoma32));
 			}
 		} else {
 			break;
@@ -151,6 +151,16 @@ void MenuInicial::desenhar()
 	case MAPSELECT:
 		for(Menu* menu : menusMS){
 			menu->desenhar();
+		}
+		if(!(mapSelected == "")){
+			Mapa m = Mapa();
+			m.load(mapSelected);
+			C2D2P_Retangulo(599, 399, 673, 473, 0, 0, 255);
+			for (int x = 0; x < 18; x++){
+				for (int y = 0; y < 18; y++){
+					m.sprite32(x, y) == 1 ? C2D2P_RetanguloPintado(600+x*4, 400+y*4, 600+x*4+4, 400+y*4+4, 255, 255, 255) : C2D2P_RetanguloPintado(600+x*4, 400+y*4, 600+x*4+4, 400+y*4+4, 0, 0, 0);
+				}
+			}
 		}
 		break;
 	}

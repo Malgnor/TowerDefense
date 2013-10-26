@@ -43,6 +43,16 @@ char Mapa::conteudo( int x, int y )
 	return map[x/32][y/32]%5;
 }
 
+char Mapa::conteudo32(int x, int y){
+	return map[x][y]%5;
+}
+
+int Mapa::sprite32( int x, int y )
+{
+	return map[x][y]/5;
+}
+
+
 void Mapa::construir( int x, int y )
 {
 	map[x/32][y/32] += 1;
