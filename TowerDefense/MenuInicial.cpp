@@ -27,8 +27,6 @@ Tela* MenuInicial::proximaTela()
 	if(btnME->getEstado() == SOLTO)
 		return new MapEditor();
 #endif // DEBUG
-	if(btnME->getEstado() == SOLTO)
-		return new MapEditor();
 
 	return this;
 }
