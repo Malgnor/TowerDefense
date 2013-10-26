@@ -84,6 +84,7 @@
     <ClCompile Include="GerenteAtor.cpp" />
     <ClCompile Include="GerenteTela.cpp" />
     <ClCompile Include="Inimigo.cpp" />
+    <ClCompile Include="InimigoDemo.cpp" />
     <ClCompile Include="InimigoExemplo.cpp" />
     <ClCompile Include="logger.cpp" />
     <ClCompile Include="MapEditor.cpp" />
@@ -98,6 +99,7 @@
     <ClCompile Include="ProjetilExemplo.cpp" />
     <ClCompile Include="Torre.cpp" />
     <ClCompile Include="Torre2.cpp" />
+    <ClCompile Include="TorreDemo.cpp" />
     <ClCompile Include="TorreExemplo.cpp" />
     <ClCompile Include="TowerDefense.cpp" />
   </ItemGroup>
@@ -109,6 +111,7 @@
     <ClInclude Include="GerenteTela.h" />
     <ClInclude Include="globalDef.h" />
     <ClInclude Include="Inimigo.h" />
+    <ClInclude Include="InimigoDemo.h" />
     <ClInclude Include="InimigoExemplo.h" />
     <ClInclude Include="logger.h" />
     <ClInclude Include="Mapa.h" />
@@ -123,6 +126,7 @@
     <ClInclude Include="Tela.h" />
     <ClInclude Include="Torre.h" />
     <ClInclude Include="Torre2.h" />
+    <ClInclude Include="TorreDemo.h" />
     <ClInclude Include="TorreExemplo.h" />
     <ClInclude Include="TowerDefense.h" />
   </ItemGroup>

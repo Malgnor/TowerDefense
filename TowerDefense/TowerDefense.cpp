@@ -52,7 +52,7 @@ void TowerDefense::inicializar(){
 	menus.push_back(btnME = new MenuButton("MapEditor", 700, 460, tahoma16));
 #endif
 	menus.push_back(btnPause = new MenuButton("Pausa", 700, 480, tahoma16));
-	menus.push_back(btnBack = new MenuButton("Voltar", 700, 500, tahoma16));
+	menus.push_back(btnBack = new MenuButton("Menu Inicial", 700, 500, tahoma16));
 	menus.push_back(btnExit = new MenuButton("Sair", 700, 520, tahoma16));
 }
 

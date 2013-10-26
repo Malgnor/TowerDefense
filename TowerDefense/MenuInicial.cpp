@@ -8,7 +8,12 @@
 #include "MenuText.h"
 #include "MenuButton.h"
 
+#include "InimigoDemo.h"
+#include "TorreDemo.h"
+#include "Mapa.h"
+
 #include <c2d2/chien2d2.h>
+#include <c2d2/chien2d2primitivas.h>
 
 Tela* MenuInicial::proximaTela()
 {
@@ -18,14 +23,19 @@ Tela* MenuInicial::proximaTela()
 		return nullptr;	
 	if(btnTD->getEstado() == SOLTO)
 		return new TowerDefense();
+#ifdef DEBUG
 	if(btnME->getEstado() == SOLTO)
 		return new MapEditor();
+#endif // DEBUG
+	if(btnME->getEstado() == SOLTO)
+		return new MapEditor();
+
 	return this;
 }
 
 void MenuInicial::inicializar()
 {
-	C2D2_TrocaCorLimpezaTela(255, 255, 255);
+	C2D2_TrocaCorLimpezaTela(0, 0, 0);
 	mouseSprite = C2D2_CarregaSpriteSet("imgs/mouse.png", 0, 0);
 	tahoma16 = C2D2_CarregaFonte("imgs/tahoma16.bmp", 16);
 	tahoma32 = C2D2_CarregaFonte("imgs/tahoma32.bmp", 32);
@@ -42,10 +52,19 @@ void MenuInicial::inicializar()
 		addToLog("Falha ao carregar a fonte Tahoma de tamanho 64!(MenuInicial.cpp)");
 #endif
 
-	menus.push_back(new MenuText("TowerDefense", 400, 100, tahoma64));
-	menus.push_back(btnTD = new MenuButton("Jogar", 400, 300, tahoma32));
-	menus.push_back(btnME = new MenuButton("MapEditor", 400, 350, tahoma32));
-	menus.push_back(btnExit = new MenuButton("Sair!", 400, 500, tahoma32));
+	menus.push_back(new MenuText("TowerDefense", 400, 90, tahoma64));
+	menus.push_back(btnTD = new MenuButton("Jogar", 400, 250, tahoma32));
+#ifdef DEBUG
+	menus.push_back(btnME = new MenuButton("MapEditor", 400, 300, tahoma32));
+#endif
+	menus.push_back(btnExit = new MenuButton("Sair!", 400, 490, tahoma32));
+
+	gAtor.adicionar(new InimigoDemo(gAtor, Mapa(), 51, 549, iDIREITA));
+	gAtor.adicionar(new InimigoDemo(gAtor, Mapa(), 749, 51, iESQUERDA));
+	gAtor.adicionar(new TorreDemo(gAtor, 84, 84));
+	gAtor.adicionar(new TorreDemo(gAtor, 84, 516));
+	gAtor.adicionar(new TorreDemo(gAtor, 716, 516));
+	gAtor.adicionar(new TorreDemo(gAtor, 716, 84));
 }
 
 void MenuInicial::atualizar()
@@ -58,10 +77,18 @@ void MenuInicial::atualizar()
 	for(Menu* menu : menus){
 		menu->atualizar();
 	}
+	gAtor.atualizar();
 }
 
 void MenuInicial::desenhar()
 {
+	C2D2P_RetanguloPintado(34, 34, 66, 566, 255, 255, 255);
+	C2D2P_RetanguloPintado(66, 534, 766, 566, 255, 255, 255);
+	C2D2P_RetanguloPintado(734, 534, 766, 34, 255, 255, 255);
+	C2D2P_RetanguloPintado(734, 34, 66, 66, 255, 255, 255);
+
+	gAtor.desenhar();
+
 	for(Menu* menu : menus){
 		menu->desenhar();
 	}

@@ -2,9 +2,10 @@
 #define _MENUINICIAL_H_
 
 #include "Tela.h"
-#include "Menu.h"
 
+#include "Menu.h"
 #include "MenuButton.h"
+#include "GerenteAtor.h"
 
 #include <vector>
 
@@ -14,6 +15,7 @@ private:
 	int mouseSprite;
 	int tahoma16, tahoma32, tahoma64;
 	int mouseX, mouseY;
+	GerenteAtor gAtor;
 	MenuButton* btnTD;
 	MenuButton* btnExit;
 	MenuButton* btnME;

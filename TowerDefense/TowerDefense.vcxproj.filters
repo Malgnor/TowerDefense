@@ -99,6 +99,12 @@
     <ClCompile Include="MenuButton.cpp">
       <Filter>Source Files\Menus</Filter>
     </ClCompile>
+    <ClCompile Include="InimigoDemo.cpp">
+      <Filter>Source Files\Atores</Filter>
+    </ClCompile>
+    <ClCompile Include="TorreDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameLoop.h">
@@ -169,6 +175,12 @@
     </ClInclude>
     <ClInclude Include="MenuButton.h">
       <Filter>Header Files\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="InimigoDemo.h">
+      <Filter>Header Files\Atores</Filter>
+    </ClInclude>
+    <ClInclude Include="TorreDemo.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
