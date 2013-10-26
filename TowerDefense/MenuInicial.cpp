@@ -29,7 +29,8 @@ Tela* MenuInicial::proximaTela()
 	if (teclas[C2D2_ENCERRA].pressionado || teclas[C2D2_ESC].pressionado || btnExit->getEstado() == SOLTO)
 		return nullptr;	
 	if(btnTD->getEstado() == SOLTO)
-		return new TowerDefense();
+		return mapSelected == "" ? new TowerDefense() : new TowerDefense(mapSelected.c_str());
+
 #ifdef DEBUG
 	if(btnME->getEstado() == SOLTO)
 		return new MapEditor();
@@ -41,6 +42,8 @@ Tela* MenuInicial::proximaTela()
 void MenuInicial::inicializar()
 {
 	C2D2_TrocaCorLimpezaTela(0, 0, 0);
+	estado = MENU;
+	mapSelected = "";
 	mouseSprite = C2D2_CarregaSpriteSet("imgs/mouse.png", 0, 0);
 	tahoma16 = C2D2_CarregaFonte("imgs/tahoma16.bmp", 16);
 	tahoma32 = C2D2_CarregaFonte("imgs/tahoma32.bmp", 32);
@@ -59,17 +62,42 @@ void MenuInicial::inicializar()
 
 	menus.push_back(new MenuText("TowerDefense", 400, 90, tahoma64));
 	menus.push_back(btnTD = new MenuButton("Jogar", 400, 250, tahoma32));
+	menus.push_back(btnMS = new MenuButton("Selecionar Mapa", 400, 300, tahoma32));
 #ifdef DEBUG
-	menus.push_back(btnME = new MenuButton("MapEditor", 400, 300, tahoma32));
+	menus.push_back(btnME = new MenuButton("MapEditor", 400, 350, tahoma32));
 #endif
 	menus.push_back(btnExit = new MenuButton("Sair!", 400, 490, tahoma32));
 
 	gAtor.adicionar(new InimigoDemo(gAtor, Mapa(), 51, 549, iDIREITA));
 	gAtor.adicionar(new InimigoDemo(gAtor, Mapa(), 749, 51, iESQUERDA));
+	gAtor.adicionar(new InimigoDemo(gAtor, Mapa(), 749, 549, iCIMA));
+	gAtor.adicionar(new InimigoDemo(gAtor, Mapa(), 51, 51, iBAIXO));
 	gAtor.adicionar(new TorreDemo(gAtor, 84, 84));
 	gAtor.adicionar(new TorreDemo(gAtor, 84, 516));
 	gAtor.adicionar(new TorreDemo(gAtor, 716, 516));
 	gAtor.adicionar(new TorreDemo(gAtor, 716, 84));
+	
+	string buffer = "";
+	int xpos = 0;
+	int ypos = 0;
+	DIR* dir = opendir("map");
+	dirent* dent;
+	while(dir){
+		if((dent = readdir(dir)) != NULL){
+			buffer = dent->d_name;
+			if(buffer.size() > 4){
+				buffer.pop_back(); //p
+				buffer.pop_back(); //a
+				buffer.pop_back(); //m
+				buffer.pop_back(); //.
+				menusMS.push_back(new MenuButton(buffer, 350+xpos++%2*75, 250+(xpos % 2 != 0 ? ypos++ : ypos)*75, tahoma32));
+			}
+		} else {
+			break;
+		}
+	}
+	closedir(dir);
+	menusMS.push_back(new MenuButton("Voltar", 400, 500, tahoma32));
 }
 
 void MenuInicial::atualizar()
@@ -78,9 +106,29 @@ void MenuInicial::atualizar()
 	C2D2_Botao* teclas = C2D2_PegaTeclas();
 	mouseX = m->x;
 	mouseY = m->y;
-
-	for(Menu* menu : menus){
-		menu->atualizar();
+	switch (estado)
+	{
+	case MENU:
+		for(Menu* menu : menus){
+			menu->atualizar();
+		}
+		if(btnMS->getEstado() == SOLTO)
+			estado = MAPSELECT;
+		break;
+	case MAPSELECT:
+		for(Menu* menu : menusMS){
+			menu->atualizar();
+			if(menu->getName() == "Voltar"){
+				MenuButton* m = (MenuButton*) menu;
+				if(m->getEstado() == SOLTO)
+					estado = MENU;
+			} else {
+				MenuButton* m = (MenuButton*) menu;
+				if(m->getEstado() == SOLTO)
+					mapSelected = m->getName();
+			}
+		}
+		break;
 	}
 	gAtor.atualizar();
 }
@@ -94,36 +142,27 @@ void MenuInicial::desenhar()
 
 	gAtor.desenhar();
 
-	for(Menu* menu : menus){
-		menu->desenhar();
-	}
-	/*
-	string buffer = "";
-	DIR* dir = opendir("map");
-	dirent* dent;
-	int ytxt = 5;
-	while(dir){
-		if((dent = readdir(dir)) != NULL){
-			buffer = dent->d_name;
-			if(buffer.size() > 4){
-				buffer.pop_back(); //p
-				buffer.pop_back(); //a
-				buffer.pop_back(); //m
-				buffer.pop_back(); //.
-				C2D2_DesenhaTexto(tahoma16, 100, ytxt++*16, buffer.c_str(), C2D2_TEXTO_ESQUERDA);
-			}
-		} else {
-			break;
+	switch(estado){
+	case MENU:
+		for(Menu* menu : menus){
+			menu->desenhar();
 		}
+		break;
+	case MAPSELECT:
+		for(Menu* menu : menusMS){
+			menu->desenhar();
+		}
+		break;
 	}
-	closedir(dir);
-	*/
 	C2D2_DesenhaSprite(mouseSprite, 0, mouseX, mouseY);
 }
 
 void MenuInicial::finalizar()
 {
 	for(Menu* menu : menus){
+		delete menu;
+	}
+	for(Menu* menu : menusMS){
 		delete menu;
 	}
 	C2D2_RemoveSpriteSet(mouseSprite);

@@ -14,6 +14,7 @@ protected:
 
 public:
 	Menu(std::string _name, int _x, int _y, int& _fonte);
+	std::string getName();
 	virtual void atualizar() = 0;
 	virtual void desenhar() = 0;
 	virtual ~Menu(){};

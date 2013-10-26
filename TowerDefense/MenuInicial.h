@@ -9,17 +9,23 @@
 
 #include <vector>
 
+enum miEstado {MENU, MAPSELECT};
+
 class MenuInicial :	public Tela
 {
 private:
 	int mouseSprite;
 	int tahoma16, tahoma32, tahoma64;
 	int mouseX, mouseY;
+	miEstado estado;
 	GerenteAtor gAtor;
 	MenuButton* btnTD;
 	MenuButton* btnExit;
 	MenuButton* btnME;
+	MenuButton* btnMS;
 	std::vector <Menu*> menus;
+	std::vector <Menu*> menusMS;
+	std::string mapSelected;
 
 public:
 	Tela* proximaTela();

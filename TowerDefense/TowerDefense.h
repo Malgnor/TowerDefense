@@ -29,6 +29,8 @@ private:
 	std::vector <Menu*> menus;
 
 public:
+	TowerDefense();
+	TowerDefense(const char* _map);
 	Tela* proximaTela();
 
 	void inicializar();		

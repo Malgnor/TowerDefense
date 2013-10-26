@@ -8,3 +8,8 @@ Menu::Menu( std::string _name, int _x, int _y, int& _fonte)
 {
 	C2D2_DimensoesTexto(fonte, name.c_str(), &l, &a);
 }
+
+std::string Menu::getName()
+{
+	return name;
+}

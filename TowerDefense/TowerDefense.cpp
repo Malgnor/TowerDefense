@@ -13,6 +13,18 @@
 #include <c2d2\chien2d2.h>
 #include <c2d2\chien2d2primitivas.h>
 
+TowerDefense::TowerDefense()
+	: mapaTD()
+{
+	mapaTD.load("Default");
+}
+
+TowerDefense::TowerDefense(const char* _map )
+	: mapaTD()
+{
+	mapaTD.load(_map);
+}
+
 Tela* TowerDefense::proximaTela(){
 	C2D2_Botao* teclas = C2D2_PegaTeclas();
 	
@@ -35,6 +47,8 @@ void TowerDefense::inicializar(){
 	mouseSprite = C2D2_CarregaSpriteSet("imgs/mouse.png", 0, 0);
 	tahoma16 = C2D2_CarregaFonte("imgs/tahoma16.bmp", 16);
 	tahoma32 = C2D2_CarregaFonte("imgs/tahoma32.bmp", 32);
+	tIndice = 0;
+	mapaTD.inicializar();
 
 #ifdef LOG
 	if(mouseSprite == 0)
@@ -44,10 +58,7 @@ void TowerDefense::inicializar(){
 	if(tahoma32 == 0)
 		addToLog("Falha ao carregar a fonte Tahoma de tamanho 32!(TowerDefense.cpp)");
 #endif
-
-	mapaTD = Mapa();
-	mapaTD.load("Default");
-	tIndice = 0;
+	
 #ifdef DEBUG
 	menus.push_back(btnME = new MenuButton("MapEditor", 700, 460, tahoma16));
 #endif
