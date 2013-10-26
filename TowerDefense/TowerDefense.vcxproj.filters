@@ -211,5 +211,23 @@
     <Image Include="imgs\torreE.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="imgs\eheart.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="imgs\heart.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="imgs\OpenSymbol64.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="imgs\tahoma16.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="imgs\tahoma32.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="imgs\tahoma64.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

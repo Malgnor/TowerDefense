@@ -22,11 +22,11 @@ int ProjetilExemplo::y(){
 }
 
 int ProjetilExemplo::l(){
-	return 16;
+	return 8;
 }
 
 int ProjetilExemplo::a(){
-	return 16;
+	return 8;
 }
 
 

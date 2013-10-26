@@ -47,7 +47,10 @@ void TowerDefense::inicializar(){
 	mouseSprite = C2D2_CarregaSpriteSet("imgs/mouse.png", 0, 0);
 	tahoma16 = C2D2_CarregaFonte("imgs/tahoma16.bmp", 16);
 	tahoma32 = C2D2_CarregaFonte("imgs/tahoma32.bmp", 32);
+	eheart = C2D2_CarregaSpriteSet("imgs/eheart.png", 0, 0);
+	heart = C2D2_CarregaSpriteSet("imgs/heart.png", 16, 16);
 	tIndice = 0;
+	chances = 20;
 	mapaTD.inicializar();
 
 #ifdef LOG
@@ -57,6 +60,10 @@ void TowerDefense::inicializar(){
 		addToLog("Falha ao carregar a fonte Tahoma de tamanho 16!(TowerDefense.cpp)");
 	if(tahoma32 == 0)
 		addToLog("Falha ao carregar a fonte Tahoma de tamanho 32!(TowerDefense.cpp)");
+	if(eheart == 0)
+		addToLog("Falha ao carregar o sprite eheart!(TowerDefense.cpp)");
+	if(heart == 0)
+		addToLog("Falha ao carregar o sprite heart!(TowerDefense.cpp)");
 #endif
 	
 #ifdef DEBUG
@@ -94,6 +101,11 @@ void TowerDefense::atualizar(){
 #ifdef DEBUG
 		if(m->botoes[C2D2_MDIREITO].pressionado)
 			gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -16, 304, 1, 50));
+
+		if(teclas[C2D2_Z].pressionado)
+			chances--;
+		if(teclas[C2D2_X].pressionado)
+			chances++;
 
 		if(teclas[C2D2_1].pressionado)
 			wave();
@@ -139,12 +151,14 @@ void TowerDefense::desenhar(){
 
 #ifdef DEBUG
 	char txt[50];
-	sprintf_s(txt, "indiceTorre:%d\t(%d,%d)\t(%d,%d)[%d]", tIndice, mouseX, mouseY, mouseX < 576 && mouseY < 576 ? mouseX/32 : 0, mouseY < 576 && mouseX < 576 ? mouseY/32 : 0, mouseY < 576 && mouseX < 576 ? mapaTD.conteudo(mouseX, mouseY) : 0);
+	sprintf_s(txt, "indiceTorre:%d\t(%d,%d)\t(%d,%d)[%d]\tChances: %d", tIndice, mouseX, mouseY, mouseX < 576 && mouseY < 576 ? mouseX/32 : 0, mouseY < 576 && mouseX < 576 ? mouseY/32 : 0, mouseY < 576 && mouseX < 576 ? mapaTD.conteudo(mouseX, mouseY) : 0, chances);
 	C2D2_DesenhaTexto(tahoma16, 32, 580, txt, C2D2_TEXTO_ESQUERDA);
 	C2D2_DesenhaTexto(tahoma16, 580, ytxt++*20, "Mouse Direito - Cria Inimigo", C2D2_TEXTO_ESQUERDA);
 	C2D2_DesenhaTexto(tahoma16, 580, ytxt++*20, "M - Map Editor", C2D2_TEXTO_ESQUERDA);
 	C2D2_DesenhaTexto(tahoma16, 580, ytxt++*20, "D - Carrega mapa", C2D2_TEXTO_ESQUERDA);
 	C2D2_DesenhaTexto(tahoma16, 580, ytxt++*20, "0-9 - Cria waves de inimigo", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(tahoma16, 580, ytxt++*20, "X - Aumenta chances", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(tahoma16, 580, ytxt++*20, "Z - Diminui chances", C2D2_TEXTO_ESQUERDA);
 #endif
 
 	C2D2P_Linha(577, 0, 577, 577, 255, 255, 255);
@@ -152,6 +166,14 @@ void TowerDefense::desenhar(){
 	mapaTD.desenhar();
 	gAtor.desenhar();
 
+	int i;
+	C2D2_DesenhaSprite(eheart, 0, 400, 580);
+	for(i = 0; i < (int)(chances/2); i++){
+		C2D2_DesenhaSprite(heart, 0, 400+i*16, 580);
+	}
+	if(chances % 2 == 1){
+		C2D2_DesenhaSprite(heart, 1, 400+i*16, 580);
+	}
 	switch (estado)
 	{
 	case PLAY:
@@ -560,6 +582,8 @@ void TowerDefense::finalizar(){
 		delete menu;
 	}
 	C2D2_RemoveSpriteSet(mouseSprite);
+	C2D2_RemoveSpriteSet(eheart);
+	C2D2_RemoveSpriteSet(heart);
 	C2D2_RemoveFonte(tahoma16);
 	C2D2_RemoveFonte(tahoma32);
 }

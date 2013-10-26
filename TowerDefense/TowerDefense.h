@@ -22,6 +22,8 @@ private:
 	int mouseX, mouseY;
 	int mouseSprite;
 	int tahoma16, tahoma32;
+	int eheart, heart;
+	int chances;
 	MenuButton* btnExit;
 	MenuButton* btnBack;
 	MenuButton* btnME;
