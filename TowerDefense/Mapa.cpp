@@ -5,7 +5,6 @@
 
 #include <iostream>
 #include <fstream>
-#include <string>
 
 #include <c2d2/chien2d2.h>
 
@@ -57,19 +56,40 @@ void Mapa::construir( int x, int y, int sprite, int id)
 void Mapa::save()
 {
 	C2D2_RemoveSpriteSet(sprite);
-	ofstream ofile("map/"+stringFInput("(SAVE)Nome do mapa:")+".map", ios_base::binary);
+	ofstream ofile("map/"+stringFInput("(SAVE)Nome do mapa:", ".map")+".map", ios_base::binary);
 	ofile.write((char*)this, sizeof(Mapa));
 	ofile.close();
 	sprite = C2D2_CarregaSpriteSet("imgs/map.png", 32, 32);
+#ifdef LOG
+	if(sprite == 0)
+		addToLog("Falha ao carregar o sprite do mapa!(Mapa.cpp)");
+#endif
 }
 
 void Mapa::load()
 {
 	C2D2_RemoveSpriteSet(sprite);
-	ifstream ifile("map/"+stringFInput("(LOAD)Nome do mapa:")+".map", ios_base::binary);
+	ifstream ifile("map/"+stringFInput("(LOAD)Nome do mapa:", ".map")+".map", ios_base::binary);
 	ifile.read((char*)this, sizeof(Mapa));
 	ifile.close();
 	sprite = C2D2_CarregaSpriteSet("imgs/map.png", 32, 32);
+#ifdef LOG
+	if(sprite == 0)
+		addToLog("Falha ao carregar o sprite do mapa!(Mapa.cpp)");
+#endif
+}
+
+void Mapa::load(string nome)
+{
+	C2D2_RemoveSpriteSet(sprite);
+	ifstream ifile("map/"+nome+".map", ios_base::binary);
+	ifile.read((char*)this, sizeof(Mapa));
+	ifile.close();
+	sprite = C2D2_CarregaSpriteSet("imgs/map.png", 32, 32);
+#ifdef LOG
+	if(sprite == 0)
+		addToLog("Falha ao carregar o sprite do mapa!(Mapa.cpp)");
+#endif
 }
 
 void Mapa::finalizar()

@@ -9,11 +9,11 @@ class TowerDefense : public Tela
 {
 private:
 	GerenteAtor gAtor;
-	Mapa mapa;
+	Mapa mapaTD;
 	int tIndice;
 	int mouseX, mouseY;
 	int mouseSprite;
-	int OpenSymbol16, OpenSymbol32;
+	int tahoma16, tahoma32;
 
 public:
 	Tela* proximaTela();

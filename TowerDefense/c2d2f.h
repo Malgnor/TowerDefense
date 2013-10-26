@@ -8,7 +8,7 @@
 using namespace std;
 
 bool stringInput(string& x);
-bool stringFInput(string& x, char* txt);
-string stringFInput(char* txt);
+bool stringFInput(string& x, char* txt = "", char* sufixo = "", char* prefixo = "");
+string stringFInput(char* txt = "", char* sufixo = "", char* prefixo = "");
 
 #endif

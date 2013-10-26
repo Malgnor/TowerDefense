@@ -26,20 +26,20 @@ Tela* TowerDefense::proximaTela(){
 }
 
 void TowerDefense::inicializar(){
-	C2D2_TrocaCorLimpezaTela(10, 10, 10);
+	C2D2_TrocaCorLimpezaTela(25, 25, 25);
 	mouseSprite = C2D2_CarregaSpriteSet("imgs/mouse.png", 0, 0);
-	OpenSymbol16 = C2D2_CarregaFonte("imgs/OpenSymbol16.bmp", 16);
-	OpenSymbol32 = C2D2_CarregaFonte("imgs/OpenSymbol32.bmp", 32);
+	tahoma16 = C2D2_CarregaFonte("imgs/tahoma16.bmp", 16);
+	tahoma32 = C2D2_CarregaFonte("imgs/tahoma32.bmp", 32);
 #ifdef LOG
 	if(mouseSprite == 0)
 		addToLog("Falha ao carregar sprite do mouse!(TowerDefense.cpp)");
-	if(OpenSymbol16 == 0)
-		addToLog("Falha ao carregar a fonte OpenSymbol de tamanho 16!(TowerDefense.cpp)");
-	if(OpenSymbol32 == 0)
-		addToLog("Falha ao carregar a fonte OpenSymbol de tamanho 32!(TowerDefense.cpp)");
+	if(tahoma16 == 0)
+		addToLog("Falha ao carregar a fonte Tahoma de tamanho 16!(TowerDefense.cpp)");
+	if(tahoma32 == 0)
+		addToLog("Falha ao carregar a fonte Tahoma de tamanho 32!(TowerDefense.cpp)");
 #endif
-	mapa = Mapa();
-	mapa.inicializar();
+	mapaTD = Mapa();
+	mapaTD.load("Default");
 	tIndice = 0;
 }
 
@@ -51,8 +51,8 @@ void TowerDefense::atualizar(){
 
 	m->botoes[C2D2_MMEIO].pressionado ? tIndice == 3 ? tIndice = 0 : tIndice++ : 0;
 
-	if(m->botoes[C2D2_MESQUERDO].ativo && mouseX < 576 && mouseY < 576 && mapa.conteudo(mouseX, mouseY) == 0){
-		mapa.construir(mouseX, mouseY);
+	if(m->botoes[C2D2_MESQUERDO].ativo && mouseX < 576 && mouseY < 576 && mapaTD.conteudo(mouseX, mouseY) == 0){
+		mapaTD.construir(mouseX, mouseY);
 		if(tIndice != 3)
 			gAtor.adicionar(new Torre2(gAtor, mouseX, mouseY, tIndice));
 		else
@@ -61,7 +61,7 @@ void TowerDefense::atualizar(){
 	}
 #ifdef DEBUG
 	if(m->botoes[C2D2_MDIREITO].pressionado)
-		gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -16, 304, 1, 50));
+		gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -16, 304, 1, 50));
 
 	if(teclas[C2D2_1].pressionado)
 		wave();
@@ -85,420 +85,424 @@ void TowerDefense::atualizar(){
 		waveBoss();
 
 	if(teclas[C2D2_D].pressionado)
-		mapa.load();
+		mapaTD.load();
 #endif
 	gAtor.atualizar();
 
 }
+
 void TowerDefense::desenhar(){
 #ifdef DEBUG
 	char txt[50];
-	sprintf(txt, "iTorre:%d\t(%d,%d)\t(%d,%d)[%d]", tIndice, mouseX, mouseY, mouseX < 576 && mouseY < 576 ? mouseX/32 : 0, mouseY < 576 && mouseX < 576 ? mouseY/32 : 0, mouseY < 576 && mouseX < 576 ? mapa.conteudo(mouseX, mouseY) : 0);
-	C2D2_DesenhaTexto(OpenSymbol16, 32, 580, txt, C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(OpenSymbol16, 580, 140, "Mouse Direito - Cria Inimigo", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(OpenSymbol16, 580, 200, "M - Map Editor", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(OpenSymbol16, 580, 220, "D - Carrega mapa", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(OpenSymbol16, 580, 240, "0-9 - Cria waves de inimigo", C2D2_TEXTO_ESQUERDA);
+	sprintf_s(txt, "indiceTorre:%d\t(%d,%d)\t(%d,%d)[%d]", tIndice, mouseX, mouseY, mouseX < 576 && mouseY < 576 ? mouseX/32 : 0, mouseY < 576 && mouseX < 576 ? mouseY/32 : 0, mouseY < 576 && mouseX < 576 ? mapaTD.conteudo(mouseX, mouseY) : 0);
+	C2D2_DesenhaTexto(tahoma16, 32, 580, txt, C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(tahoma16, 580, 140, "Mouse Direito - Cria Inimigo", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(tahoma16, 580, 200, "M - Map Editor", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(tahoma16, 580, 220, "D - Carrega mapa", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(tahoma16, 580, 240, "0-9 - Cria waves de inimigo", C2D2_TEXTO_ESQUERDA);
 #endif
 
 	C2D2P_Linha(577, 0, 577, 577, 255, 255, 255);
 	C2D2P_Linha(0, 577, 577, 577, 255, 255, 255);
-	mapa.desenhar();
-	if(mouseX < 576 && mouseY < 576 && mapa.conteudo(mouseX, mouseY) == 0){
+	mapaTD.desenhar();
+	if(mouseX < 576 && mouseY < 576 && mapaTD.conteudo(mouseX, mouseY) == 0){
 		C2D2P_Retangulo((16+mouseX-mouseX%32)-16, (16+mouseY-mouseY%32)-16, (16+mouseX-mouseX%32)+16, (16+mouseY-mouseY%32)+16, 0, 155, 0);
 	}
 	gAtor.desenhar();
 
-	C2D2_DesenhaTexto(OpenSymbol32, 580, 16, "Tower Defense", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(OpenSymbol16, 580, 120, "Mouse Esquerdo - Coloca Torre", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(OpenSymbol16, 580, 160, "Mouse meio - Muda torre", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(OpenSymbol16, 580, 180, "R - Reset", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(tahoma32, 580, 16, "Tower Defense", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(tahoma16, 580, 120, "Mouse Esquerdo - Coloca Torre", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(tahoma16, 580, 160, "Mouse meio - Muda torre", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(tahoma16, 580, 180, "R - Reset", C2D2_TEXTO_ESQUERDA);
 	C2D2_DesenhaSprite(mouseSprite, 0, mouseX, mouseY);
 }
 
+#pragma region waves
 void TowerDefense::wave(){
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -30, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -100, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -170, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -240, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -310, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -380, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -450, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -520, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -590, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -660, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -30, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -100, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -170, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -240, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -310, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -380, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -450, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -520, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -590, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -660, 304, 1, 50));
 }
 
 void TowerDefense::wave2(){
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -30, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -100, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -170, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -240, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -310, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -380, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -450, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -520, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -590, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -660, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -730, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -730, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -800, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -800, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -30, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -100, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -170, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -240, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -310, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -380, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -450, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -520, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -590, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -660, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -730, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -730, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -800, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -800, 312, 1, 50));
 }
 
 void TowerDefense::wave3(){
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -30, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -100, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -170, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -240, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -310, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -380, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -450, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -520, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -590, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -590, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -660, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -660, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -730, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -730, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -800, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -800, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -30, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -100, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -170, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -240, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -310, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -380, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -450, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -520, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -590, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -590, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -660, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -660, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -730, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -730, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -800, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -800, 312, 1, 50));
 }
 
 void TowerDefense::wave4(){
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -30, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -100, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -170, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -170, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -240, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -240, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -310, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -310, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -380, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -380, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -450, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -450, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -520, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -520, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -590, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -590, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -660, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -660, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -730, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -730, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -800, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -800, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -30, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -100, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -170, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -170, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -240, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -240, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -310, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -310, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -380, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -380, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -450, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -450, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -520, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -520, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -590, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -590, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -660, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -660, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -730, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -730, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -800, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -800, 312, 1, 50));
 }
 
 void TowerDefense::wave5(){ 
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -30, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -100, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -170, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -170, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -240, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -240, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -30, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -100, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -170, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -170, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -240, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -240, 312, 1, 50));
 
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -294, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -310, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -310, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -364, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -380, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -380, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -434, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -450, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -450, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -294, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -310, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -310, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -364, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -380, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -380, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -434, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -450, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -450, 312, 1, 50));
 }
 
 void TowerDefense::wave6(){
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -30, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -30, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -100, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -100, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -170, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -170, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -240, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -240, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -294, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -310, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -310, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -364, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -380, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -380, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -434, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -450, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -450, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -504, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -520, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -520, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -574, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -590, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -590, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -644, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -660, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -660, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -714, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -730, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -730, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -30, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -30, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -100, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -100, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -170, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -170, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -240, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -240, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -294, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -310, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -310, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -364, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -380, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -380, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -434, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -450, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -450, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -504, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -520, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -520, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -574, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -590, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -590, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -644, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -660, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -660, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -714, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -730, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -730, 312, 1, 50));
 }
 
 void TowerDefense::wave7(){
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -14, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -30, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -30, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -84, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -100, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -100, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -154, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -170, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -170, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -224, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -240, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -240, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -294, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -310, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -310, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -364, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -380, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -380, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -434, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -450, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -450, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -504, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -520, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -520, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -574, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -590, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -590, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -14, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -30, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -30, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -84, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -100, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -100, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -154, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -170, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -170, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -224, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -240, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -240, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -294, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -310, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -310, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -364, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -380, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -380, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -434, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -450, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -450, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -504, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -520, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -520, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -574, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -590, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -590, 312, 1, 50));
 
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -654, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -670, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -670, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -686, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -724, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -740, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -740, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -756, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -794, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -810, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -810, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -826, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -864, 304, 1, 50)); 
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -880, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -880, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -896, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -934, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -950, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -950, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -966, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1004, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1020, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1020, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1036, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1074, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1090, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1090, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1106, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1144, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1160, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1160, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1176, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -654, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -670, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -670, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -686, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -724, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -740, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -740, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -756, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -794, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -810, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -810, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -826, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -864, 304, 1, 50)); 
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -880, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -880, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -896, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -934, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -950, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -950, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -966, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1004, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1020, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1020, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1036, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1074, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1090, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1090, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1106, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1144, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1160, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1160, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1176, 304, 1, 50));
 }
 
 void TowerDefense::wave8(){
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -14, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -30, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -30, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -46, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -104, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -120, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -120, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -136, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -174, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -190, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -190, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -206, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -244, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -260, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -260, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -276, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -314, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -330, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -330, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -346, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -384, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -400, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -400, 312, 1, 50)); 
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -416, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -454, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -470, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -470, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -486, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -524, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -540, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -540, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -556, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -594, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -610, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -610, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -626, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -664, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -680, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -680, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -696, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -734, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -750, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -750, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -766, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -804, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -820, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -820, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -836, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -14, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -30, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -30, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -46, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -104, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -120, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -120, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -136, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -174, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -190, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -190, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -206, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -244, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -260, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -260, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -276, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -314, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -330, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -330, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -346, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -384, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -400, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -400, 312, 1, 50)); 
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -416, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -454, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -470, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -470, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -486, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -524, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -540, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -540, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -556, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -594, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -610, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -610, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -626, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -664, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -680, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -680, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -696, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -734, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -750, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -750, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -766, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -804, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -820, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -820, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -836, 304, 1, 50));
 }
 
 void TowerDefense::wave9(){
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -30, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -100, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -170, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -240, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -310, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -380, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -450, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -520, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -590, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -660, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -730, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -730, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -800, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -800, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -870, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -870, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -940, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -940, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1010, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1010, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1064, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1080, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1080, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1134, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1150, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1150, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1204, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1220, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1220, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1274, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1290, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1290, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1344, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1360, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1360, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1414, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1430, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1430, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1484, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1500, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1500, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1516, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1554, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1570, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1570, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1586, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1624, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1640, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1640, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1656, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1694, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1710, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1710, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1726, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1764, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1780, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1780, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1796, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -30, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -100, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -170, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -240, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -310, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -380, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -450, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -520, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -590, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -660, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -730, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -730, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -800, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -800, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -870, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -870, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -940, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -940, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1010, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1010, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1064, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1080, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1080, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1134, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1150, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1150, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1204, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1220, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1220, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1274, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1290, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1290, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1344, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1360, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1360, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1414, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1430, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1430, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1484, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1500, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1500, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1516, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1554, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1570, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1570, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1586, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1624, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1640, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1640, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1656, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1694, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1710, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1710, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1726, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1764, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1780, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1780, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1796, 304, 1, 50));
 }
 
 void TowerDefense::waveBoss(){ // simples, duplas, triplas, quadruplas, quadruplas blocos, simples em fila, boss lento mas com MUITA vida
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -30, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -100, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -170, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -240, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -310, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -380, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -450, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -520, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -590, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -660, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -730, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -730, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -800, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -800, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -870, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -870, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -940, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -940, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1010, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1010, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1064, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1080, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1080, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1134, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1150, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1150, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1204, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1220, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1220, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1274, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1290, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1290, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1344, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1360, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1360, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1414, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1430, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1430, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1484, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1500, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1500, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1516, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1554, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1570, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1570, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1586, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1624, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1640, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1640, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1656, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1694, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1710, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1710, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1726, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1764, 304, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1780, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1780, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1796, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -30, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -100, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -170, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -240, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -310, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -380, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -450, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -520, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -590, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -660, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -730, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -730, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -800, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -800, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -870, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -870, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -940, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -940, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1010, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1010, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1064, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1080, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1080, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1134, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1150, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1150, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1204, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1220, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1220, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1274, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1290, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1290, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1344, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1360, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1360, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1414, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1430, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1430, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1484, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1500, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1500, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1516, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1554, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1570, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1570, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1586, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1624, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1640, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1640, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1656, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1694, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1710, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1710, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1726, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1764, 304, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1780, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1780, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1796, 304, 1, 50));
 
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1850, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1850, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1866, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1866, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1850, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1850, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1866, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1866, 312, 1, 50));
 
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1936, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1936, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1952, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -1952, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1936, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1936, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1952, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -1952, 312, 1, 50));
 
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -2022, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -2022, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -2038, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -2038, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -2022, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -2022, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -2038, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -2038, 312, 1, 50));
 
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -2108, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -2108, 312, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -2124, 296, 1, 50));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapa, -2124, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -2108, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -2108, 312, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -2124, 296, 1, 50));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -2124, 312, 1, 50));
 }
+
+#pragma endregion
 
 void TowerDefense::finalizar(){
 	C2D2_RemoveSpriteSet(mouseSprite);
-	C2D2_RemoveFonte(OpenSymbol16);
-	C2D2_RemoveFonte(OpenSymbol32);
+	C2D2_RemoveFonte(tahoma16);
+	C2D2_RemoveFonte(tahoma32);
 }
