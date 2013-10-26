@@ -4,6 +4,11 @@
 #include "Tela.h"
 #include "Mapa.h"
 
+#include <vector>
+
+#include "Menu.h"
+#include "MenuButton.h"
+
 class MapEditor : public Tela
 {
 private:
@@ -12,6 +17,10 @@ private:
 	int tile, id;
 	int tahoma16, tahoma32;
 	Mapa mapaTD;
+	MenuButton* btnExit;
+	MenuButton* btnBack;
+	MenuButton* btnTD;
+	std::vector <Menu*> menus;
 
 public:
 	Tela* proximaTela();

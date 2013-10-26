@@ -5,6 +5,11 @@
 #include "GerenteAtor.h"
 #include "Mapa.h"
 
+#include <vector>
+
+#include "Menu.h"
+#include "MenuButton.h"
+
 enum tdEstado {PLAY, PAUSE};
 
 class TowerDefense : public Tela
@@ -12,11 +17,16 @@ class TowerDefense : public Tela
 private:
 	GerenteAtor gAtor;
 	Mapa mapaTD;
+	tdEstado estado;
 	int tIndice;
 	int mouseX, mouseY;
 	int mouseSprite;
 	int tahoma16, tahoma32;
-	tdEstado estado;
+	MenuButton* btnExit;
+	MenuButton* btnBack;
+	MenuButton* btnME;
+	MenuButton* btnPause;
+	std::vector <Menu*> menus;
 
 public:
 	Tela* proximaTela();

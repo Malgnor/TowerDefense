@@ -4,7 +4,7 @@
 #include "globalDef.h"
 #include <fstream>
 
-void addToLog(char* txt);
+void addToLog(char* txt = "");
 void addToLog(char* txt, int var);
 void addToLog(char* txt, unsigned int var);
 void addToLog(char* txt, float var);

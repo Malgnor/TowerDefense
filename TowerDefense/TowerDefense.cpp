@@ -1,6 +1,8 @@
 #include "globalDef.h"
+
 #include "TowerDefense.h"
 #include "MapEditor.h"
+#include "MenuInicial.h"
 
 #include "TorreExemplo.h"
 #include "Torre2.h"
@@ -14,12 +16,14 @@
 Tela* TowerDefense::proximaTela(){
 	C2D2_Botao* teclas = C2D2_PegaTeclas();
 	
-	if (teclas[C2D2_ENCERRA].pressionado)
+	if (teclas[C2D2_ENCERRA].pressionado || btnExit->getEstado() == SOLTO)
 		return nullptr;	
+	if(btnBack->getEstado() == SOLTO)
+		return new MenuInicial();
 	if (teclas[C2D2_R].pressionado && estado != PAUSE)
 		return new TowerDefense();
 #ifdef DEBUG
-	if (teclas[C2D2_M].pressionado && estado != PAUSE)
+	if ((teclas[C2D2_M].pressionado && estado != PAUSE) || btnME->getEstado() == SOLTO)
 		return new MapEditor();
 #endif
 	return this;
@@ -44,6 +48,12 @@ void TowerDefense::inicializar(){
 	mapaTD = Mapa();
 	mapaTD.load("Default");
 	tIndice = 0;
+#ifdef DEBUG
+	menus.push_back(btnME = new MenuButton("MapEditor", 700, 460, tahoma16));
+#endif
+	menus.push_back(btnPause = new MenuButton("Pausa", 700, 480, tahoma16));
+	menus.push_back(btnBack = new MenuButton("Voltar", 700, 500, tahoma16));
+	menus.push_back(btnExit = new MenuButton("Sair", 700, 520, tahoma16));
 }
 
 void TowerDefense::atualizar(){
@@ -52,8 +62,10 @@ void TowerDefense::atualizar(){
 	mouseX = m->x;
 	mouseY = m->y;
 
-	estado = teclas[C2D2_P].pressionado || teclas[C2D2_ESC].pressionado ? estado == PLAY ? PAUSE : PLAY : estado;
-
+	estado = teclas[C2D2_P].pressionado || teclas[C2D2_ESC].pressionado || btnPause->getEstado() == SOLTO ? estado == PLAY ? PAUSE : PLAY : estado;
+	for(Menu* menu : menus){
+		menu->atualizar();
+	}
 	switch (estado)
 	{
 	case PLAY:
@@ -142,6 +154,9 @@ void TowerDefense::desenhar(){
 		break;
 	}
 
+	for(Menu* menu : menus){
+		menu->desenhar();
+	}
 	C2D2_DesenhaSprite(mouseSprite, 0, mouseX, mouseY);
 }
 
@@ -530,6 +545,9 @@ void TowerDefense::waveBoss(){ // simples, duplas, triplas, quadruplas, quadrupl
 #pragma endregion
 
 void TowerDefense::finalizar(){
+	for(Menu* menu : menus){
+		delete menu;
+	}
 	C2D2_RemoveSpriteSet(mouseSprite);
 	C2D2_RemoveFonte(tahoma16);
 	C2D2_RemoveFonte(tahoma32);

@@ -107,14 +107,14 @@ void GerenteAtor::desenhar()
 }
 
 Ator* GerenteAtor::maisPerto(int x, int y, int alcance, Tipo tipo){
-	float dis = alcance;
+	float dis = (float)alcance;
 	Ator* alvo = nullptr;
 	for (Ator* ator : atores) 
 	{
 		if(ator->tipo() == tipo){
 			int dx = x-ator->x();
 			int dy = y-ator->y();
-			float dd = sqrt(dx*dx+dy*dy);
+			float dd = sqrt((float)dx*dx+dy*dy);
 			if ( dd <= dis){ 
 				dis = dd;
 				alvo = ator;

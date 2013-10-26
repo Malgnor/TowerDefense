@@ -63,11 +63,11 @@ void ProjetilExemplo::atualizar(){
 	}
 	int dx = posX-alvo.x();
 	int dy = posY-alvo.y();
-	float d = sqrt(dx*dx+dy*dy);
+	float d = sqrt((float)dx*dx+dy*dy);
 	float xx = (float)dx/d;
 	float yy = (float)dy/d;
-	posY-=vel*yy;	
-	posX-=vel*xx;
+	posY-=(int)(vel*yy);	
+	posX-=(int)(vel*xx);
 }
 		
 void ProjetilExemplo::desenhar(){

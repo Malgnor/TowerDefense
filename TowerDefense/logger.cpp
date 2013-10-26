@@ -6,7 +6,7 @@ using namespace std;
 
 void addToLog(char* txt){
 	ofstream oFile("logs/log.log", ios_base::app);
-	oFile << C2D2_TempoSistema() << ":" << txt << endl;
+	txt == "" ? oFile << endl : oFile << C2D2_TempoSistema() << ":" << txt << endl;
 	oFile.close();
 }
 

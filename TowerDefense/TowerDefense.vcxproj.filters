@@ -13,39 +13,27 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Telas">
+      <UniqueIdentifier>{a157c972-24d0-4f2d-afbf-70c53d68e8e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Atores">
+      <UniqueIdentifier>{e2681a69-9f7f-4b09-be61-309592aa5210}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Atores">
+      <UniqueIdentifier>{a53e7740-89c4-4236-9d9b-7d724d87a7b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Telas">
+      <UniqueIdentifier>{d05cab76-26c9-4f6a-ae14-97fed78477b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Menus">
+      <UniqueIdentifier>{13037ed8-3ea2-491d-8f9c-1fe6e19b9dd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Menus">
+      <UniqueIdentifier>{fae361ff-70eb-48a9-aed1-1c21bdaa705b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Ator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GameLoop.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GerenteAtor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GerenteTela.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TowerDefense.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="InimigoExemplo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ProjetilExemplo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TorreExemplo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Inimigo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Projetil.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Torre.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Mapa.cpp">
@@ -54,63 +42,69 @@
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MapEditor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Torre2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="c2d2f.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="logger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Ator.cpp">
+      <Filter>Source Files\Atores</Filter>
+    </ClCompile>
+    <ClCompile Include="GerenteAtor.cpp">
+      <Filter>Source Files\Atores</Filter>
+    </ClCompile>
+    <ClCompile Include="Inimigo.cpp">
+      <Filter>Source Files\Atores</Filter>
+    </ClCompile>
+    <ClCompile Include="InimigoExemplo.cpp">
+      <Filter>Source Files\Atores</Filter>
+    </ClCompile>
+    <ClCompile Include="Projetil.cpp">
+      <Filter>Source Files\Atores</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjetilExemplo.cpp">
+      <Filter>Source Files\Atores</Filter>
+    </ClCompile>
+    <ClCompile Include="Torre.cpp">
+      <Filter>Source Files\Atores</Filter>
+    </ClCompile>
+    <ClCompile Include="Torre2.cpp">
+      <Filter>Source Files\Atores</Filter>
+    </ClCompile>
+    <ClCompile Include="TorreExemplo.cpp">
+      <Filter>Source Files\Atores</Filter>
+    </ClCompile>
+    <ClCompile Include="GerenteTela.cpp">
+      <Filter>Source Files\Telas</Filter>
+    </ClCompile>
+    <ClCompile Include="TowerDefense.cpp">
+      <Filter>Source Files\Telas</Filter>
+    </ClCompile>
+    <ClCompile Include="MapEditor.cpp">
+      <Filter>Source Files\Telas</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuInicial.cpp">
+      <Filter>Source Files\Telas</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Source Files\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuToggle.cpp">
+      <Filter>Source Files\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuText.cpp">
+      <Filter>Source Files\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuButton.cpp">
+      <Filter>Source Files\Menus</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Ator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameLoop.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GerenteAtor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GerenteTela.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Tela.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TowerDefense.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Inimigo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="InimigoExemplo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Projetil.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ProjetilExemplo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TorreExemplo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Torre.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Mapa.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MapEditor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Torre2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="c2d2f.h">
@@ -121,6 +115,60 @@
     </ClInclude>
     <ClInclude Include="logger.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuInicial.h">
+      <Filter>Header Files\Telas</Filter>
+    </ClInclude>
+    <ClInclude Include="MapEditor.h">
+      <Filter>Header Files\Telas</Filter>
+    </ClInclude>
+    <ClInclude Include="TowerDefense.h">
+      <Filter>Header Files\Telas</Filter>
+    </ClInclude>
+    <ClInclude Include="Tela.h">
+      <Filter>Header Files\Telas</Filter>
+    </ClInclude>
+    <ClInclude Include="GerenteTela.h">
+      <Filter>Header Files\Telas</Filter>
+    </ClInclude>
+    <ClInclude Include="Ator.h">
+      <Filter>Header Files\Atores</Filter>
+    </ClInclude>
+    <ClInclude Include="GerenteAtor.h">
+      <Filter>Header Files\Atores</Filter>
+    </ClInclude>
+    <ClInclude Include="Inimigo.h">
+      <Filter>Header Files\Atores</Filter>
+    </ClInclude>
+    <ClInclude Include="InimigoExemplo.h">
+      <Filter>Header Files\Atores</Filter>
+    </ClInclude>
+    <ClInclude Include="Projetil.h">
+      <Filter>Header Files\Atores</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjetilExemplo.h">
+      <Filter>Header Files\Atores</Filter>
+    </ClInclude>
+    <ClInclude Include="Torre2.h">
+      <Filter>Header Files\Atores</Filter>
+    </ClInclude>
+    <ClInclude Include="Torre.h">
+      <Filter>Header Files\Atores</Filter>
+    </ClInclude>
+    <ClInclude Include="TorreExemplo.h">
+      <Filter>Header Files\Atores</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Header Files\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuToggle.h">
+      <Filter>Header Files\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuText.h">
+      <Filter>Header Files\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuButton.h">
+      <Filter>Header Files\Menus</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -60,6 +60,7 @@ bool GameLoop::executar(char* titulo, int largura, int altura, bool primitivas, 
 	C2D2_Encerra();
 #ifdef LOG
 	addToLog("Chien2D2 Encerrado!(GameLoop.cpp)\nTime", time(0));
+	addToLog("");
 #endif
 	return true;
 }

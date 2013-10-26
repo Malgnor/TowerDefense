@@ -87,6 +87,11 @@
     <ClCompile Include="InimigoExemplo.cpp" />
     <ClCompile Include="logger.cpp" />
     <ClCompile Include="MapEditor.cpp" />
+    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="MenuButton.cpp" />
+    <ClCompile Include="MenuInicial.cpp" />
+    <ClCompile Include="MenuText.cpp" />
+    <ClCompile Include="MenuToggle.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Mapa.cpp" />
     <ClCompile Include="Projetil.cpp" />
@@ -108,6 +113,11 @@
     <ClInclude Include="logger.h" />
     <ClInclude Include="Mapa.h" />
     <ClInclude Include="MapEditor.h" />
+    <ClInclude Include="Menu.h" />
+    <ClInclude Include="MenuButton.h" />
+    <ClInclude Include="MenuInicial.h" />
+    <ClInclude Include="MenuText.h" />
+    <ClInclude Include="MenuToggle.h" />
     <ClInclude Include="Projetil.h" />
     <ClInclude Include="ProjetilExemplo.h" />
     <ClInclude Include="Tela.h" />
