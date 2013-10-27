@@ -1,3 +1,4 @@
+#include "globalDef.h"
 #include "GameLoop.h"
 #include "MenuInicial.h"
 

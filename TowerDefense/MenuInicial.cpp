@@ -1,4 +1,5 @@
 #include "globalDef.h"
+#include "color.h"
 
 #include "dirent.h"
 
@@ -60,11 +61,11 @@ void MenuInicial::inicializar()
 		addToLog("Falha ao carregar a fonte Tahoma de tamanho 64!(MenuInicial.cpp)");
 #endif
 
-	menus.push_back(new MenuText("TowerDefense", 400, 90, tahoma64));
-	menus.push_back(btnTD = new MenuButton("Jogar", 400, 250, tahoma32));
-	menus.push_back(btnMS = new MenuButton("Selecionar Mapa", 400, 300, tahoma32));
+	menus.push_back(new MenuText("TowerDefense", 400, 100, tahoma64, "DarkOrange"));
+	menus.push_back(btnTD = new MenuButton("Jogar", 400, 250, tahoma32, "purple"));
+	menus.push_back(btnMS = new MenuButton("Selecionar Mapa", 400, 300, tahoma32, "indigo"));
 #ifdef DEBUG
-	menus.push_back(btnME = new MenuButton("MapEditor", 400, 350, tahoma32));
+	menus.push_back(btnME = new MenuButton("MapEditor", 400, 350, tahoma32, "purple1"));
 #endif
 	menus.push_back(btnExit = new MenuButton("Sair!", 400, 490, tahoma32));
 
@@ -90,7 +91,7 @@ void MenuInicial::inicializar()
 				buffer.pop_back(); //a
 				buffer.pop_back(); //m
 				buffer.pop_back(); //.
-				menusMS.push_back(new MenuButton(buffer, 200+xpos++%3*125, 50+(xpos % 3 == 0 ? ++ypos : ypos)*75, tahoma32));
+				menusMS.push_back(new MenuButton(buffer, 150+xpos++%3*125, 50+(xpos % 3 == 0 ? ++ypos : ypos)*75, tahoma32));
 			}
 		} else {
 			break;

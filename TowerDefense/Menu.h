@@ -11,9 +11,11 @@ protected:
 	int posY;
 	int l;
 	int a;
+	double r, g, b;
 
 public:
-	Menu(std::string _name, int _x, int _y, int& _fonte);
+	Menu(std::string _name, int _x, int _y, int& _fonte, double _r = 1, double _g = 0, double _b = 0);
+	Menu(std::string _name, int _x, int _y, int& _fonte, char* _cor);
 	std::string getName();
 	virtual void atualizar() = 0;
 	virtual void desenhar() = 0;

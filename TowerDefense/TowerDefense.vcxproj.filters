@@ -105,6 +105,9 @@
     <ClCompile Include="TorreDemo.cpp">
       <Filter>Source Files\Atores</Filter>
     </ClCompile>
+    <ClCompile Include="color.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameLoop.h">
@@ -184,6 +187,9 @@
     </ClInclude>
     <ClInclude Include="TorreDemo.h">
       <Filter>Header Files\Atores</Filter>
+    </ClInclude>
+    <ClInclude Include="color.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

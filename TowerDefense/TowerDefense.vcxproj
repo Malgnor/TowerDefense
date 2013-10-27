@@ -80,6 +80,7 @@
   <ItemGroup>
     <ClCompile Include="Ator.cpp" />
     <ClCompile Include="c2d2f.cpp" />
+    <ClCompile Include="color.cpp" />
     <ClCompile Include="GameLoop.cpp" />
     <ClCompile Include="GerenteAtor.cpp" />
     <ClCompile Include="GerenteTela.cpp" />
@@ -106,6 +107,7 @@
   <ItemGroup>
     <ClInclude Include="Ator.h" />
     <ClInclude Include="c2d2f.h" />
+    <ClInclude Include="color.h" />
     <ClInclude Include="dirent.h" />
     <ClInclude Include="GameLoop.h" />
     <ClInclude Include="GerenteAtor.h" />
