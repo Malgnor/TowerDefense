@@ -1,6 +1,10 @@
 #include "c2d2f.h"
 #include "globalDef.h"
 
+#include "color.h"
+
+#include <c2d2/chien2d2primitivas.h>
+
 bool stringInput( string& x ){
 	C2D2_Botao* teclas = C2D2_PegaTeclas();
 	bool m = false;
@@ -112,4 +116,20 @@ std::string stringFInput( char* txt , char* sufixo, char* prefixo)
 {
 	string x = "";
 	return stringFInput(x, txt, sufixo, prefixo) ? x : "";
+}
+
+void dRetangulo(int x, int y, int largura, int altura, char* cor){
+	C2D2P_Retangulo(x, y, x+largura, x+altura, getCorR(cor), getCorG(cor), getCorB(cor));
+}
+
+void dRetanguloPintado(int x, int y, int largura, int altura, char* cor){
+	C2D2P_RetanguloPintado(x, y, x+largura, x+altura, getCorR(cor), getCorG(cor), getCorB(cor));
+}
+
+void dRetanguloPintadoAlfa(int x, int y, int largura, int altura, char* cor, unsigned char alfa){
+	C2D2P_RetanguloPintadoAlfa(x, y, x+largura, x+altura, getCorR(cor), getCorG(cor), getCorB(cor), alfa);
+}
+
+void dLinha(int x, int y, int largura, int altura, char* cor){
+	C2D2P_Linha(x, y, x+largura, y+altura, getCorR(cor), getCorG(cor), getCorB(cor));
 }

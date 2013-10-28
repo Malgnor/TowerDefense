@@ -11,4 +11,10 @@ bool stringInput(string& x);
 bool stringFInput(string& x, char* txt = "", char* sufixo = "", char* prefixo = "");
 string stringFInput(char* txt = "", char* sufixo = "", char* prefixo = "");
 
+void dRetangulo(int x, int y, int largura, int altura, char* cor);
+void dRetanguloPintado(int x, int y, int largura, int altura, char* cor);
+void dRetanguloPintadoAlfa(int x, int y, int largura, int altura, char* cor, unsigned char alfa);
+
+void dLinha(int x, int y, int largura, int altura, char* cor);
+
 #endif
