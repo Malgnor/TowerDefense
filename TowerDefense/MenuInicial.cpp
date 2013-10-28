@@ -61,7 +61,7 @@ void MenuInicial::inicializar()
 		addToLog("Falha ao carregar a fonte Tahoma de tamanho 64!(MenuInicial.cpp)");
 #endif
 
-	menus.push_back(new MenuText("TowerDefense", 400, 100, tahoma64, "DarkOrange"));
+	menus.push_back(new MenuText("TowerDefense", 400, 100, tahoma64, "Verde-limão"));
 	menus.push_back(btnTD = new MenuButton("Jogar", 400, 250, tahoma32, "purple"));
 	menus.push_back(btnMS = new MenuButton("Selecionar Mapa", 400, 300, tahoma32, "indigo"));
 #ifdef DEBUG
@@ -80,7 +80,7 @@ void MenuInicial::inicializar()
 	
 	string buffer = "";
 	int xpos = 0;
-	int ypos = 0;
+	int ypos = -1;
 	DIR* dir = opendir("map");
 	dirent* dent;
 	while(dir){
@@ -91,7 +91,7 @@ void MenuInicial::inicializar()
 				buffer.pop_back(); //a
 				buffer.pop_back(); //m
 				buffer.pop_back(); //.
-				menusMS.push_back(new MenuButton(buffer, 150+xpos++%3*125, 50+(xpos % 3 == 0 ? ++ypos : ypos)*75, tahoma32));
+				menusMS.push_back(new MenuButton(buffer, 125+xpos++%4*125, 100+(xpos % 4 == 0 ? ++ypos : ypos)*75, tahoma32));
 			}
 		} else {
 			break;
@@ -153,17 +153,18 @@ void MenuInicial::desenhar()
 		for(Menu* menu : menusMS){
 			menu->desenhar();
 		}
-		if(!(mapSelected == "")){
-			Mapa m = Mapa();
-			m.load(mapSelected);
-			C2D2P_Retangulo(599, 399, 673, 473, 0, 0, 255);
-			for (int x = 0; x < 18; x++){
-				for (int y = 0; y < 18; y++){
-					m.sprite32(x, y) == 1 ? C2D2P_RetanguloPintado(600+x*4, 400+y*4, 600+x*4+4, 400+y*4+4, 255, 255, 255) : C2D2P_RetanguloPintado(600+x*4, 400+y*4, 600+x*4+4, 400+y*4+4, 0, 0, 0);
-				}
+		
+		break;
+	}
+	if(!(mapSelected == "")){
+		Mapa m = Mapa();
+		m.load(mapSelected);
+		C2D2P_Retangulo(624, 424, 698, 498, 0, 0, 255);
+		for (int x = 0; x < 18; x++){
+			for (int y = 0; y < 18; y++){
+				m.sprite32(x, y) == 1 ? C2D2P_RetanguloPintado(625+x*4, 425+y*4, 625+x*4+4, 425+y*4+4, 255, 255, 255) : C2D2P_RetanguloPintado(625+x*4, 425+y*4, 625+x*4+4, 425+y*4+4, 0, 0, 0);
 			}
 		}
-		break;
 	}
 	C2D2_DesenhaSprite(mouseSprite, 0, mouseX, mouseY);
 }

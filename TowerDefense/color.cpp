@@ -8,10 +8,10 @@ using namespace std;
 /*
 	Tabela de cores:
 	http://www.imagemagick.org/script/color.php
-	672
+
 	snow 	snow 	rgb( 255 , 250 , 250 ) 	#FFFAFA
-	snow= 255 250 250
-	snow= 1 0.980392 0.980392
+	snow 255 250 250
+	snow 1 0.980392 0.980392
 
 	ifstream ifile("rawCor.txt");
 	ofstream ofile("cores_uchar.txt");

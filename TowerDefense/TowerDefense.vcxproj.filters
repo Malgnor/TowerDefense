@@ -31,6 +31,30 @@
     <Filter Include="Source Files\Menus">
       <UniqueIdentifier>{fae361ff-70eb-48a9-aed1-1c21bdaa705b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\fonte">
+      <UniqueIdentifier>{9f8d4060-26eb-4cea-8e83-5780e06c308c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\maps">
+      <UniqueIdentifier>{5ee04696-5f98-4bdf-9d6a-560f1188688d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Atores\Inimigos">
+      <UniqueIdentifier>{60e5a76e-ffbc-48af-b04b-ed18d73df29b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Atores\Torres">
+      <UniqueIdentifier>{674776ab-46bf-44c1-87bc-8597ba6f8c05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Atores\Projéteis">
+      <UniqueIdentifier>{0fb3cd4d-a6c2-44f0-b2e1-269f427da707}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Atores\Projéteis">
+      <UniqueIdentifier>{5bc52ec6-48f1-4283-b4ad-8d9cdff40978}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Atores\Inimigos">
+      <UniqueIdentifier>{fc50bc85-7cf4-4c8c-b6d4-b5976e3d1551}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Atores\Torres">
+      <UniqueIdentifier>{7e57d43a-7f71-49b0-b86a-0be9f16745a2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameLoop.cpp">
@@ -52,27 +76,6 @@
       <Filter>Source Files\Atores</Filter>
     </ClCompile>
     <ClCompile Include="GerenteAtor.cpp">
-      <Filter>Source Files\Atores</Filter>
-    </ClCompile>
-    <ClCompile Include="Inimigo.cpp">
-      <Filter>Source Files\Atores</Filter>
-    </ClCompile>
-    <ClCompile Include="InimigoExemplo.cpp">
-      <Filter>Source Files\Atores</Filter>
-    </ClCompile>
-    <ClCompile Include="Projetil.cpp">
-      <Filter>Source Files\Atores</Filter>
-    </ClCompile>
-    <ClCompile Include="ProjetilExemplo.cpp">
-      <Filter>Source Files\Atores</Filter>
-    </ClCompile>
-    <ClCompile Include="Torre.cpp">
-      <Filter>Source Files\Atores</Filter>
-    </ClCompile>
-    <ClCompile Include="Torre2.cpp">
-      <Filter>Source Files\Atores</Filter>
-    </ClCompile>
-    <ClCompile Include="TorreExemplo.cpp">
       <Filter>Source Files\Atores</Filter>
     </ClCompile>
     <ClCompile Include="GerenteTela.cpp">
@@ -99,14 +102,35 @@
     <ClCompile Include="MenuButton.cpp">
       <Filter>Source Files\Menus</Filter>
     </ClCompile>
-    <ClCompile Include="InimigoDemo.cpp">
-      <Filter>Source Files\Atores</Filter>
-    </ClCompile>
-    <ClCompile Include="TorreDemo.cpp">
-      <Filter>Source Files\Atores</Filter>
-    </ClCompile>
     <ClCompile Include="color.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjetilExemplo.cpp">
+      <Filter>Source Files\Atores\Projéteis</Filter>
+    </ClCompile>
+    <ClCompile Include="Projetil.cpp">
+      <Filter>Source Files\Atores\Projéteis</Filter>
+    </ClCompile>
+    <ClCompile Include="Inimigo.cpp">
+      <Filter>Source Files\Atores\Inimigos</Filter>
+    </ClCompile>
+    <ClCompile Include="InimigoDemo.cpp">
+      <Filter>Source Files\Atores\Inimigos</Filter>
+    </ClCompile>
+    <ClCompile Include="InimigoExemplo.cpp">
+      <Filter>Source Files\Atores\Inimigos</Filter>
+    </ClCompile>
+    <ClCompile Include="TorreExemplo.cpp">
+      <Filter>Source Files\Atores\Torres</Filter>
+    </ClCompile>
+    <ClCompile Include="Torre.cpp">
+      <Filter>Source Files\Atores\Torres</Filter>
+    </ClCompile>
+    <ClCompile Include="Torre2.cpp">
+      <Filter>Source Files\Atores\Torres</Filter>
+    </ClCompile>
+    <ClCompile Include="TorreDemo.cpp">
+      <Filter>Source Files\Atores\Torres</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -146,27 +170,6 @@
     <ClInclude Include="GerenteAtor.h">
       <Filter>Header Files\Atores</Filter>
     </ClInclude>
-    <ClInclude Include="Inimigo.h">
-      <Filter>Header Files\Atores</Filter>
-    </ClInclude>
-    <ClInclude Include="InimigoExemplo.h">
-      <Filter>Header Files\Atores</Filter>
-    </ClInclude>
-    <ClInclude Include="Projetil.h">
-      <Filter>Header Files\Atores</Filter>
-    </ClInclude>
-    <ClInclude Include="ProjetilExemplo.h">
-      <Filter>Header Files\Atores</Filter>
-    </ClInclude>
-    <ClInclude Include="Torre2.h">
-      <Filter>Header Files\Atores</Filter>
-    </ClInclude>
-    <ClInclude Include="Torre.h">
-      <Filter>Header Files\Atores</Filter>
-    </ClInclude>
-    <ClInclude Include="TorreExemplo.h">
-      <Filter>Header Files\Atores</Filter>
-    </ClInclude>
     <ClInclude Include="Menu.h">
       <Filter>Header Files\Menus</Filter>
     </ClInclude>
@@ -179,17 +182,38 @@
     <ClInclude Include="MenuButton.h">
       <Filter>Header Files\Menus</Filter>
     </ClInclude>
-    <ClInclude Include="InimigoDemo.h">
-      <Filter>Header Files\Atores</Filter>
-    </ClInclude>
     <ClInclude Include="dirent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TorreDemo.h">
-      <Filter>Header Files\Atores</Filter>
-    </ClInclude>
     <ClInclude Include="color.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Inimigo.h">
+      <Filter>Header Files\Atores\Inimigos</Filter>
+    </ClInclude>
+    <ClInclude Include="InimigoDemo.h">
+      <Filter>Header Files\Atores\Inimigos</Filter>
+    </ClInclude>
+    <ClInclude Include="InimigoExemplo.h">
+      <Filter>Header Files\Atores\Inimigos</Filter>
+    </ClInclude>
+    <ClInclude Include="Torre.h">
+      <Filter>Header Files\Atores\Torres</Filter>
+    </ClInclude>
+    <ClInclude Include="Torre2.h">
+      <Filter>Header Files\Atores\Torres</Filter>
+    </ClInclude>
+    <ClInclude Include="TorreDemo.h">
+      <Filter>Header Files\Atores\Torres</Filter>
+    </ClInclude>
+    <ClInclude Include="TorreExemplo.h">
+      <Filter>Header Files\Atores\Torres</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjetilExemplo.h">
+      <Filter>Header Files\Atores\Projéteis</Filter>
+    </ClInclude>
+    <ClInclude Include="Projetil.h">
+      <Filter>Header Files\Atores\Projéteis</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -200,12 +224,6 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="imgs\mouse.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="imgs\OpenSymbol16.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="imgs\OpenSymbol32.bmp">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="imgs\inimE.png">
@@ -223,17 +241,51 @@
     <Image Include="imgs\heart.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="imgs\OpenSymbol16.bmp">
+      <Filter>Resource Files\fonte</Filter>
+    </Image>
+    <Image Include="imgs\OpenSymbol32.bmp">
+      <Filter>Resource Files\fonte</Filter>
+    </Image>
     <Image Include="imgs\OpenSymbol64.bmp">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\fonte</Filter>
     </Image>
     <Image Include="imgs\tahoma16.bmp">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\fonte</Filter>
     </Image>
     <Image Include="imgs\tahoma32.bmp">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\fonte</Filter>
     </Image>
     <Image Include="imgs\tahoma64.bmp">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\fonte</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="cores_double.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="cores_uchar.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="map\1.map">
+      <Filter>Resource Files\maps</Filter>
+    </None>
+    <None Include="map\asdfgh.map">
+      <Filter>Resource Files\maps</Filter>
+    </None>
+    <None Include="map\asg.map">
+      <Filter>Resource Files\maps</Filter>
+    </None>
+    <None Include="map\Default.map">
+      <Filter>Resource Files\maps</Filter>
+    </None>
+    <None Include="map\oi.map">
+      <Filter>Resource Files\maps</Filter>
+    </None>
+    <None Include="map\Teste.map">
+      <Filter>Resource Files\maps</Filter>
+    </None>
   </ItemGroup>
 </Project>

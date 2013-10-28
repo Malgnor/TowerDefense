@@ -149,6 +149,18 @@
     <Image Include="imgs\torre2.bmp" />
     <Image Include="imgs\torreE.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="cores_double.txt" />
+    <Text Include="cores_uchar.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="map\1.map" />
+    <None Include="map\asdfgh.map" />
+    <None Include="map\asg.map" />
+    <None Include="map\Default.map" />
+    <None Include="map\oi.map" />
+    <None Include="map\Teste.map" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

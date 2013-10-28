@@ -133,3 +133,19 @@ void dRetanguloPintadoAlfa(int x, int y, int largura, int altura, char* cor, uns
 void dLinha(int x, int y, int largura, int altura, char* cor){
 	C2D2P_Linha(x, y, x+largura, y+altura, getCorR(cor), getCorG(cor), getCorB(cor));
 }
+
+void dCirculo(int xcentro, int ycentro, int raio, char* cor){
+	C2D2P_Circulo(xcentro, ycentro, raio, getCorR(cor), getCorG(cor), getCorB(cor));
+}
+
+void dCirculoPintado(int xcentro, int ycentro, int raio, char* cor){
+	C2D2P_CirculoPintado(xcentro, ycentro, raio, getCorR(cor), getCorG(cor), getCorB(cor));
+}
+
+void dElipse(int xcentro, int ycentro, int va, int vb, char* cor){
+	C2D2P_Elipse(xcentro, ycentro, va, vb, getCorR(cor), getCorG(cor), getCorB(cor));
+}
+
+void dElipsePintada(int xcentro, int ycentro, int va, int vb, char* cor){
+	C2D2P_ElipsePintada(xcentro, ycentro, va, vb, getCorR(cor), getCorG(cor), getCorB(cor));
+}

@@ -17,4 +17,9 @@ void dRetanguloPintadoAlfa(int x, int y, int largura, int altura, char* cor, uns
 
 void dLinha(int x, int y, int largura, int altura, char* cor);
 
+void dCirculo(int xcentro, int ycentro, int raio, char* cor);
+void dCirculoPintado(int xcentro, int ycentro, int raio, char* cor);
+
+void dElipse(int xcentro, int ycentro, int va, int vb, char* cor);
+void dElipsePintada(int xcentro, int ycentro, int va, int vb, char* cor);
 #endif
