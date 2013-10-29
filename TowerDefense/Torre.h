@@ -9,7 +9,7 @@ enum tESTADO { RTF, COOLDOWN };
 
 class Torre : public Ator
 {
-protected:
+public:
 	int posX, posY, alcance;
 	tESTADO estado;
 	int tSprite;

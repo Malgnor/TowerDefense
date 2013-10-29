@@ -9,7 +9,7 @@
 
 #include "Menu.h"
 #include "MenuButton.h"
-
+class Torre;
 enum tdEstado {PLAY, PAUSE};
 
 class TowerDefense : public Tela
@@ -24,6 +24,7 @@ private:
 	int tahoma16, tahoma32;
 	int eheart, heart;
 	int chances;
+	Torre* pTorre;
 	MenuButton* btnExit;
 	MenuButton* btnBack;
 	MenuButton* btnME;

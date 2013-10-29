@@ -1,5 +1,7 @@
 #include "globalDef.h"
 
+#include "c2d2f.h"
+
 #include "TowerDefense.h"
 #include "MapEditor.h"
 #include "MenuInicial.h"
@@ -44,6 +46,7 @@ Tela* TowerDefense::proximaTela(){
 void TowerDefense::inicializar(){
 	C2D2_TrocaCorLimpezaTela(25, 25, 25);
 	estado = PLAY;
+	pTorre = nullptr;
 	mouseSprite = C2D2_CarregaSpriteSet("imgs/mouse.png", 0, 0);
 	tahoma16 = C2D2_CarregaFonte("imgs/tahoma16.bmp", 16);
 	tahoma32 = C2D2_CarregaFonte("imgs/tahoma32.bmp", 32);
@@ -79,7 +82,7 @@ void TowerDefense::atualizar(){
 	C2D2_Botao* teclas = C2D2_PegaTeclas();
 	mouseX = m->x;
 	mouseY = m->y;
-
+	
 	estado = teclas[C2D2_P].pressionado || teclas[C2D2_ESC].pressionado || btnPause->getEstado() == SOLTO ? estado == PLAY ? PAUSE : PLAY : estado;
 	for(Menu* menu : menus){
 		menu->atualizar();
@@ -88,14 +91,16 @@ void TowerDefense::atualizar(){
 	{
 	case PLAY:
 		m->botoes[C2D2_MMEIO].pressionado ? tIndice == 3 ? tIndice = 0 : tIndice++ : 0;
-
-		if(m->botoes[C2D2_MESQUERDO].ativo && mouseX < 576 && mouseY < 576 && mapaTD.conteudo(mouseX, mouseY) == 0){
-			mapaTD.construir(mouseX, mouseY);
-			if(tIndice != 3)
-				gAtor.adicionar(new Torre2(gAtor, mouseX, mouseY, tIndice));
-			else
-				gAtor.adicionar(new TorreExemplo(gAtor, mouseX, mouseY));
-
+		if(mouseX < 576 && mouseY < 576){
+			if(m->botoes[C2D2_MESQUERDO].ativo && mapaTD.conteudo(mouseX, mouseY) == 0){
+				mapaTD.construir(mouseX, mouseY);
+				if(tIndice != 3)
+					gAtor.adicionar(new Torre2(gAtor, mouseX, mouseY, tIndice));
+				else
+					gAtor.adicionar(new TorreExemplo(gAtor, mouseX, mouseY));
+			} else if(m->botoes[C2D2_MESQUERDO].pressionado) {
+				pTorre = (Torre*)(gAtor.maisPerto(mouseX, mouseY, 16, TORRE));
+			}
 		}
 
 #ifdef DEBUG
@@ -141,7 +146,7 @@ void TowerDefense::atualizar(){
 }
 
 void TowerDefense::desenhar(){
-	int ytxt = 5;
+	int ytxt = 3;
 
 	C2D2_DesenhaTexto(tahoma32, 580, 16, "Tower Defense", C2D2_TEXTO_ESQUERDA);
 	C2D2_DesenhaTexto(tahoma16, 580, ytxt++*20, "Mouse Esquerdo - Coloca Torre", C2D2_TEXTO_ESQUERDA);
@@ -161,9 +166,26 @@ void TowerDefense::desenhar(){
 	C2D2_DesenhaTexto(tahoma16, 580, ytxt++*20, "Z - Diminui chances", C2D2_TEXTO_ESQUERDA);
 #endif
 
+	
+
 	C2D2P_Linha(577, 0, 577, 577, 255, 255, 255);
 	C2D2P_Linha(0, 577, 577, 577, 255, 255, 255);
 	mapaTD.desenhar();
+
+	if(pTorre != nullptr){
+		dCirculo(pTorre->x(), pTorre->y(), pTorre->alcance, "White");
+		//C2D2P_Circulo(pTorre->x(), pTorre->y(), pTorre->alcance, 255, 255, 255);
+		int yt = 15;
+		C2D2_DesenhaTexto(tahoma16, 585, yt++*20, "Torre", C2D2_TEXTO_ESQUERDA);
+		char temp[50];
+		sprintf_s(temp, "Nível: %d", pTorre->indice()+1);
+		C2D2_DesenhaTexto(tahoma16, 585, yt++*20, temp, C2D2_TEXTO_ESQUERDA);
+		sprintf_s(temp, "Alcance: %d", pTorre->alcance);
+		C2D2_DesenhaTexto(tahoma16, 585, yt++*20, temp, C2D2_TEXTO_ESQUERDA);
+		sprintf_s(temp, "RoF: %d", pTorre->RoF);
+		C2D2_DesenhaTexto(tahoma16, 585, yt++*20, temp, C2D2_TEXTO_ESQUERDA);
+	}
+
 	gAtor.desenhar();
 
 	int i;

@@ -61,7 +61,7 @@ void MenuInicial::inicializar()
 		addToLog("Falha ao carregar a fonte Tahoma de tamanho 64!(MenuInicial.cpp)");
 #endif
 
-	menus.push_back(new MenuText("TowerDefense", 400, 100, tahoma64, "Verde-limão"));
+	menus.push_back(new MenuText("TowerDefense", 400, 100, tahoma64, "Verde-limao"));
 	menus.push_back(btnTD = new MenuButton("Jogar", 400, 250, tahoma32, "purple"));
 	menus.push_back(btnMS = new MenuButton("Selecionar Mapa", 400, 300, tahoma32, "indigo"));
 #ifdef DEBUG
