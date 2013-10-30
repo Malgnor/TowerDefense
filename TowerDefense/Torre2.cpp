@@ -7,8 +7,9 @@
 #include <c2d2\chien2d2primitivas.h>
 
 Torre2::Torre2(GerenteAtor& _gerente, int _x, int _y, int _ind)
-	: Torre(_gerente, _x, _y), ind(_ind)
+	: Torre(_gerente, _x, _y)
 {
+	ind = _ind;
 }
 
 int Torre2::x(){

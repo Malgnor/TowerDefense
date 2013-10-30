@@ -29,6 +29,8 @@ private:
 	MenuButton* btnBack;
 	MenuButton* btnME;
 	MenuButton* btnPause;
+	MenuButton btnSell;
+	MenuButton btnUpgrade;
 	std::vector <Menu*> menus;
 
 public:

@@ -5,9 +5,6 @@
 
 class Torre2 : public Torre
 {
-private:
-	int ind;
-
 public:	
 	Torre2(GerenteAtor& _gerente, int _x, int _y, int _ind);
 	int x();

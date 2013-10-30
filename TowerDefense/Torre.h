@@ -13,6 +13,7 @@ public:
 	int posX, posY, alcance;
 	tESTADO estado;
 	int tSprite;
+	int ind;
 
 	//Rate of Fire
 	int RoF;

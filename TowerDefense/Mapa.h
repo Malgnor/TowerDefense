@@ -16,7 +16,8 @@ public:
 	char conteudo(int x, int y);
 	char conteudo32(int x, int y);
 	int sprite32(int x, int y);
-	void construir(int x, int y);
+	void addTorre(int x, int y);
+	void removeTorre(int x, int y);
 	void construir(int x, int y, int sprite, int id);
 	void save();
 	void load();

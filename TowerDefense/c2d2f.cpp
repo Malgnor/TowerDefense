@@ -1,4 +1,5 @@
 #include "c2d2f.h"
+
 #include "globalDef.h"
 
 #include "color.h"
@@ -119,15 +120,15 @@ std::string stringFInput( char* txt , char* sufixo, char* prefixo)
 }
 
 void dRetangulo(int x, int y, int largura, int altura, char* cor){
-	C2D2P_Retangulo(x, y, x+largura, x+altura, getCorR(cor), getCorG(cor), getCorB(cor));
+	C2D2P_Retangulo(x, y, x+largura, y+altura, getCorR(cor), getCorG(cor), getCorB(cor));
 }
 
 void dRetanguloPintado(int x, int y, int largura, int altura, char* cor){
-	C2D2P_RetanguloPintado(x, y, x+largura, x+altura, getCorR(cor), getCorG(cor), getCorB(cor));
+	C2D2P_RetanguloPintado(x, y, x+largura, y+altura, getCorR(cor), getCorG(cor), getCorB(cor));
 }
 
 void dRetanguloPintadoAlfa(int x, int y, int largura, int altura, char* cor, unsigned char alfa){
-	C2D2P_RetanguloPintadoAlfa(x, y, x+largura, x+altura, getCorR(cor), getCorG(cor), getCorB(cor), alfa);
+	C2D2P_RetanguloPintadoAlfa(x, y, x+largura, y+altura, getCorR(cor), getCorG(cor), getCorB(cor), alfa);
 }
 
 void dLinha(int x, int y, int largura, int altura, char* cor){

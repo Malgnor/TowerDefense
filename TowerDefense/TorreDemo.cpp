@@ -1,6 +1,7 @@
 #include "TorreDemo.h"
 #include "GerenteAtor.h"
 #include "ProjetilExemplo.h"
+
 #include <c2d2/chien2d2.h>
 
 TorreDemo::TorreDemo(GerenteAtor& _gerente, int _x, int _y)

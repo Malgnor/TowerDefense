@@ -52,10 +52,14 @@ int Mapa::sprite32( int x, int y )
 	return map[x][y]/5;
 }
 
-
-void Mapa::construir( int x, int y )
+void Mapa::addTorre( int x, int y )
 {
 	map[x/32][y/32] += 1;
+}
+
+void Mapa::removeTorre( int x, int y )
+{
+	map[x/32][y/32] -= 1;
 }
 
 void Mapa::construir( int x, int y, int sprite, int id)

@@ -1,6 +1,7 @@
 #include "globalDef.h"
 
 #include "c2d2f.h"
+#include "color.h"
 
 #include "TowerDefense.h"
 #include "MapEditor.h"
@@ -16,13 +17,13 @@
 #include <c2d2\chien2d2primitivas.h>
 
 TowerDefense::TowerDefense()
-	: mapaTD()
+	: mapaTD(), btnSell("Vender", 630, 415, tahoma16 = C2D2_CarregaFonte("imgs/tahoma16.bmp", 16)), btnUpgrade("Upgrade", 685, 415, tahoma16)
 {
 	mapaTD.load("Default");
 }
 
 TowerDefense::TowerDefense(const char* _map )
-	: mapaTD()
+	: mapaTD(), btnSell("Vender", 630, 415, tahoma16 = C2D2_CarregaFonte("imgs/tahoma16.bmp", 16)), btnUpgrade("Upgrade", 685, 415, tahoma16)
 {
 	mapaTD.load(_map);
 }
@@ -44,7 +45,8 @@ Tela* TowerDefense::proximaTela(){
 }
 
 void TowerDefense::inicializar(){
-	C2D2_TrocaCorLimpezaTela(25, 25, 25);
+	C2D2_TrocaCorLimpezaTela(255, 255, 255);
+
 	estado = PLAY;
 	pTorre = nullptr;
 	mouseSprite = C2D2_CarregaSpriteSet("imgs/mouse.png", 0, 0);
@@ -75,6 +77,7 @@ void TowerDefense::inicializar(){
 	menus.push_back(btnPause = new MenuButton("Pausa", 700, 480, tahoma16));
 	menus.push_back(btnBack = new MenuButton("Menu Inicial", 700, 500, tahoma16));
 	menus.push_back(btnExit = new MenuButton("Sair", 700, 520, tahoma16));
+
 }
 
 void TowerDefense::atualizar(){
@@ -93,7 +96,7 @@ void TowerDefense::atualizar(){
 		m->botoes[C2D2_MMEIO].pressionado ? tIndice == 3 ? tIndice = 0 : tIndice++ : 0;
 		if(mouseX < 576 && mouseY < 576){
 			if(m->botoes[C2D2_MESQUERDO].ativo && mapaTD.conteudo(mouseX, mouseY) == 0){
-				mapaTD.construir(mouseX, mouseY);
+				mapaTD.addTorre(mouseX, mouseY);
 				if(tIndice != 3)
 					gAtor.adicionar(new Torre2(gAtor, mouseX, mouseY, tIndice));
 				else
@@ -136,7 +139,16 @@ void TowerDefense::atualizar(){
 		if(teclas[C2D2_D].pressionado)
 			mapaTD.load();
 #endif
-
+		if( pTorre != nullptr){
+			btnSell.atualizar();
+			btnUpgrade.atualizar();
+			btnUpgrade.getEstado() == SOLTO ? pTorre->indice() == 2 ? pTorre->ind = 0 : pTorre->ind++ : 0;
+			if(btnSell.getEstado() == SOLTO){
+				pTorre->alive = false;
+				mapaTD.removeTorre(pTorre->x(), pTorre->y());
+				pTorre = nullptr;
+			}
+		}
 		gAtor.atualizar();
 		break;
 	case PAUSE:
@@ -146,47 +158,56 @@ void TowerDefense::atualizar(){
 }
 
 void TowerDefense::desenhar(){
+	
+	mapaTD.desenhar();
+	gAtor.desenhar();
+
+	if( pTorre != nullptr )
+		C2D2P_Circulo(pTorre->x(), pTorre->y(), pTorre->alcance, 255, 255, 255);
+
+	C2D2P_RetanguloPintado(577, 0, 800, 600, 25, 25, 25);
+	C2D2P_RetanguloPintado(0, 577, 577, 600, 25, 25, 25);
+
+	if(pTorre != nullptr){
+		//dCirculo(pTorre->x(), pTorre->y(), pTorre->alcance, "White");
+		//dRetanguloPintadoAlfa(590, 290, 135, 150, "CornflowerBlue", 127);
+		//dRetangulo(590, 290, 135, 150, "Green");
+		C2D2P_RetanguloPintadoAlfa(590, 290, 725, 440, 100, 149, 237, 127);
+		C2D2P_Retangulo(590, 290, 725, 440, 0, 127, 0);
+		btnUpgrade.desenhar();
+		btnSell.desenhar();
+		int yt = 16;
+		C2D2_DesenhaSprite(pTorre->sprite(), pTorre->indice(), 680, yt*20+35);
+		C2D2_DesenhaTexto(tahoma32, 630, yt++*20-25, "Torre", C2D2_TEXTO_ESQUERDA);
+		char temp[50];
+		sprintf_s(temp, "Nível: %d", pTorre->indice()+1);
+		C2D2_DesenhaTexto(tahoma16, 600, yt++*20, temp, C2D2_TEXTO_ESQUERDA);
+		sprintf_s(temp, "Alcance: %d", pTorre->alcance);
+		C2D2_DesenhaTexto(tahoma16, 600, yt++*20, temp, C2D2_TEXTO_ESQUERDA);
+		sprintf_s(temp, "RoF: %d", pTorre->RoF);
+		C2D2_DesenhaTexto(tahoma16, 600, yt++*20, temp, C2D2_TEXTO_ESQUERDA);
+	}
+
 	int ytxt = 3;
 
-	C2D2_DesenhaTexto(tahoma32, 580, 16, "Tower Defense", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(tahoma16, 580, ytxt++*20, "Mouse Esquerdo - Coloca Torre", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(tahoma16, 580, ytxt++*20, "Mouse meio - Muda torre", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(tahoma16, 580, ytxt++*20, "P/ESC - Pausa/Despausa", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(tahoma16, 580, ytxt++*20, "R - Reset", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(tahoma32, 600, 16, "Tower Defense", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(tahoma16, 585, ytxt++*20, "Mouse Esquerdo - Coloca Torre", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(tahoma16, 585, ytxt++*20, "Mouse meio - Muda torre", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(tahoma16, 585, ytxt++*20, "P/ESC - Pausa/Despausa", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(tahoma16, 585, ytxt++*20, "R - Reset", C2D2_TEXTO_ESQUERDA);
 
 #ifdef DEBUG
 	char txt[50];
 	sprintf_s(txt, "indiceTorre:%d\t(%d,%d)\t(%d,%d)[%d]\tChances: %d", tIndice, mouseX, mouseY, mouseX < 576 && mouseY < 576 ? mouseX/32 : 0, mouseY < 576 && mouseX < 576 ? mouseY/32 : 0, mouseY < 576 && mouseX < 576 ? mapaTD.conteudo(mouseX, mouseY) : 0, chances);
 	C2D2_DesenhaTexto(tahoma16, 32, 580, txt, C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(tahoma16, 580, ytxt++*20, "Mouse Direito - Cria Inimigo", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(tahoma16, 580, ytxt++*20, "M - Map Editor", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(tahoma16, 580, ytxt++*20, "D - Carrega mapa", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(tahoma16, 580, ytxt++*20, "0-9 - Cria waves de inimigo", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(tahoma16, 580, ytxt++*20, "X - Aumenta chances", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(tahoma16, 580, ytxt++*20, "Z - Diminui chances", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(tahoma16, 585, ytxt++*20, "Mouse Direito - Cria Inimigo", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(tahoma16, 585, ytxt++*20, "M - Map Editor", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(tahoma16, 585, ytxt++*20, "D - Carrega mapa", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(tahoma16, 585, ytxt++*20, "0-9 - Cria waves de inimigo", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(tahoma16, 585, ytxt++*20, "X - Aumenta chances", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(tahoma16, 585, ytxt++*20, "Z - Diminui chances", C2D2_TEXTO_ESQUERDA);
 #endif
 
-	
-
-	C2D2P_Linha(577, 0, 577, 577, 255, 255, 255);
-	C2D2P_Linha(0, 577, 577, 577, 255, 255, 255);
-	mapaTD.desenhar();
-
-	if(pTorre != nullptr){
-		dCirculo(pTorre->x(), pTorre->y(), pTorre->alcance, "White");
-		//C2D2P_Circulo(pTorre->x(), pTorre->y(), pTorre->alcance, 255, 255, 255);
-		int yt = 15;
-		C2D2_DesenhaTexto(tahoma16, 585, yt++*20, "Torre", C2D2_TEXTO_ESQUERDA);
-		char temp[50];
-		sprintf_s(temp, "Nível: %d", pTorre->indice()+1);
-		C2D2_DesenhaTexto(tahoma16, 585, yt++*20, temp, C2D2_TEXTO_ESQUERDA);
-		sprintf_s(temp, "Alcance: %d", pTorre->alcance);
-		C2D2_DesenhaTexto(tahoma16, 585, yt++*20, temp, C2D2_TEXTO_ESQUERDA);
-		sprintf_s(temp, "RoF: %d", pTorre->RoF);
-		C2D2_DesenhaTexto(tahoma16, 585, yt++*20, temp, C2D2_TEXTO_ESQUERDA);
-	}
-
-	gAtor.desenhar();
 
 	int i;
 	C2D2_DesenhaSprite(eheart, 0, 400, 580);
