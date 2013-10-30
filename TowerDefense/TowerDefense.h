@@ -24,6 +24,7 @@ private:
 	int tahoma16, tahoma32;
 	int eheart, heart;
 	int chances;
+	int gold;
 	Torre* pTorre;
 	MenuButton* btnExit;
 	MenuButton* btnBack;
@@ -41,7 +42,8 @@ public:
 	void inicializar();		
 	void atualizar();
 	void desenhar();
-
+	void Lucro(int money);
+	void DanoRecebido(int porrada);
 	void wave();
 	void wave2();
 	void wave3();

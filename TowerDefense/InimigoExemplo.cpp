@@ -6,8 +6,8 @@
 
 #include <c2d2\chien2d2primitivas.h>
 
-InimigoExemplo::InimigoExemplo(GerenteAtor& _gerente, Mapa& _map, int _x, int _y, int _vel, int _vida)
-	: Inimigo(_gerente, _map, _x, _y, _vel, _vida)
+InimigoExemplo::InimigoExemplo(GerenteAtor& _gerente, Mapa& _map, int _x, int _y, int _vel, int _vida, int _dinheiro, TowerDefense*_td)
+	: Inimigo(_gerente, _map, _x, _y, _vel, _vida, _dinheiro, _td)
 {
 }
 
@@ -57,6 +57,7 @@ void InimigoExemplo::inicializar(){
 void InimigoExemplo::atualizar(){
 	if (vida <= 0){
 		alive = false;
+		td->Lucro(dinheiro);
 	}
 
 	if(--passos >= 0){
@@ -88,9 +89,10 @@ void InimigoExemplo::atualizar(){
 		else
 			passos = 0;
 	}	
-	if(posX > 576)
+	if(posX > 576){
 		alive = false;
-	else if (posX > 544)
+		td->DanoRecebido(1);
+	}else if (posX > 544)
 		passos = 32;
 }
 		

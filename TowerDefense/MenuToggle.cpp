@@ -18,7 +18,7 @@ mToggle MenuToggle::getEstado()
 void MenuToggle::atualizar()
 {
 	C2D2_Mouse* m = C2D2_PegaMouse();
-	estado = C2D2_ColidiuQuadrados((int)(posX-l/1.75), posY, (int)((posX+l/1.75)-(posX-l/1.75)), a, m->x, m->y, 1, 1) && m->botoes[C2D2_MESQUERDO].pressionado ? estado == ATIVADO ? DESATIVADO : ATIVADO : estado;
+	estado = C2D2_ColidiuQuadrados((int)(posX-l/2-3), posY, (int)((posX+l/2+3)-(posX-l/2-3)), a, m->x, m->y, 1, 1) && m->botoes[C2D2_MESQUERDO].pressionado ? estado == ATIVADO ? DESATIVADO : ATIVADO : estado;
 }
 
 void MenuToggle::desenhar()
@@ -26,12 +26,12 @@ void MenuToggle::desenhar()
 	switch (estado)
 	{
 	case DESATIVADO:
-		C2D2P_RetanguloPintadoAlfa((int)(posX-l/1.75), posY, (int)(posX+l/1.75), posY+a, 127, 0, 0, 127);
-		C2D2P_Retangulo((int)(posX-l/1.75), posY, (int)(posX+l/1.75), posY+a, 255, 0, 0);
+		C2D2P_RetanguloPintadoAlfa((int)(posX-l/2-3), posY, (int)(posX+l/2+3), posY+a, 127, 0, 0, 127);
+		C2D2P_Retangulo((int)(posX-l/2-3), posY, (int)(posX+l/2+3), posY+a, 255, 0, 0);
 		break;
 	case ATIVADO:
-		C2D2P_RetanguloPintadoAlfa((int)(posX-l/1.75), posY, (int)(posX+l/1.75), posY+a, 0, 127, 0, 127);
-		C2D2P_Retangulo((int)(posX-l/1.75), posY, (int)(posX+l/1.75), posY+a, 0, 255, 0);
+		C2D2P_RetanguloPintadoAlfa((int)(posX-l/2-3), posY, (int)(posX+l/2+3), posY+a, 0, 127, 0, 127);
+		C2D2P_Retangulo((int)(posX-l/2-3), posY, (int)(posX+l/2+3), posY+a, 0, 255, 0);
 		break;
 	}
 	C2D2_DesenhaTexto(fonte, posX, posY, name.c_str(), C2D2_TEXTO_CENTRALIZADO);

@@ -69,10 +69,10 @@ void MenuInicial::inicializar()
 #endif
 	menus.push_back(btnExit = new MenuButton("Sair!", 400, 490, tahoma32));
 
-	gAtor.adicionar(new InimigoDemo(gAtor, Mapa(), 51, 549, iDIREITA));
-	gAtor.adicionar(new InimigoDemo(gAtor, Mapa(), 749, 51, iESQUERDA));
-	gAtor.adicionar(new InimigoDemo(gAtor, Mapa(), 749, 549, iCIMA));
-	gAtor.adicionar(new InimigoDemo(gAtor, Mapa(), 51, 51, iBAIXO));
+	gAtor.adicionar(new InimigoDemo(gAtor, Mapa(), 51, 549, iDIREITA, new TowerDefense()));
+	gAtor.adicionar(new InimigoDemo(gAtor, Mapa(), 749, 51, iESQUERDA, new TowerDefense()));
+	gAtor.adicionar(new InimigoDemo(gAtor, Mapa(), 749, 549, iCIMA, new TowerDefense()));
+	gAtor.adicionar(new InimigoDemo(gAtor, Mapa(), 51, 51, iBAIXO, new TowerDefense()));
 	gAtor.adicionar(new TorreDemo(gAtor, 84, 84));
 	gAtor.adicionar(new TorreDemo(gAtor, 84, 516));
 	gAtor.adicionar(new TorreDemo(gAtor, 716, 516));

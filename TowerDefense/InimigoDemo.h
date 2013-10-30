@@ -6,7 +6,7 @@
 class InimigoDemo :	public Inimigo
 {
 public:
-	InimigoDemo(GerenteAtor& _gerente, Mapa& _map, int _x, int _y, iDirecao _dir);
+	InimigoDemo(GerenteAtor& _gerente, Mapa& _map, int _x, int _y, iDirecao _dir, TowerDefense *_td);
 	
 	int x();
 	int y();
