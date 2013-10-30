@@ -6,15 +6,16 @@
 class Projetil : public Ator
 {
 protected:
-	int posX, posY, vel;
+	int posX, posY, vel, dano;
 	int pSprite;
 	Ator& alvo;
 	bool alive;
 
 public:
-	Projetil(GerenteAtor& _gerente, int _x, int _y, int _vel, Ator& _alvo);
+	Projetil(GerenteAtor& _gerente, int _x, int _y, int _vel, Ator& _alvo, int _dano);
 
 	Tipo tipo();
+	int retornaDano();
 
 	virtual ~Projetil(){ }
 };

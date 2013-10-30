@@ -8,8 +8,8 @@
 
 using namespace std;
 
-ProjetilExemplo::ProjetilExemplo(GerenteAtor& _gerente, int _x, int _y, int _vel, Ator& _alvo)
-	: Projetil(_gerente, _x, _y, _vel, _alvo)
+ProjetilExemplo::ProjetilExemplo(GerenteAtor& _gerente, int _x, int _y, int _vel, Ator& _alvo, int _dano)
+	: Projetil(_gerente, _x, _y, _vel, _alvo, _dano)
 {
 }
 

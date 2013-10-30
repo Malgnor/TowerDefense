@@ -1,5 +1,7 @@
 #include "InimigoExemplo.h"
 
+#include "Projetil.h"
+
 #include <c2d2\chien2d2.h>
 
 #include <c2d2\chien2d2primitivas.h>
@@ -34,7 +36,10 @@ int InimigoExemplo::indice(){
 }
 
 void InimigoExemplo::aoColidir(Ator* ator){
-
+	if(ator->tipo() == PROJETIL){
+		Projetil* acerto = (Projetil *)ator; 
+		vida -= acerto->retornaDano();
+	}
 }
 
 bool InimigoExemplo::estaNoJogo(){
@@ -50,6 +55,10 @@ void InimigoExemplo::inicializar(){
 }
 		
 void InimigoExemplo::atualizar(){
+	if (vida <= 0){
+		alive = false;
+	}
+
 	if(--passos >= 0){
 		switch (dir)
 		{
