@@ -6,33 +6,11 @@
 #include <c2d2\chien2d2primitivas.h>
 
 TorreExemplo::TorreExemplo(GerenteAtor& _gerente, int _x, int _y)
-	: Torre(_gerente, _x, _y)
+	: Torre(_gerente, _x, _y, 0, 0)
 {
 }
 
-int TorreExemplo::x(){
-	return posX;
-}
 
-int TorreExemplo::y(){
-	return posY;
-}
-
-int TorreExemplo::l(){
-	return 32;
-}
-
-int TorreExemplo::a(){
-	return 32;
-}
-
-int TorreExemplo::sprite(){
-	return tSprite;
-}
-
-int TorreExemplo::indice(){
-	return 0;
-}
 
 void TorreExemplo::aoColidir(Ator* ator){
 
@@ -83,4 +61,9 @@ void TorreExemplo::desenhar(){
 
 void TorreExemplo::finalizar(){
 	C2D2_RemoveSpriteSet(tSprite);
+}
+
+void TorreExemplo::upgrade()
+{
+
 }

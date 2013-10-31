@@ -5,35 +5,13 @@
 #include <c2d2/chien2d2.h>
 
 TorreDemo::TorreDemo(GerenteAtor& _gerente, int _x, int _y)
-	:Torre(_gerente, _x, _y)
+	:Torre(_gerente, _x, _y, 0, 0)
 {
 	posX = _x;
 	posY = _y;
 }
 
-int TorreDemo::x(){
-	return posX;
-}
 
-int TorreDemo::y(){
-	return posY;
-}
-
-int TorreDemo::l(){
-	return 32;
-}
-
-int TorreDemo::a(){
-	return 32;
-}
-
-int TorreDemo::sprite(){
-	return tSprite;
-}
-
-int TorreDemo::indice(){
-	return 0;
-}
 
 void TorreDemo::aoColidir(Ator* ator){
 
@@ -45,6 +23,7 @@ bool TorreDemo::estaNoJogo(){
 
 void TorreDemo::inicializar(){
 	tSprite = C2D2_CarregaSpriteSet("imgs/torreE.png", 0, 0);
+	Torre::inicializar();
 	alcance = 200;
 	RoF = 60;
 	cd = RoF/10;
@@ -80,4 +59,9 @@ void TorreDemo::desenhar(){
 
 void TorreDemo::finalizar(){
 	C2D2_RemoveSpriteSet(tSprite);
+}
+
+void TorreDemo::upgrade()
+{
+
 }

@@ -6,35 +6,12 @@
 #include <c2d2\chien2d2.h>
 #include <c2d2\chien2d2primitivas.h>
 
-Torre2::Torre2(GerenteAtor& _gerente, int _x, int _y, int _ind)
-	: Torre(_gerente, _x, _y)
+Torre2::Torre2(GerenteAtor& _gerente, int _x, int _y)
+	: Torre(_gerente, _x, _y, 50, 120)
 {
-	ind = _ind;
 }
 
-int Torre2::x(){
-	return posX;
-}
 
-int Torre2::y(){
-	return posY;
-}
-
-int Torre2::l(){
-	return 32;
-}
-
-int Torre2::a(){
-	return 32;
-}
-
-int Torre2::sprite(){
-	return tSprite;
-}
-
-int Torre2::indice(){
-	return ind;
-}
 
 void Torre2::aoColidir(Ator* ator){
 
@@ -49,6 +26,7 @@ void Torre2::inicializar(){
 	RoF = 40;
 	cd = RoF;
 	tSprite = C2D2_CarregaSpriteSet("imgs/torre2.bmp", 32, 32);	
+	Torre::inicializar();
 #ifdef LOG
 	if(tSprite == 0)
 		addToLog("Falha ao carregar sprite da Torre!(Torre2.cpp)");
@@ -85,4 +63,25 @@ void Torre2::desenhar(){
 
 void Torre2::finalizar(){
 	C2D2_RemoveSpriteSet(tSprite);
+}
+
+void Torre2::upgrade()
+{
+	switch (ind)
+	{
+	case 0:
+		alcance = 140;
+		RoF = 50;
+		ind++;
+		valor += custo;
+		custo = 150;
+		break;
+	case 1:
+		alcance = 180;
+		RoF = 60;
+		ind++;
+		valor += custo;
+		custo = 0;
+		break;
+	}
 }

@@ -8,12 +8,7 @@ class TorreExemplo : public Torre
 
 public:	
 	TorreExemplo(GerenteAtor& _gerente, int _x, int _y);
-	int x();
-	int y();
-	int l();
-	int a();
-	int sprite();
-	int indice();
+	
 	
 
 	void aoColidir(Ator* ator);
@@ -24,6 +19,7 @@ public:
 	void atualizar();		
 	void desenhar();		
 	void finalizar();
+	void upgrade();
 };
 
 #endif

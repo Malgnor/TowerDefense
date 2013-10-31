@@ -56,7 +56,7 @@ void TowerDefense::inicializar(){
 	heart = C2D2_CarregaSpriteSet("imgs/heart.png", 16, 16);
 	tIndice = 0;
 	chances = 20;
-	gold = 200;
+	gold = 600;
 	mapaTD.inicializar();
 
 #ifdef LOG
@@ -94,15 +94,16 @@ void TowerDefense::atualizar(){
 	switch (estado)
 	{
 	case PLAY:
-		m->botoes[C2D2_MMEIO].pressionado ? tIndice == 3 ? tIndice = 0 : tIndice++ : 0;
+		//m->botoes[C2D2_MMEIO].pressionado ? tIndice == 3 ? tIndice = 0 : tIndice++ : 0;
 		if(mouseX < 576 && mouseY < 576){
 			if(m->botoes[C2D2_MESQUERDO].ativo && mapaTD.conteudo(mouseX, mouseY) == 0 && gold >= 50){
 				gold -= 50;
 				mapaTD.addTorre(mouseX, mouseY);
-				if(tIndice != 3)
-					gAtor.adicionar(new Torre2(gAtor, mouseX, mouseY, tIndice));
+				gAtor.adicionar(new Torre2(gAtor, mouseX, mouseY));
+				/*if(tIndice != 3)
+					
 				else
-					gAtor.adicionar(new TorreExemplo(gAtor, mouseX, mouseY));
+					gAtor.adicionar(new TorreExemplo(gAtor, mouseX, mouseY));*/
 			} else if(m->botoes[C2D2_MESQUERDO].pressionado) {
 				pTorre = (Torre*)(gAtor.maisPerto(mouseX, mouseY, 16, TORRE));
 			}
@@ -144,12 +145,15 @@ void TowerDefense::atualizar(){
 		if( pTorre != nullptr){
 			btnSell.atualizar();
 			btnUpgrade.atualizar();
-			btnUpgrade.getEstado() == SOLTO ? pTorre->indice() == 2 ? pTorre->ind = 0 : pTorre->ind++ : 0;
+			if (btnUpgrade.getEstado() == SOLTO && gold>=pTorre->comprar() && pTorre->comprar() != 0){
+				gold -= pTorre->comprar();
+				pTorre->upgrade();
+			}
 			if(btnSell.getEstado() == SOLTO){
-				pTorre->alive = false;
+				gold += pTorre->vender()/2;
 				mapaTD.removeTorre(pTorre->x(), pTorre->y());
 				pTorre = nullptr;
-				gold += 25;
+				
 			}
 		}
 		gAtor.atualizar();
@@ -166,7 +170,7 @@ void TowerDefense::desenhar(){
 	gAtor.desenhar();
 
 	if( pTorre != nullptr )
-		C2D2P_Circulo(pTorre->x(), pTorre->y(), pTorre->alcance, 255, 255, 255);
+		C2D2P_Circulo(pTorre->x(), pTorre->y(), pTorre->getAlcance(), 255, 255, 255);
 
 	C2D2P_RetanguloPintado(577, 0, 800, 600, 25, 25, 25);
 	C2D2P_RetanguloPintado(0, 577, 577, 600, 25, 25, 25);
@@ -185,9 +189,9 @@ void TowerDefense::desenhar(){
 		char temp[50];
 		sprintf_s(temp, "Nível: %d", pTorre->indice()+1);
 		C2D2_DesenhaTexto(tahoma16, 600, yt++*20, temp, C2D2_TEXTO_ESQUERDA);
-		sprintf_s(temp, "Alcance: %d", pTorre->alcance);
+		sprintf_s(temp, "Alcance: %d", pTorre->getAlcance());
 		C2D2_DesenhaTexto(tahoma16, 600, yt++*20, temp, C2D2_TEXTO_ESQUERDA);
-		sprintf_s(temp, "RoF: %d", pTorre->RoF);
+		sprintf_s(temp, "RoF: %d", pTorre->getRof());
 		C2D2_DesenhaTexto(tahoma16, 600, yt++*20, temp, C2D2_TEXTO_ESQUERDA);
 	}
 
