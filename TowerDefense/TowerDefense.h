@@ -18,7 +18,6 @@ private:
 	GerenteAtor gAtor;
 	Mapa mapaTD;
 	tdEstado estado;
-	int tIndice;
 	int mouseX, mouseY;
 	int mouseSprite;
 	int tahoma16, tahoma32;

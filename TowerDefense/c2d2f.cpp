@@ -95,6 +95,7 @@ bool stringFInput( string& x, char* txt, char* sufixo, char* prefixo)
 	if(tahoma16 == 0)
 		addToLog("Falha ao carregar a fonte Tahoma de tamanho 16!(c2d2f.cpp)");
 #endif
+	C2D2_TrocaCorLimpezaTela(0, 0, 0);
 	C2D2_Sincroniza(C2D2_FPS_PADRAO);
 	while(true){
 		C2D2_LimpaTela();
@@ -104,9 +105,9 @@ bool stringFInput( string& x, char* txt, char* sufixo, char* prefixo)
 		stringInput(x);
 		string buffer = prefixo+x+sufixo;
 		int xoff = 0;
-		int yoff = 0
+		int yoff = 0;
 		C2D2_DimensoesTexto(tahoma16, buffer.c_str(), &xoff, &yoff);
-		C2D2_TempoSistema%10 > 4 ? C2D2P_Linha(400+xoff/2, 300, 400+xoff/2, 300+yoff, 255, 255, 255) : 0;
+		C2D2_TempoSistema() % 400 > 200 ? C2D2P_Linha(400+xoff/2+1, 300, 400+xoff/2+1, 300+yoff, 255, 255, 255) : 0;
 		C2D2_DesenhaTexto(tahoma16, 400, 280, txt, C2D2_TEXTO_CENTRALIZADO);
 		C2D2_DesenhaTexto(tahoma16, 400, 300, buffer.c_str(), C2D2_TEXTO_CENTRALIZADO);
 		C2D2_DesenhaTexto(tahoma16, 400, 320, "Shift + Espaço = Apaga um caracter", C2D2_TEXTO_CENTRALIZADO);

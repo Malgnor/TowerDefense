@@ -54,7 +54,6 @@ void TowerDefense::inicializar(){
 	tahoma32 = C2D2_CarregaFonte("imgs/tahoma32.bmp", 32);
 	eheart = C2D2_CarregaSpriteSet("imgs/eheart.png", 0, 0);
 	heart = C2D2_CarregaSpriteSet("imgs/heart.png", 16, 16);
-	tIndice = 0;
 	chances = 20;
 	gold = 600;
 	mapaTD.inicializar();
@@ -94,16 +93,11 @@ void TowerDefense::atualizar(){
 	switch (estado)
 	{
 	case PLAY:
-		//m->botoes[C2D2_MMEIO].pressionado ? tIndice == 3 ? tIndice = 0 : tIndice++ : 0;
 		if(mouseX < 576 && mouseY < 576){
 			if(m->botoes[C2D2_MESQUERDO].ativo && mapaTD.conteudo(mouseX, mouseY) == 0 && gold >= 50){
 				gold -= 50;
 				mapaTD.addTorre(mouseX, mouseY);
 				gAtor.adicionar(new Torre2(gAtor, mouseX, mouseY));
-				/*if(tIndice != 3)
-					
-				else
-					gAtor.adicionar(new TorreExemplo(gAtor, mouseX, mouseY));*/
 			} else if(m->botoes[C2D2_MESQUERDO].pressionado) {
 				pTorre = (Torre*)(gAtor.maisPerto(mouseX, mouseY, 16, TORRE));
 			}
@@ -205,7 +199,7 @@ void TowerDefense::desenhar(){
 
 #ifdef DEBUG
 	char txt[99];
-	sprintf_s(txt, "indiceTorre:%d\t(%d,%d)\t(%d,%d)[%d]\tChances: %d\tDinheiro: %d", tIndice, mouseX, mouseY, mouseX < 576 && mouseY < 576 ? mouseX/32 : 0, mouseY < 576 && mouseX < 576 ? mouseY/32 : 0, mouseY < 576 && mouseX < 576 ? mapaTD.conteudo(mouseX, mouseY) : 0, chances, gold);
+	sprintf_s(txt, "(%d,%d)\t(%d,%d)[%d]\tChances: %d\tDinheiro: %d", mouseX, mouseY, mouseX < 576 && mouseY < 576 ? mouseX/32 : 0, mouseY < 576 && mouseX < 576 ? mouseY/32 : 0, mouseY < 576 && mouseX < 576 ? mapaTD.conteudo(mouseX, mouseY) : 0, chances, gold);
 	C2D2_DesenhaTexto(tahoma16, 32, 580, txt, C2D2_TEXTO_ESQUERDA);
 	C2D2_DesenhaTexto(tahoma16, 585, ytxt++*20, "Mouse Direito - Cria Inimigo", C2D2_TEXTO_ESQUERDA);
 	C2D2_DesenhaTexto(tahoma16, 585, ytxt++*20, "M - Map Editor", C2D2_TEXTO_ESQUERDA);
