@@ -51,11 +51,7 @@ void TorreExemplo::atualizar(){
 	}
 }
 
-void TorreExemplo::desenhar(){	
-	//C2D2_Mouse* mouse = C2D2_PegaMouse();
-	//if(C2D2_ColidiuQuadrados(mouse->x, mouse->y, 1, 1, posX-16, posY-16, 32, 32)){
-	//	C2D2P_Circulo(posX, posY, alcance, 255, 255, 255);
-	//}
+void TorreExemplo::desenhar(){
 	C2D2_DesenhaSpriteCentro(tSprite, 0, posX, posY, l(), a());
 }
 

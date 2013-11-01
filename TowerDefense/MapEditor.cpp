@@ -30,9 +30,13 @@ void MapEditor::inicializar()
 	mouseSprite = C2D2_CarregaSpriteSet("imgs/mouse.png", 0, 0);
 	tahoma32 = C2D2_CarregaFonte("imgs/tahoma32.bmp", 32);
 	tahoma16 = C2D2_CarregaFonte("imgs/tahoma16.bmp", 16);
+	tahoma16r = C2D2_CarregaFonte("imgs/tahoma16r.bmp", 16);
+
 #ifdef LOG
 	if(mouseSprite == 0)
 		addToLog("Falha ao carregar sprite do mouse!(MapEditor.cpp)");
+	if(tahoma16r == 0)
+		addToLog("Falha ao carregar a fonte Tahoma de tamanho 16, vermelho!(MapEditor.cpp)");
 	if(tahoma16 == 0)
 		addToLog("Falha ao carregar a fonte Tahoma de tamanho 16!(MapEditor.cpp)");
 	if(tahoma32 == 0)
@@ -40,6 +44,7 @@ void MapEditor::inicializar()
 	if(mapSprite == 0)
 		addToLog("Falha ao carregar o sprite do mapa!(MapEditor.cpp)");
 #endif
+
 	mapaTD = Mapa();
 	mapaTD.inicializar();
 	id = 0;
@@ -125,6 +130,13 @@ void MapEditor::desenhar()
 	C2D2_DesenhaTexto(tahoma16, 600, ytxt++*20, "M - Retorna ao TD", C2D2_TEXTO_ESQUERDA);
 	for(Menu* menu : menus){
 		menu->desenhar();
+	}
+	for(int x = 0; x < 18; x++){
+		for(int y = 0; y < 18; y++){
+			char c[5];
+			sprintf_s(c, "%d", mapaTD.conteudo32(x, y));
+			C2D2_DesenhaTexto(tahoma16r, x*32+16, y*32+8, c, C2D2_TEXTO_CENTRALIZADO);
+		}
 	}
 	C2D2_DesenhaSprite(mouseSprite, 0, mouseX, mouseY);
 }

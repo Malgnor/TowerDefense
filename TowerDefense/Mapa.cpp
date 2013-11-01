@@ -83,8 +83,14 @@ void Mapa::save()
 void Mapa::load()
 {
 	C2D2_RemoveSpriteSet(sprite);
-	ifstream ifile("map/"+stringFInput("(LOAD)Nome do mapa:", ".map")+".map", ios_base::binary);
+	string nome = "";
+	stringFInput(nome, "(LOAD)Nome do mapa:", ".map");
+	ifstream ifile("map/"+nome+".map", ios_base::binary);
 	ifile.read((char*)this, sizeof(Mapa));
+#ifdef LOG
+	if(!ifile.is_open())
+		addToLog("Falha ao carregar mapa:", nome);
+#endif
 	ifile.close();
 	sprite = C2D2_CarregaSpriteSet("imgs/map.png", 32, 32);
 #ifdef LOG
@@ -97,6 +103,10 @@ void Mapa::load(string nome)
 {
 	C2D2_RemoveSpriteSet(sprite);
 	ifstream ifile("map/"+nome+".map", ios_base::binary);
+#ifdef LOG
+	if(!ifile.is_open())
+		addToLog("Falha ao carregar mapa:", nome);
+#endif
 	ifile.read((char*)this, sizeof(Mapa));
 	ifile.close();
 	sprite = C2D2_CarregaSpriteSet("imgs/map.png", 32, 32);

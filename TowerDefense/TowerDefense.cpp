@@ -22,7 +22,7 @@ TowerDefense::TowerDefense()
 	mapaTD.load("Default");
 }
 
-TowerDefense::TowerDefense(const char* _map )
+TowerDefense::TowerDefense(const char* _map)
 	: mapaTD(), btnSell("Vender", 630, 415, tahoma16 = C2D2_CarregaFonte("imgs/tahoma16.bmp", 16)), btnUpgrade("Upgrade", 685, 415, tahoma16)
 {
 	mapaTD.load(_map);
@@ -170,9 +170,6 @@ void TowerDefense::desenhar(){
 	C2D2P_RetanguloPintado(0, 577, 577, 600, 25, 25, 25);
 
 	if(pTorre != nullptr){
-		//dCirculo(pTorre->x(), pTorre->y(), pTorre->alcance, "White");
-		//dRetanguloPintadoAlfa(590, 290, 135, 150, "CornflowerBlue", 127);
-		//dRetangulo(590, 290, 135, 150, "Green");
 		C2D2P_RetanguloPintadoAlfa(590, 290, 725, 440, 100, 149, 237, 127);
 		C2D2P_Retangulo(590, 290, 725, 440, 0, 127, 0);
 		btnUpgrade.desenhar();
