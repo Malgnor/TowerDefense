@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <IncludePath>C:\Temp\jogos\libs\c2d2\include;C:\Temp\jogos\libs\SDL\include;C:\Temp\jogos\libs\SDL_image\include;C:\Temp\jogos\libs\SDL_mixer\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Temp\jogos\libs\c2d2\lib;C:\Temp\jogos\libs\SDL\lib;C:\Temp\jogos\libs\SDL_image\lib;C:\Temp\jogos\libs\SDL_mixer\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <Link>
+      <AdditionalDependencies>c2d2.lib;ca2.lib;SDL.lib;SDLmain.lib;SDL_image.lib;SDL_mixer.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup />
+</Project>
