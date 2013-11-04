@@ -54,7 +54,7 @@ void TorreDemo::atualizar(){
 }
 
 void TorreDemo::desenhar(){	
-	C2D2_DesenhaSpriteCentro(tSprite, 0, posX, posY, l(), a());
+	C2D2_DesenhaSpriteCentro(tSprite, 0, posX, posY, largura, altura);
 }
 
 void TorreDemo::finalizar(){

@@ -54,7 +54,7 @@ void Torre2::atualizar(){
 }
 
 void Torre2::desenhar(){
-	C2D2_DesenhaSprite(tSprite, ind, posX-l()/2, posY-a()/2);
+	C2D2_DesenhaSpriteCentro(tSprite, ind, posX, posY, largura, altura);
 }
 
 void Torre2::finalizar(){
@@ -67,14 +67,14 @@ void Torre2::upgrade()
 	{
 	case 0:
 		alcance = 140;
-		RoF = 50;
+		RoF = 45;
 		ind++;
 		valor += custo;
 		custo = 150;
 		break;
 	case 1:
 		alcance = 180;
-		RoF = 60;
+		RoF = 50;
 		ind++;
 		valor += custo;
 		custo = 0;

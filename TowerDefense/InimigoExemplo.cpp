@@ -1,6 +1,7 @@
 #include "InimigoExemplo.h"
 
 #include "Projetil.h"
+#include "Coin.h"
 
 #include <c2d2\chien2d2.h>
 
@@ -57,7 +58,7 @@ void InimigoExemplo::inicializar(){
 void InimigoExemplo::atualizar(){
 	if (vida <= 0){
 		alive = false;
-		td->Lucro(dinheiro);
+		gerente.adicionar(new Coin(gerente, td, dinheiro, posX, posY));
 	}
 
 	if(--passos >= 0){

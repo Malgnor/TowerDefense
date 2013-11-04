@@ -21,7 +21,7 @@ private:
 	int mouseX, mouseY;
 	int mouseSprite;
 	int tahoma16, tahoma32;
-	int eheart, heart;
+	int eheart, heart, goldcoins;
 	int chances;
 	int gold;
 	Torre* pTorre;

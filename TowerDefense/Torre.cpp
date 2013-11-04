@@ -42,9 +42,13 @@ void Torre::inicializar()
 	C2D2_DimensoesSprite(tSprite, &largura, &altura);
 }
 
-int Torre::vender()
+void Torre::vender()
 {
 	alive = false;
+}
+
+int Torre::getValor()
+{
 	return valor;
 }
 

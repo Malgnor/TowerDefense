@@ -72,24 +72,20 @@ void GerenteAtor::atualizar()
 	//Testa a colisão entre os atores vivos	
 	for (unsigned i = 0; i < atores.size() - 1; i++) 
 	{
-		if(atores[i]->tipo() == TORRE){
-
-		} else {
-			for (unsigned j = i+1; j < atores.size(); j++) 
+		if(atores[i]->tipo() == TORRE || atores[i]->tipo() == COIN)
+			continue;
+		for (unsigned j = i+1; j < atores.size(); j++) 
+		{
+			if(atores[j]->tipo() == TORRE || atores[i]->tipo() == COIN || atores[j]->tipo() == atores[i]->tipo())
+				continue;
+			if (C2D2_ColidiuSprites(
+				atores[i]->sprite(), atores[i]->indice(),
+				atores[i]->x()-atores[i]->l()/2, atores[i]->y()-atores[i]->a()/2,
+				atores[j]->sprite(), atores[j]->indice(),
+				atores[j]->x()-atores[j]->l()/2, atores[j]->y()-atores[j]->a()/2))
 			{
-				if(atores[j]->tipo() == TORRE || atores[j]->tipo() == atores[i]->tipo()){
-
-				} else {
-					if (C2D2_ColidiuSprites(
-						atores[i]->sprite(), atores[i]->indice(),
-						atores[i]->x()-atores[i]->l()/2, atores[i]->y()-atores[i]->a()/2,
-						atores[j]->sprite(), atores[j]->indice(),
-						atores[j]->x()-atores[j]->l()/2, atores[j]->y()-atores[j]->a()/2))
-					{
-						atores[i]->aoColidir(atores[j]);
-						atores[j]->aoColidir(atores[i]);
-					}
-				}
+				atores[i]->aoColidir(atores[j]);
+				atores[j]->aoColidir(atores[i]);
 			}
 		}
 	}

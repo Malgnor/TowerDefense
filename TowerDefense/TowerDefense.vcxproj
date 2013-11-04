@@ -80,6 +80,7 @@
   <ItemGroup>
     <ClCompile Include="Ator.cpp" />
     <ClCompile Include="c2d2f.cpp" />
+    <ClCompile Include="Coin.cpp" />
     <ClCompile Include="color.cpp" />
     <ClCompile Include="GameLoop.cpp" />
     <ClCompile Include="GerenteAtor.cpp" />
@@ -107,6 +108,7 @@
   <ItemGroup>
     <ClInclude Include="Ator.h" />
     <ClInclude Include="c2d2f.h" />
+    <ClInclude Include="Coin.h" />
     <ClInclude Include="color.h" />
     <ClInclude Include="dirent.h" />
     <ClInclude Include="GameLoop.h" />
@@ -135,6 +137,8 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="imgs\eheart.png" />
+    <Image Include="imgs\goldcoin.png" />
+    <Image Include="imgs\goldcoins.png" />
     <Image Include="imgs\heart.png" />
     <Image Include="imgs\inimE.png" />
     <Image Include="imgs\map.png" />
@@ -144,6 +148,7 @@
     <Image Include="imgs\OpenSymbol64.bmp" />
     <Image Include="imgs\projE.png" />
     <Image Include="imgs\tahoma16.bmp" />
+    <Image Include="imgs\tahoma16r.bmp" />
     <Image Include="imgs\tahoma32.bmp" />
     <Image Include="imgs\tahoma64.bmp" />
     <Image Include="imgs\torre2.bmp" />
@@ -152,14 +157,6 @@
   <ItemGroup>
     <Text Include="cores_double.txt" />
     <Text Include="cores_uchar.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="map\1.map" />
-    <None Include="map\asdfgh.map" />
-    <None Include="map\asg.map" />
-    <None Include="map\Default.map" />
-    <None Include="map\oi.map" />
-    <None Include="map\Teste.map" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

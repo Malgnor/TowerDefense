@@ -1,7 +1,12 @@
-#pragma once
+#ifndef _ATOR_H_
+#define _ATOR_H_
+
 #include "globalDef.h"
+
 class GerenteAtor;
-enum Tipo {TORRE, PROJETIL, INIMIGO};
+
+enum Tipo {TORRE, PROJETIL, INIMIGO, COIN};
+
 class Ator
 {
 	protected:
@@ -27,10 +32,10 @@ class Ator
 		virtual void inicializar() = 0;		
 		virtual void atualizar() = 0;
 
-		//Somente é usando quando primitiva() retorna TRUE
 		virtual void desenhar() = 0;	
 
 		virtual void finalizar() = 0;
 		virtual ~Ator() {};
 };
 
+#endif

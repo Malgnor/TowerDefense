@@ -39,7 +39,8 @@ public:
 	int indice();
 	virtual void upgrade() = 0;
 	virtual void inicializar();
-	int vender();
+	void vender();
+	int getValor();
 	int comprar();
 	int getAlcance();
 	int getRof();

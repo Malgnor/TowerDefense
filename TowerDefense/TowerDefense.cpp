@@ -54,6 +54,7 @@ void TowerDefense::inicializar(){
 	tahoma32 = C2D2_CarregaFonte("imgs/tahoma32.bmp", 32);
 	eheart = C2D2_CarregaSpriteSet("imgs/eheart.png", 0, 0);
 	heart = C2D2_CarregaSpriteSet("imgs/heart.png", 16, 16);
+	goldcoins = C2D2_CarregaSpriteSet("imgs/goldcoins.png", 0, 0);
 	chances = 20;
 	gold = 600;
 	mapaTD.inicializar();
@@ -69,6 +70,8 @@ void TowerDefense::inicializar(){
 		addToLog("Falha ao carregar o sprite eheart!(TowerDefense.cpp)");
 	if(heart == 0)
 		addToLog("Falha ao carregar o sprite heart!(TowerDefense.cpp)");
+	if(goldcoins == 0)
+		addToLog("Falha ao carregar o sprite goldcoins!(TowerDefense.cpp)");
 #endif
 	
 #ifdef DEBUG
@@ -144,7 +147,8 @@ void TowerDefense::atualizar(){
 				pTorre->upgrade();
 			}
 			if(btnSell.getEstado() == SOLTO){
-				gold += pTorre->vender()/2;
+				gold += pTorre->getValor()/2;
+				pTorre->vender();
 				mapaTD.removeTorre(pTorre->x(), pTorre->y());
 				pTorre = nullptr;
 				
@@ -174,16 +178,20 @@ void TowerDefense::desenhar(){
 		C2D2P_Retangulo(590, 290, 725, 440, 0, 127, 0);
 		btnUpgrade.desenhar();
 		btnSell.desenhar();
-		int yt = 16;
-		C2D2_DesenhaSprite(pTorre->sprite(), pTorre->indice(), 680, yt*20+35);
-		C2D2_DesenhaTexto(tahoma32, 630, yt++*20-25, "Torre", C2D2_TEXTO_ESQUERDA);
+		int yt = 19;
+		C2D2_DesenhaSprite(pTorre->sprite(), pTorre->indice(), 680, yt*16+35);
+		C2D2_DesenhaTexto(tahoma32, 630, yt++*16-15, "Torre", C2D2_TEXTO_ESQUERDA);
 		char temp[50];
 		sprintf_s(temp, "Nível: %d", pTorre->indice()+1);
-		C2D2_DesenhaTexto(tahoma16, 600, yt++*20, temp, C2D2_TEXTO_ESQUERDA);
+		C2D2_DesenhaTexto(tahoma16, 600, yt++*16, temp, C2D2_TEXTO_ESQUERDA);
 		sprintf_s(temp, "Alcance: %d", pTorre->getAlcance());
-		C2D2_DesenhaTexto(tahoma16, 600, yt++*20, temp, C2D2_TEXTO_ESQUERDA);
+		C2D2_DesenhaTexto(tahoma16, 600, yt++*16, temp, C2D2_TEXTO_ESQUERDA);
 		sprintf_s(temp, "RoF: %d", pTorre->getRof());
-		C2D2_DesenhaTexto(tahoma16, 600, yt++*20, temp, C2D2_TEXTO_ESQUERDA);
+		C2D2_DesenhaTexto(tahoma16, 600, yt++*16, temp, C2D2_TEXTO_ESQUERDA);
+		sprintf_s(temp, "Custo: %d", pTorre->comprar());
+		C2D2_DesenhaTexto(tahoma16, 600, yt++*16, temp, C2D2_TEXTO_ESQUERDA);
+		sprintf_s(temp, "Valor: %d", pTorre->getValor()/2);
+		C2D2_DesenhaTexto(tahoma16, 600, yt++*16, temp, C2D2_TEXTO_ESQUERDA);
 	}
 
 	int ytxt = 3;
@@ -206,14 +214,17 @@ void TowerDefense::desenhar(){
 	C2D2_DesenhaTexto(tahoma16, 585, ytxt++*20, "Z - Diminui chances", C2D2_TEXTO_ESQUERDA);
 #endif
 
-
+	C2D2_DesenhaSprite(goldcoins, 0, 360, 580);
+	char g[9];
+	sprintf_s(g, "%d", gold);
+	C2D2_DesenhaTexto(tahoma16, 380, 580, g, C2D2_TEXTO_ESQUERDA);
 	int i;
-	C2D2_DesenhaSprite(eheart, 0, 400, 580);
+	C2D2_DesenhaSprite(eheart, 0, 415, 580);
 	for(i = 0; i < (int)(chances/2); i++){
-		C2D2_DesenhaSprite(heart, 0, 400+i*16, 580);
+		C2D2_DesenhaSprite(heart, 0, 415+i*16, 580);
 	}
 	if(chances % 2 == 1){
-		C2D2_DesenhaSprite(heart, 1, 400+i*16, 580);
+		C2D2_DesenhaSprite(heart, 1, 415+i*16, 580);
 	}
 	switch (estado)
 	{

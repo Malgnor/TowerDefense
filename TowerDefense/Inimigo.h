@@ -15,7 +15,7 @@ protected:
 	iDirecao dir;
 	Mapa& mapa;
 	bool alive;
-	TowerDefense*td;
+	TowerDefense* td;
 	
 public:
 
