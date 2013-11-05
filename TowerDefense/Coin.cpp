@@ -49,8 +49,9 @@ bool Coin::estaNoJogo(){
 
 void Coin::inicializar(){
 	int r = rand()%360;
-	offX = posX+(int)(16*cos(r));
-	offY = posY+(int)(16*sin(r));
+	int r2 = rand()%17;
+	offX = posX+(int)(r2*cos(r));
+	offY = posY+(int)(r2*sin(r));
 	spriteSet = C2D2_CarregaSpriteSet("imgs/goldcoin.png", 0, 0);
 	C2D2_DimensoesSprite(spriteSet, &largura, &altura);
 }		
