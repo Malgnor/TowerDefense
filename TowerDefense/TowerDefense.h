@@ -1,37 +1,14 @@
 #ifndef _TOWERDEFENSE_H_
 #define _TOWERDEFENSE_H_
 
-#include "Tela.h"
-#include "GerenteAtor.h"
-#include "Mapa.h"
+#include "TDBase.h"
 
-#include <vector>
-
-#include "Menu.h"
-#include "MenuButton.h"
-class Torre;
-enum tdEstado {PLAY, PAUSE};
-
-class TowerDefense : public Tela
+class TowerDefense : public TDBase
 {
 private:
-	GerenteAtor gAtor;
-	Mapa mapaTD;
-	tdEstado estado;
-	int mouseX, mouseY;
-	int mouseSprite;
-	int tahoma16, tahoma32;
-	int eheart, heart, goldcoins;
-	int chances;
-	int gold;
-	Torre* pTorre;
-	MenuButton* btnExit;
-	MenuButton* btnBack;
+#ifdef DEBUG
 	MenuButton* btnME;
-	MenuButton* btnPause;
-	MenuButton btnSell;
-	MenuButton btnUpgrade;
-	std::vector <Menu*> menus;
+#endif // DEBUG
 
 public:
 	TowerDefense();
@@ -41,8 +18,7 @@ public:
 	void inicializar();		
 	void atualizar();
 	void desenhar();
-	void Lucro(int money);
-	void DanoRecebido(int porrada);
+
 	void wave();
 	void wave2();
 	void wave3();
@@ -54,7 +30,6 @@ public:
 	void wave9();
 	void waveBoss();
 
-	void finalizar();
 };
 
 #endif

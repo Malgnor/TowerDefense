@@ -10,7 +10,8 @@ Menu::Menu( std::string _name, int _x, int _y, int& _fonte, double _r , double _
 {
 	C2D2_DimensoesTexto(fonte, name.c_str(), &l, &a);
 
-}Menu::Menu( std::string _name, int _x, int _y, int& _fonte, char* _cor, unsigned char _alfa)
+}
+Menu::Menu( std::string _name, int _x, int _y, int& _fonte, char* _cor, unsigned char _alfa)
 	: name(_name), posX(_x), posY(_y), fonte(_fonte), r(getCorDoubleR(_cor)), g(getCorDoubleG(_cor)), b(getCorDoubleB(_cor)), alfa(_alfa)
 {
 	C2D2_DimensoesTexto(fonte, name.c_str(), &l, &a);

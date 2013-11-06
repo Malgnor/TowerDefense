@@ -5,7 +5,11 @@
 
 #include "MenuInicial.h"
 #include "TowerDefense.h"
+#ifdef DEBUG
 #include "MapEditor.h"
+#else
+#include "Tutorial.h"
+#endif
 
 #include "MenuToggle.h"
 #include "MenuText.h"
@@ -32,9 +36,11 @@ Tela* MenuInicial::proximaTela()
 	if(btnTD->getEstado() == SOLTO)
 		return mapSelected == "" ? new TowerDefense() : new TowerDefense(mapSelected.c_str());
 
+	if(btnTUTO->getEstado() == SOLTO)
 #ifdef DEBUG
-	if(btnME->getEstado() == SOLTO)
 		return new MapEditor();
+#else
+		return new Tutorial();
 #endif // DEBUG
 
 	return this;
@@ -65,7 +71,9 @@ void MenuInicial::inicializar()
 	menus.push_back(btnTD = new MenuButton("Jogar", 400, 250, tahoma32, "purple"));
 	menus.push_back(btnMS = new MenuButton("Selecionar Mapa", 400, 300, tahoma32, "indigo"));
 #ifdef DEBUG
-	menus.push_back(btnME = new MenuButton("MapEditor", 400, 350, tahoma32, "purple1"));
+	menus.push_back(btnTUTO = new MenuButton("MapEditor", 400, 350, tahoma32, "purple1"));
+#else
+	menus.push_back(btnTUTO = new MenuButton("Tutorial", 400, 350, tahoma32, "purple1"));
 #endif
 	menus.push_back(btnExit = new MenuButton("Sair!", 400, 490, tahoma32));
 

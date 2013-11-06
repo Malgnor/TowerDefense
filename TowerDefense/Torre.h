@@ -37,13 +37,14 @@ public:
 	int a();
 	int sprite();
 	int indice();
-	virtual void upgrade() = 0;
 	virtual void inicializar();
 	void vender();
 	int getValor();
 	int comprar();
 	int getAlcance();
 	int getRof();
+
+	virtual void upgrade() = 0;
 
 	virtual ~Torre(){ }
 };

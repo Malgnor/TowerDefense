@@ -21,7 +21,7 @@ private:
 	GerenteAtor gAtor;
 	MenuButton* btnTD;
 	MenuButton* btnExit;
-	MenuButton* btnME;
+	MenuButton* btnTUTO;
 	MenuButton* btnMS;
 	std::vector <Menu*> menus;
 	std::vector <Menu*> menusMS;
