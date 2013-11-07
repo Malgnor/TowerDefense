@@ -31,8 +31,10 @@ void TDBase::inicializar()
 	eheart = C2D2_CarregaSpriteSet("imgs/eheart.png", 0, 0);
 	heart = C2D2_CarregaSpriteSet("imgs/heart.png", 16, 16);
 	goldcoins = C2D2_CarregaSpriteSet("imgs/goldcoins.png", 0, 0);
+	torreSprite = C2D2_CarregaSpriteSet("imgs/map.png", 32, 32);
 	chances = 20;
 	gold = 600;
+	torreSelecionada = 0;
 	mapaTD.inicializar();
 
 	menus.push_back(btnPause = new MenuButton("Pausa", 700, 480, tahoma16));
@@ -70,11 +72,29 @@ void TDBase::atualizar()
 	switch (estado)
 	{
 	case PLAY:
+		if(m->botoes[C2D2_MESQUERDO].ativo && mouseX > 575){
+			for(int j = 0; j < 2; j++){
+				if(C2D2_ColidiuSprites(mouseSprite, 0, mouseX, mouseY, torreSprite, j, 625+j*75, 100)){
+					torreSelecionada = j+1;
+				}
+			}
+		}
 		if(mouseX < 576 && mouseY < 576){
 			if(m->botoes[C2D2_MESQUERDO].ativo && mapaTD.conteudo(mouseX, mouseY) == 0 && gold >= 50){
-				gold -= 50;
-				mapaTD.addTorre(mouseX, mouseY);
-				gAtor.adicionar(new Torre2(gAtor, mouseX, mouseY));
+				switch (torreSelecionada)
+				{
+				case 1:
+					gold -= 50;
+					mapaTD.addTorre(mouseX, mouseY);
+					gAtor.adicionar(new Torre2(gAtor, mouseX, mouseY));
+					break;
+				case 2:
+					gold -= 50;
+					mapaTD.addTorre(mouseX, mouseY);
+					gAtor.adicionar(new TorreExemplo(gAtor, mouseX, mouseY));
+				default:
+					break;
+				}
 			} else if(m->botoes[C2D2_MESQUERDO].pressionado) {
 				pTorre = (Torre*)(gAtor.maisPerto(mouseX, mouseY, 16, TORRE));
 			}
@@ -151,6 +171,9 @@ void TDBase::desenhar()
 		C2D2_DesenhaSprite(heart, 1, 415+i*16, 580);
 	}
 
+	for(int j = 0; j < 2; j++)
+		C2D2_DesenhaSprite(torreSprite, +j, 625+j*75, 100);
+
 	switch (estado)
 	{
 	case PLAY:
@@ -189,6 +212,7 @@ void TDBase::finalizar()
 	C2D2_RemoveSpriteSet(eheart);
 	C2D2_RemoveSpriteSet(heart);
 	C2D2_RemoveSpriteSet(goldcoins);
+	C2D2_RemoveSpriteSet(torreSprite);
 	C2D2_RemoveFonte(tahoma16);
 	C2D2_RemoveFonte(tahoma32);
 }

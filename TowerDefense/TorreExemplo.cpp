@@ -22,6 +22,7 @@ bool TorreExemplo::estaNoJogo(){
 
 void TorreExemplo::inicializar(){
 	tSprite = C2D2_CarregaSpriteSet("imgs/torreE.png", 0, 0);
+	Torre::inicializar();
 	alcance = 200;
 	RoF = 60; // 1*segundos(60 frames)
 	cd = RoF/10;

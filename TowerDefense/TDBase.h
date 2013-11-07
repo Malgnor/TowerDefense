@@ -22,10 +22,12 @@ protected:
 	tdEstado estado;
 	int mouseX, mouseY;
 	int mouseSprite;
+	int torreSprite;
 	int tahoma16, tahoma32;
 	int eheart, heart, goldcoins;
 	int chances;
 	int gold;
+	int torreSelecionada;
 	Torre* pTorre;
 
 	std::vector <Menu*> menus;
