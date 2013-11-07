@@ -73,6 +73,7 @@ void TDBase::atualizar()
 	{
 	case PLAY:
 		if(m->botoes[C2D2_MESQUERDO].ativo && mouseX > 575){
+			torreSelecionada = 0;
 			for(int j = 0; j < 2; j++){
 				if(C2D2_ColidiuSprites(mouseSprite, 0, mouseX, mouseY, torreSprite, j, 625+j*75, 100)){
 					torreSelecionada = j+1;
@@ -145,7 +146,7 @@ void TDBase::desenhar()
 		C2D2_DesenhaSprite(pTorre->sprite(), pTorre->indice(), 680, yt*16+35);
 		C2D2_DesenhaTexto(tahoma32, 630, yt++*16-15, "Torre", C2D2_TEXTO_ESQUERDA);
 		char temp[50];
-		sprintf_s(temp, "Nível: %d", pTorre->indice()+1);
+		sprintf_s(temp, "Nï¿½vel: %d", pTorre->indice()+1);
 		C2D2_DesenhaTexto(tahoma16, 600, yt++*16, temp, C2D2_TEXTO_ESQUERDA);
 		sprintf_s(temp, "Alcance: %d", pTorre->getAlcance());
 		C2D2_DesenhaTexto(tahoma16, 600, yt++*16, temp, C2D2_TEXTO_ESQUERDA);
