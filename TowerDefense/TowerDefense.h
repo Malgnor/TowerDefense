@@ -9,6 +9,7 @@ private:
 #ifdef DEBUG
 	MenuButton* btnME;
 #endif // DEBUG
+	int timer, chrono;
 
 public:
 	TowerDefense();

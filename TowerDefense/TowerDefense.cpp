@@ -46,6 +46,8 @@ Tela* TowerDefense::proximaTela(){
 }
 
 void TowerDefense::inicializar(){
+	timer = 0;
+	chrono = 0;
 	TDBase::inicializar();
 #ifdef DEBUG
 		menus.push_back(btnME = new MenuButton("MapEditor", 700, 460, tahoma16));
@@ -54,12 +56,36 @@ void TowerDefense::inicializar(){
 
 void TowerDefense::atualizar(){
 	TDBase::atualizar();
+	timer++;
 	C2D2_Mouse* m = C2D2_PegaMouse();
 	C2D2_Botao* teclas = C2D2_PegaTeclas();
+	chrono = timer/60;
 
 	switch (estado)
 	{
 	case PLAY:
+
+		if(chrono == 20)
+			wave();
+		if(chrono == 80)
+			wave2();
+		if(chrono == 140)
+			wave3();
+		if(chrono == 200)
+			wave4();
+		if(chrono == 260)
+			wave5();
+		if(chrono == 320)
+			wave6();
+		if(chrono == 380)
+			wave7();
+		if(chrono == 440)
+			wave8();
+		if(chrono == 500)
+			wave9();
+		if(chrono == 600)
+			waveBoss();
+
 #ifdef DEBUG
 		if(m->botoes[C2D2_MDIREITO].pressionado && teclas[C2D2_LSHIFT].ativo)
 			gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -16, 304, 1, 50, 10, this));
@@ -68,27 +94,6 @@ void TowerDefense::atualizar(){
 			chances--;
 		if(teclas[C2D2_X].pressionado)
 			chances++;
-
-		if(teclas[C2D2_1].pressionado)
-			wave();
-		if(teclas[C2D2_2].pressionado)
-			wave2();
-		if(teclas[C2D2_3].pressionado)
-			wave3();
-		if(teclas[C2D2_4].pressionado)
-			wave4();
-		if(teclas[C2D2_5].pressionado)
-			wave5();
-		if(teclas[C2D2_6].pressionado)
-			wave6();
-		if(teclas[C2D2_7].pressionado)
-			wave7();
-		if(teclas[C2D2_8].pressionado)
-			wave8();
-		if(teclas[C2D2_9].pressionado)
-			wave9();
-		if(teclas[C2D2_0].pressionado)
-			waveBoss();
 
 		if(teclas[C2D2_D].pressionado)
 			mapaTD.load();
