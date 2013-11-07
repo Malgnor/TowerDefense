@@ -160,7 +160,7 @@ void TDBase::desenhar()
 		break;
 	case PAUSE:
 		C2D2P_RetanguloPintadoAlfa(0, 0, 800, 600, 25, 25, 25, 200);
-		C2D2_DesenhaTexto(tahoma32, 400-32, 150, "PAUSE", C2D2_TEXTO_CENTRALIZADO);
+		C2D2_DesenhaTexto(tahoma32, 400-32, 75, "PAUSE", C2D2_TEXTO_CENTRALIZADO);
 		break;
 	case PAUSEF1:
 		C2D2P_RetanguloPintadoAlfa(0, 0, 800, 600, 25, 25, 25, 200);

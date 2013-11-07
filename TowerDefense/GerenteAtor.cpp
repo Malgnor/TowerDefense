@@ -107,7 +107,7 @@ Ator* GerenteAtor::maisPerto(int x, int y, int alcance, Tipo tipo){
 	Ator* alvo = nullptr;
 	for (Ator* ator : atores) 
 	{
-		if(ator->tipo() == tipo){
+		if(ator->tipo() == tipo && ator->estaNoJogo()){
 			int dx = x-ator->x();
 			int dy = y-ator->y();
 			float dd = sqrt((float)dx*dx+dy*dy);
