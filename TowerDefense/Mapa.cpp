@@ -11,6 +11,7 @@
 using namespace std;
 
 Mapa::Mapa()
+	:initX(16), initY(304)
 {
 	for(int x = 0; x < 18; x++){
 		for(int y = 0; y < 18; y++){
@@ -36,6 +37,10 @@ void Mapa::desenhar()
 				C2D2_DesenhaSprite(sprite, map[x][y]/5, x*32, y*32);
 		}
 	}
+}
+void Mapa::getInit(int &x, int &y){
+	x = initX;
+	y = initY;
 }
 
 char Mapa::conteudo( int x, int y )
@@ -69,6 +74,14 @@ void Mapa::construir( int x, int y, int sprite, int id)
 
 void Mapa::save()
 {
+	for(int x = 0; x < 18; x++){
+		for(int y = 0; y < 18; y++){
+			if(map[x][y] == 2){
+				initX = x*32+16;
+				initY = y*32+16;
+			}
+		}
+	}
 	C2D2_RemoveSpriteSet(sprite);
 	ofstream ofile("map/"+stringFInput("(SAVE)Nome do mapa:", ".map")+".map", ios_base::binary);
 	ofile.write((char*)this, sizeof(Mapa));

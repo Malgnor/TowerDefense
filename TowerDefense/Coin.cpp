@@ -6,7 +6,7 @@
 
 #include <c2d2/chien2d2.h>
 
-Coin::Coin(GerenteAtor& _gerente, TowerDefense* _td, int _valor, int _x, int _y)
+Coin::Coin(GerenteAtor& _gerente, TDBase* _td, int _valor, int _x, int _y)
 	: Ator(_gerente), td(_td), valor(_valor), posX(_x), posY(_y), alive(true), decay(60*15)
 {
 }

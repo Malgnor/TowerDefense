@@ -3,12 +3,15 @@
 
 #include "TDBase.h"
 #include "Inimigo.h"
+#include "Coin.h"
 
 class Tutorial : public TDBase
 {
 private:
 	unsigned int stage;
-	Inimigo* pInimigo;
+	Inimigo* pInimigoTuto;
+	Torre* pTorreTuto;
+	Coin* pCoinTuto;
 	MenuButton  btnOk;
 
 public:

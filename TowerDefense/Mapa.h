@@ -7,12 +7,14 @@ class Mapa
 {
 private:
 	char map[18][18];
+	int initX, initY;
 	int sprite;
 
 public:
 	Mapa();
 	void inicializar();
 	void desenhar();
+	void getInit(int &x, int &y);
 	char conteudo(int x, int y);
 	char conteudo32(int x, int y);
 	int sprite32(int x, int y);

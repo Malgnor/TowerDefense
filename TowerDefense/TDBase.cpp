@@ -173,7 +173,7 @@ void TDBase::desenhar()
 		break;
 	}
 	
-	C2D2_DesenhaTexto(tahoma16, 16, 580, "F1 - Mostra atalhos", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(tahoma16, 8, 580, "F1 - Mostra atalhos", C2D2_TEXTO_ESQUERDA);
 
 	for(Menu* menu : menus){
 		menu->desenhar();

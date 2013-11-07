@@ -2,7 +2,7 @@
 #define _COIN_H_
 
 #include "Ator.h"
-#include "TowerDefense.h"
+#include "TDBase.h"
 
 class Coin : public Ator
 {
@@ -11,10 +11,10 @@ private:
 	int posX, posY, offX, offY, altura, largura;
 	int spriteSet;
 	bool alive;
-	TowerDefense* td;
+	TDBase* td;
 
 public:
-	Coin(GerenteAtor& _gerente, TowerDefense* _td, int _valor, int _x, int _y);
+	Coin(GerenteAtor& _gerente, TDBase* _td, int _valor, int _x, int _y);
 
 	int x();
 	int y();

@@ -3,7 +3,7 @@
 
 #include "Ator.h"
 #include "Mapa.h"
-#include "TowerDefense.h"
+#include "TDBase.h"
 
 enum iDirecao { iCIMA, iBAIXO, iESQUERDA, iDIREITA };
 
@@ -15,11 +15,11 @@ protected:
 	iDirecao dir;
 	Mapa& mapa;
 	bool alive;
-	TowerDefense* td;
+	TDBase* td;
 	
 public:
 
-	Inimigo(GerenteAtor& _gerente, Mapa& _map, int _x, int _y, int _vel, int _vida, int _dinheiro, TowerDefense *_td);
+	Inimigo(GerenteAtor& _gerente, Mapa& _map, int _x, int _y, int _vel, int _vida, int _dinheiro, TDBase *_td);
 
 	Tipo tipo();
 

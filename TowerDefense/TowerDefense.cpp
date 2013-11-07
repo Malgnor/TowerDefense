@@ -115,22 +115,21 @@ void TowerDefense::desenhar(){
 		break;
 	case PAUSEF1:
 		C2D2_DesenhaTexto(tahoma16, 300, 220, "R - Reset", C2D2_TEXTO_ESQUERDA);
+#ifdef DEBUG
+		char txt[99];
+		int ytxt = 1;
+		sprintf_s(txt, "(%d,%d) (%d,%d)[%d] Chances: %d Dinheiro: %d", mouseX, mouseY, mouseX < 576 && mouseY < 576 ? mouseX/32 : 0, mouseY < 576 && mouseX < 576 ? mouseY/32 : 0, mouseY < 576 && mouseX < 576 ? mapaTD.conteudo(mouseX, mouseY) : 0, chances, gold);
+		C2D2_DesenhaTexto(tahoma16, 120, 580, txt, C2D2_TEXTO_ESQUERDA);
+		C2D2_DesenhaTexto(tahoma16, 300, 220+ytxt++*16, "Mouse Direito + Shift - Cria Inimigo", C2D2_TEXTO_ESQUERDA);
+		C2D2_DesenhaTexto(tahoma16, 300, 220+ytxt++*16, "M - Map Editor", C2D2_TEXTO_ESQUERDA);
+		C2D2_DesenhaTexto(tahoma16, 300, 220+ytxt++*16, "D - Carrega mapa", C2D2_TEXTO_ESQUERDA);
+		C2D2_DesenhaTexto(tahoma16, 300, 220+ytxt++*16, "0-9 - Cria waves de inimigo", C2D2_TEXTO_ESQUERDA);
+		C2D2_DesenhaTexto(tahoma16, 300, 220+ytxt++*16, "X - Aumenta chances", C2D2_TEXTO_ESQUERDA);
+		C2D2_DesenhaTexto(tahoma16, 300, 220+ytxt++*16, "Z - Diminui chances", C2D2_TEXTO_ESQUERDA);
+#endif
 		break;
 	}
 
-	
-
-#ifdef DEBUG
-	char txt[99];
-	sprintf_s(txt, "(%d,%d)\t(%d,%d)[%d]\tChances: %d\tDinheiro: %d", mouseX, mouseY, mouseX < 576 && mouseY < 576 ? mouseX/32 : 0, mouseY < 576 && mouseX < 576 ? mouseY/32 : 0, mouseY < 576 && mouseX < 576 ? mapaTD.conteudo(mouseX, mouseY) : 0, chances, gold);
-	C2D2_DesenhaTexto(tahoma16, 32, 580, txt, C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(tahoma16, 585, ytxt++*18, "Mouse Direito + Shift - Cria Inimigo", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(tahoma16, 585, ytxt++*18, "M - Map Editor", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(tahoma16, 585, ytxt++*18, "D - Carrega mapa", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(tahoma16, 585, ytxt++*18, "0-9 - Cria waves de inimigo", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(tahoma16, 585, ytxt++*18, "X - Aumenta chances", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(tahoma16, 585, ytxt++*18, "Z - Diminui chances", C2D2_TEXTO_ESQUERDA);
-#endif
 	desenhaMouse();
 }
 

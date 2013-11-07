@@ -1,7 +1,7 @@
 #include "InimigoDemo.h"
 #include <c2d2\chien2d2.h>
 
-InimigoDemo::InimigoDemo(GerenteAtor& _gerente, Mapa& _map, int _x, int _y, iDirecao _dir, TowerDefense *_td)
+InimigoDemo::InimigoDemo(GerenteAtor& _gerente, Mapa& _map, int _x, int _y, iDirecao _dir, TDBase *_td)
 	:Inimigo(_gerente, _map, _x, _y, 1, 1, 1, _td)
 {
 	dir = _dir;

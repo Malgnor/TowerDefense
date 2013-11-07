@@ -7,7 +7,7 @@
 
 #include <c2d2\chien2d2primitivas.h>
 
-InimigoExemplo::InimigoExemplo(GerenteAtor& _gerente, Mapa& _map, int _x, int _y, int _vel, int _vida, int _dinheiro, TowerDefense*_td)
+InimigoExemplo::InimigoExemplo(GerenteAtor& _gerente, Mapa& _map, int _x, int _y, int _vel, int _vida, int _dinheiro, TDBase* _td)
 	: Inimigo(_gerente, _map, _x, _y, _vel, _vida, _dinheiro, _td)
 {
 }
