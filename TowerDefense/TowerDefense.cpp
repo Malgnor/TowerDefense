@@ -47,7 +47,6 @@ Tela* TowerDefense::proximaTela(){
 
 void TowerDefense::inicializar(){
 	timer = 0;
-	chrono = 0;
 	TDBase::inicializar();
 #ifdef DEBUG
 		menus.push_back(btnME = new MenuButton("MapEditor", 700, 460, tahoma16));
@@ -59,31 +58,30 @@ void TowerDefense::atualizar(){
 	timer++;
 	C2D2_Mouse* m = C2D2_PegaMouse();
 	C2D2_Botao* teclas = C2D2_PegaTeclas();
-	chrono = timer/60;
 
 	switch (estado)
 	{
 	case PLAY:
 
-		if(chrono == 20)
+		if(timer == 60*2)
 			wave();
-		if(chrono == 80)
+		if(timer == 60*80)
 			wave2();
-		if(chrono == 140)
+		if(timer == 60*140)
 			wave3();
-		if(chrono == 200)
+		if(timer == 60*200)
 			wave4();
-		if(chrono == 260)
+		if(timer == 60*260)
 			wave5();
-		if(chrono == 320)
+		if(timer == 60*320)
 			wave6();
-		if(chrono == 380)
+		if(timer == 60*380)
 			wave7();
-		if(chrono == 440)
+		if(timer == 60*440)
 			wave8();
-		if(chrono == 500)
+		if(timer == 60*500)
 			wave9();
-		if(chrono == 600)
+		if(timer == 60*600)
 			waveBoss();
 
 #ifdef DEBUG
