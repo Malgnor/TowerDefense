@@ -5,7 +5,7 @@
 #include "Mapa.h"
 #include "TDBase.h"
 
-enum iDirecao { iCIMA, iBAIXO, iESQUERDA, iDIREITA };
+enum iDirecao { iCIMA, iBAIXO, iESQUERDA, iDIREITA, iPARADO };
 
 class Inimigo : public Ator
 {

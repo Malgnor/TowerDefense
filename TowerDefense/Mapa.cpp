@@ -76,7 +76,7 @@ void Mapa::save()
 {
 	for(int x = 0; x < 18; x++){
 		for(int y = 0; y < 18; y++){
-			if(map[x][y] == 2){
+			if(map[x][y]%5 == 2){
 				initX = x*32+16;
 				initY = y*32+16;
 			}

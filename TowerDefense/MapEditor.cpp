@@ -95,7 +95,7 @@ void MapEditor::atualizar()
 		mapaTD.construir(mouseX, mouseY, tile, id);
 	}
 	if(m->botoes[C2D2_MDIREITO].ativo && mouseX < 576 && mouseY < 576){
-		mapaTD.construir(mouseX, mouseY, -1, id);
+		mapaTD.construir(mouseX, mouseY, 0, 0);
 	}
 	for(Menu* menu : menus){
 		menu->atualizar();
@@ -150,4 +150,5 @@ void MapEditor::finalizar()
 	C2D2_RemoveSpriteSet(mouseSprite);
 	C2D2_RemoveFonte(tahoma16);
 	C2D2_RemoveFonte(tahoma32);
+	C2D2_RemoveFonte(tahoma16r);
 }
