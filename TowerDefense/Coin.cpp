@@ -69,7 +69,7 @@ void Coin::atualizar(){
 	}
 	if(--decay <= 0)
 		alive = false;
-	if(C2D2_ColidiuQuadrados(posX-largura/2, posY-altura/2, largura, altura, mouse->x, mouse->y, 1, 1)){
+	if(C2D2_ColidiuQuadrados(posX-largura/2, posY-altura/2, largura, altura, mouse->x, mouse->y, 2, 2)){
 		td->Lucro(valor);
 		alive = false;
 	}

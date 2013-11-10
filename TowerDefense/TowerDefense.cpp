@@ -63,7 +63,7 @@ void TowerDefense::atualizar(){
 	{
 	case PLAY:
 
-		if(timer == 60*2)
+		if(timer == 60*20)
 			wave();
 		if(timer == 60*80)
 			wave2();

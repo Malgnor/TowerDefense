@@ -31,7 +31,7 @@ void TDBase::inicializar()
 	eheart = C2D2_CarregaSpriteSet("imgs/eheart.png", 0, 0);
 	heart = C2D2_CarregaSpriteSet("imgs/heart.png", 16, 16);
 	goldcoins = C2D2_CarregaSpriteSet("imgs/goldcoins.png", 0, 0);
-	torreSprite = C2D2_CarregaSpriteSet("imgs/map.png", 32, 32);
+	torreSprite = C2D2_CarregaSpriteSet("imgs/torres.png", 32, 32);
 	chances = 20;
 	gold = 600;
 	torreSelecionada = 0;
@@ -54,6 +54,8 @@ void TDBase::inicializar()
 		addToLog("Falha ao carregar o sprite heart!(TDBase.cpp)");
 	if(goldcoins == 0)
 		addToLog("Falha ao carregar o sprite goldcoins!(TDBase.cpp)");
+	if(torreSprite == 0)
+		addToLog("Falha ao carregar o sprite das torres!(TDBase.cpp)");
 #endif
 }
 
@@ -146,7 +148,7 @@ void TDBase::desenhar()
 		C2D2_DesenhaSprite(pTorre->sprite(), pTorre->indice(), 680, yt*16+35);
 		C2D2_DesenhaTexto(tahoma32, 630, yt++*16-15, "Torre", C2D2_TEXTO_ESQUERDA);
 		char temp[50];
-		sprintf_s(temp, "Nï¿½vel: %d", pTorre->indice()+1);
+		sprintf_s(temp, "Nível: %d", pTorre->indice()+1);
 		C2D2_DesenhaTexto(tahoma16, 600, yt++*16, temp, C2D2_TEXTO_ESQUERDA);
 		sprintf_s(temp, "Alcance: %d", pTorre->getAlcance());
 		C2D2_DesenhaTexto(tahoma16, 600, yt++*16, temp, C2D2_TEXTO_ESQUERDA);

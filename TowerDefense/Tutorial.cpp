@@ -235,7 +235,7 @@ void Tutorial::desenhar()
 			C2D2_DesenhaTexto(tahoma16, 375, 160+ytxt++*16, "O que fazer", C2D2_TEXTO_CENTRALIZADO);
 			break;
 		case TORRE1:
-			C2D2_DesenhaTexto(tahoma16, 375, 160+ytxt++*16, "Colocar Torre", C2D2_TEXTO_CENTRALIZADO);
+			C2D2_DesenhaTexto(tahoma16, 375, 160+ytxt++*16, "Inimigos", C2D2_TEXTO_CENTRALIZADO);
 			break;
 		case MOEDAS:
 			C2D2_DesenhaTexto(tahoma16, 375, 160+ytxt++*16, "Moedas", C2D2_TEXTO_CENTRALIZADO);
