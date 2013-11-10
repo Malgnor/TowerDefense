@@ -5,7 +5,7 @@
 #include "Inimigo.h"
 #include "Coin.h"
 
-enum faseTutorial {INTRO, PRIMEIROSPASSOS, TORRE1, MOEDAS, TORRE2, UPGRADE, VENDER, RTORRE, RMOEDAS, FIM};
+enum faseTutorial {INTRO, PRIMEIROSPASSOS, TORRE0, TORRE1, MOEDAS, TORRE2, UPGRADE, VENDER, RTORRE, RMOEDAS, FIM};
 
 class Tutorial : public TDBase
 {

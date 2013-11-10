@@ -75,6 +75,20 @@ void Tutorial::atualizar()
 				gold = 50;
 			}
 		} else {
+			if( torreSelecionada == 0 ){
+			} else{
+				stage=0;
+				fase = TORRE0;
+			}
+		}
+		break;
+	case TORRE0:
+		if(stage == 0){
+			if(btnOk.getEstado() == SOLTO){
+				stage++;
+				gold = 50;
+			}
+		} else {
 			if(pTorreTuto == nullptr)
 				pTorreTuto = (Torre*)gAtor.maisPerto(0, 0, 1000, TORRE);
 			else{
@@ -234,6 +248,9 @@ void Tutorial::desenhar()
 		case PRIMEIROSPASSOS:
 			C2D2_DesenhaTexto(tahoma16, 375, 160+ytxt++*16, "O que fazer", C2D2_TEXTO_CENTRALIZADO);
 			break;
+		case TORRE0:
+			C2D2_DesenhaTexto(tahoma16, 375, 160+ytxt++*16, "Colocar torre", C2D2_TEXTO_CENTRALIZADO);
+			break;
 		case TORRE1:
 			C2D2_DesenhaTexto(tahoma16, 375, 160+ytxt++*16, "Inimigos", C2D2_TEXTO_CENTRALIZADO);
 			break;
@@ -241,7 +258,7 @@ void Tutorial::desenhar()
 			C2D2_DesenhaTexto(tahoma16, 375, 160+ytxt++*16, "Moedas", C2D2_TEXTO_CENTRALIZADO);
 			break;
 		case TORRE2:
-			C2D2_DesenhaTexto(tahoma16, 375, 160+ytxt++*16, "Selecionar", C2D2_TEXTO_CENTRALIZADO);
+			C2D2_DesenhaTexto(tahoma16, 375, 160+ytxt++*16, "Selecionar Torre", C2D2_TEXTO_CENTRALIZADO);
 			break;
 		case UPGRADE:
 			C2D2_DesenhaTexto(tahoma16, 375, 160+ytxt++*16, "Upgrade Torre", C2D2_TEXTO_CENTRALIZADO);
