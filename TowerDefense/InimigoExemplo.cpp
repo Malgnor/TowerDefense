@@ -37,7 +37,7 @@ int InimigoExemplo::indice(){
 }
 
 void InimigoExemplo::aoColidir(Ator* ator){
-	if(ator->tipo() == PROJETIL){
+	if(ator->tipo() == PROJETIL && ator->estaNoJogo()){
 		Projetil* acerto = (Projetil *)ator; 
 		vida -= acerto->retornaDano();
 	}
