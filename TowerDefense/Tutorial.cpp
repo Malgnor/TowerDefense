@@ -5,6 +5,8 @@
 #include "Torre.h"
 #include "Torre2.h"
 
+#include "c2d2f.h"
+
 #include <c2d2/chien2d2.h>
 #include <c2d2/chien2d2primitivas.h>
 
@@ -243,7 +245,11 @@ void Tutorial::desenhar()
 		{
 		case INTRO:
 			//15 linhas
-			C2D2_DesenhaTexto(tahoma16, 375, 160+ytxt++*16, "Intro", C2D2_TEXTO_CENTRALIZADO);
+			//C2D2_DesenhaTexto(tahoma16, 375, 160+ytxt++*16, "Intro", C2D2_TEXTO_CENTRALIZADO);
+			//desenhaTextoML(tahoma16, 375, 160, "Teste\nTeste2\nafaoisudfasiu\nabsodfiuashf98uaz\nasufiadygiu");
+			desenhaTextoML(tahoma16, 375, 160, "Teste fshuifa gnaoidfhy8 asfuihasf af9asiu adsnfiuosf asdfhui", 0, ' ');
+			dimentsoesTextoML(tahoma16, "Teste fshuifa gnaoidfhy8 asfuihasf af9asiu adsnfiuosf asdfhui", ytxt, ' ');
+			desenhaTextoML(tahoma16, 375, 160+ytxt, "Teste\nfayui\nfaio");
 			break;
 		case PRIMEIROSPASSOS:
 			C2D2_DesenhaTexto(tahoma16, 375, 160+ytxt++*16, "O que fazer", C2D2_TEXTO_CENTRALIZADO);

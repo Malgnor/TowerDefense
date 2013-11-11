@@ -124,6 +124,46 @@ std::string stringFInput( char* txt , char* sufixo, char* prefixo)
 	return stringFInput(x, txt, sufixo, prefixo) ? x : "";
 }
 
+bool desenhaTextoML( unsigned int fonte, int x, int y, char* texto, int alinhamento /*= C2D2_TEXTO_CENTRALIZADO*/, char split /*= '\n'*/ )
+{
+	if(fonte == 0)
+		return false;
+	int i = 0;
+	int a = 0;
+	int h = 0;
+	int l = 0;
+	C2D2_DimensoesTexto(fonte, "A", &l, &a);
+	while(texto[i] != '\0'){
+		string temp = "";
+		while(texto[i] != split && texto[i] != '\0'){
+			temp.push_back(texto[i]);
+			i++;
+		}
+		C2D2_DesenhaTexto(fonte, x, y+a*h++, temp.c_str(), alinhamento);
+		i++;
+	}
+	return true;
+}
+
+bool dimentsoesTextoML(unsigned int fonte, char* texto, int &a, char split){
+	if(fonte == 0)
+		return false;
+	int h = 0;
+	int l = 0;
+	int aa = 0;
+	int i = 0;
+	C2D2_DimensoesTexto(fonte, "A", &l, &aa);
+	while(texto[i] != '\0'){
+		while(texto[i] != split && texto[i] != '\0'){
+			i++;
+		}
+		h++;
+		i++;
+	}
+	a = h*aa;
+	return true;
+}
+
 void dRetangulo(int x, int y, int largura, int altura, char* cor){
 	C2D2P_Retangulo(x, y, x+largura, y+altura, getCorR(cor), getCorG(cor), getCorB(cor));
 }
