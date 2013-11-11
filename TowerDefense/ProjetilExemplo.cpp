@@ -13,27 +13,6 @@ ProjetilExemplo::ProjetilExemplo(GerenteAtor& _gerente, int _x, int _y, int _vel
 {
 }
 
-int ProjetilExemplo::x(){
-	return posX;
-}
-
-int ProjetilExemplo::y(){
-	return posY;
-}
-
-int ProjetilExemplo::l(){
-	return 8;
-}
-
-int ProjetilExemplo::a(){
-	return 8;
-}
-
-
-int ProjetilExemplo::sprite(){
-	return pSprite;
-}
-
 int ProjetilExemplo::indice(){
 	return 0;
 }
@@ -43,13 +22,9 @@ void ProjetilExemplo::aoColidir(Ator* ator){
 		alive = false;
 }
 
-bool ProjetilExemplo::estaNoJogo(){
-	return alive;
-}
-
-
 void ProjetilExemplo::inicializar(){
 	pSprite = C2D2_CarregaSpriteSet("imgs/projE.png" , 0, 0);
+	Projetil::inicializar();
 #ifdef LOG
 	if(pSprite == 0)
 		addToLog("Falha ao carregar sprite do Projétil!(ProjetilExemplo.cpp)");
@@ -73,6 +48,7 @@ void ProjetilExemplo::atualizar(){
 void ProjetilExemplo::desenhar(){
 	C2D2_DesenhaSpriteCentro(pSprite, 0, posX, posY, l(), a());
 }
+
 void ProjetilExemplo::finalizar(){
 	C2D2_RemoveSpriteSet(pSprite);
 }

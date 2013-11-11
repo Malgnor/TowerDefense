@@ -95,6 +95,7 @@
     <ClCompile Include="MenuInicial.cpp" />
     <ClCompile Include="MenuText.cpp" />
     <ClCompile Include="MenuToggle.cpp" />
+    <ClCompile Include="ProjetilSplash.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Mapa.cpp" />
     <ClCompile Include="Projetil.cpp" />
@@ -130,6 +131,7 @@
     <ClInclude Include="MenuToggle.h" />
     <ClInclude Include="Projetil.h" />
     <ClInclude Include="ProjetilExemplo.h" />
+    <ClInclude Include="ProjetilSplash.h" />
     <ClInclude Include="TDBase.h" />
     <ClInclude Include="Tela.h" />
     <ClInclude Include="Torre.h" />

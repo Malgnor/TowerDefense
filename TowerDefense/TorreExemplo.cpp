@@ -1,5 +1,5 @@
 #include "TorreExemplo.h"
-#include "ProjetilExemplo.h"
+#include "ProjetilSplash.h"
 #include "GerenteAtor.h"
 
 #include <c2d2\chien2d2.h>
@@ -38,7 +38,7 @@ void TorreExemplo::atualizar(){
 	{
 	case RTF:
 		if(alvo != nullptr){
-			gerente.adicionar(new ProjetilExemplo(gerente, posX, posY, 5, *alvo, 10));
+			gerente.adicionar(new ProjetilSplash(gerente, posX, posY, 5, *alvo, 1));
 			cd = RoF;
 			estado = COOLDOWN;
 		} else {

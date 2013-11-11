@@ -63,25 +63,25 @@ void TowerDefense::atualizar(){
 	{
 	case PLAY:
 
-		if(timer == 60*20)
+		if(timer == 60*10)
 			wave();
-		if(timer == 60*80)
+		if(timer == 60*60)
 			wave2();
-		if(timer == 60*140)
+		if(timer == 60*120)
 			wave3();
-		if(timer == 60*200)
+		if(timer == 60*180)
 			wave4();
-		if(timer == 60*260)
+		if(timer == 60*240)
 			wave5();
-		if(timer == 60*320)
+		if(timer == 60*300)
 			wave6();
-		if(timer == 60*380)
+		if(timer == 60*360)
 			wave7();
-		if(timer == 60*440)
+		if(timer == 60*420)
 			wave8();
-		if(timer == 60*500)
+		if(timer == 60*480)
 			wave9();
-		if(timer == 60*600)
+		if(timer == 60*540)
 			waveBoss();
 
 #ifdef DEBUG

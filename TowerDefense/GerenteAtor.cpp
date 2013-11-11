@@ -2,6 +2,7 @@
 #include "GerenteAtor.h"
 
 #include <math.h>
+#include <algorithm>
 
 #include <c2d2\chien2d2.h>
 
@@ -68,6 +69,8 @@ void GerenteAtor::atualizar()
 
 	if(atores.empty())
 		return;
+
+	std::sort(atores.begin(), atores.end(), [](Ator* a1, Ator* a2){return a1>a2;});
 
 	//Testa a colisão entre os atores vivos	
 	for (unsigned i = 0; i < atores.size() - 1; i++) 

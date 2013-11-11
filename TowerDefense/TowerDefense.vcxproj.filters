@@ -138,6 +138,9 @@
     <ClCompile Include="TDBase.cpp">
       <Filter>Source Files\Telas</Filter>
     </ClCompile>
+    <ClCompile Include="ProjetilSplash.cpp">
+      <Filter>Source Files\Atores\Projéteis</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameLoop.h">
@@ -229,6 +232,9 @@
     </ClInclude>
     <ClInclude Include="TDBase.h">
       <Filter>Header Files\Telas</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjetilSplash.h">
+      <Filter>Header Files\Atores\Projéteis</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

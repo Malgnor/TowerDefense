@@ -11,10 +11,15 @@ class Ator
 {
 	protected:
 		GerenteAtor& gerente;
+		//0-fundo
+		//1-moeda
+		//2-tiro
+		//3-inimigos/torres
+		int layer;
 
 	public:
 
-		Ator(GerenteAtor& gerente);
+		Ator(GerenteAtor& gerente, int _layer);
 
 		virtual int x() = 0;
 		virtual int y() = 0;
@@ -36,6 +41,7 @@ class Ator
 
 		virtual void finalizar() = 0;
 		virtual ~Ator() {};
+		bool operator>(Ator& ator);
 };
 
 #endif
