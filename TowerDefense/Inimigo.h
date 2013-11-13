@@ -10,7 +10,7 @@ enum iDirecao { iCIMA, iBAIXO, iESQUERDA, iDIREITA, iPARADO };
 class Inimigo : public Ator
 {
 protected:
-	int posX, posY, passos, vel, vida, dinheiro;
+	int posX, posY, passos, vel, vida, dinheiro, offX, offY;
 	int iSprite;
 	iDirecao dir;
 	Mapa& mapa;

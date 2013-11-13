@@ -50,6 +50,8 @@ bool InimigoExemplo::estaNoJogo(){
 void InimigoExemplo::inicializar(){
 	iSprite = C2D2_CarregaSpriteSet("imgs/inimE.png", 0, 0);
 	mapa.getInit(posX, posY);
+	posX += offX;
+    posY += offY;
 #ifdef LOG
 	if(iSprite == 0)
 		addToLog("Falha ao carregar o sprite do inimigo!(InimigoExemplo.cpp)");

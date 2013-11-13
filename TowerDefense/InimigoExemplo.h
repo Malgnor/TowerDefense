@@ -14,7 +14,7 @@ public:
 	int a();
 	int sprite();
 	int indice();
-
+	
 	void aoColidir(Ator* ator);
 
 	bool estaNoJogo();

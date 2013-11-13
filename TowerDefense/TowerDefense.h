@@ -20,16 +20,12 @@ public:
 	void atualizar();
 	void desenhar();
 
-	void wave();
-	void wave2();
-	void wave3();
-	void wave4();
-	void wave5();
-	void wave6();
-	void wave7();
-	void wave8();
-	void wave9();
 	void waveBoss();
+	void formation1();
+	void formation2();
+	void formation3();
+	void formation4();
+	void formation5();
 
 };
 
