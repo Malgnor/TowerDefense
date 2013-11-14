@@ -60,7 +60,7 @@ void Tutorial::atualizar()
 		if(stage == 0){
 			if(btnOk.getEstado() == SOLTO){
 				stage++;
-				gAtor.adicionar(pInimigoTuto = new InimigoExemplo(gAtor, mapaTD, 112, 304, 1, 50, 10, this));
+				gAtor.adicionar(pInimigoTuto = new InimigoExemplo(gAtor, mapaTD, 384, 0, 1, 50, 10, this));
 			}
 		} else {
 			if(!pInimigoTuto->estaNoJogo()){
@@ -104,7 +104,7 @@ void Tutorial::atualizar()
 			if(btnOk.getEstado() == SOLTO){
 				stage++;
 				chances = 19;
-				gAtor.adicionar(pInimigoTuto = new InimigoExemplo(gAtor, mapaTD, 16, 304, 1, 50, 10, this));
+				gAtor.adicionar(pInimigoTuto = new InimigoExemplo(gAtor, mapaTD, 0, 0, 1, 50, 10, this));
 			}
 		} else {
 			if(!pInimigoTuto->estaNoJogo()){
@@ -196,7 +196,7 @@ void Tutorial::atualizar()
 		if(stage == 0){
 			if(btnOk.getEstado() == SOLTO){
 				stage++;
-				gAtor.adicionar(pInimigoTuto = new InimigoExemplo(gAtor, mapaTD, 16, 304, 1, 50, 10, this));
+				gAtor.adicionar(pInimigoTuto = new InimigoExemplo(gAtor, mapaTD, 0, 0, 1, 50, 10, this));
 			}
 		} else {
 			if(!pInimigoTuto->estaNoJogo()){
@@ -238,48 +238,44 @@ void Tutorial::desenhar()
 	case PLAY:
 		break;
 	case PAUSE:
-		C2D2P_RetanguloPintadoAlfa(200, 150, 550, 450, 0, 127, 127, 127);
-		C2D2P_Retangulo(200, 150, 550, 450, 255, 255, 255);
+		C2D2P_RetanguloPintadoAlfa(200, 250, 550, 450, 0, 127, 127, 127);
+		C2D2P_Retangulo(200, 250, 550, 450, 255, 255, 255);
 		btnOk.desenhar();
 		switch (fase)
 		{
 		case INTRO:
-			//15 linhas
-			//C2D2_DesenhaTexto(tahoma16, 375, 160+ytxt++*16, "Intro", C2D2_TEXTO_CENTRALIZADO);
-			//desenhaTextoML(tahoma16, 375, 160, "Teste\nTeste2\nafaoisudfasiu\nabsodfiuashf98uaz\nasufiadygiu");
-			desenhaTextoML(tahoma16, 375, 160, "Teste fshuifa gnaoidfhy8 asfuihasf af9asiu adsnfiuosf asdfhui", 0, ' ');
-			dimentsoesTextoML(tahoma16, "Teste fshuifa gnaoidfhy8 asfuihasf af9asiu adsnfiuosf asdfhui", ytxt, ' ');
-			desenhaTextoML(tahoma16, 375, 160+ytxt, "Teste\nfayui\nfaio");
+			desenhaTextoML(tahoma16, 375, 260, "Bem-Vindo ao Tutorial!\n\nAtravés deste tutorial você irá aprender o\nbásico de como jogar um Tower Defense.");
 			break;
 		case PRIMEIROSPASSOS:
-			C2D2_DesenhaTexto(tahoma16, 375, 160+ytxt++*16, "O que fazer", C2D2_TEXTO_CENTRALIZADO);
+			desenhaTextoML(tahoma16, 375, 260, "Parece que um inimigo acabou de nos atacar!\nPrecisamos criar uma defesa contra eles!\n\nVamos começar escolhendo uma torre ao lado.");
 			break;
 		case TORRE0:
-			C2D2_DesenhaTexto(tahoma16, 375, 160+ytxt++*16, "Colocar torre", C2D2_TEXTO_CENTRALIZADO);
+			desenhaTextoML(tahoma16, 375, 260, "Agora temos que colocar a torre no mapa,\n para isso simplesmente escolha um local e clique com o\n botão esquerdo do mouse.\n\nAtenção: cada torre tem um custo para colocá-la.\nNão se preocupe agora, nós iremos\nte dar dinheiro suficiente para uma torre.");
 			break;
 		case TORRE1:
-			C2D2_DesenhaTexto(tahoma16, 375, 160+ytxt++*16, "Inimigos", C2D2_TEXTO_CENTRALIZADO);
+			desenhaTextoML(tahoma16, 375, 260, "Excelente! Agora temos uma defesa contra os\n próximos inimigos.\nVamos testá-la!\n\nObs: durante o jogo, ondas de inimigos\nirão aparecer periodicamente!");
 			break;
 		case MOEDAS:
-			C2D2_DesenhaTexto(tahoma16, 375, 160+ytxt++*16, "Moedas", C2D2_TEXTO_CENTRALIZADO);
+			desenhaTextoML(tahoma16, 375, 260, "Ótimo, conseguimos eliminar o inimigo.\nQuando eliminados, eles derrubam moedas.\nPara pega-las passe o mouse por cima delas.\nElas aumentam seu dinheiro, que é necessário para\nadquirir novas torres e melhorar essas torres.");
 			break;
 		case TORRE2:
-			C2D2_DesenhaTexto(tahoma16, 375, 160+ytxt++*16, "Selecionar Torre", C2D2_TEXTO_CENTRALIZADO);
+			desenhaTextoML(tahoma16, 375, 260, "É possível verificar as estatísticas das suas torres.\nPara seleciona-la clique com o botão esquerdo do mouse\nem cima dela.");
 			break;
 		case UPGRADE:
-			C2D2_DesenhaTexto(tahoma16, 375, 160+ytxt++*16, "Upgrade Torre", C2D2_TEXTO_CENTRALIZADO);
+			desenhaTextoML(tahoma16, 375, 260, "Nós podemos melhorar essa torre!\nSimplesmente clique no botão \"Upgrade\" ao lado.");
 			break;
 		case VENDER:
-			C2D2_DesenhaTexto(tahoma16, 375, 160+ytxt++*16, "Vender Torre", C2D2_TEXTO_CENTRALIZADO);
+			desenhaTextoML(tahoma16, 375, 260, "E também é possível vender as torres!\nÉ só clicar no botão \"Vender\" ao lado.");
 			break;
 		case RTORRE:
-			C2D2_DesenhaTexto(tahoma16, 375, 160+ytxt++*16, "Torres 2", C2D2_TEXTO_CENTRALIZADO);
+			desenhaTextoML(tahoma16, 375, 260, "Parece que a nossa nova torre não conseguiu\neliminar o inimigo. Em um Tower Defense,\n o posicionamento das torres é importante!\n\nVamos te dar dinheiro suficiente para colocar outra torre!");
 			break;
 		case RMOEDAS:
-			C2D2_DesenhaTexto(tahoma16, 375, 160+ytxt++*16, "Moedas 2", C2D2_TEXTO_CENTRALIZADO);
+			desenhaTextoML(tahoma16, 375, 260, "É importante tentar coletar o maior número\nde moedas possíveis durante o jogo!\nCaso contrário, seu dinheiro não será suficiente\n para adquirir e melhorar novas torres!");
 			break;
 		case FIM:
-			C2D2_DesenhaTexto(tahoma16, 375, 160+ytxt++*16, "Fim Tutorial", C2D2_TEXTO_CENTRALIZADO);
+			desenhaTextoML(tahoma16, 375, 260, "Parabéns!\n\nVocê chegou ao fim deste tutorial!");
+
 			break;
 		}
 		break;

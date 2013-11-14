@@ -13,6 +13,7 @@ public:
 	int indice();
 	
 	void aoColidir(Ator* ator);
+	void hit();
 	
 	void inicializar();		
 	void atualizar();		

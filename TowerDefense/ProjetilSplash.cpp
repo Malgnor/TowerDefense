@@ -31,6 +31,10 @@ void ProjetilSplash::aoColidir(Ator* ator){
 		}	
 }
 
+void ProjetilSplash::hit(){
+
+}
+
 void ProjetilSplash::inicializar(){
 	pSprite = C2D2_CarregaSpriteSet("imgs/projE.png" , 0, 0);
 	Projetil::inicializar();

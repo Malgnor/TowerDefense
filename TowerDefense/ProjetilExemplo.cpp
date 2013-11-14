@@ -8,8 +8,8 @@
 
 using namespace std;
 
-ProjetilExemplo::ProjetilExemplo(GerenteAtor& _gerente, int _x, int _y, int _vel, Ator& _alvo, int _dano)
-	: Projetil(_gerente, _x, _y, _vel, _alvo, _dano)
+ProjetilExemplo::ProjetilExemplo(GerenteAtor& _gerente, int _x, int _y, int _vel, Ator& _alvo, int _dano, int _hp)
+	: Projetil(_gerente, _x, _y, _vel, _alvo, _dano, _hp)
 {
 }
 
@@ -18,7 +18,10 @@ int ProjetilExemplo::indice(){
 }
 
 void ProjetilExemplo::aoColidir(Ator* ator){
-	if(ator->tipo() == INIMIGO)
+}
+
+void ProjetilExemplo::hit(){
+	if(--hp <= 0)
 		alive = false;
 }
 

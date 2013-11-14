@@ -145,7 +145,7 @@ bool desenhaTextoML( unsigned int fonte, int x, int y, char* texto, int alinhame
 	return true;
 }
 
-bool dimentsoesTextoML(unsigned int fonte, char* texto, int &a, char split){
+bool dimensoesTextoML(unsigned int fonte, char* texto, int &a, char split){
 	if(fonte == 0)
 		return false;
 	int h = 0;
