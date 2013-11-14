@@ -62,34 +62,315 @@ void TowerDefense::atualizar(){
 	switch (estado)
 	{
 	case PLAY:
+		//wave 1
+		if(timer == 60*8)
+			formation1();
+		if(timer == 60*9)
+		    formation1();
+	    if(timer == 60*10)
+		    formation1();
+     	if(timer == 60*11)
+		    formation1();
+		if(timer == 60*12)
+			formation1();
+		if(timer == 60*13)
+		    formation1();
+	    if(timer == 60*14)
+		    formation1();
+     	if(timer == 60*15)
+		    formation1();
+		if(timer == 60*16)
+			formation1();
+		if(timer == 60*17)
+		    formation1();
+	    if(timer == 60*18)
+		    formation1();
+     	if(timer == 60*19)
+		    formation1();
+		if(timer == 60*20)
+			formation1();
+		if(timer == 60*21)
+		    formation1();
+	    if(timer == 60*22)
+		    formation1();
+     	if(timer == 60*23)
+		    formation1();
+		//wave 1
 
-		if(timer == 60*10)
-			formation4();
-		if(timer == 60*11)
+		//wave 2
+		if(timer == 60*30)
+			formation1();
+		if(timer == 60*31)
 		    formation1();
-	    if(timer == 60*12)
+	    if(timer == 60*32)
 		    formation1();
-     	if(timer == 60*13)
+     	if(timer == 60*33)
 		    formation1();
+		if(timer == 60*34)
+			formation1();
+		if(timer == 60*35)
+		    formation1();
+		if(timer == 60*36)
+			formation2();
+		if(timer == 60*37)
+			formation2();
+		if(timer == 60*39)
+			formation2();
+		if(timer == 60*41)
+			formation2();
+		if(timer == 60*43)
+			formation2();
+		if(timer == 60*45)
+			formation2();
+		if(timer == 60*47)
+			formation2();
+		if(timer == 60*49)
+			formation2();
+		if(timer == 60*51)
+			formation2();
+		if(timer == 60*53)
+			formation2();
+		if(timer == 60*55)
+			formation2();
+		//wave 2
 
+		//wave 3
 		if(timer == 60*60)
-			formation4();
+			formation1();
+		if(timer == 60*61)
+		    formation1();
+	    if(timer == 60*62)
+		    formation1();
+     	if(timer == 60*63)
+		    formation1();
+		if(timer == 60*64)
+			formation1();
+		if(timer == 60*65)
+		    formation1();
+		if(timer == 60*66)
+			formation2();
+		if(timer == 60*67)
+			formation2();
+		if(timer == 60*69)
+			formation2();
+		if(timer == 60*71)
+			formation2();
+		if(timer == 60*73)
+			formation2();
+		if(timer == 60*75)
+			formation2();
+		if(timer == 60*77)
+			formation2();
+		if(timer == 60*79)
+			formation2();
+		if(timer == 60*81)
+			formation2();
+		if(timer == 60*83)
+			formation2();
+		if(timer == 60*85)
+			formation2();
+		if(timer == 60*88)
+			formation3();
+		if(timer == 60*91)
+			formation3();
+		if(timer == 60*94)
+			formation3();
+		if(timer == 60*97)
+			formation3();
+		if(timer == 60*100)
+			formation3();
+		if(timer == 60*103)
+			formation3();
+		if(timer == 60*106)
+			formation3();
+		if(timer == 60*109)
+			formation3();
+		if(timer == 60*112)
+			formation3();
+		if(timer == 60*115)
+			formation3();
+		//wave 3
+
+		//wave 4
 		if(timer == 60*120)
+			formation1();
+		if(timer == 60*121)
+		    formation1();
+	    if(timer == 60*123)
+		    formation1();
+     	if(timer == 60*124)
+		    formation1();
+		if(timer == 60*125)
+			formation1();
+		if(timer == 60*126)
+		    formation1();
+		if(timer == 60*127)
+			formation2();
+		if(timer == 60*129)
+			formation2();
+		if(timer == 60*131)
+			formation2();
+		if(timer == 60*133)
+			formation2();
+		if(timer == 60*135)
+			formation2();
+		if(timer == 60*137)
+			formation2();
+		if(timer == 60*139)
+			formation2();
+		if(timer == 60*141)
+			formation2();
+		if(timer == 60*143)
+			formation2();
+		if(timer == 60*145)
+			formation2();
+		if(timer == 60*148)
+			formation3();
+		if(timer == 60*151)
+			formation3();
+		if(timer == 60*154)
+			formation3();
+		if(timer == 60*157)
+			formation3();
+		if(timer == 60*160)
+			formation3();
+		if(timer == 60*163)
+			formation3();
+		if(timer == 60*166)
+			formation3();
+		if(timer == 60*169)
+			formation3();
+		if(timer == 60*172)
+			formation3();
+		if(timer == 60*175)
+			formation3();
+		if(timer == 60*179)
 			formation4();
-		if(timer == 60*180)
+		if(timer == 60*183)
 			formation4();
-		if(timer == 60*240)
+		if(timer == 60*187)
 			formation4();
-		if(timer == 60*300)
+		if(timer == 60*191)
 			formation4();
-		if(timer == 60*360)
+		if(timer == 60*195)
 			formation4();
-		if(timer == 60*420)
+		if(timer == 60*199)
 			formation4();
-		if(timer == 60*480)
+		if(timer == 60*203)
 			formation4();
-		if(timer == 60*540)
+		if(timer == 60*207)
 			formation4();
+		if(timer == 60*201)
+			formation4();
+		if(timer == 60*205)
+			formation4();
+		if(timer == 60*209)
+			formation4();
+		//wave 4
+
+		//wave 5
+		if(timer == 60*220)
+			formation1();
+		if(timer == 60*221)
+		    formation1();
+	    if(timer == 60*223)
+		    formation1();
+     	if(timer == 60*224)
+		    formation1();
+		if(timer == 60*225)
+			formation1();
+		if(timer == 60*226)
+		    formation1();
+		if(timer == 60*227)
+			formation2();
+		if(timer == 60*229)
+			formation2();
+		if(timer == 60*231)
+			formation2();
+		if(timer == 60*233)
+			formation2();
+		if(timer == 60*235)
+			formation2();
+		if(timer == 60*237)
+			formation2();
+		if(timer == 60*239)
+			formation2();
+		if(timer == 60*241)
+			formation2();
+		if(timer == 60*243)
+			formation2();
+		if(timer == 60*245)
+			formation2();
+		if(timer == 60*248)
+			formation3();
+		if(timer == 60*251)
+			formation3();
+		if(timer == 60*254)
+			formation3();
+		if(timer == 60*257)
+			formation3();
+		if(timer == 60*260)
+			formation3();
+		if(timer == 60*263)
+			formation3();
+		if(timer == 60*266)
+			formation3();
+		if(timer == 60*269)
+			formation3();
+		if(timer == 60*272)
+			formation3();
+		if(timer == 60*275)
+			formation3();
+		if(timer == 60*279)
+			formation4();
+		if(timer == 60*283)
+			formation4();
+		if(timer == 60*287)
+			formation4();
+		if(timer == 60*291)
+			formation4();
+		if(timer == 60*295)
+			formation4();
+		if(timer == 60*299)
+			formation4();
+		if(timer == 60*303)
+			formation4();
+		if(timer == 60*307)
+			formation4();
+		if(timer == 60*301)
+			formation4();
+		if(timer == 60*305)
+			formation4();
+		if(timer == 60*309)
+			formation4();
+		if(timer == 60*313)
+			formation5();
+		if(timer == 60*317)
+			formation5();
+		if(timer == 60*321)
+			formation5();
+		if(timer == 60*325)
+			formation5();
+		if(timer == 60*329)
+			formation5();
+		if(timer == 60*333)
+			formation5();
+		if(timer == 60*337)
+			formation5();
+		if(timer == 60*341)
+			formation5();
+		if(timer == 60*344)
+			formation5();
+		if(timer == 60*347)
+			formation5();
+		if(timer == 60*351)
+			formation5();
+		if(timer == 60*354)
+			formation5();
+		if(timer == 60*359)
+			formation5();
+		//wave 5
+		
 
 #ifdef DEBUG
 		if(m->botoes[C2D2_MDIREITO].pressionado && teclas[C2D2_LSHIFT].ativo)
@@ -146,20 +427,20 @@ void TowerDefense::desenhar(){
 
 void TowerDefense::formation1()
 {
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 15, 0, 1, 50, 10, this));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 0, 0, 1, 50, 10, this));
 }
 
 void TowerDefense::formation2()
 {
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -30, 296, 1, 50, 10, this));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -30, 312, 1, 50, 10, this));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 0, 8, 1, 50, 10, this));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 0, -8, 1, 50, 10, this));
 }
 
 void TowerDefense::formation3()
 {
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -30, 304, 1, 50, 10, this));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -46, 296, 1, 50, 10, this));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -46, 312, 1, 50, 10, this));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 15, 0, 1, 50, 10, this));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 0, 8, 1, 50, 10, this));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 0, -8, 1, 50, 10, this));
 }
 
 void TowerDefense::formation4()
@@ -172,8 +453,8 @@ void TowerDefense::formation4()
 
 void TowerDefense::formation5()
 {
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -30, 296, 1, 50, 10, this));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -30, 312, 1, 50, 10, this));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -46, 296, 1, 50, 10, this));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -46, 312, 1, 50, 10, this));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 0, 8, 1, 50, 10, this));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 0, -8, 1, 50, 10, this));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 15, 8, 1, 50, 10, this));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 15, -8, 1, 50, 10, this));
 }
