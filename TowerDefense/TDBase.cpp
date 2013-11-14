@@ -76,8 +76,8 @@ void TDBase::atualizar()
 	case PLAY:
 		if(m->botoes[C2D2_MESQUERDO].ativo && mouseX > 575){
 			torreSelecionada = 0;
-			for(int j = 0; j < 2; j++){
-				if(C2D2_ColidiuSprites(mouseSprite, 0, mouseX, mouseY, torreSprite, j, 625+j*75, 100)){
+			for(int j = 0; j < 3; j++){
+				if(C2D2_ColidiuSprites(mouseSprite, 0, mouseX, mouseY, torreSprite, j, 625+j%2*75, 100+j/2*48)){
 					torreSelecionada = j+1;
 				}
 			}
@@ -174,8 +174,14 @@ void TDBase::desenhar()
 		C2D2_DesenhaSprite(heart, 1, 415+i*16, 580);
 	}
 
-	for(int j = 0; j < 2; j++)
-		C2D2_DesenhaSprite(torreSprite, +j, 625+j*75, 100);
+	for(int j = 0; j < 3; j++)
+		C2D2_DesenhaSprite(torreSprite, j, 625+j%2*75, 100+j/2*48);
+
+	if (torreSelecionada!=0)
+	{
+		C2D2P_Retangulo(625+(torreSelecionada - 1) % 2 * 75, 100 + (torreSelecionada - 1) / 2 * 48, 658+(torreSelecionada - 1) % 2 * 75, 133 + (torreSelecionada - 1) / 2 * 48, 0, 255, 0);
+	}
+	
 
 	switch (estado)
 	{

@@ -38,6 +38,7 @@ protected:
 	MenuButton btnUpgrade;
 
 public:
+
 	TDBase();
 
 	void Lucro(int money);
