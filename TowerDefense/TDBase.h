@@ -29,6 +29,7 @@ protected:
 	int gold;
 	int torreSelecionada;
 	Torre* pTorre;
+	int aMusic;
 
 	std::vector <Menu*> menus;
 	MenuButton* btnExit;

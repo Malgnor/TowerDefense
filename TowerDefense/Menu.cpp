@@ -21,3 +21,11 @@ std::string Menu::getName()
 {
 	return name;
 }
+
+int Menu::altura(){
+	return a;
+}
+
+int Menu::largura(){
+	return l;
+}

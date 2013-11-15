@@ -5,6 +5,7 @@
 
 #include <c2d2\chien2d2.h>
 #include <c2d2\chien2d2primitivas.h>
+#include <c2d2\chienaudio2.h>
 
 Torre2::Torre2(GerenteAtor& _gerente, int _x, int _y)
 	: Torre(_gerente, _x, _y, 50, 120)
@@ -23,6 +24,7 @@ bool Torre2::estaNoJogo(){
 
 void Torre2::inicializar(){
 	alcance = 100;
+	aTiro = CA2_CarregaEfeito("audio/tiro.wav");
 	RoF = 40;
 	cd = RoF;
 	tSprite = C2D2_CarregaSpriteSet("imgs/torre2.bmp", 32, 32);	
@@ -40,6 +42,7 @@ void Torre2::atualizar(){
 	case RTF:
 		if(alvo != nullptr){
 			gerente.adicionar(new ProjetilExemplo(gerente, posX, posY, 5, *alvo, 10, 1));
+			CA2_TocaEfeito(aTiro, 0);
 			cd = RoF;
 			estado = COOLDOWN;
 		} else {

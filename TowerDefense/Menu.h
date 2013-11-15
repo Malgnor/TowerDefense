@@ -18,6 +18,8 @@ public:
 	Menu(std::string _name, int _x, int _y, int& _fonte, double _r = 1, double _g = 0, double _b = 0, unsigned char _alfa = 255);
 	Menu(std::string _name, int _x, int _y, int& _fonte, char* _cor, unsigned char _alfa = 255);
 	std::string getName();
+	int altura();
+	int largura();
 	virtual void atualizar() = 0;
 	virtual void desenhar() = 0;
 	virtual ~Menu(){};

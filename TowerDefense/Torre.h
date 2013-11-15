@@ -18,6 +18,7 @@ protected:
 	int altura;
 	int valor;
 	int custo;
+	int aTiro;
 
 	//Rate of Fire
 	int RoF;

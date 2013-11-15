@@ -5,6 +5,7 @@
 
 #include <c2d2/chien2d2.h>
 #include <c2d2/chien2d2primitivas.h>
+#include <c2d2\chienaudio2.h>
 
 TDBase::TDBase()
 	:btnSell("Vender", 630, 415, tahoma16 = C2D2_CarregaFonte("imgs/tahoma16.bmp", 16)), btnUpgrade("Upgrade", 685, 415, tahoma16)
@@ -23,6 +24,8 @@ void TDBase::inicializar()
 {
 	C2D2_TrocaCorLimpezaTela(255, 255, 255);
 
+	aMusic = CA2_CarregaMusica("audio/music.mp3");
+	CA2_TocaMusica(aMusic, 0);
 	estado = PLAY;
 	pTorre = nullptr;
 	tahoma16 = C2D2_CarregaFonte("imgs/tahoma16.bmp", 16);
@@ -61,6 +64,8 @@ void TDBase::inicializar()
 
 void TDBase::atualizar()
 {
+	
+
 	C2D2_Mouse* m = C2D2_PegaMouse();
 	C2D2_Botao* teclas = C2D2_PegaTeclas();
 	mouseX = m->x;
@@ -214,6 +219,7 @@ void TDBase::desenhar()
 
 void TDBase::finalizar()
 {
+	CA2_PausaMusica();
 	for(Menu* menu : menus){
 		delete menu;
 	}

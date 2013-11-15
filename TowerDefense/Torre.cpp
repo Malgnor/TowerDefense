@@ -4,7 +4,7 @@
 
 Torre::Torre(GerenteAtor& _gerente, int _x, int _y, int _valor, int _custo)
 	: Ator(_gerente, 3), posX(16+_x-_x%32), posY(16+_y-_y%32), valor(_valor), custo(_custo), 
-	alive(true), estado(COOLDOWN), largura(0), altura(0), ind(0)
+	alive(true), estado(COOLDOWN), largura(0), altura(0), ind(0), aTiro(0)
 {
 
 }

@@ -140,6 +140,8 @@ bool desenhaTextoML( unsigned int fonte, int x, int y, char* texto, int alinhame
 			i++;
 		}
 		C2D2_DesenhaTexto(fonte, x, y+a*h++, temp.c_str(), alinhamento);
+		if(texto[i] == '\0')
+			return true;
 		i++;
 	}
 	return true;
@@ -158,6 +160,8 @@ bool dimensoesTextoML(unsigned int fonte, char* texto, int &a, char split){
 			i++;
 		}
 		h++;
+		if(texto[i] == '\0')
+			break;
 		i++;
 	}
 	a = h*aa;

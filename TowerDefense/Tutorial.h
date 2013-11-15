@@ -11,6 +11,7 @@ class Tutorial : public TDBase
 {
 private:
 	unsigned int stage;
+	int timer;
 	faseTutorial fase;
 	Inimigo* pInimigoTuto;
 	Torre* pTorreTuto;

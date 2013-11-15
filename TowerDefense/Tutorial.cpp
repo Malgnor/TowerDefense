@@ -31,6 +31,7 @@ void Tutorial::inicializar()
 {
 	TDBase::inicializar();
 	fase = INTRO;
+	timer = 0;
 	stage = 0;
 	gold = 0;
 	pInimigoTuto = nullptr;
@@ -45,6 +46,7 @@ void Tutorial::inicializar()
 void Tutorial::atualizar()
 {
 	TDBase::atualizar();
+	timer++;
 	
 	if (stage == 0)
 	{
@@ -124,7 +126,10 @@ void Tutorial::atualizar()
 				pCoinTuto = (Coin*)gAtor.maisPerto(0, 0, 1000, COIN);
 			}
 		} else {
-			if(!pCoinTuto->estaNoJogo()){
+			if(pCoinTuto == nullptr){
+				stage = 0;
+				fase = TORRE1;
+			}else if(!pCoinTuto->estaNoJogo()){
 				pCoinTuto = nullptr;
 				stage = 0;
 				if(gold > 9)
@@ -236,46 +241,89 @@ void Tutorial::desenhar()
 	switch (estado)
 	{
 	case PLAY:
+		switch (fase)
+		{
+		case INTRO:
+			break;
+		case PRIMEIROSPASSOS:
+			for(int j = 1; j < 3; j++)
+				if(timer % 30 >= 15)
+					C2D2P_Retangulo(625+(j - 1) % 2 * 75, 100 + (j - 1) / 2 * 48, 658+(j - 1) % 2 * 75, 133 + (j - 1) / 2 * 48, 255, 0, 0);
+			break;
+		case TORRE0:
+			if(timer % 30 >= 15){
+				C2D2P_Retangulo(0, 1, 576, 9*32, 255, 0, 0);
+				C2D2P_Retangulo(0, 10*32, 576, 576, 255, 0, 0);
+			}
+			break;
+		case TORRE1:
+			break;
+		case MOEDAS:
+			if(timer % 30 >= 15 && pCoinTuto != nullptr)
+				C2D2P_Retangulo(pCoinTuto->x()-pCoinTuto->l()/2-1, pCoinTuto->y()-pCoinTuto->a()/2-1, pCoinTuto->x()+pCoinTuto->l()/2, pCoinTuto->y()+pCoinTuto->a()/2+2, 255, 0, 0);
+			break;
+		case TORRE2:
+			if(timer % 30 >= 15 && pTorreTuto != nullptr)
+				C2D2P_Retangulo(pTorreTuto->x()-pTorreTuto->l()/2-1, pTorreTuto->y()-pTorreTuto->a()/2-1, pTorreTuto->x()+pTorreTuto->l()/2+1, pTorreTuto->y()+pTorreTuto->a()/2+1, 255, 0, 0);
+			break;
+		case UPGRADE:
+			if(timer % 30 >= 15)
+				C2D2P_Retangulo(685-btnUpgrade.largura()/2-4, 414, 685+btnUpgrade.largura()/2+4, 414+btnUpgrade.altura()+2, 0, 0, 255);
+			break;
+		case VENDER:
+			if(timer % 30 >= 15)
+				C2D2P_Retangulo(630-btnSell.largura()/2-4, 414, 630+btnSell.largura()/2+4, 414+btnSell.altura()+2, 0, 0, 255);
+			break;
+		case RTORRE:
+			if(timer % 30 >= 15){
+				C2D2P_Retangulo(0, 1, 576, 9*32, 255, 0, 0);
+				C2D2P_Retangulo(0, 10*32, 576, 576, 255, 0, 0);
+			}
+			break;
+		case RMOEDAS:
+			break;
+		case FIM:
+			break;
+		}
 		break;
 	case PAUSE:
-		C2D2P_RetanguloPintadoAlfa(200, 250, 550, 450, 0, 127, 127, 127);
-		C2D2P_Retangulo(200, 250, 550, 450, 255, 255, 255);
+		C2D2P_RetanguloPintadoAlfa(200, 270, 550, 450, 0, 127, 127, 127);
+		C2D2P_Retangulo(200, 270, 550, 450, 255, 255, 255);
 		btnOk.desenhar();
 		switch (fase)
 		{
 		case INTRO:
-			desenhaTextoML(tahoma16, 375, 260, "Bem-Vindo ao Tutorial!\n\nAtravés deste tutorial você irá aprender o\nbásico de como jogar um Tower Defense.");
+			desenhaTextoML(tahoma16, 375, 280, "Bem-Vindo ao Tutorial!\n\nAtravés deste tutorial você irá aprender o\nbásico de como jogar um Tower Defense.");
 			break;
 		case PRIMEIROSPASSOS:
-			desenhaTextoML(tahoma16, 375, 260, "Parece que um inimigo acabou de nos atacar!\nPrecisamos criar uma defesa contra eles!\n\nVamos começar escolhendo uma torre ao lado.");
+			desenhaTextoML(tahoma16, 375, 280, "Parece que um inimigo acabou de nos atacar!\nPrecisamos criar uma defesa contra eles!\n\nVamos começar escolhendo uma torre ao lado.");
 			break;
 		case TORRE0:
-			desenhaTextoML(tahoma16, 375, 260, "Agora temos que colocar a torre no mapa,\n para isso simplesmente escolha um local e clique com o\n botão esquerdo do mouse.\n\nAtenção: cada torre tem um custo para colocá-la.\nNão se preocupe agora, nós iremos\nte dar dinheiro suficiente para uma torre.");
+			desenhaTextoML(tahoma16, 375, 280, "Agora temos que colocar a torre no mapa,\n para isso simplesmente escolha um local e clique com o\n botão esquerdo do mouse.\n\nAtenção: cada torre tem um custo para colocá-la.\nNão se preocupe agora, nós iremos\nte dar dinheiro suficiente para uma torre.");
 			break;
 		case TORRE1:
-			desenhaTextoML(tahoma16, 375, 260, "Excelente! Agora temos uma defesa contra os\n próximos inimigos.\nVamos testá-la!\n\nObs: durante o jogo, ondas de inimigos\nirão aparecer periodicamente!");
+			desenhaTextoML(tahoma16, 375, 280, "Excelente! Agora temos uma defesa contra os\n próximos inimigos.\nVamos testá-la!\n\nObs: durante o jogo, ondas de inimigos\nirão aparecer periodicamente!");
 			break;
 		case MOEDAS:
-			desenhaTextoML(tahoma16, 375, 260, "Ótimo, conseguimos eliminar o inimigo.\nQuando eliminados, eles derrubam moedas.\nPara pega-las passe o mouse por cima delas.\nElas aumentam seu dinheiro, que é necessário para\nadquirir novas torres e melhorar essas torres.");
+			desenhaTextoML(tahoma16, 375, 280, "Ótimo, conseguimos eliminar o inimigo.\nQuando eliminados, eles derrubam moedas.\nPara pega-las passe o mouse por cima delas.\nElas aumentam seu dinheiro, que é necessário para\nadquirir novas torres e melhorar essas torres.");
 			break;
 		case TORRE2:
-			desenhaTextoML(tahoma16, 375, 260, "É possível verificar as estatísticas das suas torres.\nPara seleciona-la clique com o botão esquerdo do mouse\nem cima dela.");
+			desenhaTextoML(tahoma16, 375, 280, "É possível verificar as estatísticas das suas torres.\nPara seleciona-la clique com o botão esquerdo do mouse\nem cima dela.");
 			break;
 		case UPGRADE:
-			desenhaTextoML(tahoma16, 375, 260, "Nós podemos melhorar essa torre!\nSimplesmente clique no botão \"Upgrade\" ao lado.");
+			desenhaTextoML(tahoma16, 375, 280, "Nós podemos melhorar essa torre!\nSimplesmente clique no botão \"Upgrade\" ao lado.");
 			break;
 		case VENDER:
-			desenhaTextoML(tahoma16, 375, 260, "E também é possível vender as torres!\nÉ só clicar no botão \"Vender\" ao lado.");
+			desenhaTextoML(tahoma16, 375, 280, "E também é possível vender as torres!\nÉ só clicar no botão \"Vender\" ao lado.");
 			break;
 		case RTORRE:
-			desenhaTextoML(tahoma16, 375, 260, "Parece que a nossa nova torre não conseguiu\neliminar o inimigo. Em um Tower Defense,\n o posicionamento das torres é importante!\n\nVamos te dar dinheiro suficiente para colocar outra torre!");
+			desenhaTextoML(tahoma16, 375, 280, "Parece que a nossa nova torre não conseguiu\neliminar o inimigo. Em um Tower Defense,\no posicionamento das torres é importante!\n\nVamos te dar dinheiro suficiente para colocar outra torre!");
 			break;
 		case RMOEDAS:
-			desenhaTextoML(tahoma16, 375, 260, "É importante tentar coletar o maior número\nde moedas possíveis durante o jogo!\nCaso contrário, seu dinheiro não será suficiente\n para adquirir e melhorar novas torres!");
+			desenhaTextoML(tahoma16, 375, 280, "É importante tentar coletar o maior número\nde moedas possíveis durante o jogo!\nCaso contrário, seu dinheiro não será suficiente\n para adquirir e melhorar novas torres!");
 			break;
 		case FIM:
-			desenhaTextoML(tahoma16, 375, 260, "Parabéns!\n\nVocê chegou ao fim deste tutorial!");
-
+			desenhaTextoML(tahoma16, 375, 280, "Parabéns!\n\nVocê chegou ao fim deste tutorial!");
 			break;
 		}
 		break;
