@@ -168,6 +168,7 @@ bool dimensoesTextoML(unsigned int fonte, char* texto, int &a, char split){
 	return true;
 }
 
+/*
 void dRetangulo(int x, int y, int largura, int altura, char* cor){
 	C2D2P_Retangulo(x, y, x+largura, y+altura, getCorR(cor), getCorG(cor), getCorB(cor));
 }
@@ -199,3 +200,5 @@ void dElipse(int xcentro, int ycentro, int va, int vb, char* cor){
 void dElipsePintada(int xcentro, int ycentro, int va, int vb, char* cor){
 	C2D2P_ElipsePintada(xcentro, ycentro, va, vb, getCorR(cor), getCorG(cor), getCorB(cor));
 }
+*/
+
