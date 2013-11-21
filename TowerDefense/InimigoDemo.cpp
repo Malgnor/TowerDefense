@@ -33,7 +33,10 @@ int InimigoDemo::indice(){
 }
 
 void InimigoDemo::aoColidir(Ator* ator){
-
+	if(ator->tipo() == PROJETIL){
+		Projetil* acerto = (Projetil *)ator; 
+		acerto->hit();
+	}
 }
 
 bool InimigoDemo::estaNoJogo(){
