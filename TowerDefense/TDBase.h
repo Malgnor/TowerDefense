@@ -21,6 +21,8 @@ protected:
 	Mapa mapaTD;
 	tdEstado estado;
 	int mouseX, mouseY;
+	int magneticRadius;
+	bool magMenu;
 	int mouseSprite;
 	int torreSprite;
 	int tahoma16, tahoma32;
@@ -45,6 +47,8 @@ public:
 	void Lucro(int money);
 	void DanoRecebido(int porrada);
 	void desenhaMouse();
+	void posMouse(int &x, int &y);
+	int magRadius();
 
 	virtual Tela* proximaTela() = 0;
 

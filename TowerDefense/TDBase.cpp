@@ -38,6 +38,8 @@ void TDBase::inicializar()
 	chances = 20;
 	gold = 600;
 	torreSelecionada = 0;
+	magneticRadius = 0;
+	magMenu = false;
 	mapaTD.inicializar();
 
 	menus.push_back(btnPause = new MenuButton("Pausa", 700, 480, tahoma16));
@@ -86,6 +88,10 @@ void TDBase::atualizar()
 					torreSelecionada = j+1;
 				}
 			}
+			if(C2D2_ColidiuQuadrados(625, 245, 32, 32, mouseX, mouseY, 1, 1)){
+				magMenu = true;
+				pTorre = nullptr;
+			}
 		}
 		if(mouseX < 576 && mouseY < 576){
 			if(m->botoes[C2D2_MESQUERDO].ativo && mapaTD.conteudo(mouseX, mouseY) == 0 && gold >= 50){
@@ -105,10 +111,20 @@ void TDBase::atualizar()
 				}
 			} else if(m->botoes[C2D2_MESQUERDO].pressionado) {
 				pTorre = (Torre*)(gAtor.maisPerto(mouseX, mouseY, 16, TORRE));
+				magMenu = false;
 			}
 		}
-		if(m->botoes[C2D2_MDIREITO].pressionado)
+		if(m->botoes[C2D2_MDIREITO].pressionado){
 			pTorre = nullptr;
+			magMenu = false;
+		}
+		if( magMenu ){
+			btnUpgrade.atualizar();
+			if(btnUpgrade.getEstado() == SOLTO && gold >= 100*(1+magneticRadius/25)){
+				gold -= 100*(1+magneticRadius/25);
+				magneticRadius += 25;
+			}
+		}
 		if( pTorre != nullptr){
 			btnSell.atualizar();
 			btnUpgrade.atualizar();
@@ -121,7 +137,6 @@ void TDBase::atualizar()
 				pTorre->vender();
 				mapaTD.removeTorre(pTorre->x(), pTorre->y());
 				pTorre = nullptr;
-
 			}
 		}
 		gAtor.atualizar();
@@ -150,9 +165,9 @@ void TDBase::desenhar()
 		btnUpgrade.desenhar();
 		btnSell.desenhar();
 		int yt = 19;
+		char temp[50];
 		C2D2_DesenhaSprite(pTorre->sprite(), pTorre->indice(), 680, yt*16+35);
 		C2D2_DesenhaTexto(tahoma32, 630, yt++*16-15, "Torre", C2D2_TEXTO_ESQUERDA);
-		char temp[50];
 		sprintf_s(temp, "Nível: %d", pTorre->indice()+1);
 		C2D2_DesenhaTexto(tahoma16, 600, yt++*16, temp, C2D2_TEXTO_ESQUERDA);
 		sprintf_s(temp, "Alcance: %d", pTorre->getAlcance());
@@ -163,6 +178,23 @@ void TDBase::desenhar()
 		C2D2_DesenhaTexto(tahoma16, 600, yt++*16, temp, C2D2_TEXTO_ESQUERDA);
 		sprintf_s(temp, "Valor: %d", pTorre->getValor()/2);
 		C2D2_DesenhaTexto(tahoma16, 600, yt++*16, temp, C2D2_TEXTO_ESQUERDA);
+	}
+
+	C2D2P_RetanguloPintado(625, 245, 625+32, 245+32, 100, 100, 100);
+	if(magMenu){
+		C2D2P_Retangulo(625, 245, 625+33, 245+33, 0, 255, 0);
+		C2D2P_RetanguloPintadoAlfa(590, 290, 725, 440, 100, 149, 237, 127);
+		C2D2P_Retangulo(590, 290, 725, 440, 0, 127, 0);
+		btnUpgrade.desenhar();
+		int yt = 16;
+		char temp[50];
+		C2D2_DesenhaTexto(tahoma16, 658, 19*16-12, "Imã de moedas", C2D2_TEXTO_CENTRALIZADO);
+		sprintf_s(temp, "Alcance: %d", magneticRadius);
+		C2D2_DesenhaTexto(tahoma16, 600, yt++*20, temp, C2D2_TEXTO_ESQUERDA);
+		sprintf_s(temp, "Próximo alcance: %d", magneticRadius+25);
+		C2D2_DesenhaTexto(tahoma16, 600, yt++*20, temp, C2D2_TEXTO_ESQUERDA);
+		sprintf_s(temp, "Custo: %d", 100*(1+magneticRadius/25));
+		C2D2_DesenhaTexto(tahoma16, 600, yt++*20, temp, C2D2_TEXTO_ESQUERDA);
 	}
 
 	C2D2_DesenhaSprite(goldcoins, 0, 360, 580);
@@ -234,6 +266,17 @@ void TDBase::finalizar()
 
 void TDBase::desenhaMouse()
 {
+	if(magMenu){
+		C2D2P_Circulo(mouseX, mouseY, magneticRadius, 255, 255, 255);
+	}
 	C2D2_DesenhaSprite(mouseSprite, 0, mouseX, mouseY);
 }
 
+void TDBase::posMouse(int &x, int &y){
+	x = mouseX;
+	y = mouseY;
+}
+
+int TDBase::magRadius(){
+	return magneticRadius;
+}

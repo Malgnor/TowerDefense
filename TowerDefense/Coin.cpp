@@ -49,30 +49,36 @@ bool Coin::estaNoJogo(){
 
 void Coin::inicializar(){
 	int r = rand()%360;
-	int r2 = rand()%17;
-	offX = posX+(int)(r2*cos(r));
-	offY = posY+(int)(r2*sin(r));
+	int r2 = rand()%8;
+	posX += r2*cos(r);
+	posY += r2*sin(r);
 	spriteSet = C2D2_CarregaSpriteSet("imgs/goldcoin.png", 0, 0);
 	C2D2_DimensoesSprite(spriteSet, &largura, &altura);
 }		
 
 void Coin::atualizar(){
 	C2D2_Mouse* mouse = C2D2_PegaMouse();
-	if(posX != offX || posY != offY){
-		int dx = posX-offX;
-		int dy = posY-offY;
-		float d = sqrt((float)dx*dx+dy*dy);
-		float xx = (float)dx/d;
-		float yy = (float)dy/d;
-		posY-=(int)(yy*1.5);	
-		posX-=(int)(xx*1.5);
-	}
 	if(--decay <= 0)
 		alive = false;
 	if(C2D2_ColidiuQuadrados(posX-largura/2, posY-altura/2, largura, altura, mouse->x, mouse->y, 2, 2)){
 		td->Lucro(valor);
 		alive = false;
+		return;
 	}
+	if(td->magRadius() > 0){
+		int mx;
+		int my;
+		td->posMouse(mx, my);
+		int dx = posX-mx;
+		int dy = posY-my;
+		float d = sqrt((float)dx*dx+dy*dy);
+		if(d <= td->magRadius()){
+			float xx = (float)dx/d;
+			float yy = (float)dy/d;
+			posY-=(int)(2*yy);	
+			posX-=(int)(2*xx); 
+		}
+	}	
 }
 
 void Coin::desenhar(){

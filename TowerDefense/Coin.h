@@ -8,7 +8,7 @@ class Coin : public Ator
 {
 private:
 	int valor, decay;
-	int posX, posY, offX, offY, altura, largura;
+	int posX, posY, altura, largura;
 	int spriteSet;
 	bool alive;
 	TDBase* td;
