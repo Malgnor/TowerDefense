@@ -88,7 +88,6 @@
     <ClCompile Include="Inimigo.cpp" />
     <ClCompile Include="InimigoDemo.cpp" />
     <ClCompile Include="InimigoExemplo.cpp" />
-    <ClCompile Include="logger.cpp" />
     <ClCompile Include="MapEditor.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MenuButton.cpp" />
@@ -121,7 +120,6 @@
     <ClInclude Include="Inimigo.h" />
     <ClInclude Include="InimigoDemo.h" />
     <ClInclude Include="InimigoExemplo.h" />
-    <ClInclude Include="logger.h" />
     <ClInclude Include="Mapa.h" />
     <ClInclude Include="MapEditor.h" />
     <ClInclude Include="Menu.h" />

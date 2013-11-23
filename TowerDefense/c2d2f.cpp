@@ -91,10 +91,6 @@ bool stringFInput( string& x, char* txt, char* sufixo, char* prefixo)
 {
 	C2D2_Botao* teclas = C2D2_PegaTeclas();
 	int tahoma16 = C2D2_CarregaFonte("imgs/tahoma16.bmp", 16);
-#ifdef LOG
-	if(tahoma16 == 0)
-		addToLog("Falha ao carregar a fonte Tahoma de tamanho 16!(c2d2f.cpp)");
-#endif
 	C2D2_TrocaCorLimpezaTela(0, 0, 0);
 	C2D2_Sincroniza(C2D2_FPS_PADRAO);
 	while(true){

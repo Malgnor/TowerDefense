@@ -24,10 +24,6 @@ void ProjetilSplash::aoColidir(Ator* ator){
 			C2D2_RemoveSpriteSet(pSprite);
 			pSprite = C2D2_CarregaSpriteSet("imgs/projS.png" , 0, 0);
 			Projetil::inicializar();
-#ifdef LOG
-			if(pSprite == 0)
-				addToLog("Falha ao carregar sprite do Projétil Splash!(ProjetilSplash.cpp)");
-#endif
 		}	
 }
 
@@ -38,10 +34,6 @@ void ProjetilSplash::hit(){
 void ProjetilSplash::inicializar(){
 	pSprite = C2D2_CarregaSpriteSet("imgs/projE.png" , 0, 0);
 	Projetil::inicializar();
-#ifdef LOG
-	if(pSprite == 0)
-		addToLog("Falha ao carregar sprite do Projétil!(ProjetilSplash.cpp)");
-#endif
 }
 		
 void ProjetilSplash::atualizar(){

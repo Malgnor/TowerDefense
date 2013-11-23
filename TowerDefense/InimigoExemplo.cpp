@@ -53,10 +53,6 @@ void InimigoExemplo::inicializar(){
 	mapa.getInit(posX, posY);
 	posX += offX;
     posY += offY;
-#ifdef LOG
-	if(iSprite == 0)
-		addToLog("Falha ao carregar o sprite do inimigo!(InimigoExemplo.cpp)");
-#endif
 }
 		
 void InimigoExemplo::atualizar(){

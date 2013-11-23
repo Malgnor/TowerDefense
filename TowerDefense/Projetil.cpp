@@ -4,7 +4,7 @@
 #include <c2d2/chien2d2.h>
 
 Projetil::Projetil(GerenteAtor& _gerente, int _x, int _y, int _vel, Ator& _alvo, int _dano, int _hp)
-	: Ator(_gerente, 2), posX(_x), posY(_y), vel(_vel), alive(true), alvo(_alvo), dano(_dano), hp(_hp)
+	: Ator(_gerente, 3), posX(_x), posY(_y), vel(_vel), alive(true), alvo(_alvo), dano(_dano), hp(_hp)
 {
 
 }

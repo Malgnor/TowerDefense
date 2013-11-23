@@ -12,7 +12,7 @@
 
 class Torre;
 
-enum tdEstado {PLAY, PAUSE, PAUSEF1};
+enum tdEstado {PLAY, PAUSE, PAUSEF1, GAVEOVER};
 
 class TDBase : public Tela
 {
@@ -22,6 +22,7 @@ protected:
 	tdEstado estado;
 	int mouseX, mouseY;
 	int magneticRadius;
+	int magnet;
 	bool magMenu;
 	int mouseSprite;
 	int torreSprite;

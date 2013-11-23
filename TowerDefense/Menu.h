@@ -20,6 +20,9 @@ public:
 	std::string getName();
 	int altura();
 	int largura();
+	void mover(int x, int y);
+	void mudarCor(char* cor);
+	void mudarCor(double r, double g, double b);
 	virtual void atualizar() = 0;
 	virtual void desenhar() = 0;
 	virtual ~Menu(){};

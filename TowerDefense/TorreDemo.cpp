@@ -27,10 +27,6 @@ void TorreDemo::inicializar(){
 	alcance = 200;
 	RoF = 60;
 	cd = RoF/10;
-#ifdef LOG
-	if(tSprite == 0)
-		addToLog("Falha ao carregar sprite da Torre!(TorreDemo.cpp)");
-#endif
 }
 
 void TorreDemo::atualizar(){

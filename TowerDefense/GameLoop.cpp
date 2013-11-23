@@ -21,28 +21,15 @@ bool GameLoop::executar(char* titulo, int largura, int altura, bool primitivas, 
 	if (!C2D2_Inicia(largura, altura, 
 		janela ? C2D2_JANELA : C2D2_TELA_CHEIA, 
 		C2D2_DESENHO_OPENGL, titulo)){
-#ifdef LOG
-			addToLog("Chien2d2 falhou!(GameLoop.cpp)");
-#endif 
 		return false;
 	}
-
-#ifdef LOG
-	addToLog("Chien2D2 Iniciado!(GameLoop.cpp)\nTime", time(0));
-#endif
-
+	
 	if (!CA2_Inicia()){
-#ifdef LOG
-		addToLog("Chien2d2 Audio falhou!(GameLoop.cpp)");
-#endif 
 		return false;
 	}
 
 	if(primitivas){
 		if(C2D2P_Inicia()){
-#ifdef LOG
-			addToLog("Chien2d2 Primitivas falhou!(GameLoop.cpp)");
-#endif 
 			return false;
 		}
 	}
@@ -58,10 +45,6 @@ bool GameLoop::executar(char* titulo, int largura, int altura, bool primitivas, 
 
 	CA2_Encerra();
 	C2D2_Encerra();
-#ifdef LOG
-	addToLog("Chien2D2 Encerrado!(GameLoop.cpp)\nTime", time(0));
-	addToLog("");
-#endif
 	return true;
 }
 

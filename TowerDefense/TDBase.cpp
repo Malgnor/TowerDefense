@@ -34,9 +34,10 @@ void TDBase::inicializar()
 	eheart = C2D2_CarregaSpriteSet("imgs/eheart.png", 0, 0);
 	heart = C2D2_CarregaSpriteSet("imgs/heart.png", 16, 16);
 	goldcoins = C2D2_CarregaSpriteSet("imgs/goldcoins.png", 0, 0);
+	magnet = C2D2_CarregaSpriteSet("imgs/magnet.png", 0, 0);
 	torreSprite = C2D2_CarregaSpriteSet("imgs/torres.png", 32, 32);
 	chances = 20;
-	gold = 600;
+	gold = 1000;
 	torreSelecionada = 0;
 	magneticRadius = 0;
 	magMenu = false;
@@ -45,36 +46,22 @@ void TDBase::inicializar()
 	menus.push_back(btnPause = new MenuButton("Pausa", 700, 480, tahoma16));
 	menus.push_back(btnBack = new MenuButton("Menu Inicial", 700, 500, tahoma16));
 	menus.push_back(btnExit = new MenuButton("Sair", 700, 520, tahoma16));
-
-#ifdef LOG
-	if(mouseSprite == 0)
-		addToLog("Falha ao carregar sprite do mouse!(TDBase.cpp)");
-	if(tahoma16 == 0)
-		addToLog("Falha ao carregar a fonte Tahoma de tamanho 16!(TDBase.cpp)");
-	if(tahoma32 == 0)
-		addToLog("Falha ao carregar a fonte Tahoma de tamanho 32!(TDBase.cpp)");
-	if(eheart == 0)
-		addToLog("Falha ao carregar o sprite eheart!(TDBase.cpp)");
-	if(heart == 0)
-		addToLog("Falha ao carregar o sprite heart!(TDBase.cpp)");
-	if(goldcoins == 0)
-		addToLog("Falha ao carregar o sprite goldcoins!(TDBase.cpp)");
-	if(torreSprite == 0)
-		addToLog("Falha ao carregar o sprite das torres!(TDBase.cpp)");
-#endif
 }
 
 void TDBase::atualizar()
 {
-	
-
 	C2D2_Mouse* m = C2D2_PegaMouse();
 	C2D2_Botao* teclas = C2D2_PegaTeclas();
 	mouseX = m->x;
 	mouseY = m->y;
-
+		
 	estado = teclas[C2D2_F1].pressionado ? estado == PAUSEF1 ? PLAY : PAUSEF1 : teclas[C2D2_P].pressionado || teclas[C2D2_ESC].pressionado || btnPause->getEstado() == SOLTO ? estado == PLAY ? PAUSE : PLAY : estado;
-	
+	if(chances <= 0 && estado != GAVEOVER){
+		estado = GAVEOVER;
+		btnPause->mover(-100, -100);
+		btnBack->mover(400-32, 116);
+		btnExit->mover(400-32, 148);
+	}
 	for(Menu* menu : menus){
 		menu->atualizar();
 	}
@@ -82,15 +69,17 @@ void TDBase::atualizar()
 	{
 	case PLAY:
 		if(m->botoes[C2D2_MESQUERDO].ativo && mouseX > 575){
-			torreSelecionada = 0;
 			for(int j = 0; j < 3; j++){
-				if(C2D2_ColidiuSprites(mouseSprite, 0, mouseX, mouseY, torreSprite, j, 625+j%2*75, 100+j/2*48)){
+				if(C2D2_ColidiuQuadrados(625+j%2*75, 100+j/2*48, 32, 32, mouseX, mouseY, 1, 1)){
 					torreSelecionada = j+1;
+					pTorre = nullptr;
+					magMenu = false;
 				}
 			}
 			if(C2D2_ColidiuQuadrados(625, 245, 32, 32, mouseX, mouseY, 1, 1)){
 				magMenu = true;
 				pTorre = nullptr;
+				torreSelecionada = 0;
 			}
 		}
 		if(mouseX < 576 && mouseY < 576){
@@ -103,7 +92,7 @@ void TDBase::atualizar()
 					gAtor.adicionar(new Torre2(gAtor, mouseX, mouseY));
 					break;
 				case 2:
-					gold -= 50;
+					gold -= 100;
 					mapaTD.addTorre(mouseX, mouseY);
 					gAtor.adicionar(new TorreExemplo(gAtor, mouseX, mouseY));
 				default:
@@ -112,11 +101,13 @@ void TDBase::atualizar()
 			} else if(m->botoes[C2D2_MESQUERDO].pressionado) {
 				pTorre = (Torre*)(gAtor.maisPerto(mouseX, mouseY, 16, TORRE));
 				magMenu = false;
+				torreSelecionada = 0;
 			}
 		}
 		if(m->botoes[C2D2_MDIREITO].pressionado){
 			pTorre = nullptr;
 			magMenu = false;
+			torreSelecionada = 0;
 		}
 		if( magMenu ){
 			btnUpgrade.atualizar();
@@ -144,6 +135,8 @@ void TDBase::atualizar()
 	case PAUSE:
 		break;
 	case PAUSEF1:
+		break;
+	case GAVEOVER:
 		break;
 	}
 }
@@ -180,7 +173,7 @@ void TDBase::desenhar()
 		C2D2_DesenhaTexto(tahoma16, 600, yt++*16, temp, C2D2_TEXTO_ESQUERDA);
 	}
 
-	C2D2P_RetanguloPintado(625, 245, 625+32, 245+32, 100, 100, 100);
+	C2D2_DesenhaSprite(magnet, 0, 625, 245);
 	if(magMenu){
 		C2D2P_Retangulo(625, 245, 625+33, 245+33, 0, 255, 0);
 		C2D2P_RetanguloPintadoAlfa(590, 290, 725, 440, 100, 149, 237, 127);
@@ -218,8 +211,9 @@ void TDBase::desenhar()
 	{
 		C2D2P_Retangulo(625+(torreSelecionada - 1) % 2 * 75, 100 + (torreSelecionada - 1) / 2 * 48, 658+(torreSelecionada - 1) % 2 * 75, 133 + (torreSelecionada - 1) / 2 * 48, 0, 255, 0);
 	}
-	
 
+	C2D2_DesenhaTexto(tahoma16, 8, 580, "F1 - Mostra atalhos", C2D2_TEXTO_ESQUERDA);
+	int ytxt = 0;
 	switch (estado)
 	{
 	case PLAY:
@@ -234,15 +228,16 @@ void TDBase::desenhar()
 	case PAUSEF1:
 		C2D2P_RetanguloPintadoAlfa(0, 0, 800, 600, 25, 25, 25, 200);
 		C2D2_DesenhaTexto(tahoma32, 400-32, 100, "PAUSE", C2D2_TEXTO_CENTRALIZADO);
-		int ytxt = 0;
 		C2D2_DesenhaTexto(tahoma16, 300, 150+ytxt++*16, "Mouse Esquerdo - Coloca Torre", C2D2_TEXTO_ESQUERDA);
 		C2D2_DesenhaTexto(tahoma16, 300, 150+ytxt++*16, "Mouse Esquerdo - Seleciona Torre", C2D2_TEXTO_ESQUERDA);
 		C2D2_DesenhaTexto(tahoma16, 300, 150+ytxt++*16, "Mouse Direito - Deseleciona torre", C2D2_TEXTO_ESQUERDA);
 		C2D2_DesenhaTexto(tahoma16, 300, 150+ytxt++*16, "P/ESC/F1 - Pausa/Despausa", C2D2_TEXTO_ESQUERDA);
 		break;
+	case GAVEOVER:
+		C2D2P_RetanguloPintadoAlfa(0, 0, 800, 600, 25, 25, 25, 200);
+		C2D2_DesenhaTexto(tahoma32, 400-32, 75, "GameOver", C2D2_TEXTO_CENTRALIZADO);
+		break;
 	}
-	
-	C2D2_DesenhaTexto(tahoma16, 8, 580, "F1 - Mostra atalhos", C2D2_TEXTO_ESQUERDA);
 
 	for(Menu* menu : menus){
 		menu->desenhar();
@@ -259,6 +254,7 @@ void TDBase::finalizar()
 	C2D2_RemoveSpriteSet(eheart);
 	C2D2_RemoveSpriteSet(heart);
 	C2D2_RemoveSpriteSet(goldcoins);
+	C2D2_RemoveSpriteSet(magnet);
 	C2D2_RemoveSpriteSet(torreSprite);
 	C2D2_RemoveFonte(tahoma16);
 	C2D2_RemoveFonte(tahoma32);

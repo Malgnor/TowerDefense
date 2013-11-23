@@ -1,4 +1,5 @@
 #include "InimigoDemo.h"
+#include "Projetil.h"
 #include <c2d2\chien2d2.h>
 
 InimigoDemo::InimigoDemo(GerenteAtor& _gerente, Mapa& _map, int _x, int _y, iDirecao _dir, TDBase *_td)
@@ -34,7 +35,7 @@ int InimigoDemo::indice(){
 
 void InimigoDemo::aoColidir(Ator* ator){
 	if(ator->tipo() == PROJETIL){
-		Projetil* acerto = (Projetil *)ator; 
+		Projetil* acerto = (Projetil*)ator; 
 		acerto->hit();
 	}
 }
@@ -47,10 +48,6 @@ void InimigoDemo::inicializar(){
 	iSprite = C2D2_CarregaSpriteSet("imgs/inimE.png", 0, 0);
 	posX = offX;
 	posY = offY;
-#ifdef LOG
-	if(iSprite == 0)
-		addToLog("Falha ao carregar o sprite do inimigo!(InimigoDemo.cpp)");
-#endif
 }
 
 void InimigoDemo::atualizar(){

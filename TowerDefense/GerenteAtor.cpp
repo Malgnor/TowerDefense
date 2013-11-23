@@ -47,7 +47,7 @@ void GerenteAtor::atualizar()
 	if(atores.empty())
 		return;
 
-	std::sort(atores.begin(), atores.end(), [](Ator* a1, Ator* a2){return a1>a2;});
+	//std::sort(atores.begin(), atores.end(), [](Ator* a1, Ator* a2){return a1>a2;});
 	//3. Atualiza a lógica do ator e, caso queira sair do jogo
 	//finaliza e move para a lista de mortos. Caso contrário,
 	//mantém o ator numa lista de vivos.
@@ -71,8 +71,7 @@ void GerenteAtor::atualizar()
 
 	if(atores.empty())
 		return;
-
-	std::sort(atores.begin(), atores.end(), [](Ator* a1, Ator* a2){return a1>a2;});
+	std::sort(atores.begin(), atores.end(), [](Ator* a1, Ator* a2){return a1->getLayer() < a2->getLayer();});
 
 	//Testa a colisão entre os atores vivos	
 	for (unsigned i = 0; i < atores.size() - 1; i++) 

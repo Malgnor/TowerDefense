@@ -424,7 +424,6 @@ void TowerDefense::desenhar(){
 	desenhaMouse();
 }
 
-
 void TowerDefense::formation1()
 {
 	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 0, 0, 1, 50, 10, this));

@@ -29,3 +29,23 @@ int Menu::altura(){
 int Menu::largura(){
 	return l;
 }
+
+void Menu::mover( int x, int y )
+{
+	posX = x;
+	posY = y;
+}
+
+void Menu::mudarCor( char* cor )
+{
+	r = getCorDoubleR(cor);
+	g = getCorDoubleG(cor);
+	b = getCorDoubleB(cor);
+}
+
+void Menu::mudarCor( double r, double g, double b )
+{
+	this->r = r;
+	this->g = g;
+	this->b = b;
+}

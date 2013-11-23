@@ -7,7 +7,7 @@
 #include <c2d2/chien2d2.h>
 
 Coin::Coin(GerenteAtor& _gerente, TDBase* _td, int _valor, int _x, int _y)
-	: Ator(_gerente, 1), td(_td), valor(_valor), posX(_x), posY(_y), alive(true), decay(60*10)
+	: Ator(_gerente, 2), td(_td), valor(_valor), posX(_x), posY(_y), alive(true), decay(60*15)
 {
 }
 
@@ -50,8 +50,8 @@ bool Coin::estaNoJogo(){
 void Coin::inicializar(){
 	int r = rand()%360;
 	int r2 = rand()%8;
-	posX += r2*cos(r);
-	posY += r2*sin(r);
+	posX += (int)(r2*cos(r));
+	posY += (int)(r2*sin(r));
 	spriteSet = C2D2_CarregaSpriteSet("imgs/goldcoin.png", 0, 0);
 	C2D2_DimensoesSprite(spriteSet, &largura, &altura);
 }		
@@ -60,7 +60,7 @@ void Coin::atualizar(){
 	C2D2_Mouse* mouse = C2D2_PegaMouse();
 	if(--decay <= 0)
 		alive = false;
-	if(C2D2_ColidiuQuadrados(posX-largura/2, posY-altura/2, largura, altura, mouse->x, mouse->y, 2, 2)){
+	if(C2D2_ColidiuQuadrados(posX-largura/2, posY-altura/2, largura, altura, mouse->x-1, mouse->y-1, 3, 3)){
 		td->Lucro(valor);
 		alive = false;
 		return;

@@ -29,10 +29,6 @@ void Torre2::inicializar(){
 	cd = RoF;
 	tSprite = C2D2_CarregaSpriteSet("imgs/torre2.bmp", 32, 32);	
 	Torre::inicializar();
-#ifdef LOG
-	if(tSprite == 0)
-		addToLog("Falha ao carregar sprite da Torre!(Torre2.cpp)");
-#endif
 }
 
 void Torre2::atualizar(){

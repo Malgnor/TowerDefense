@@ -32,19 +32,6 @@ void MapEditor::inicializar()
 	tahoma16 = C2D2_CarregaFonte("imgs/tahoma16.bmp", 16);
 	tahoma16r = C2D2_CarregaFonte("imgs/tahoma16r.bmp", 16);
 
-#ifdef LOG
-	if(mouseSprite == 0)
-		addToLog("Falha ao carregar sprite do mouse!(MapEditor.cpp)");
-	if(tahoma16r == 0)
-		addToLog("Falha ao carregar a fonte Tahoma de tamanho 16, vermelho!(MapEditor.cpp)");
-	if(tahoma16 == 0)
-		addToLog("Falha ao carregar a fonte Tahoma de tamanho 16!(MapEditor.cpp)");
-	if(tahoma32 == 0)
-		addToLog("Falha ao carregar a fonte Tahoma de tamanho 32!(MapEditor.cpp)");
-	if(mapSprite == 0)
-		addToLog("Falha ao carregar o sprite do mapa!(MapEditor.cpp)");
-#endif
-
 	mapaTD = Mapa();
 	mapaTD.inicializar();
 	id = 0;

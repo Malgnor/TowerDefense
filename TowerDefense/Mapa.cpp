@@ -23,10 +23,6 @@ Mapa::Mapa()
 void Mapa::inicializar()
 {
 	sprite = C2D2_CarregaSpriteSet("imgs/map.png", 32, 32);
-#ifdef LOG
-	if(sprite == 0)
-		addToLog("Falha ao carregar o sprite do mapa!(Mapa.cpp)");
-#endif
 }
 
 
@@ -87,10 +83,6 @@ void Mapa::save()
 	ofile.write((char*)this, sizeof(Mapa));
 	ofile.close();
 	sprite = C2D2_CarregaSpriteSet("imgs/map.png", 32, 32);
-#ifdef LOG
-	if(sprite == 0)
-		addToLog("Falha ao carregar o sprite do mapa!(Mapa.cpp)");
-#endif
 }
 
 void Mapa::load()
@@ -100,33 +92,17 @@ void Mapa::load()
 	stringFInput(nome, "(LOAD)Nome do mapa:", ".map");
 	ifstream ifile("map/"+nome+".map", ios_base::binary);
 	ifile.read((char*)this, sizeof(Mapa));
-#ifdef LOG
-	if(!ifile.is_open())
-		addToLog("Falha ao carregar mapa:", nome);
-#endif
 	ifile.close();
 	sprite = C2D2_CarregaSpriteSet("imgs/map.png", 32, 32);
-#ifdef LOG
-	if(sprite == 0)
-		addToLog("Falha ao carregar o sprite do mapa!(Mapa.cpp)");
-#endif
 }
 
 void Mapa::load(string nome)
 {
 	C2D2_RemoveSpriteSet(sprite);
 	ifstream ifile("map/"+nome+".map", ios_base::binary);
-#ifdef LOG
-	if(!ifile.is_open())
-		addToLog("Falha ao carregar mapa:", nome);
-#endif
 	ifile.read((char*)this, sizeof(Mapa));
 	ifile.close();
 	sprite = C2D2_CarregaSpriteSet("imgs/map.png", 32, 32);
-#ifdef LOG
-	if(sprite == 0)
-		addToLog("Falha ao carregar o sprite do mapa!(Mapa.cpp)");
-#endif
 }
 
 void Mapa::finalizar()

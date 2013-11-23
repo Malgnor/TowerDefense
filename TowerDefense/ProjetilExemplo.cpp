@@ -28,10 +28,6 @@ void ProjetilExemplo::hit(){
 void ProjetilExemplo::inicializar(){
 	pSprite = C2D2_CarregaSpriteSet("imgs/projE.png" , 0, 0);
 	Projetil::inicializar();
-#ifdef LOG
-	if(pSprite == 0)
-		addToLog("Falha ao carregar sprite do Projétil!(ProjetilExemplo.cpp)");
-#endif
 }
 		
 void ProjetilExemplo::atualizar(){

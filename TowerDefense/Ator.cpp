@@ -5,7 +5,7 @@ Ator::Ator(GerenteAtor& _gerente, int _layer)
 {
 }
 
-bool Ator::operator>( Ator& ator )
+int Ator::getLayer()
 {
-	return this->layer > ator.layer;
+	return layer;
 }

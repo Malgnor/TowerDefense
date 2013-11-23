@@ -57,17 +57,6 @@ void MenuInicial::inicializar()
 	tahoma32 = C2D2_CarregaFonte("imgs/tahoma32.bmp", 32);
 	tahoma64 = C2D2_CarregaFonte("imgs/tahoma64.bmp", 64);
 
-#ifdef LOG
-	if(mouseSprite == 0)
-		addToLog("Falha ao carregar sprite do mouse!(MenuInicial.cpp)");
-	if(tahoma16 == 0)
-		addToLog("Falha ao carregar a fonte Tahoma de tamanho 16!(MenuInicial.cpp)");
-	if(tahoma32 == 0)
-		addToLog("Falha ao carregar a fonte Tahoma de tamanho 32!(MenuInicial.cpp)");
-	if(tahoma64 == 0)
-		addToLog("Falha ao carregar a fonte Tahoma de tamanho 64!(MenuInicial.cpp)");
-#endif
-
 	menus.push_back(new MenuText("TowerDefense", 400, 100, tahoma64, "Verde-limao"));
 	menus.push_back(btnTD = new MenuButton("Jogar", 400, 250, tahoma32, "purple"));
 	menus.push_back(btnMS = new MenuButton("Selecionar Mapa", 400, 300, tahoma32, "indigo"));
