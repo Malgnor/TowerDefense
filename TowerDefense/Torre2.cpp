@@ -58,6 +58,7 @@ void Torre2::desenhar(){
 
 void Torre2::finalizar(){
 	C2D2_RemoveSpriteSet(tSprite);
+	CA2_RemoveEfeito(aTiro);
 }
 
 void Torre2::upgrade()

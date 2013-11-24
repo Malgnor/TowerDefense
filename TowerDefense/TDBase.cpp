@@ -247,6 +247,7 @@ void TDBase::desenhar()
 void TDBase::finalizar()
 {
 	CA2_PausaMusica();
+	CA2_RemoveMusica(aMusic);
 	for(Menu* menu : menus){
 		delete menu;
 	}
