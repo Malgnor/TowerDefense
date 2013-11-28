@@ -24,7 +24,7 @@ void TDBase::inicializar()
 {
 	C2D2_TrocaCorLimpezaTela(255, 255, 255);
 
-	aMusic = CA2_CarregaMusica("audio/music.mp3");
+	aMusic = CA2_CarregaMusica("audio/Space.mp3");
 	CA2_TocaMusica(aMusic, 0);
 	estado = PLAY;
 	pTorre = nullptr;

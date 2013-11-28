@@ -162,6 +162,10 @@
     <Text Include="cores_double.txt" />
     <Text Include="cores_uchar.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="audio\Space.mp3" />
+    <Media Include="audio\tiro.wav" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
