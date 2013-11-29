@@ -76,11 +76,11 @@ void GerenteAtor::atualizar()
 	//Testa a colisão entre os atores vivos	
 	for (unsigned i = 0; i < atores.size() - 1; i++) 
 	{
-		if(atores[i]->tipo() == TORRE || atores[i]->tipo() == COIN)
+		if(atores[i]->tipo() == TORRE || atores[i]->tipo() == COIN || atores[i]->tipo() == SCOLISAO)
 			continue;
 		for (unsigned j = i+1; j < atores.size(); j++) 
 		{
-			if(atores[j]->tipo() == TORRE || atores[i]->tipo() == COIN || atores[j]->tipo() == atores[i]->tipo())
+			if(atores[j]->tipo() == TORRE || atores[j]->tipo() == COIN || atores[j]->tipo() == SCOLISAO || atores[j]->tipo() == atores[i]->tipo())
 				continue;
 			if (C2D2_ColidiuSprites(
 				atores[i]->sprite(), atores[i]->indice(),

@@ -82,6 +82,7 @@
     <ClCompile Include="c2d2f.cpp" />
     <ClCompile Include="Coin.cpp" />
     <ClCompile Include="color.cpp" />
+    <ClCompile Include="ControladorVolume.cpp" />
     <ClCompile Include="GameLoop.cpp" />
     <ClCompile Include="GerenteAtor.cpp" />
     <ClCompile Include="GerenteTela.cpp" />
@@ -112,6 +113,7 @@
     <ClInclude Include="c2d2f.h" />
     <ClInclude Include="Coin.h" />
     <ClInclude Include="color.h" />
+    <ClInclude Include="ControladorVolume.h" />
     <ClInclude Include="dirent.h" />
     <ClInclude Include="GameLoop.h" />
     <ClInclude Include="GerenteAtor.h" />

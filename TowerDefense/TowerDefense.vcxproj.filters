@@ -138,6 +138,9 @@
     <ClCompile Include="ProjetilSplash.cpp">
       <Filter>Source Files\Atores\Projéteis</Filter>
     </ClCompile>
+    <ClCompile Include="ControladorVolume.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameLoop.h">
@@ -229,6 +232,9 @@
     </ClInclude>
     <ClInclude Include="ProjetilSplash.h">
       <Filter>Header Files\Atores\Projéteis</Filter>
+    </ClInclude>
+    <ClInclude Include="ControladorVolume.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -8,80 +8,46 @@ InimigoDemo::InimigoDemo(GerenteAtor& _gerente, Mapa& _map, int _x, int _y, iDir
 	dir = _dir;
 }
 
-
-int InimigoDemo::x(){
-	return posX;
-}
-
-int InimigoDemo::y(){
-	return posY;
-}
-
-int InimigoDemo::l(){
-	return 16;
-}
-
-int InimigoDemo::a(){
-	return 16;
-}
-
-int InimigoDemo::sprite(){
-	return iSprite;
-}
-
-int InimigoDemo::indice(){
-	return 0;
-}
-
-void InimigoDemo::aoColidir(Ator* ator){
-	if(ator->tipo() == PROJETIL){
-		Projetil* acerto = (Projetil*)ator; 
-		acerto->hit();
-	}
-}
-
-bool InimigoDemo::estaNoJogo(){
-	return true;
-}
-
 void InimigoDemo::inicializar(){
 	iSprite = C2D2_CarregaSpriteSet("imgs/inimE.png", 0, 0);
+	indiceVar = 0;
+	Inimigo::inicializar();
 	posX = offX;
 	posY = offY;
 }
 
 void InimigoDemo::atualizar(){
-	switch (dir)
-	{
-	case iCIMA:
-		posY--;
-		if (posY <= 50)
-			dir = iESQUERDA;
-		break;
-	case iBAIXO:
-		posY++;
-		if (posY >= 550)
-			dir = iDIREITA;
-		break;
-	case iESQUERDA:
-		posX--;
-		if (posX <= 50)
-			dir = iBAIXO;
-		break;
-	case iDIREITA:
-		posX++;
-		if (posX >= 750)
-			dir = iCIMA;
-		break;
-	}
+        switch (dir)
+        {
+        case iCIMA:
+                posY--;
+                if (posY <= 50)
+                        dir = iESQUERDA;
+                break;
+        case iBAIXO:
+                posY++;
+                if (posY >= 550)
+                        dir = iDIREITA;
+                break;
+        case iESQUERDA:
+                posX--;
+                if (posX <= 50)
+                        dir = iBAIXO;
+                break;
+        case iDIREITA:
+                posX++;
+                if (posX >= 750)
+                        dir = iCIMA;
+                break;
+        }
 
 }
 
 void InimigoDemo::desenhar(){
+
 	C2D2_DesenhaSpriteCentro(iSprite, 0, posX, posY, l(), a());
 }
 
 void InimigoDemo::finalizar(){
-	delete td;
 	C2D2_RemoveSpriteSet(iSprite);
 }

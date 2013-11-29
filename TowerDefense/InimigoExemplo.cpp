@@ -12,49 +12,15 @@ InimigoExemplo::InimigoExemplo(GerenteAtor& _gerente, Mapa& _map, int _x, int _y
 {
 }
 
-int InimigoExemplo::x(){
-	return posX;
-}
-
-int InimigoExemplo::y(){
-	return posY;
-}
-
-int InimigoExemplo::l(){
-	return 16;
-}
-
-int InimigoExemplo::a(){
-	return 16;
-}
-
-int InimigoExemplo::sprite(){
-	return iSprite;
-}
-
-int InimigoExemplo::indice(){
-	return 0;
-}
-
-void InimigoExemplo::aoColidir(Ator* ator){
-	if(ator->tipo() == PROJETIL && ator->estaNoJogo()){
-		Projetil* acerto = (Projetil *)ator; 
-		vida -= acerto->retornaDano();
-		acerto->hit();
-	}
-}
-
-bool InimigoExemplo::estaNoJogo(){
-	return alive;
-}
-
 void InimigoExemplo::inicializar(){
 	iSprite = C2D2_CarregaSpriteSet("imgs/inimE.png", 0, 0);
+	Inimigo::inicializar();
+	indiceVar = 0;
 	mapa.getInit(posX, posY);
 	posX += offX;
     posY += offY;
 }
-		
+
 void InimigoExemplo::atualizar(){
 	if (vida <= 0){
 		alive = false;
@@ -79,16 +45,19 @@ void InimigoExemplo::atualizar(){
 		}
 	} else {
 		passos = 32;
-		if(mapa.conteudo(posX + 32, posY) == 3 && dir != iESQUERDA)
+		if((mapa.conteudo(posX + 32, posY) == 3 || mapa.conteudo(posX + 32, posY) == 4)  && dir != iESQUERDA)
 			dir = iDIREITA;
-		else if(mapa.conteudo(posX - 32, posY) == 3 && dir != iDIREITA)
+		else if((mapa.conteudo(posX - 32, posY) == 3|| mapa.conteudo(posX - 32, posY) == 4) && dir != iDIREITA)
 			dir = iESQUERDA;
-		else if(mapa.conteudo(posX, posY + 32) == 3 && dir != iCIMA)
+		else if((mapa.conteudo(posX, posY + 32) == 3 || mapa.conteudo(posX, posY + 32) == 4)&& dir != iCIMA)
 			dir = iBAIXO;
-		else if(mapa.conteudo(posX, posY - 32) == 3 && dir != iBAIXO)
+		else if((mapa.conteudo(posX, posY - 32) == 3 || mapa.conteudo(posX, posY - 32) == 4)&& dir != iBAIXO)
 			dir = iCIMA;
-		else
+		else if (mapa.conteudo(posX, posY) == 4){
+		    alive = false;
+		    td->DanoRecebido(1);
 			passos = 0;
+		}
 	}	
 	if(posX > 576){
 		alive = false;
@@ -98,7 +67,7 @@ void InimigoExemplo::atualizar(){
 }
 		
 void InimigoExemplo::desenhar(){
-	C2D2_DesenhaSpriteCentro(iSprite, 0, posX, posY, l(), a());
+	C2D2_DesenhaSpriteCentro(iSprite, indiceVar, posX, posY, l(), a());
 	//C2D2P_RetanguloPintado(posX-8, posY-8, posX+8, posY+8, 155, 25, 25);
 	//C2D2P_Retangulo(posX-8, posY-8, posX+8, posY+8, 50, 0, 0);
 }

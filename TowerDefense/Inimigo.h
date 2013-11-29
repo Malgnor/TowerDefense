@@ -16,12 +16,23 @@ protected:
 	Mapa& mapa;
 	bool alive;
 	TDBase* td;
-	
+	int indiceVar;
+	int largura;
+	int altura;
+
 public:
 
 	Inimigo(GerenteAtor& _gerente, Mapa& _map, int _x, int _y, int _vel, int _vida, int _dinheiro, TDBase *_td);
-
+	int x();
+	int y();
+	int l();
+	int a();
+	int sprite();
+	int indice();
 	Tipo tipo();
+	void aoColidir(Ator* ator);
+    bool estaNoJogo();
+    virtual void inicializar();
 
 	virtual ~Inimigo(){ }
 };

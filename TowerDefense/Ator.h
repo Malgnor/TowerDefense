@@ -5,7 +5,7 @@
 
 class GerenteAtor;
 
-enum Tipo {TORRE, PROJETIL, INIMIGO, COIN};
+enum Tipo {TORRE, PROJETIL, INIMIGO, COIN, SCOLISAO};
 
 class Ator
 {
@@ -16,6 +16,7 @@ class Ator
 		//2-Moedas
 		//3-Tiro
 		//4-Inimigos
+		//5-UI
 		int layer;
 
 	public:
