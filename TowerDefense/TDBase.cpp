@@ -8,7 +8,7 @@
 #include <c2d2\chienaudio2.h>
 
 TDBase::TDBase()
-	:btnSell("Vender", 630, 415, tahoma16 = C2D2_CarregaFonte("imgs/tahoma16.bmp", 16)), btnUpgrade("Upgrade", 685, 415, tahoma16)
+	:btnSell("Vender", 630, 415, tahoma16 = C2D2_CarregaFonte("imgs/tahoma16.bmp", 16)), btnUpgrade("Upgrade", 685, 415, tahoma16), cVolume(400, 400)
 {
 }
 
@@ -42,6 +42,7 @@ void TDBase::inicializar()
 	magneticRadius = 0;
 	magMenu = false;
 	mapaTD.inicializar();
+	cVolume.inicializar();
 
 	menus.push_back(btnPause = new MenuButton("Pausa", 700, 480, tahoma16));
 	menus.push_back(btnBack = new MenuButton("Menu Inicial", 700, 500, tahoma16));
@@ -135,6 +136,7 @@ void TDBase::atualizar()
 	case PAUSE:
 		break;
 	case PAUSEF1:
+		cVolume.atualizar();
 		break;
 	case GAVEOVER:
 		break;
@@ -232,6 +234,7 @@ void TDBase::desenhar()
 		C2D2_DesenhaTexto(tahoma16, 300, 150+ytxt++*16, "Mouse Esquerdo - Seleciona Torre", C2D2_TEXTO_ESQUERDA);
 		C2D2_DesenhaTexto(tahoma16, 300, 150+ytxt++*16, "Mouse Direito - Deseleciona torre", C2D2_TEXTO_ESQUERDA);
 		C2D2_DesenhaTexto(tahoma16, 300, 150+ytxt++*16, "P/ESC/F1 - Pausa/Despausa", C2D2_TEXTO_ESQUERDA);
+		cVolume.desenhar();
 		break;
 	case GAVEOVER:
 		C2D2P_RetanguloPintadoAlfa(0, 0, 800, 600, 25, 25, 25, 200);
@@ -246,6 +249,7 @@ void TDBase::desenhar()
 
 void TDBase::finalizar()
 {
+	cVolume.finalizar();
 	CA2_PausaMusica();
 	CA2_RemoveMusica(aMusic);
 	for(Menu* menu : menus){

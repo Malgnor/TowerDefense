@@ -51,6 +51,8 @@ void MenuInicial::inicializar()
 {
 	C2D2_TrocaCorLimpezaTela(0, 0, 0);
 	estado = MENU;
+	cVolume = ControladorVolume(400, 432);
+	cVolume.inicializar();
 	mapSelected = "";
 	mouseSprite = C2D2_CarregaSpriteSet("imgs/mouse.png", 0, 0);
 	tahoma16 = C2D2_CarregaFonte("imgs/tahoma16.bmp", 16);
@@ -103,6 +105,7 @@ void MenuInicial::atualizar()
 {
 	C2D2_Mouse* m = C2D2_PegaMouse();
 	C2D2_Botao* teclas = C2D2_PegaTeclas();
+	cVolume.atualizar();
 	mouseX = m->x;
 	mouseY = m->y;
 	switch (estado)
@@ -146,6 +149,7 @@ void MenuInicial::desenhar()
 		for(Menu* menu : menus){
 			menu->desenhar();
 		}
+		cVolume.desenhar();
 		break;
 	case MAPSELECT:
 		for(Menu* menu : menusMS){
@@ -169,6 +173,7 @@ void MenuInicial::desenhar()
 
 void MenuInicial::finalizar()
 {
+	cVolume.finalizar();
 	for(Menu* menu : menus){
 		delete menu;
 	}

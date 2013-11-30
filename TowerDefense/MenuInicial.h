@@ -6,6 +6,7 @@
 #include "Menu.h"
 #include "MenuButton.h"
 #include "GerenteAtor.h"
+#include "ControladorVolume.h"
 
 #include <vector>
 
@@ -26,6 +27,7 @@ private:
 	std::vector <Menu*> menus;
 	std::vector <Menu*> menusMS;
 	std::string mapSelected;
+	ControladorVolume cVolume;
 
 public:
 	Tela* proximaTela();

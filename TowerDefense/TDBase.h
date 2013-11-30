@@ -7,6 +7,7 @@
 
 #include <vector>
 
+#include "ControladorVolume.h"
 #include "Menu.h"
 #include "MenuButton.h"
 
@@ -33,6 +34,7 @@ protected:
 	int torreSelecionada;
 	Torre* pTorre;
 	int aMusic;
+	ControladorVolume cVolume;
 
 	std::vector <Menu*> menus;
 	MenuButton* btnExit;
