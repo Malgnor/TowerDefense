@@ -36,6 +36,8 @@ Tela* TowerDefense::proximaTela(){
 		return nullptr;	
 	if(btnBack->getEstado() == SOLTO)
 		return new MenuInicial();
+	if(btnRetry->getEstado() == SOLTO)
+		return new TowerDefense(mapaTD.getNome().c_str());
 	if (teclas[C2D2_R].pressionado && estado != PAUSE)
 		return new TowerDefense();
 #ifdef DEBUG

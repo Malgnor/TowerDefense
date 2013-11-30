@@ -9,12 +9,14 @@ private:
 	unsigned int map[18][18];
 	int initX, initY;
 	int sprite;
+	std::string nome;
 
 public:
 	Mapa();
 	void inicializar();
 	void desenhar();
 	void getInit(int &x, int &y);
+	std::string getNome();
 	unsigned int conteudo(int x, int y);
 	unsigned int conteudo32(int x, int y);
 	int sprite32(int x, int y);
@@ -23,7 +25,7 @@ public:
 	void construir(int x, int y, int sprite, int id);
 	void save();
 	void load();
-	void load(std::string nome);
+	void load(std::string _nome);
 	void finalizar();
 };
 

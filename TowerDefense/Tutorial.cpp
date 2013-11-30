@@ -24,6 +24,8 @@ Tela* Tutorial::proximaTela()
 		return nullptr;	
 	if(btnBack->getEstado() == SOLTO || (fase == FIM && stage == 1))
 		return new MenuInicial();
+	if(btnRetry->getEstado() == SOLTO)
+		return new Tutorial();
 	return this;
 }
 
@@ -38,6 +40,7 @@ void Tutorial::inicializar()
 	pTorreTuto = nullptr;
 	pCoinTuto = nullptr;
 	delete btnPause;
+	delete btnRetry;
 	menus.clear();
 	menus.push_back(btnBack);
 	menus.push_back(btnExit);

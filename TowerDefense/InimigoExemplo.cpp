@@ -49,27 +49,24 @@ void InimigoExemplo::atualizar(){
 			dir = iDIREITA;
 		else if((mapa.conteudo(posX - 32, posY) == 3|| mapa.conteudo(posX - 32, posY) == 4) && dir != iDIREITA)
 			dir = iESQUERDA;
-		else if((mapa.conteudo(posX, posY + 32) == 3 || mapa.conteudo(posX, posY + 32) == 4)&& dir != iCIMA)
+		else if((mapa.conteudo(posX, posY + 32) == 3 || mapa.conteudo(posX, posY + 32) == 4) && dir != iCIMA)
 			dir = iBAIXO;
-		else if((mapa.conteudo(posX, posY - 32) == 3 || mapa.conteudo(posX, posY - 32) == 4)&& dir != iBAIXO)
+		else if((mapa.conteudo(posX, posY - 32) == 3 || mapa.conteudo(posX, posY - 32) == 4) && dir != iBAIXO)
 			dir = iCIMA;
 		else if (mapa.conteudo(posX, posY) == 4){
 		    alive = false;
 		    td->DanoRecebido(1);
-			passos = 0;
-		}
+		} else
+			passos = -1;
 	}	
 	if(posX > 576){
 		alive = false;
 		td->DanoRecebido(1);
-	}else if (posX > 544)
-		passos = 32;
+	}
 }
 		
 void InimigoExemplo::desenhar(){
 	C2D2_DesenhaSpriteCentro(iSprite, indiceVar, posX, posY, l(), a());
-	//C2D2P_RetanguloPintado(posX-8, posY-8, posX+8, posY+8, 155, 25, 25);
-	//C2D2P_Retangulo(posX-8, posY-8, posX+8, posY+8, 50, 0, 0);
 }
 
 void InimigoExemplo::finalizar(){

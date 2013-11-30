@@ -11,7 +11,7 @@
 using namespace std;
 
 Mapa::Mapa()
-	:initX(16), initY(304)
+	:initX(16), initY(304), nome("")
 {
 	for(int x = 0; x < 18; x++){
 		for(int y = 0; y < 18; y++){
@@ -39,13 +39,17 @@ void Mapa::getInit(int &x, int &y){
 	y = initY;
 }
 
+string Mapa::getNome(){
+	return nome;
+}
+
 unsigned int Mapa::conteudo( int x, int y )
 {
-	return map[x/32][y/32]%5;
+	return ((x/32 >= 0) && (y/32 >= 0)) ? map[x/32][y/32]%5 : 0;
 }
 
 unsigned int Mapa::conteudo32(int x, int y){
-	return map[x][y]%5;
+	return ((x >= 0) && (y >= 0)) ? map[x][y]%5 : 0;
 }
 
 int Mapa::sprite32( int x, int y )
@@ -78,7 +82,8 @@ void Mapa::save()
 			}
 		}
 	}
-	ofstream ofile("map/"+stringFInput("(SAVE)Nome do mapa:", ".map")+".map");
+	stringFInput(nome, "(SAVE)Nome do mapa:", ".map");
+	ofstream ofile("map/"+nome+".map");
 	ofile << "[" << endl;
 	for(int y = 0; y < 18; y++){
 		for(int x = 0; x < 18; x++){
@@ -100,7 +105,6 @@ void Mapa::save()
 
 void Mapa::load()
 {
-	string nome = "";
 	string buffer;
 	stringFInput(nome, "(LOAD)Nome do mapa:", ".map");
 	ifstream ifile("map/"+nome+".map");
@@ -123,10 +127,11 @@ void Mapa::load()
 	*/
 }
 
-void Mapa::load(string nome)
+void Mapa::load(string _nome)
 {
+	nome = _nome;
 	string buffer;
-	ifstream ifile("map/"+nome+".map");
+	ifstream ifile("map/"+_nome+".map");
 	ifile >> buffer;
 	for(int y = 0; y < 18; y++){
 		for(int x = 0; x < 18; x++){

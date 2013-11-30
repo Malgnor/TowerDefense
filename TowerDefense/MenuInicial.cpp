@@ -73,10 +73,10 @@ void MenuInicial::inicializar()
 	gAtor.adicionar(new InimigoDemo(gAtor, Mapa(), 749, 51, iESQUERDA, new TowerDefense()));
 	gAtor.adicionar(new InimigoDemo(gAtor, Mapa(), 749, 549, iCIMA, new TowerDefense()));
 	gAtor.adicionar(new InimigoDemo(gAtor, Mapa(), 51, 51, iBAIXO, new TowerDefense()));
-	gAtor.adicionar(new TorreDemo(gAtor, 84, 84));
-	gAtor.adicionar(new TorreDemo(gAtor, 84, 516));
-	gAtor.adicionar(new TorreDemo(gAtor, 716, 516));
-	gAtor.adicionar(new TorreDemo(gAtor, 716, 84));
+	gAtor.adicionar(new TorreDemo(gAtor, 20, 20));
+	gAtor.adicionar(new TorreDemo(gAtor, 20, 580));
+	gAtor.adicionar(new TorreDemo(gAtor, 780, 580));
+	gAtor.adicionar(new TorreDemo(gAtor, 780, 20));
 	
 	string buffer = "";
 	int xpos = 0;
@@ -99,7 +99,9 @@ void MenuInicial::inicializar()
 				if(buffer[buffer.size()-1] != '.')
 					continue;
 				buffer.pop_back(); //.
-				menusMS.push_back(new MenuButton(buffer, 125+xpos++%4*125, 100+(xpos % 4 == 0 ? ++ypos : ypos)*75, tahoma32));
+				while(buffer.size() > 9) // Max 9 char
+					buffer.pop_back();
+				menusMS.push_back(new MenuButton(buffer, 140+xpos++%5*130, 90+(xpos % 5 == 0 ? ++ypos : ypos)*75, tahoma32));
 			}
 		} else {
 			break;

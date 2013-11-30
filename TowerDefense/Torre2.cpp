@@ -24,7 +24,7 @@ bool Torre2::estaNoJogo(){
 
 void Torre2::inicializar(){
 	alcance = 100;
-	aTiro = CA2_CarregaEfeito("audio/tiro.wav");
+	aTiro = CA2_CarregaEfeito("audio/tiro.ogg");
 	RoF = 40;
 	cd = RoF;
 	tSprite = C2D2_CarregaSpriteSet("imgs/torre2.bmp", 32, 32);	

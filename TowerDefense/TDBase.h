@@ -40,6 +40,7 @@ protected:
 	MenuButton* btnExit;
 	MenuButton* btnBack;
 	MenuButton* btnPause;
+	MenuButton* btnRetry;
 	MenuButton btnSell;
 	MenuButton btnUpgrade;
 

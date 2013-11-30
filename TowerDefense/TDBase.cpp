@@ -3,9 +3,13 @@
 #include "TorreExemplo.h"
 #include "Torre2.h"
 
+#include <iostream>
+
 #include <c2d2/chien2d2.h>
 #include <c2d2/chien2d2primitivas.h>
 #include <c2d2\chienaudio2.h>
+
+using namespace std;
 
 TDBase::TDBase()
 	:btnSell("Vender", 630, 415, tahoma16 = C2D2_CarregaFonte("imgs/tahoma16.bmp", 16)), btnUpgrade("Upgrade", 685, 415, tahoma16), cVolume(400, 400)
@@ -24,8 +28,8 @@ void TDBase::inicializar()
 {
 	C2D2_TrocaCorLimpezaTela(255, 255, 255);
 
-	aMusic = CA2_CarregaMusica("audio/Space.mp3");
-	CA2_TocaMusica(aMusic, 0);
+	aMusic = CA2_CarregaMusica("audio/Space.ogg");
+	CA2_TocaMusica(aMusic, -1);
 	estado = PLAY;
 	pTorre = nullptr;
 	tahoma16 = C2D2_CarregaFonte("imgs/tahoma16.bmp", 16);
@@ -46,7 +50,9 @@ void TDBase::inicializar()
 
 	menus.push_back(btnPause = new MenuButton("Pausa", 700, 480, tahoma16));
 	menus.push_back(btnBack = new MenuButton("Menu Inicial", 700, 500, tahoma16));
-	menus.push_back(btnExit = new MenuButton("Sair", 700, 520, tahoma16));
+	menus.push_back(btnRetry = new MenuButton("Retry", 700, 520, tahoma16));
+	menus.push_back(btnExit = new MenuButton("Sair", 700, 540, tahoma16));
+	//cout << mapaTD.conteudo(16, 528+32) << endl;
 }
 
 void TDBase::atualizar()
@@ -61,7 +67,8 @@ void TDBase::atualizar()
 		estado = GAVEOVER;
 		btnPause->mover(-100, -100);
 		btnBack->mover(400-32, 116);
-		btnExit->mover(400-32, 148);
+		btnRetry->mover(400-32, 148);
+		btnExit->mover(400-32, 180);
 	}
 	for(Menu* menu : menus){
 		menu->atualizar();
@@ -134,7 +141,6 @@ void TDBase::atualizar()
 		gAtor.atualizar();
 		break;
 	case PAUSE:
-		cVolume.atualizar();
 		break;
 	case PAUSEF1:
 		cVolume.atualizar();
@@ -227,7 +233,6 @@ void TDBase::desenhar()
 	case PAUSE:
 		C2D2P_RetanguloPintadoAlfa(0, 0, 800, 600, 25, 25, 25, 200);
 		C2D2_DesenhaTexto(tahoma32, 400-32, 75, "PAUSE", C2D2_TEXTO_CENTRALIZADO);
-		cVolume.desenhar();
 		break;
 	case PAUSEF1:
 		C2D2P_RetanguloPintadoAlfa(0, 0, 800, 600, 25, 25, 25, 200);

@@ -55,11 +55,7 @@ void MapEditor::atualizar()
 	if(teclas[C2D2_D].pressionado)
 		mapaTD.load();
 	if(teclas[C2D2_N].pressionado){
-		for(int x = 0; x < 18; x++){
-			for(int y = 0; y < 18; y++){
-				mapaTD.construir(x*32, y*32, 0, 0);
-			}
-		}
+		mapaTD = Mapa();
 	}
 	if(teclas[C2D2_0].pressionado)
 		id = 0;
