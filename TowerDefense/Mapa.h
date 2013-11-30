@@ -6,7 +6,7 @@
 class Mapa
 {
 private:
-	char map[18][18];
+	unsigned int map[18][18];
 	int initX, initY;
 	int sprite;
 
@@ -15,8 +15,8 @@ public:
 	void inicializar();
 	void desenhar();
 	void getInit(int &x, int &y);
-	char conteudo(int x, int y);
-	char conteudo32(int x, int y);
+	unsigned int conteudo(int x, int y);
+	unsigned int conteudo32(int x, int y);
 	int sprite32(int x, int y);
 	void addTorre(int x, int y);
 	void removeTorre(int x, int y);

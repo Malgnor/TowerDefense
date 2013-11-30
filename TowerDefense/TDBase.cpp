@@ -134,6 +134,7 @@ void TDBase::atualizar()
 		gAtor.atualizar();
 		break;
 	case PAUSE:
+		cVolume.atualizar();
 		break;
 	case PAUSEF1:
 		cVolume.atualizar();
@@ -226,6 +227,7 @@ void TDBase::desenhar()
 	case PAUSE:
 		C2D2P_RetanguloPintadoAlfa(0, 0, 800, 600, 25, 25, 25, 200);
 		C2D2_DesenhaTexto(tahoma32, 400-32, 75, "PAUSE", C2D2_TEXTO_CENTRALIZADO);
+		cVolume.desenhar();
 		break;
 	case PAUSEF1:
 		C2D2P_RetanguloPintadoAlfa(0, 0, 800, 600, 25, 25, 25, 200);

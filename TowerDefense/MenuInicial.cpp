@@ -87,9 +87,17 @@ void MenuInicial::inicializar()
 		if((dent = readdir(dir)) != NULL){
 			buffer = dent->d_name;
 			if(buffer.size() > 4){
+				if(buffer[buffer.size()-1] != 'p')
+					continue;
 				buffer.pop_back(); //p
+				if(buffer[buffer.size()-1] != 'a')
+					continue;
 				buffer.pop_back(); //a
+				if(buffer[buffer.size()-1] != 'm')
+					continue;
 				buffer.pop_back(); //m
+				if(buffer[buffer.size()-1] != '.')
+					continue;
 				buffer.pop_back(); //.
 				menusMS.push_back(new MenuButton(buffer, 125+xpos++%4*125, 100+(xpos % 4 == 0 ? ++ypos : ypos)*75, tahoma32));
 			}
@@ -164,7 +172,7 @@ void MenuInicial::desenhar()
 		C2D2P_Retangulo(624, 424, 698, 498, 0, 0, 255);
 		for (int x = 0; x < 18; x++){
 			for (int y = 0; y < 18; y++){
-				m.sprite32(x, y) == 1 ? C2D2P_RetanguloPintado(625+x*4, 425+y*4, 625+x*4+4, 425+y*4+4, 255, 255, 255) : C2D2P_RetanguloPintado(625+x*4, 425+y*4, 625+x*4+4, 425+y*4+4, 0, 0, 0);
+				m.sprite32(x, y) == 1 ? C2D2P_RetanguloPintado(625+x*4, 425+y*4, 625+x*4+4, 425+y*4+4, 255, 255, 255) : m.sprite32(x, y) ==  2 ? C2D2P_RetanguloPintado(625+x*4, 425+y*4, 625+x*4+4, 425+y*4+4, 200, 200, 200):  C2D2P_RetanguloPintado(625+x*4, 425+y*4, 625+x*4+4, 425+y*4+4, 0, 0, 0);
 			}
 		}
 	}

@@ -34,6 +34,7 @@ void MapEditor::inicializar()
 
 	mapaTD = Mapa();
 	mapaTD.inicializar();
+	qtdTiles = 3;
 	id = 0;
 	tile = 0;
 
@@ -56,7 +57,7 @@ void MapEditor::atualizar()
 	if(teclas[C2D2_N].pressionado){
 		for(int x = 0; x < 18; x++){
 			for(int y = 0; y < 18; y++){
-				mapaTD.construir(x*32, y*32, -1, 0);
+				mapaTD.construir(x*32, y*32, 0, 0);
 			}
 		}
 	}
@@ -71,8 +72,8 @@ void MapEditor::atualizar()
 	if(teclas[C2D2_4].pressionado)
 		id = 4;
 	if(m->botoes[C2D2_MESQUERDO].ativo && mouseX > 575){
-		for(int j = 0; j < 2; j++){
-			if(C2D2_ColidiuSprites(mouseSprite, 0, mouseX, mouseY, mapSprite, j, 625+j*75, 100)){
+		for(int j = 0; j < qtdTiles; j++){
+			if(C2D2_ColidiuSprites(mouseSprite, 0, mouseX, mouseY, mapSprite, j, 625+j%2*75, 100+j/2*48)){
 				tile = j;
 			}
 		}
@@ -99,8 +100,9 @@ void MapEditor::desenhar()
 
 	mapaTD.desenhar();
 
-	for(int j = 0; j < 2; j++)
-		C2D2_DesenhaSprite(mapSprite, +j, 625+j*75, 100);
+	for(int j = 0; j < qtdTiles; j++)
+		C2D2_DesenhaSprite(mapSprite, j, 625+j%2*75, 100+j/2*48);
+	C2D2P_Retangulo(625+tile % 2 * 75, 100 + tile / 2 * 48, 658+tile % 2 * 75, 133 + tile / 2 * 48, 0, 255, 0);
 	if(mouseX < 576 && mouseY < 576){
 		C2D2P_Retangulo((16+mouseX-mouseX%32)-16, (16+mouseY-mouseY%32)-16, (16+mouseX-mouseX%32)+16, (16+mouseY-mouseY%32)+16, 0, 255, 0);
 	}

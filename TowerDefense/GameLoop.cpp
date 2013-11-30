@@ -4,6 +4,7 @@
 
 #include "Tela.h"
 #include "GerenteTela.h"
+#include "ControladorVolume.h"
 
 #include <time.h>
 
@@ -27,7 +28,7 @@ bool GameLoop::executar(char* titulo, int largura, int altura, bool primitivas, 
 	if (!CA2_Inicia()){
 		return false;
 	}
-
+	CA2_AjustaVolume(ControladorVolume::volumeMusica(),ControladorVolume::volumeEfeitos());
 	if(primitivas){
 		if(C2D2P_Inicia()){
 			return false;

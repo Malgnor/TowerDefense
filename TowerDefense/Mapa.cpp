@@ -39,12 +39,12 @@ void Mapa::getInit(int &x, int &y){
 	y = initY;
 }
 
-char Mapa::conteudo( int x, int y )
+unsigned int Mapa::conteudo( int x, int y )
 {
 	return map[x/32][y/32]%5;
 }
 
-char Mapa::conteudo32(int x, int y){
+unsigned int Mapa::conteudo32(int x, int y){
 	return map[x][y]%5;
 }
 
@@ -78,31 +78,72 @@ void Mapa::save()
 			}
 		}
 	}
+	ofstream ofile("map/"+stringFInput("(SAVE)Nome do mapa:", ".map")+".map");
+	ofile << "[" << endl;
+	for(int y = 0; y < 18; y++){
+		for(int x = 0; x < 18; x++){
+			ofile << map[x][y] << " ";
+		}
+		ofile << endl;
+	}
+	ofile << "]" << endl;
+	ofile << "( " << initX << " , " << initY << " )" << endl;
+	ofile.close();
+	/*
 	C2D2_RemoveSpriteSet(sprite);
 	ofstream ofile("map/"+stringFInput("(SAVE)Nome do mapa:", ".map")+".map", ios_base::binary);
 	ofile.write((char*)this, sizeof(Mapa));
 	ofile.close();
 	sprite = C2D2_CarregaSpriteSet("imgs/map.png", 32, 32);
+	*/
 }
 
 void Mapa::load()
 {
-	C2D2_RemoveSpriteSet(sprite);
 	string nome = "";
+	string buffer;
 	stringFInput(nome, "(LOAD)Nome do mapa:", ".map");
+	ifstream ifile("map/"+nome+".map");
+	ifile >> buffer;
+	for(int y = 0; y < 18; y++){
+		for(int x = 0; x < 18; x++){
+			ifile >> map[x][y];
+		}
+		ifile;
+	}
+	ifile >> buffer;
+	ifile >> buffer >> initX >> buffer >> initY >> buffer;
+	ifile.close();
+	/*
+	C2D2_RemoveSpriteSet(sprite);
 	ifstream ifile("map/"+nome+".map", ios_base::binary);
 	ifile.read((char*)this, sizeof(Mapa));
 	ifile.close();
 	sprite = C2D2_CarregaSpriteSet("imgs/map.png", 32, 32);
+	*/
 }
 
 void Mapa::load(string nome)
 {
+	string buffer;
+	ifstream ifile("map/"+nome+".map");
+	ifile >> buffer;
+	for(int y = 0; y < 18; y++){
+		for(int x = 0; x < 18; x++){
+			ifile >> map[x][y];
+		}
+		ifile;
+	}
+	ifile >> buffer;
+	ifile >> buffer >> initX >> buffer >> initY >> buffer;
+	ifile.close();
+	/*
 	C2D2_RemoveSpriteSet(sprite);
 	ifstream ifile("map/"+nome+".map", ios_base::binary);
 	ifile.read((char*)this, sizeof(Mapa));
 	ifile.close();
 	sprite = C2D2_CarregaSpriteSet("imgs/map.png", 32, 32);
+	*/
 }
 
 void Mapa::finalizar()

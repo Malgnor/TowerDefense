@@ -16,6 +16,7 @@ private:
 	int mouseX, mouseY;
 	int tile, id;
 	int tahoma16, tahoma32, tahoma16r;
+	int qtdTiles;
 	Mapa mapaTD;
 	MenuButton* btnExit;
 	MenuButton* btnBack;

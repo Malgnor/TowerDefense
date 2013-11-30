@@ -4,8 +4,8 @@
 
 using namespace std;
 
-unsigned int ControladorVolume::efeitos = 100;
-unsigned int ControladorVolume::musica = 100;
+unsigned int ControladorVolume::efeitos = 50;
+unsigned int ControladorVolume::musica = 50;
 
 ControladorVolume::ControladorVolume()
 	:posX(0), posY(0), indEfeito(0), indMusica(0)
@@ -32,17 +32,28 @@ void ControladorVolume::atualizar(){
 			efeitos < 1 ? 0 : efeitos--;
 			indEfeito = 2;
 		}else if(C2D2_ColidiuQuadrados(posX+16, posY-32, 32, 32, m->x, m->y, 1, 1)){
-			efeitos > 100 ? 0 : efeitos++;
+			efeitos > 99 ? 0 : efeitos++;
 			indEfeito = 1;
 		}
 		if(C2D2_ColidiuQuadrados(posX-48, posY, 32, 32, m->x, m->y, 1, 1)){
 			musica < 1 ? 0 : musica--;
 			indMusica = 2;
 		}else if(C2D2_ColidiuQuadrados(posX+16, posY, 32, 32, m->x, m->y, 1, 1)){
-			musica > 100 ? 0 : musica++;
+			musica > 99 ? 0 : musica++;
 			indMusica = 1;
 		}
 		CA2_AjustaVolume(musica, efeitos);
+	} else{
+		if(C2D2_ColidiuQuadrados(posX-48, posY-32, 32, 32, m->x, m->y, 1, 1)){
+			indEfeito = 4;
+		}else if(C2D2_ColidiuQuadrados(posX+16, posY-32, 32, 32, m->x, m->y, 1, 1)){
+			indEfeito = 3;
+		}
+		if(C2D2_ColidiuQuadrados(posX-48, posY, 32, 32, m->x, m->y, 1, 1)){
+			indMusica = 4;
+		}else if(C2D2_ColidiuQuadrados(posX+16, posY, 32, 32, m->x, m->y, 1, 1)){
+			indMusica = 3;
+		}
 	}
 }
 
@@ -51,9 +62,9 @@ void ControladorVolume::desenhar(){
 	C2D2_DesenhaSprite(sprEfeito, indEfeito, posX-48, posY-32);
 	C2D2_DesenhaSprite(sprMusica, indMusica, posX-48, posY);
 	sprintf_s(c, "E %d", efeitos);
-	C2D2_DesenhaTexto(fonte, posX, posY-16, c, C2D2_TEXTO_CENTRALIZADO);
+	C2D2_DesenhaTexto(fonte, posX, posY-24, c, C2D2_TEXTO_CENTRALIZADO);
 	sprintf_s(c, "M %d", musica);
-	C2D2_DesenhaTexto(fonte, posX, posY+16, c, C2D2_TEXTO_CENTRALIZADO);
+	C2D2_DesenhaTexto(fonte, posX, posY+8, c, C2D2_TEXTO_CENTRALIZADO);
 }
 
 void ControladorVolume::finalizar(){
