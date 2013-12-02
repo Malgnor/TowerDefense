@@ -12,8 +12,6 @@ Torre2::Torre2(GerenteAtor& _gerente, int _x, int _y)
 {
 }
 
-
-
 void Torre2::aoColidir(Ator* ator){
 
 }
@@ -27,7 +25,7 @@ void Torre2::inicializar(){
 	aTiro = CA2_CarregaEfeito("audio/tiro.ogg");
 	RoF = 40;
 	cd = RoF;
-	tSprite = C2D2_CarregaSpriteSet("imgs/torre2.bmp", 32, 32);	
+	tSprite = C2D2_CarregaSpriteSet("imgs/torre2.png", 32, 32);	
 	Torre::inicializar();
 }
 
@@ -58,7 +56,6 @@ void Torre2::desenhar(){
 
 void Torre2::finalizar(){
 	C2D2_RemoveSpriteSet(tSprite);
-	CA2_RemoveEfeito(aTiro);
 }
 
 void Torre2::upgrade()

@@ -141,6 +141,12 @@
     <ClCompile Include="ControladorVolume.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Projetil3.cpp">
+      <Filter>Source Files\Atores\Projéteis</Filter>
+    </ClCompile>
+    <ClCompile Include="Torre3.cpp">
+      <Filter>Source Files\Atores\Torres</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameLoop.h">
@@ -236,6 +242,12 @@
     <ClInclude Include="ControladorVolume.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Projetil3.h">
+      <Filter>Header Files\Atores\Projéteis</Filter>
+    </ClInclude>
+    <ClInclude Include="Torre3.h">
+      <Filter>Header Files\Atores\Torres</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="imgs\torre2.bmp">
@@ -289,6 +301,33 @@
     <Image Include="imgs\goldcoins.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="imgs\explo.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="imgs\frame.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="imgs\gran.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="imgs\magnet.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="imgs\projS.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="imgs\torre2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="imgs\torre3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="imgs\torres.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="imgs\volume1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Text Include="cores_double.txt">
@@ -299,11 +338,11 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <Media Include="audio\Space.mp3">
+    <None Include="audio\Space.ogg">
       <Filter>Resource Files</Filter>
-    </Media>
-    <Media Include="audio\tiro.wav">
+    </None>
+    <None Include="audio\tiro.ogg">
       <Filter>Resource Files</Filter>
-    </Media>
+    </None>
   </ItemGroup>
 </Project>
