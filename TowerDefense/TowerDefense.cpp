@@ -371,6 +371,110 @@ void TowerDefense::atualizar(){
 			formation5();
 		//wave 5
 		
+		//wave boss
+		if(timer == 60*370)
+			formation1();
+		if(timer == 60*371)
+		    formation1();
+	    if(timer == 60*373)
+		    formation1();
+     	if(timer == 60*374)
+		    formation1();
+		if(timer == 60*375)
+			formation1();
+		if(timer == 60*376)
+		    formation1();
+		if(timer == 60*377)
+			formation2();
+		if(timer == 60*379)
+			formation2();
+		if(timer == 60*381)
+			formation2();
+		if(timer == 60*383)
+			formation2();
+		if(timer == 60*385)
+			formation2();
+		if(timer == 60*387)
+			formation2();
+		if(timer == 60*389)
+			formation2();
+		if(timer == 60*391)
+			formation2();
+		if(timer == 60*393)
+			formation2();
+		if(timer == 60*395)
+			formation2();
+		if(timer == 60*398)
+			formation3();
+		if(timer == 60*401)
+			formation3();
+		if(timer == 60*404)
+			formation3();
+		if(timer == 60*407)
+			formation3();
+		if(timer == 60*410)
+			formation3();
+		if(timer == 60*413)
+			formation3();
+		if(timer == 60*416)
+			formation3();
+		if(timer == 60*419)
+			formation3();
+		if(timer == 60*422)
+			formation3();
+		if(timer == 60*425)
+			formation3();
+		if(timer == 60*429)
+			formation4();
+		if(timer == 60*433)
+			formation4();
+		if(timer == 60*437)
+			formation4();
+		if(timer == 60*441)
+			formation4();
+		if(timer == 60*445)
+			formation4();
+		if(timer == 60*449)
+			formation4();
+		if(timer == 60*453)
+			formation4();
+		if(timer == 60*457)
+			formation4();
+		if(timer == 60*461)
+			formation4();
+		if(timer == 60*465)
+			formation4();
+		if(timer == 60*469)
+			formation4();
+		if(timer == 60*473)
+			formation5();
+		if(timer == 60*477)
+			formation5();
+		if(timer == 60*481)
+			formation5();
+		if(timer == 60*485)
+			formation5();
+		if(timer == 60*489)
+			formation5();
+		if(timer == 60*493)
+			formation5();
+		if(timer == 60*497)
+			formation5();
+		if(timer == 60*501)
+			formation5();
+		if(timer == 60*504)
+			formation5();
+		if(timer == 60*507)
+			formation5();
+		if(timer == 60*511)
+			formation5();
+		if(timer == 60*514)
+			formation5();
+		if(timer == 60*519)
+			formation5();
+		if(timer == 60*525)
+			queen();
+		//wave boss
 
 #ifdef DEBUG
 		if(m->botoes[C2D2_MDIREITO].pressionado && teclas[C2D2_LSHIFT].ativo)
@@ -426,34 +530,39 @@ void TowerDefense::desenhar(){
 
 void TowerDefense::formation1()
 {
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 0, 0, 1, 50, 10, this));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 0, 0, 1, 100, 10, this));
 }
 
 void TowerDefense::formation2()
 {
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 0, 8, 1, 50, 10, this));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 0, -8, 1, 50, 10, this));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 0, 8, 1, 250, 15, this));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 0, -8, 1, 250, 15, this));
 }
 
 void TowerDefense::formation3()
 {
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 15, 0, 1, 50, 10, this));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 0, 8, 1, 50, 10, this));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 0, -8, 1, 50, 10, this));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 15, 0, 1, 450, 20, this));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 0, 8, 1, 450, 20, this));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 0, -8, 1, 450, 20, this));
 }
 
 void TowerDefense::formation4()
 {
-    gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 0, 0, 1, 50, 10, this));
-    gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 30, 0, 1, 50, 10, this));
-    gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 15, 8, 1, 50, 10, this));
-    gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 15, -8, 1, 50, 10, this));
+    gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 0, 0, 1, 600, 25, this));
+    gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 30, 0, 1, 600, 25, this));
+    gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 15, 8, 1, 600, 25, this));
+    gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 15, -8, 1, 600, 25, this));
 }
 
 void TowerDefense::formation5()
 {
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 0, 8, 1, 50, 10, this));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 0, -8, 1, 50, 10, this));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 15, 8, 1, 50, 10, this));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 15, -8, 1, 50, 10, this));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 0, 8, 1, 720, 30, this));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 0, -8, 1, 720, 30, this));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 15, 8, 1, 720, 30, this));
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 15, -8, 1, 720, 30, this));
+}
+
+void TowerDefense::queen()
+{
+	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 0, 0, 1, 10500, 0, this));
 }

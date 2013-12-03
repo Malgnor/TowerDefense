@@ -24,12 +24,7 @@ public:
 	void formation3();
 	void formation4();
 	void formation5();
-
-	void formation6();
-	void formation7();
-	void formation8();
-	void formation9();
-	void formation10();
+	void queen();
 
 };
 
