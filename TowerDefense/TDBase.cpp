@@ -192,7 +192,7 @@ void TDBase::desenhar()
 		int yt = 19;
 		char temp[50];
 		C2D2_DesenhaSprite(pTorre->sprite(), pTorre->indice(), 680, yt*16+35);
-		C2D2_DesenhaTexto(tahoma32, 630, yt++*16-15, "Torre", C2D2_TEXTO_ESQUERDA);
+		//C2D2_DesenhaTexto(tahoma32, 630, yt++*16-15, "Torre", C2D2_TEXTO_ESQUERDA);
 		sprintf_s(temp, "Nível: %d", pTorre->indice()+1);
 		C2D2_DesenhaTexto(tahoma16, 600, yt++*16, temp, C2D2_TEXTO_ESQUERDA);
 		sprintf_s(temp, "Alcance: %d", pTorre->getAlcance());
