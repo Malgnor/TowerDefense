@@ -52,6 +52,9 @@
     <Filter Include="Source Files\Atores\Torres">
       <UniqueIdentifier>{7e57d43a-7f71-49b0-b86a-0be9f16745a2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\sons">
+      <UniqueIdentifier>{1bd5300f-f0d8-40c4-be7e-61fd0a8bcb3b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameLoop.cpp">
@@ -338,11 +341,17 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
+    <None Include="audio\bang.ogg">
+      <Filter>Resource Files\sons</Filter>
+    </None>
+    <None Include="audio\launcher.ogg">
+      <Filter>Resource Files\sons</Filter>
+    </None>
     <None Include="audio\Space.ogg">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\sons</Filter>
     </None>
     <None Include="audio\tiro.ogg">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\sons</Filter>
     </None>
   </ItemGroup>
 </Project>

@@ -23,10 +23,6 @@ void Projetil3::aoColidir(Ator* ator){
 			pSprite = C2D2_CarregaSpriteSet("imgs/explo.png" , 0, 0);
 			CA2_TocaEfeito(explo, 0);
 			Projetil::inicializar();
-#ifdef LOG
-			if(pSprite == 0)
-				addToLog("Falha ao carregar sprite do Projétil Splash!(Projetil3.cpp)");
-#endif
 		}	
 }
 
@@ -35,13 +31,9 @@ void Projetil3::hit(){
 }
 
 void Projetil3::inicializar(){
-	explo = CA2_CarregaEfeito("audio/bang.wav");
+	explo = CA2_CarregaEfeito("audio/bang.ogg");
 	pSprite = C2D2_CarregaSpriteSet("imgs/gran.png" , 0, 0);
 	Projetil::inicializar();
-#ifdef LOG
-	if(pSprite == 0)
-		addToLog("Falha ao carregar sprite do Projétil!(Projetil3.cpp)");
-#endif
 }
 
 void Projetil3::atualizar(){

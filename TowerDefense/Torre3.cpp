@@ -2,7 +2,6 @@
 #include "Projetil3.h"
 #include "GerenteAtor.h"
 
-
 #include <c2d2\chien2d2.h>
 #include <c2d2\chien2d2primitivas.h>
 #include <c2d2\chienaudio2.h>
@@ -25,15 +24,10 @@ bool Torre3::estaNoJogo(){
 void Torre3::inicializar(){
 	tDano = 15;
 	alcance = 120;
-	aTiro = CA2_CarregaEfeito("audio/launcher.wav");
+	aTiro = CA2_CarregaEfeito("audio/launcher.ogg");
 	RoF = 80;
 	cd = RoF;
 	tSprite = C2D2_CarregaSpriteSet("imgs/Torre3.png", 32, 32);	
-	Torre::inicializar();
-#ifdef LOG
-	if(tSprite == 0)
-		addToLog("Falha ao carregar sprite da Torre!(Torre3.cpp)");
-#endif
 }
 
 void Torre3::atualizar(){

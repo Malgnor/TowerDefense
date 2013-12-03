@@ -178,6 +178,8 @@
     <Text Include="cores_uchar.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="audio\bang.ogg" />
+    <None Include="audio\launcher.ogg" />
     <None Include="audio\Space.ogg" />
     <None Include="audio\tiro.ogg" />
   </ItemGroup>
