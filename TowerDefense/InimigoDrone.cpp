@@ -40,7 +40,7 @@ void InimigoDrone::inicializar(){
         	iSprite = C2D2_CarregaSpriteSet("imgs/inimE5.png", 0, 0);	
         	break;
 		case 6:
-			danoinimigo = 5;
+			danoinimigo = 20;
         	iSprite = C2D2_CarregaSpriteSet("imgs/inimEBoss.png", 0, 0);	
         break;
     }
