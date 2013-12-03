@@ -36,6 +36,8 @@ protected:
 	Torre* pTorre;
 	ControladorVolume cVolume;
 
+	int tAlcance, tRoF, tCusto;
+
 	std::vector <Menu*> menus;
 	MenuButton* btnExit;
 	MenuButton* btnBack;
@@ -43,6 +45,7 @@ protected:
 	MenuButton* btnRetry;
 	MenuButton btnSell;
 	MenuButton btnUpgrade;
+	MenuButton btnX;
 
 public:
 

@@ -87,6 +87,8 @@ void MenuInicial::inicializar()
 		if((dent = readdir(dir)) != NULL){
 			buffer = dent->d_name;
 			if(buffer.size() > 4){
+				if(buffer == "Default.map")
+					continue;
 				if(buffer[buffer.size()-1] != 'p')
 					continue;
 				buffer.pop_back(); //p

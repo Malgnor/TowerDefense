@@ -59,13 +59,19 @@ void ControladorVolume::atualizar(){
 }
 
 void ControladorVolume::desenhar(){
+	C2D2_Mouse* m = C2D2_PegaMouse();
 	char c[10];
 	C2D2_DesenhaSprite(sprEfeito, indEfeito, posX-48, posY-32);
 	C2D2_DesenhaSprite(sprMusica, indMusica, posX-48, posY);
-	sprintf_s(c, "E %d", efeitos);
+	sprintf_s(c, "%d", efeitos);
 	C2D2_DesenhaTexto(fonte, posX, posY-24, c, C2D2_TEXTO_CENTRALIZADO);
-	sprintf_s(c, "M %d", musica);
+	sprintf_s(c, "%d", musica);
 	C2D2_DesenhaTexto(fonte, posX, posY+8, c, C2D2_TEXTO_CENTRALIZADO);
+	if(C2D2_ColidiuQuadrados(posX-48, posY-32, 96, 32, m->x, m->y, 1, 1)){
+		C2D2_DesenhaTexto(fonte, m->x, m->y+16, "Efeitos sonoros", C2D2_TEXTO_CENTRALIZADO);
+	}else if(C2D2_ColidiuQuadrados(posX-48, posY, 96, 32, m->x, m->y, 1, 1)){
+		C2D2_DesenhaTexto(fonte, m->x, m->y+16, "Musica", C2D2_TEXTO_CENTRALIZADO);
+	}
 }
 
 void ControladorVolume::finalizar(){

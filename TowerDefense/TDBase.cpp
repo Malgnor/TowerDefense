@@ -13,7 +13,7 @@
 using namespace std;
 
 TDBase::TDBase()
-	:btnSell("Vender", 630, 415, tahoma16 = C2D2_CarregaFonte("imgs/tahoma16.bmp", 16)), btnUpgrade("Upgrade", 685, 415, tahoma16), cVolume(400, 400)
+	:btnSell("Vender", 630, 415, tahoma16 = C2D2_CarregaFonte("imgs/tahoma16.bmp", 16)), btnUpgrade("Upgrade", 685, 415, tahoma16), btnX("X", 710, 300, tahoma16), cVolume(400, 400)
 {
 }
 
@@ -44,6 +44,9 @@ void TDBase::inicializar()
 	torreSelecionada = 0;
 	magneticRadius = 0;
 	timer = 0;
+	tAlcance = 0;
+	tRoF = 0;
+	tCusto = 0;
 	magMenu = false;
 	mapaTD.inicializar();
 	cVolume.inicializar();
@@ -52,7 +55,6 @@ void TDBase::inicializar()
 	menus.push_back(btnBack = new MenuButton("Menu Inicial", 700, 500, tahoma16));
 	menus.push_back(btnRetry = new MenuButton("Retry", 700, 520, tahoma16));
 	menus.push_back(btnExit = new MenuButton("Sair", 700, 540, tahoma16));
-	//cout << mapaTD.conteudo(16, 528+32) << endl;
 }
 
 void TDBase::atualizar()
@@ -113,12 +115,30 @@ void TDBase::atualizar()
 				torreSelecionada = 0;
 			}
 		}
-		if(m->botoes[C2D2_MDIREITO].pressionado){
+		if(m->botoes[C2D2_MDIREITO].pressionado || btnX.getEstado() == SOLTO){
 			pTorre = nullptr;
 			magMenu = false;
 			torreSelecionada = 0;
+			btnX.atualizar();
+		}
+		if(torreSelecionada != 0){
+			btnX.atualizar();
+			switch (torreSelecionada)
+			{
+			case 1:
+				tAlcance = 100;
+				tRoF = 40;
+				tCusto = 50;
+				break;
+			case 2:
+				tAlcance = 120;
+				tRoF = 80;
+				tCusto = 100;
+				break;
+			}
 		}
 		if( magMenu ){
+			btnX.atualizar();
 			btnUpgrade.atualizar();
 			if(btnUpgrade.getEstado() == SOLTO && gold >= 100*(1+magneticRadius/25)){
 				gold -= 100*(1+magneticRadius/25);
@@ -126,6 +146,7 @@ void TDBase::atualizar()
 			}
 		}
 		if( pTorre != nullptr){
+			btnX.atualizar();
 			btnSell.atualizar();
 			btnUpgrade.atualizar();
 			if (btnUpgrade.getEstado() == SOLTO && gold>=pTorre->comprar() && pTorre->comprar() != 0){
@@ -167,6 +188,7 @@ void TDBase::desenhar()
 		C2D2P_Retangulo(590, 290, 725, 440, 0, 127, 0);
 		btnUpgrade.desenhar();
 		btnSell.desenhar();
+		btnX.desenhar();
 		int yt = 19;
 		char temp[50];
 		C2D2_DesenhaSprite(pTorre->sprite(), pTorre->indice(), 680, yt*16+35);
@@ -175,7 +197,7 @@ void TDBase::desenhar()
 		C2D2_DesenhaTexto(tahoma16, 600, yt++*16, temp, C2D2_TEXTO_ESQUERDA);
 		sprintf_s(temp, "Alcance: %d", pTorre->getAlcance());
 		C2D2_DesenhaTexto(tahoma16, 600, yt++*16, temp, C2D2_TEXTO_ESQUERDA);
-		sprintf_s(temp, "RoF: %d", pTorre->getRof());
+		sprintf_s(temp, "RoF: %.2f/s", (float)pTorre->getRof()/60);
 		C2D2_DesenhaTexto(tahoma16, 600, yt++*16, temp, C2D2_TEXTO_ESQUERDA);
 		sprintf_s(temp, "Custo: %d", pTorre->comprar());
 		C2D2_DesenhaTexto(tahoma16, 600, yt++*16, temp, C2D2_TEXTO_ESQUERDA);
@@ -183,12 +205,31 @@ void TDBase::desenhar()
 		C2D2_DesenhaTexto(tahoma16, 600, yt++*16, temp, C2D2_TEXTO_ESQUERDA);
 	}
 
+	if(torreSelecionada != 0){
+		C2D2P_RetanguloPintadoAlfa(590, 290, 725, 440, 100, 149, 237, 127);
+		C2D2P_Retangulo(590, 290, 725, 440, 0, 127, 0);
+		btnX.desenhar();
+		int yt = 16;
+		char temp[50];
+		C2D2_DesenhaSprite(torreSprite, torreSelecionada-1, 680, 339);
+		//C2D2_DesenhaTexto(tahoma32, 630, yt++*16-15, "Torre", C2D2_TEXTO_ESQUERDA);
+		sprintf_s(temp, "Nível: %d", 1);
+		C2D2_DesenhaTexto(tahoma16, 600, yt++*20, temp, C2D2_TEXTO_ESQUERDA);
+		sprintf_s(temp, "Alcance: %d", tAlcance);
+		C2D2_DesenhaTexto(tahoma16, 600, yt++*20, temp, C2D2_TEXTO_ESQUERDA);
+		sprintf_s(temp, "RoF: %.2f/s", (float)tRoF/60);
+		C2D2_DesenhaTexto(tahoma16, 600, yt++*20, temp, C2D2_TEXTO_ESQUERDA);
+		sprintf_s(temp, "Custo: %d", tCusto);
+		C2D2_DesenhaTexto(tahoma16, 600, yt++*20, temp, C2D2_TEXTO_ESQUERDA);
+	}
+	
 	C2D2_DesenhaSprite(magnet, 0, 625, 245);
 	if(magMenu){
 		C2D2P_Retangulo(625, 245, 625+33, 245+33, 0, 255, 0);
 		C2D2P_RetanguloPintadoAlfa(590, 290, 725, 440, 100, 149, 237, 127);
 		C2D2P_Retangulo(590, 290, 725, 440, 0, 127, 0);
 		btnUpgrade.desenhar();
+		btnX.desenhar();
 		int yt = 16;
 		char temp[50];
 		C2D2_DesenhaTexto(tahoma16, 658, 19*16-12, "Imã de moedas", C2D2_TEXTO_CENTRALIZADO);
@@ -216,7 +257,7 @@ void TDBase::desenhar()
 
 	for(int j = 0; j < 2; j++)
 		C2D2_DesenhaSprite(torreSprite, j, 625+j%2*75, 100+j/2*48);
-
+	
 	if (torreSelecionada!=0)
 	{
 		C2D2P_Retangulo(625+(torreSelecionada - 1) % 2 * 75, 100 + (torreSelecionada - 1) / 2 * 48, 658+(torreSelecionada - 1) % 2 * 75, 133 + (torreSelecionada - 1) / 2 * 48, 0, 255, 0);
