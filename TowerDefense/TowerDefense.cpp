@@ -8,7 +8,7 @@
 
 #include "TorreExemplo.h"
 #include "Torre2.h"
-#include "InimigoExemplo.h"
+#include "InimigoDrone.h"
 
 #include <stdio.h>
 
@@ -478,7 +478,7 @@ void TowerDefense::atualizar(){
 
 #ifdef DEBUG
 		if(m->botoes[C2D2_MDIREITO].pressionado && teclas[C2D2_LSHIFT].ativo)
-			gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, -16, 304, 1, 50, 10, this));
+			gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, -16, 304, 1, 50, 10, this));
 
 		if(teclas[C2D2_Z].pressionado)
 			chances--;
@@ -530,39 +530,39 @@ void TowerDefense::desenhar(){
 
 void TowerDefense::formation1()
 {
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 0, 0, 1, 100, 10, this));
+	gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 0, 0, 1, 100, 10, 1,this));
 }
 
 void TowerDefense::formation2()
 {
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 0, 8, 1, 250, 15, this));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 0, -8, 1, 250, 15, this));
+	gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 0, 8, 1, 250, 15, 2, this));
+	gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 0, -8, 1, 250, 15, 2, this));
 }
 
 void TowerDefense::formation3()
 {
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 15, 0, 1, 450, 20, this));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 0, 8, 1, 450, 20, this));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 0, -8, 1, 450, 20, this));
+	gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 15, 0, 1, 450, 20, 3, this));
+	gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 0, 8, 1, 450, 20, 3, this));
+	gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 0, -8, 1, 450, 20, 3, this));
 }
 
 void TowerDefense::formation4()
 {
-    gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 0, 0, 1, 600, 25, this));
-    gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 30, 0, 1, 600, 25, this));
-    gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 15, 8, 1, 600, 25, this));
-    gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 15, -8, 1, 600, 25, this));
+    gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 0, 0, 1, 600, 25, 4, this));
+    gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 30, 0, 1, 600, 25, 4, this));
+    gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 15, 8, 1, 600, 25, 4, this));
+    gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 15, -8, 1, 600, 25, 4, this));
 }
 
 void TowerDefense::formation5()
 {
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 0, 8, 1, 720, 30, this));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 0, -8, 1, 720, 30, this));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 15, 8, 1, 720, 30, this));
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 15, -8, 1, 720, 30, this));
+	gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 0, 8, 1, 720, 30, 5, this));
+	gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 0, -8, 1, 720, 30, 5, this));
+	gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 15, 8, 1, 720, 30, 5, this));
+	gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 15, -8, 1, 720, 30, 5, this));
 }
 
 void TowerDefense::queen()
 {
-	gAtor.adicionar(new InimigoExemplo(gAtor, mapaTD, 0, 0, 1, 10500, 0, this));
+	gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 0, 0, 1, 10500, 0, 6, this));
 }

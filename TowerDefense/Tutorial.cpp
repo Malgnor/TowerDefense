@@ -1,7 +1,7 @@
 #include "Tutorial.h"
 #include "MenuInicial.h"
 
-#include "InimigoExemplo.h"
+#include "InimigoDrone.h"
 #include "Torre.h"
 #include "Torre2.h"
 
@@ -63,7 +63,7 @@ void Tutorial::atualizar()
 		if(stage == 0){
 			if(btnOk.getEstado() == SOLTO){
 				stage++;
-				gAtor.adicionar(pInimigoTuto = new InimigoExemplo(gAtor, mapaTD, 384, 0, 1, 50, 10, this));
+				gAtor.adicionar(pInimigoTuto = new InimigoDrone(gAtor, mapaTD, 384, 0, 1, 50, 10, this));
 			}
 		} else {
 			if(!pInimigoTuto->estaNoJogo()){
@@ -107,7 +107,7 @@ void Tutorial::atualizar()
 			if(btnOk.getEstado() == SOLTO){
 				stage++;
 				chances = 19;
-				gAtor.adicionar(pInimigoTuto = new InimigoExemplo(gAtor, mapaTD, 0, 0, 1, 50, 10, this));
+				gAtor.adicionar(pInimigoTuto = new InimigoDrone(gAtor, mapaTD, 0, 0, 1, 50, 10, this));
 			}
 		} else {
 			if(!pInimigoTuto->estaNoJogo()){
@@ -202,7 +202,7 @@ void Tutorial::atualizar()
 		if(stage == 0){
 			if(btnOk.getEstado() == SOLTO){
 				stage++;
-				gAtor.adicionar(pInimigoTuto = new InimigoExemplo(gAtor, mapaTD, 0, 0, 1, 50, 10, this));
+				gAtor.adicionar(pInimigoTuto = new InimigoDrone(gAtor, mapaTD, 0, 0, 1, 50, 10, this));
 			}
 		} else {
 			if(!pInimigoTuto->estaNoJogo()){

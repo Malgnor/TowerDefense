@@ -1,4 +1,4 @@
-#include "InimigoExemplo.h"
+#include "InimigoDrone.h"
 
 #include "Projetil.h"
 #include "Coin.h"
@@ -7,21 +7,40 @@
 
 #include <c2d2\chien2d2primitivas.h>
 
-InimigoExemplo::InimigoExemplo(GerenteAtor& _gerente, Mapa& _map, int _x, int _y, int _vel, int _vida, int _dinheiro, TDBase* _td)
+InimigoDrone::InimigoDrone(GerenteAtor& _gerente, Mapa& _map, int _x, int _y, int _vel, int _vida, int _dinheiro, int sprite, TDBase* _td)
 	: Inimigo(_gerente, _map, _x, _y, _vel, _vida, _dinheiro, _td)
 {
 }
 
-void InimigoExemplo::inicializar(){
-	iSprite = C2D2_CarregaSpriteSet("imgs/inimE.png", 0, 0);
+void InimigoDrone::inicializar(){
 	Inimigo::inicializar();
 	indiceVar = 0;
 	mapa.getInit(posX, posY);
 	posX += offX;
     posY += offY;
+	switch (iSprite){
+        case 1:
+        iSprite = C2D2_CarregaSpriteSet("imgs/inimE.png", 0, 0);	
+	    break;
+        case 2:
+        iSprite = C2D2_CarregaSpriteSet("imgs/inimE2.png", 0, 0);	
+        break;
+		case 3:
+        iSprite = C2D2_CarregaSpriteSet("imgs/inimE3.png", 0, 0);	
+        break;
+		case 4:
+        iSprite = C2D2_CarregaSpriteSet("imgs/inimE4.png", 0, 0);	
+        break;
+		case 5:
+        iSprite = C2D2_CarregaSpriteSet("imgs/inimE5.png", 0, 0);	
+        break;
+		case 6:
+        iSprite = C2D2_CarregaSpriteSet("imgs/inimEBoss.png", 0, 0);	
+        break;
+    }
 }
 
-void InimigoExemplo::atualizar(){
+void InimigoDrone::atualizar(){
 	if (vida <= 0){
 		alive = false;
 		gerente.adicionar(new Coin(gerente, td, dinheiro, posX, posY));
@@ -65,10 +84,10 @@ void InimigoExemplo::atualizar(){
 	}
 }
 		
-void InimigoExemplo::desenhar(){
+void InimigoDrone::desenhar(){
 	C2D2_DesenhaSpriteCentro(iSprite, indiceVar, posX, posY, l(), a());
 }
 
-void InimigoExemplo::finalizar(){
+void InimigoDrone::finalizar(){
 	C2D2_RemoveSpriteSet(iSprite);
 }

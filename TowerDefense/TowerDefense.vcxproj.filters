@@ -114,9 +114,6 @@
     <ClCompile Include="InimigoDemo.cpp">
       <Filter>Source Files\Atores\Inimigos</Filter>
     </ClCompile>
-    <ClCompile Include="InimigoExemplo.cpp">
-      <Filter>Source Files\Atores\Inimigos</Filter>
-    </ClCompile>
     <ClCompile Include="TorreExemplo.cpp">
       <Filter>Source Files\Atores\Torres</Filter>
     </ClCompile>
@@ -149,6 +146,9 @@
     </ClCompile>
     <ClCompile Include="Torre3.cpp">
       <Filter>Source Files\Atores\Torres</Filter>
+    </ClCompile>
+    <ClCompile Include="InimigoDrone.cpp">
+      <Filter>Source Files\Atores\Inimigos</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -209,9 +209,6 @@
     <ClInclude Include="InimigoDemo.h">
       <Filter>Header Files\Atores\Inimigos</Filter>
     </ClInclude>
-    <ClInclude Include="InimigoExemplo.h">
-      <Filter>Header Files\Atores\Inimigos</Filter>
-    </ClInclude>
     <ClInclude Include="Torre.h">
       <Filter>Header Files\Atores\Torres</Filter>
     </ClInclude>
@@ -250,6 +247,9 @@
     </ClInclude>
     <ClInclude Include="Torre3.h">
       <Filter>Header Files\Atores\Torres</Filter>
+    </ClInclude>
+    <ClInclude Include="InimigoDrone.h">
+      <Filter>Header Files\Atores\Inimigos</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
