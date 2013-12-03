@@ -6,7 +6,7 @@
 class ProjetilExemplo : public Projetil
 {
 public:
-	ProjetilExemplo(GerenteAtor& _gerente, int _x, int _y, int vel, Ator& _alvo, int _dano, int _hp);
+	ProjetilExemplo(GerenteAtor& _gerente, int _x, int _y, int vel, Ator* _alvo, int _dano, int _hp);
 
 	int indice();
 	

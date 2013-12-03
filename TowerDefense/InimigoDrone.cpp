@@ -7,18 +7,17 @@
 
 #include <c2d2\chien2d2primitivas.h>
 
-InimigoDrone::InimigoDrone(GerenteAtor& _gerente, Mapa& _map, int _x, int _y, int _vel, int _vida, int _dinheiro, int sprite, TDBase* _td)
-	: Inimigo(_gerente, _map, _x, _y, _vel, _vida, _dinheiro, _td)
+InimigoDrone::InimigoDrone(GerenteAtor& _gerente, Mapa& _map, int _x, int _y, int _vel, int _vida, int _dinheiro, int _sprite, TDBase* _td)
+	: Inimigo(_gerente, _map, _x, _y, _vel, _vida, _dinheiro, _td), sprite(_sprite)
 {
 }
 
 void InimigoDrone::inicializar(){
-	Inimigo::inicializar();
 	indiceVar = 0;
 	mapa.getInit(posX, posY);
 	posX += offX;
     posY += offY;
-	switch (iSprite){
+	switch (sprite){
         case 1:
         iSprite = C2D2_CarregaSpriteSet("imgs/inimE.png", 0, 0);	
 	    break;
@@ -38,6 +37,7 @@ void InimigoDrone::inicializar(){
         iSprite = C2D2_CarregaSpriteSet("imgs/inimEBoss.png", 0, 0);	
         break;
     }
+	Inimigo::inicializar();
 }
 
 void InimigoDrone::atualizar(){

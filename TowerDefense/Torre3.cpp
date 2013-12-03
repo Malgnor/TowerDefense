@@ -22,7 +22,7 @@ bool Torre3::estaNoJogo(){
 }
 
 void Torre3::inicializar(){
-	tDano = 15;
+	tDano = 10;
 	alcance = 120;
 	aTiro = CA2_CarregaEfeito("audio/launcher.ogg");
 	RoF = 80;
@@ -37,7 +37,7 @@ void Torre3::atualizar(){
 	{
 	case RTF:
 		if(alvo != nullptr){
-			gerente.adicionar(new Projetil3(gerente, posX, posY, 3, *alvo, tDano));
+			gerente.adicionar(new Projetil3(gerente, posX, posY, 3, alvo, tDano));
 			CA2_TocaEfeito(aTiro, 0);
 			cd = RoF;
 			estado = COOLDOWN;
@@ -65,7 +65,7 @@ void Torre3::upgrade()
 	switch (ind)
 	{
 	case 0:
-		tDano = 20;
+		tDano = 15;
 		alcance = 150;
 		RoF = 70;
 		ind++;
@@ -73,7 +73,7 @@ void Torre3::upgrade()
 		custo = 150;
 		break;
 	case 1:
-		tDano = 25;
+		tDano = 20;
 		alcance = 170;
 		RoF = 60;
 		ind++;

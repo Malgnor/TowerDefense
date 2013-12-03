@@ -8,7 +8,7 @@
 
 using namespace std;
 
-ProjetilExemplo::ProjetilExemplo(GerenteAtor& _gerente, int _x, int _y, int _vel, Ator& _alvo, int _dano, int _hp)
+ProjetilExemplo::ProjetilExemplo(GerenteAtor& _gerente, int _x, int _y, int _vel, Ator* _alvo, int _dano, int _hp)
 	: Projetil(_gerente, _x, _y, _vel, _alvo, _dano, _hp)
 {
 }
@@ -31,12 +31,15 @@ void ProjetilExemplo::inicializar(){
 }
 		
 void ProjetilExemplo::atualizar(){
-	if(!alvo.estaNoJogo()){
-		alive = false;
-		return;
+	if(!alvo->estaNoJogo()){
+		alvo = gerente.maisPerto(posX, posY, 100, INIMIGO);
+		if(alvo == nullptr){
+			alive = false;
+			return;
+		}
 	}
-	int dx = posX-alvo.x();
-	int dy = posY-alvo.y();
+	int dx = posX-alvo->x();
+	int dy = posY-alvo->y();
 	float d = sqrt((float)dx*dx+dy*dy);
 	float xx = (float)dx/d;
 	float yy = (float)dy/d;

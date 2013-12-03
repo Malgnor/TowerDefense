@@ -63,7 +63,7 @@ void Tutorial::atualizar()
 		if(stage == 0){
 			if(btnOk.getEstado() == SOLTO){
 				stage++;
-				gAtor.adicionar(pInimigoTuto = new InimigoDrone(gAtor, mapaTD, 384, 0, 1, 50, 10, this));
+				gAtor.adicionar(pInimigoTuto = new InimigoDrone(gAtor, mapaTD, 384, 0, 1, 50, 10, 1, this));
 			}
 		} else {
 			if(!pInimigoTuto->estaNoJogo()){
@@ -107,7 +107,7 @@ void Tutorial::atualizar()
 			if(btnOk.getEstado() == SOLTO){
 				stage++;
 				chances = 19;
-				gAtor.adicionar(pInimigoTuto = new InimigoDrone(gAtor, mapaTD, 0, 0, 1, 50, 10, this));
+				gAtor.adicionar(pInimigoTuto = new InimigoDrone(gAtor, mapaTD, 0, 0, 1, 50, 10, 1, this));
 			}
 		} else {
 			if(!pInimigoTuto->estaNoJogo()){
@@ -202,7 +202,7 @@ void Tutorial::atualizar()
 		if(stage == 0){
 			if(btnOk.getEstado() == SOLTO){
 				stage++;
-				gAtor.adicionar(pInimigoTuto = new InimigoDrone(gAtor, mapaTD, 0, 0, 1, 50, 10, this));
+				gAtor.adicionar(pInimigoTuto = new InimigoDrone(gAtor, mapaTD, 0, 0, 1, 50, 10, 1, this));
 			}
 		} else {
 			if(!pInimigoTuto->estaNoJogo()){
@@ -228,6 +228,10 @@ void Tutorial::atualizar()
 	case PAUSE:
 		break;
 	case PAUSEF1:
+		break;
+	case GAVEOVER:
+		break;
+	case WIN:
 		break;
 	}
 }
@@ -329,6 +333,10 @@ void Tutorial::desenhar()
 		}
 		break;
 	case PAUSEF1:
+		break;
+	case GAVEOVER:
+		break;
+	case WIN:
 		break;
 	}
 	desenhaMouse();

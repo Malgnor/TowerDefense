@@ -35,7 +35,7 @@ void TorreDemo::atualizar(){
 	{
 	case RTF:
 		if(alvo != nullptr){
-			gerente.adicionar(new ProjetilExemplo(gerente, posX, posY, 5, *alvo, 0, 1));
+			gerente.adicionar(new ProjetilExemplo(gerente, posX, posY, 5, alvo, 0, 1));
 			cd = RoF;
 			estado = COOLDOWN;
 		} else {

@@ -8,7 +8,7 @@ class ProjetilSplash : public Projetil
 private:
 	int danoS, decay;
 public:
-	ProjetilSplash(GerenteAtor& _gerente, int _x, int _y, int vel, Ator& _alvo, int _dano);
+	ProjetilSplash(GerenteAtor& _gerente, int _x, int _y, int vel, Ator* _alvo, int _dano);
 
 	int indice();
 	

@@ -474,11 +474,13 @@ void TowerDefense::atualizar(){
 			formation5();
 		if(timer == 60*525)
 			queen();
-		//wave boss
+		//wave boss 08:45
+		if(timer > 60*525 && gAtor.maisPerto(400, 300, 999, INIMIGO) == nullptr)
+			estado = WIN;
 
 #ifdef DEBUG
 		if(m->botoes[C2D2_MDIREITO].pressionado && teclas[C2D2_LSHIFT].ativo)
-			gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, -16, 304, 1, 50, 10, this));
+			gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, -16, 304, 1, 50, 10, 1, this));
 
 		if(teclas[C2D2_Z].pressionado)
 			chances--;
@@ -493,6 +495,10 @@ void TowerDefense::atualizar(){
 		break;
 	case PAUSEF1:
 		break;
+	case GAVEOVER:
+		break;
+	case WIN:
+		break;
 	}
 
 }
@@ -501,7 +507,8 @@ void TowerDefense::desenhar(){
 	TDBase::desenhar();
 
 	C2D2_DesenhaTexto(tahoma32, 600, 16, "Tower Defense", C2D2_TEXTO_ESQUERDA);
-
+	int ytxt;
+	char txt[99];
 	switch (estado)
 	{
 	case PLAY:
@@ -511,19 +518,24 @@ void TowerDefense::desenhar(){
 	case PAUSEF1:
 		C2D2_DesenhaTexto(tahoma16, 300, 220, "R - Reset", C2D2_TEXTO_ESQUERDA);
 #ifdef DEBUG
-		char txt[99];
-		int ytxt = 1;
+		ytxt = 1;
 		sprintf_s(txt, "(%d,%d) (%d,%d)[%d] Chances: %d Dinheiro: %d", mouseX, mouseY, mouseX < 576 && mouseY < 576 ? mouseX/32 : 0, mouseY < 576 && mouseX < 576 ? mouseY/32 : 0, mouseY < 576 && mouseX < 576 ? mapaTD.conteudo(mouseX, mouseY) : 0, chances, gold);
-		C2D2_DesenhaTexto(tahoma16, 120, 580, txt, C2D2_TEXTO_ESQUERDA);
+		C2D2_DesenhaTexto(tahoma16, 120, 500, txt, C2D2_TEXTO_ESQUERDA);
 		C2D2_DesenhaTexto(tahoma16, 300, 220+ytxt++*16, "Mouse Direito + Shift - Cria Inimigo", C2D2_TEXTO_ESQUERDA);
 		C2D2_DesenhaTexto(tahoma16, 300, 220+ytxt++*16, "M - Map Editor", C2D2_TEXTO_ESQUERDA);
 		C2D2_DesenhaTexto(tahoma16, 300, 220+ytxt++*16, "D - Carrega mapa", C2D2_TEXTO_ESQUERDA);
-		C2D2_DesenhaTexto(tahoma16, 300, 220+ytxt++*16, "0-9 - Cria waves de inimigo", C2D2_TEXTO_ESQUERDA);
 		C2D2_DesenhaTexto(tahoma16, 300, 220+ytxt++*16, "X - Aumenta chances", C2D2_TEXTO_ESQUERDA);
 		C2D2_DesenhaTexto(tahoma16, 300, 220+ytxt++*16, "Z - Diminui chances", C2D2_TEXTO_ESQUERDA);
 #endif
 		break;
+	case GAVEOVER:
+		break;
+	case WIN:
+		break;
 	}
+	
+	sprintf_s(txt, "%02d:%02d", timer/3600, (timer/60)%60);
+	C2D2_DesenhaTexto(tahoma16, 240, 580, txt, C2D2_TEXTO_CENTRALIZADO);
 
 	desenhaMouse();
 }

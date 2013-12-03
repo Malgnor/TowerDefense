@@ -40,7 +40,7 @@ void TDBase::inicializar()
 	magnet = C2D2_CarregaSpriteSet("imgs/magnet.png", 0, 0);
 	torreSprite = C2D2_CarregaSpriteSet("imgs/torres.png", 32, 32);
 	chances = 20;
-	gold = 1000;
+	gold = 10000;
 	torreSelecionada = 0;
 	magneticRadius = 0;
 	timer = 0;
@@ -61,7 +61,6 @@ void TDBase::atualizar()
 {
 	C2D2_Mouse* m = C2D2_PegaMouse();
 	C2D2_Botao* teclas = C2D2_PegaTeclas();
-	timer++;
 	mouseX = m->x;
 	mouseY = m->y;
 		
@@ -73,12 +72,19 @@ void TDBase::atualizar()
 		btnRetry->mover(400-32, 148);
 		btnExit->mover(400-32, 180);
 	}
+	if(estado == WIN){		
+		btnPause->mover(-100, -100);
+		btnBack->mover(400-32, 148);
+		btnRetry->mover(400-32, 180);
+		btnExit->mover(400-32, 212);
+	}
 	for(Menu* menu : menus){
 		menu->atualizar();
 	}
 	switch (estado)
 	{
 	case PLAY:
+		timer++;
 		if(m->botoes[C2D2_MESQUERDO].ativo && mouseX > 575){
 			for(int j = 0; j < 2; j++){
 				if(C2D2_ColidiuQuadrados(625+j%2*75, 100+j/2*48, 32, 32, mouseX, mouseY, 1, 1)){
@@ -168,6 +174,8 @@ void TDBase::atualizar()
 		cVolume.atualizar();
 		break;
 	case GAVEOVER:
+		break;
+	case WIN:
 		break;
 	}
 }
@@ -270,6 +278,8 @@ void TDBase::desenhar()
 	case PLAY:
 		if(mouseX < 576 && mouseY < 576 && mapaTD.conteudo(mouseX, mouseY) == 0){
 			C2D2P_Retangulo((16+mouseX-mouseX%32)-16, (16+mouseY-mouseY%32)-16, (16+mouseX-mouseX%32)+16, (16+mouseY-mouseY%32)+16, 0, 155, 0);
+			if(torreSelecionada != 0)				
+				C2D2_DesenhaSprite(torreSprite, torreSelecionada-1, (16+mouseX-mouseX%32)-16, (16+mouseY-mouseY%32)-16);
 		}
 		break;
 	case PAUSE:
@@ -288,6 +298,11 @@ void TDBase::desenhar()
 	case GAVEOVER:
 		C2D2P_RetanguloPintadoAlfa(0, 0, 800, 600, 25, 25, 25, 200);
 		C2D2_DesenhaTexto(tahoma32, 400-32, 75, "GameOver", C2D2_TEXTO_CENTRALIZADO);
+		break;
+	case WIN:
+		C2D2P_RetanguloPintadoAlfa(0, 0, 800, 600, 25, 25, 25, 200);
+		C2D2_DesenhaTexto(tahoma32, 400-32, 75, "Parabéns!", C2D2_TEXTO_CENTRALIZADO);
+		C2D2_DesenhaTexto(tahoma16, 400-32, 120, "Você derrotou todos os inimigos!", C2D2_TEXTO_CENTRALIZADO);
 		break;
 	}
 

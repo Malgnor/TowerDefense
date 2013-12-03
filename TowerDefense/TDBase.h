@@ -13,7 +13,7 @@
 
 class Torre;
 
-enum tdEstado {PLAY, PAUSE, PAUSEF1, GAVEOVER};
+enum tdEstado {PLAY, PAUSE, PAUSEF1, GAVEOVER, WIN};
 
 class TDBase : public Tela
 {

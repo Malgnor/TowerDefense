@@ -8,7 +8,7 @@ class Projetil3 : public Projetil
 private:
 	int danoS, decay, explo;
 public:
-	Projetil3(GerenteAtor& _gerente, int _x, int _y, int vel, Ator& _alvo, int _dano);
+	Projetil3(GerenteAtor& _gerente, int _x, int _y, int vel, Ator* _alvo, int _dano);
 
 	int indice();
 

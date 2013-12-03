@@ -8,7 +8,7 @@
 
 using namespace std;
 
-ProjetilSplash::ProjetilSplash(GerenteAtor& _gerente, int _x, int _y, int _vel, Ator& _alvo, int _dano)
+ProjetilSplash::ProjetilSplash(GerenteAtor& _gerente, int _x, int _y, int _vel, Ator* _alvo, int _dano)
 	: Projetil(_gerente, _x, _y, _vel, _alvo, 0), danoS(_dano), decay(15)
 {
 }
@@ -37,13 +37,16 @@ void ProjetilSplash::inicializar(){
 }
 		
 void ProjetilSplash::atualizar(){
-	if(!alvo.estaNoJogo()){
-		alive = false;
-		return;
+	if(!alvo->estaNoJogo()){
+		alvo = gerente.maisPerto(posX, posY, 100, INIMIGO);
+		if(alvo == nullptr){
+			alive = false;
+			return;
+		}
 	}
 	if(dano == 0){
-		int dx = posX-alvo.x();
-		int dy = posY-alvo.y();
+		int dx = posX-alvo->x();
+		int dy = posY-alvo->y();
 		float d = sqrt((float)dx*dx+dy*dy);
 		float xx = (float)dx/d;
 		float yy = (float)dy/d;

@@ -8,11 +8,11 @@ class Projetil : public Ator
 protected:
 	int posX, posY, altura, largura, vel, dano, hp;
 	int pSprite;
-	Ator& alvo;
+	Ator* alvo;
 	bool alive;
 
 public:
-	Projetil(GerenteAtor& _gerente, int _x, int _y, int _vel, Ator& _alvo, int _dano = 0, int _hp = 0);
+	Projetil(GerenteAtor& _gerente, int _x, int _y, int _vel, Ator* _alvo, int _dano = 0, int _hp = 0);
 
 	int x();
 	int y();

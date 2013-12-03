@@ -35,7 +35,7 @@ void Torre2::atualizar(){
 	{
 	case RTF:
 		if(alvo != nullptr){
-			gerente.adicionar(new ProjetilExemplo(gerente, posX, posY, 5, *alvo, 10, 1));
+			gerente.adicionar(new ProjetilExemplo(gerente, posX, posY, 5, alvo, 10, 1));
 			CA2_TocaEfeito(aTiro, 0);
 			cd = RoF;
 			estado = COOLDOWN;
