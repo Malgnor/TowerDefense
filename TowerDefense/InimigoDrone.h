@@ -7,6 +7,7 @@ class InimigoDrone : public Inimigo
 {
 private:
 	int sprite;
+	int danoinimigo;
 
 public:
 	InimigoDrone(GerenteAtor& _gerente, Mapa& _map, int _x, int _y, int _vel, int _vida, int _dinheiro, int _sprite, TDBase* _td);

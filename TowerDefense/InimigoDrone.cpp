@@ -14,27 +14,34 @@ InimigoDrone::InimigoDrone(GerenteAtor& _gerente, Mapa& _map, int _x, int _y, in
 
 void InimigoDrone::inicializar(){
 	indiceVar = 0;
+	danoinimigo = 0;
 	mapa.getInit(posX, posY);
 	posX += offX;
     posY += offY;
 	switch (sprite){
-        case 1:
-        iSprite = C2D2_CarregaSpriteSet("imgs/inimE.png", 0, 0);	
-	    break;
-        case 2:
-        iSprite = C2D2_CarregaSpriteSet("imgs/inimE2.png", 0, 0);	
-        break;
+	    case 1:
+		    danoinimigo = 1;
+			iSprite = C2D2_CarregaSpriteSet("imgs/inimE.png", 0, 0);	
+	    	break;
+		case 2:
+			danoinimigo = 1;
+        	iSprite = C2D2_CarregaSpriteSet("imgs/inimE2.png", 0, 0);	
+        	break;
 		case 3:
-        iSprite = C2D2_CarregaSpriteSet("imgs/inimE3.png", 0, 0);	
-        break;
+			danoinimigo = 1;
+        	iSprite = C2D2_CarregaSpriteSet("imgs/inimE3.png", 0, 0);	
+        	break;
 		case 4:
-        iSprite = C2D2_CarregaSpriteSet("imgs/inimE4.png", 0, 0);	
-        break;
+			danoinimigo = 1;
+        	iSprite = C2D2_CarregaSpriteSet("imgs/inimE4.png", 0, 0);	
+        	break;
 		case 5:
-        iSprite = C2D2_CarregaSpriteSet("imgs/inimE5.png", 0, 0);	
-        break;
+			danoinimigo = 1;
+        	iSprite = C2D2_CarregaSpriteSet("imgs/inimE5.png", 0, 0);	
+        	break;
 		case 6:
-        iSprite = C2D2_CarregaSpriteSet("imgs/inimEBoss.png", 0, 0);	
+			danoinimigo = 5;
+        	iSprite = C2D2_CarregaSpriteSet("imgs/inimEBoss.png", 0, 0);	
         break;
     }
 	Inimigo::inicializar();
@@ -74,13 +81,13 @@ void InimigoDrone::atualizar(){
 			dir = iCIMA;
 		else if (mapa.conteudo(posX, posY) == 4){
 		    alive = false;
-		    td->DanoRecebido(1);
+		    td->DanoRecebido(danoinimigo);
 		} else
 			passos = -1;
 	}	
 	if(posX > 576){
 		alive = false;
-		td->DanoRecebido(1);
+		td->DanoRecebido(danoinimigo);
 	}
 }
 		
