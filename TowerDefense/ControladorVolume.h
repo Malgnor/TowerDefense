@@ -5,6 +5,7 @@ class ControladorVolume
 {
 private:
 	static unsigned int efeitos, musica;
+	static int space;
 	int posX, posY;	
 	int sprEfeito, sprMusica;
 	int indEfeito, indMusica;
@@ -18,7 +19,10 @@ public:
 	void atualizar();
 	void desenhar();
 	void finalizar();
-
+	
+	static void tocaMusica();
+	static void carregaMusica();
+	static void removeMusica();
 	static unsigned int volumeEfeitos();
 	static unsigned int volumeMusica();
 };

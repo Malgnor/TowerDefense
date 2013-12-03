@@ -33,7 +33,6 @@ void Tutorial::inicializar()
 {
 	TDBase::inicializar();
 	fase = INTRO;
-	timer = 0;
 	stage = 0;
 	gold = 0;
 	pInimigoTuto = nullptr;
@@ -49,7 +48,6 @@ void Tutorial::inicializar()
 void Tutorial::atualizar()
 {
 	TDBase::atualizar();
-	timer++;
 	
 	if (stage == 0)
 	{

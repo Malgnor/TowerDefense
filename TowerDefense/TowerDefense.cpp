@@ -48,7 +48,6 @@ Tela* TowerDefense::proximaTela(){
 }
 
 void TowerDefense::inicializar(){
-	timer = 0;
 	TDBase::inicializar();
 #ifdef DEBUG
 		menus.push_back(btnME = new MenuButton("MapEditor", 700, 460, tahoma16));
@@ -57,7 +56,6 @@ void TowerDefense::inicializar(){
 
 void TowerDefense::atualizar(){
 	TDBase::atualizar();
-	timer++;
 	C2D2_Mouse* m = C2D2_PegaMouse();
 	C2D2_Botao* teclas = C2D2_PegaTeclas();
 

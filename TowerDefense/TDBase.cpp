@@ -29,8 +29,6 @@ void TDBase::inicializar()
 {
 	C2D2_TrocaCorLimpezaTela(255, 255, 255);
 
-	aMusic = CA2_CarregaMusica("audio/Space.ogg");
-	CA2_TocaMusica(aMusic, -1);
 	estado = PLAY;
 	pTorre = nullptr;
 	tahoma16 = C2D2_CarregaFonte("imgs/tahoma16.bmp", 16);
@@ -45,6 +43,7 @@ void TDBase::inicializar()
 	gold = 1000;
 	torreSelecionada = 0;
 	magneticRadius = 0;
+	timer = 0;
 	magMenu = false;
 	mapaTD.inicializar();
 	cVolume.inicializar();
@@ -60,6 +59,7 @@ void TDBase::atualizar()
 {
 	C2D2_Mouse* m = C2D2_PegaMouse();
 	C2D2_Botao* teclas = C2D2_PegaTeclas();
+	timer++;
 	mouseX = m->x;
 	mouseY = m->y;
 		
@@ -258,8 +258,6 @@ void TDBase::desenhar()
 void TDBase::finalizar()
 {
 	cVolume.finalizar();
-	CA2_PausaMusica();
-	CA2_RemoveMusica(aMusic);
 	for(Menu* menu : menus){
 		delete menu;
 	}

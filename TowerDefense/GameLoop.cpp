@@ -28,7 +28,11 @@ bool GameLoop::executar(char* titulo, int largura, int altura, bool primitivas, 
 	if (!CA2_Inicia()){
 		return false;
 	}
+
 	CA2_AjustaVolume(ControladorVolume::volumeMusica(),ControladorVolume::volumeEfeitos());
+	ControladorVolume::carregaMusica();
+	ControladorVolume::tocaMusica();
+
 	if(primitivas){
 		if(C2D2P_Inicia()){
 			return false;
@@ -43,6 +47,8 @@ bool GameLoop::executar(char* titulo, int largura, int altura, bool primitivas, 
 		gerente.desenhar();
 		C2D2_Sincroniza(C2D2_FPS_PADRAO);
 	}	
+
+	ControladorVolume::removeMusica();
 
 	CA2_Encerra();
 	C2D2_Encerra();

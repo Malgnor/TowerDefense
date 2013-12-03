@@ -6,6 +6,7 @@ using namespace std;
 
 unsigned int ControladorVolume::efeitos = 50;
 unsigned int ControladorVolume::musica = 50;
+int ControladorVolume::space = 0;
 
 ControladorVolume::ControladorVolume()
 	:posX(0), posY(0), indEfeito(0), indMusica(0)
@@ -71,6 +72,19 @@ void ControladorVolume::finalizar(){
 	C2D2_RemoveSpriteSet(sprEfeito);
 	C2D2_RemoveSpriteSet(sprMusica);
 	C2D2_RemoveFonte(fonte);
+}
+
+void ControladorVolume::tocaMusica(){
+	CA2_TocaMusica(space, -1);
+}
+
+void ControladorVolume::carregaMusica(){
+	space = CA2_CarregaMusica("audio/space.ogg");
+}
+
+void ControladorVolume::removeMusica(){
+	CA2_PausaMusica();
+	CA2_RemoveMusica(space);
 }
 
 unsigned int ControladorVolume::volumeEfeitos(){

@@ -27,7 +27,8 @@ void Torre3::inicializar(){
 	aTiro = CA2_CarregaEfeito("audio/launcher.ogg");
 	RoF = 80;
 	cd = RoF;
-	tSprite = C2D2_CarregaSpriteSet("imgs/Torre3.png", 32, 32);	
+	tSprite = C2D2_CarregaSpriteSet("imgs/Torre3.png", 32, 32);
+	Torre::inicializar();
 }
 
 void Torre3::atualizar(){

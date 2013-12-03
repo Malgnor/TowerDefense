@@ -32,8 +32,8 @@ protected:
 	int chances;
 	int gold;
 	int torreSelecionada;
+	int timer;
 	Torre* pTorre;
-	int aMusic;
 	ControladorVolume cVolume;
 
 	std::vector <Menu*> menus;
