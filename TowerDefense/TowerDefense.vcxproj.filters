@@ -102,9 +102,6 @@
     <ClCompile Include="color.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ProjetilExemplo.cpp">
-      <Filter>Source Files\Atores\Projéteis</Filter>
-    </ClCompile>
     <ClCompile Include="Projetil.cpp">
       <Filter>Source Files\Atores\Projéteis</Filter>
     </ClCompile>
@@ -113,9 +110,6 @@
     </ClCompile>
     <ClCompile Include="InimigoDemo.cpp">
       <Filter>Source Files\Atores\Inimigos</Filter>
-    </ClCompile>
-    <ClCompile Include="TorreExemplo.cpp">
-      <Filter>Source Files\Atores\Torres</Filter>
     </ClCompile>
     <ClCompile Include="Torre.cpp">
       <Filter>Source Files\Atores\Torres</Filter>
@@ -135,9 +129,6 @@
     <ClCompile Include="TDBase.cpp">
       <Filter>Source Files\Telas</Filter>
     </ClCompile>
-    <ClCompile Include="ProjetilSplash.cpp">
-      <Filter>Source Files\Atores\Projéteis</Filter>
-    </ClCompile>
     <ClCompile Include="ControladorVolume.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -149,6 +140,9 @@
     </ClCompile>
     <ClCompile Include="InimigoDrone.cpp">
       <Filter>Source Files\Atores\Inimigos</Filter>
+    </ClCompile>
+    <ClCompile Include="Projetil1.cpp">
+      <Filter>Source Files\Atores\Projéteis</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -218,12 +212,6 @@
     <ClInclude Include="TorreDemo.h">
       <Filter>Header Files\Atores\Torres</Filter>
     </ClInclude>
-    <ClInclude Include="TorreExemplo.h">
-      <Filter>Header Files\Atores\Torres</Filter>
-    </ClInclude>
-    <ClInclude Include="ProjetilExemplo.h">
-      <Filter>Header Files\Atores\Projéteis</Filter>
-    </ClInclude>
     <ClInclude Include="Projetil.h">
       <Filter>Header Files\Atores\Projéteis</Filter>
     </ClInclude>
@@ -236,9 +224,6 @@
     <ClInclude Include="TDBase.h">
       <Filter>Header Files\Telas</Filter>
     </ClInclude>
-    <ClInclude Include="ProjetilSplash.h">
-      <Filter>Header Files\Atores\Projéteis</Filter>
-    </ClInclude>
     <ClInclude Include="ControladorVolume.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -250,6 +235,9 @@
     </ClInclude>
     <ClInclude Include="InimigoDrone.h">
       <Filter>Header Files\Atores\Inimigos</Filter>
+    </ClInclude>
+    <ClInclude Include="Projetil1.h">
+      <Filter>Header Files\Atores\Projéteis</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

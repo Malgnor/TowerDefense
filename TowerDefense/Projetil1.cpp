@@ -1,4 +1,4 @@
-#include "ProjetilExemplo.h"
+#include "Projetil1.h"
 
 #include "GerenteAtor.h"
 
@@ -8,29 +8,29 @@
 
 using namespace std;
 
-ProjetilExemplo::ProjetilExemplo(GerenteAtor& _gerente, int _x, int _y, int _vel, Ator* _alvo, int _dano, int _hp)
+Projetil1::Projetil1(GerenteAtor& _gerente, int _x, int _y, int _vel, Ator* _alvo, int _dano, int _hp)
 	: Projetil(_gerente, _x, _y, _vel, _alvo, _dano, _hp)
 {
 }
 
-int ProjetilExemplo::indice(){
+int Projetil1::indice(){
 	return 0;
 }
 
-void ProjetilExemplo::aoColidir(Ator* ator){
+void Projetil1::aoColidir(Ator* ator){
 }
 
-void ProjetilExemplo::hit(){
+void Projetil1::hit(){
 	if(--hp <= 0)
 		alive = false;
 }
 
-void ProjetilExemplo::inicializar(){
+void Projetil1::inicializar(){
 	pSprite = C2D2_CarregaSpriteSet("imgs/projE.png" , 0, 0);
 	Projetil::inicializar();
 }
 		
-void ProjetilExemplo::atualizar(){
+void Projetil1::atualizar(){
 	if(!alvo->estaNoJogo()){
 		alvo = gerente.maisPerto(posX, posY, 100, INIMIGO);
 		if(alvo == nullptr){
@@ -47,10 +47,10 @@ void ProjetilExemplo::atualizar(){
 	posX-=(int)(vel*xx);
 }
 		
-void ProjetilExemplo::desenhar(){
+void Projetil1::desenhar(){
 	C2D2_DesenhaSpriteCentro(pSprite, 0, posX, posY, l(), a());
 }
 
-void ProjetilExemplo::finalizar(){
+void Projetil1::finalizar(){
 	C2D2_RemoveSpriteSet(pSprite);
 }

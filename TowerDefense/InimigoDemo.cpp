@@ -1,5 +1,6 @@
 #include "InimigoDemo.h"
 #include "Projetil.h"
+#include <stdlib.h>
 #include <c2d2\chien2d2.h>
 
 InimigoDemo::InimigoDemo(GerenteAtor& _gerente, Mapa& _map, int _x, int _y, iDirecao _dir, TDBase *_td)
@@ -9,7 +10,27 @@ InimigoDemo::InimigoDemo(GerenteAtor& _gerente, Mapa& _map, int _x, int _y, iDir
 }
 
 void InimigoDemo::inicializar(){
-	iSprite = C2D2_CarregaSpriteSet("imgs/inimE.png", 0, 0);
+	switch (rand()%5)
+	{
+	case 0:
+		iSprite = C2D2_CarregaSpriteSet("imgs/inimE.png", 0, 0);
+		break;
+	case 1:
+		iSprite = C2D2_CarregaSpriteSet("imgs/inimE2.png", 0, 0);
+		break;
+	case 2:
+		iSprite = C2D2_CarregaSpriteSet("imgs/inimE3.png", 0, 0);
+		break;
+	case 3:
+		iSprite = C2D2_CarregaSpriteSet("imgs/inimE4.png", 0, 0);
+		break;
+	case 4:
+		iSprite = C2D2_CarregaSpriteSet("imgs/inimE5.png", 0, 0);
+		break;
+	default:
+		iSprite = C2D2_CarregaSpriteSet("imgs/inimE.png", 0, 0);
+		break;
+	}
 	indiceVar = 0;
 	Inimigo::inicializar();
 	posX = offX;

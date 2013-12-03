@@ -1,6 +1,5 @@
 #include "TDBase.h"
 
-#include "TorreExemplo.h"
 #include "Torre2.h"
 #include "Torre3.h"
 

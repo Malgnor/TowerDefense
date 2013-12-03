@@ -6,8 +6,6 @@
 #include "TowerDefense.h"
 #include "MenuInicial.h"
 
-#include "TorreExemplo.h"
-#include "Torre2.h"
 #include "InimigoDrone.h"
 
 #include <stdio.h>
@@ -62,7 +60,7 @@ void TowerDefense::atualizar(){
 	switch (estado)
 	{
 	case PLAY:
-		//wave 1
+		//wave 1 0:08
 		if(timer == 60*8)
 			formation1();
 		if(timer == 60*9)
@@ -95,9 +93,9 @@ void TowerDefense::atualizar(){
 		    formation1();
      	if(timer == 60*23)
 		    formation1();
-		//wave 1
+		//wave 1 0:23
 
-		//wave 2
+		//wave 2 0:30
 		if(timer == 60*30)
 			formation1();
 		if(timer == 60*31)
@@ -132,9 +130,9 @@ void TowerDefense::atualizar(){
 			formation2();
 		if(timer == 60*55)
 			formation2();
-		//wave 2
+		//wave 2 0:55
 
-		//wave 3
+		//wave 3 1:00
 		if(timer == 60*60)
 			formation1();
 		if(timer == 60*61)
@@ -189,9 +187,9 @@ void TowerDefense::atualizar(){
 			formation3();
 		if(timer == 60*115)
 			formation3();
-		//wave 3
+		//wave 3 1:55
 
-		//wave 4
+		//wave 4 2:00
 		if(timer == 60*120)
 			formation1();
 		if(timer == 60*121)
@@ -266,9 +264,9 @@ void TowerDefense::atualizar(){
 			formation4();
 		if(timer == 60*209)
 			formation4();
-		//wave 4
+		//wave 4 3:29
 
-		//wave 5
+		//wave 5 3:40
 		if(timer == 60*220)
 			formation1();
 		if(timer == 60*221)
@@ -369,9 +367,9 @@ void TowerDefense::atualizar(){
 			formation5();
 		if(timer == 60*359)
 			formation5();
-		//wave 5
+		//wave 5 5:59
 		
-		//wave boss
+		//wave boss 6:10
 		if(timer == 60*370)
 			formation1();
 		if(timer == 60*371)

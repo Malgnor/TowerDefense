@@ -1,6 +1,7 @@
 #include "TorreDemo.h"
 #include "GerenteAtor.h"
-#include "ProjetilExemplo.h"
+#include "Projetil1.h"
+#include <stdlib.h>
 
 #include <c2d2/chien2d2.h>
 
@@ -22,7 +23,10 @@ bool TorreDemo::estaNoJogo(){
 }
 
 void TorreDemo::inicializar(){
-	tSprite = C2D2_CarregaSpriteSet("imgs/torreE.png", 0, 0);
+	if(rand()%2 == 1)
+		tSprite = C2D2_CarregaSpriteSet("imgs/torre2.png", 32, 32);
+	else
+		tSprite = C2D2_CarregaSpriteSet("imgs/torre3.png", 32, 32);
 	Torre::inicializar();
 	alcance = 200;
 	RoF = 60;
@@ -35,7 +39,7 @@ void TorreDemo::atualizar(){
 	{
 	case RTF:
 		if(alvo != nullptr){
-			gerente.adicionar(new ProjetilExemplo(gerente, posX, posY, 5, alvo, 0, 1));
+			gerente.adicionar(new Projetil1(gerente, posX, posY, 5, alvo, 0, 1));
 			cd = RoF;
 			estado = COOLDOWN;
 		} else {

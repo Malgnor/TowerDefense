@@ -70,7 +70,7 @@ void ControladorVolume::desenhar(){
 	if(C2D2_ColidiuQuadrados(posX-48, posY-32, 96, 32, m->x, m->y, 1, 1)){
 		C2D2_DesenhaTexto(fonte, m->x, m->y+16, "Efeitos sonoros", C2D2_TEXTO_CENTRALIZADO);
 	}else if(C2D2_ColidiuQuadrados(posX-48, posY, 96, 32, m->x, m->y, 1, 1)){
-		C2D2_DesenhaTexto(fonte, m->x, m->y+16, "Musica", C2D2_TEXTO_CENTRALIZADO);
+		C2D2_DesenhaTexto(fonte, m->x, m->y+16, "Música", C2D2_TEXTO_CENTRALIZADO);
 	}
 }
 
