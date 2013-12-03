@@ -12,8 +12,6 @@ TorreDemo::TorreDemo(GerenteAtor& _gerente, int _x, int _y)
 	posY = _y;
 }
 
-
-
 void TorreDemo::aoColidir(Ator* ator){
 
 }
@@ -23,10 +21,22 @@ bool TorreDemo::estaNoJogo(){
 }
 
 void TorreDemo::inicializar(){
-	if(rand()%2 == 1)
+	ind = rand()%3;
+	switch (rand()%3)
+	{
+	case 0:		
+		tSprite = C2D2_CarregaSpriteSet("imgs/torreB.png", 32, 32);
+		break;
+	case 1:		
 		tSprite = C2D2_CarregaSpriteSet("imgs/torre2.png", 32, 32);
-	else
+		break;
+	case 2:		
 		tSprite = C2D2_CarregaSpriteSet("imgs/torre3.png", 32, 32);
+		break;
+	default:
+		tSprite = C2D2_CarregaSpriteSet("imgs/torre2.png", 32, 32);
+		break;
+	}
 	Torre::inicializar();
 	alcance = 200;
 	RoF = 60;
@@ -54,7 +64,7 @@ void TorreDemo::atualizar(){
 }
 
 void TorreDemo::desenhar(){	
-	C2D2_DesenhaSpriteCentro(tSprite, 0, posX, posY, largura, altura);
+	C2D2_DesenhaSpriteCentro(tSprite, ind, posX, posY, largura, altura);
 }
 
 void TorreDemo::finalizar(){

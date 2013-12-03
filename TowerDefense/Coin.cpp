@@ -60,7 +60,7 @@ void Coin::atualizar(){
 	C2D2_Mouse* mouse = C2D2_PegaMouse();
 	if(--decay <= 0)
 		alive = false;
-	if(C2D2_ColidiuQuadrados(posX-largura/2, posY-altura/2, largura, altura, mouse->x-1, mouse->y-1, 3, 3)){
+	if(C2D2_ColidiuQuadrados(posX-largura/2, posY-altura/2, largura, altura, mouse->x-1, mouse->y-1, 4, 4)){
 		td->Lucro(valor);
 		alive = false;
 		return;
@@ -75,8 +75,8 @@ void Coin::atualizar(){
 		if(d <= td->magRadius()){
 			float xx = (float)dx/d;
 			float yy = (float)dy/d;
-			posY-=(int)(2*yy);	
-			posX-=(int)(2*xx); 
+			posY-=(int)(3*yy);	
+			posX-=(int)(3*xx); 
 		}
 	}	
 }

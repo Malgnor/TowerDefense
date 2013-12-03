@@ -1,5 +1,6 @@
 #include "TDBase.h"
 
+#include "TorreB.h"
 #include "Torre2.h"
 #include "Torre3.h"
 
@@ -85,7 +86,7 @@ void TDBase::atualizar()
 	case PLAY:
 		timer++;
 		if(m->botoes[C2D2_MESQUERDO].ativo && mouseX > 575){
-			for(int j = 0; j < 2; j++){
+			for(int j = 0; j < 3; j++){
 				if(C2D2_ColidiuQuadrados(625+j%2*75, 100+j/2*48, 32, 32, mouseX, mouseY, 1, 1)){
 					torreSelecionada = j+1;
 					pTorre = nullptr;
@@ -99,7 +100,7 @@ void TDBase::atualizar()
 			}
 		}
 		if(mouseX < 576 && mouseY < 576){
-			if(m->botoes[C2D2_MESQUERDO].ativo && mapaTD.conteudo(mouseX, mouseY) == 0 && gold >= 50){
+			if(m->botoes[C2D2_MESQUERDO].ativo && mapaTD.conteudo(mouseX, mouseY) == 0 && gold >= 50*torreSelecionada){
 				switch (torreSelecionada)
 				{
 				case 1:
@@ -111,6 +112,12 @@ void TDBase::atualizar()
 					gold -= 100;
 					mapaTD.addTorre(mouseX, mouseY);
 					gAtor.adicionar(new Torre3(gAtor, mouseX, mouseY));
+					break;
+				case 3:
+					gold -= 150;
+					mapaTD.addTorre(mouseX, mouseY);
+					gAtor.adicionar(new TorreB(gAtor, mouseX, mouseY));
+					break;
 				default:
 					break;
 				}
@@ -140,6 +147,13 @@ void TDBase::atualizar()
 				tRoF = 80;
 				tCusto = 100;
 				break;
+			case 3:
+				tAlcance = 100;
+				tRoF = 60;
+				tCusto = 150;
+				break;
+			default:
+				break;
 			}
 		}
 		if( magMenu ){
@@ -153,7 +167,8 @@ void TDBase::atualizar()
 		if( pTorre != nullptr){
 			btnX.atualizar();
 			btnSell.atualizar();
-			btnUpgrade.atualizar();
+			if(pTorre->comprar() != 0)
+				btnUpgrade.atualizar();
 			if (btnUpgrade.getEstado() == SOLTO && gold>=pTorre->comprar() && pTorre->comprar() != 0){
 				gold -= pTorre->comprar();
 				pTorre->upgrade();
@@ -193,6 +208,7 @@ void TDBase::desenhar()
 	if(pTorre != nullptr){
 		C2D2P_RetanguloPintadoAlfa(590, 290, 725, 440, 100, 149, 237, 127);
 		C2D2P_Retangulo(590, 290, 725, 440, 0, 127, 0);
+		if(pTorre->comprar() != 0)
 		btnUpgrade.desenhar();
 		btnSell.desenhar();
 		btnX.desenhar();
@@ -262,7 +278,7 @@ void TDBase::desenhar()
 		C2D2_DesenhaSprite(heart, 1, 415+i*16, 580);
 	}
 
-	for(int j = 0; j < 2; j++)
+	for(int j = 0; j < 3; j++)
 		C2D2_DesenhaSprite(torreSprite, j, 625+j%2*75, 100+j/2*48);
 	
 	if (torreSelecionada!=0)

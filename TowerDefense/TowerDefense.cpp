@@ -504,7 +504,7 @@ void TowerDefense::atualizar(){
 void TowerDefense::desenhar(){
 	TDBase::desenhar();
 
-	C2D2_DesenhaTexto(tahoma32, 600, 16, "Tower Defense", C2D2_TEXTO_ESQUERDA);
+	C2D2_DesenhaTexto(tahoma32, 600, 16, "Drone Attack", C2D2_TEXTO_ESQUERDA);
 	int ytxt;
 	char txt[99];
 	switch (estado)
