@@ -7,7 +7,7 @@
 #include <c2d2\chienaudio2.h>
 
 TorreMulti::TorreMulti(GerenteAtor& _gerente, int _x, int _y)
-	: Torre(_gerente, _x, _y, 50, 120)
+	: Torre(_gerente, _x, _y, 50, 100)
 {
 }
 

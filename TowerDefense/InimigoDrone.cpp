@@ -93,8 +93,29 @@ void InimigoDrone::atualizar(){
 		
 void InimigoDrone::desenhar(){
 	C2D2_DesenhaSpriteCentro(iSprite, indiceVar, posX, posY, l(), a());
+	C2D2P_RetanguloPintado(posX-8, posY-altura/2-9, posX-8+(int)((float)vida/(float)vidaMax*16.0), posY-altura/2-6, 0, 255, 0);
 	C2D2P_Retangulo(posX-9, posY-altura/2-9, posX+9, posY-altura/2-5, 0, 0, 0);
-	C2D2P_RetanguloPintado(posX-8, posY-altura/2-8, posX-8+(int)((float)vida/(float)vidaMax*16.0), posY-altura/2-6, 0, 255, 0);
+#ifdef DEBUG
+	switch (dir)
+	{
+	case iCIMA:
+		C2D2P_Linha(posX, posY, posX, posY-passos, 0, 0, 255);
+		break;
+	case iBAIXO:
+		C2D2P_Linha(posX, posY, posX, posY+passos, 0, 0, 255);
+		break;
+	case iESQUERDA:
+		C2D2P_Linha(posX, posY, posX-passos, posY, 0, 0, 255);
+		break;
+	case iDIREITA:
+		C2D2P_Linha(posX, posY, posX+passos, posY, 0, 0, 255);
+		break;
+	case iPARADO:
+		break;
+	default:
+		break;
+	}
+#endif
 }
 
 void InimigoDrone::finalizar(){
