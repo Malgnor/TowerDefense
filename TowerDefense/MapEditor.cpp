@@ -17,7 +17,7 @@ Tela* MapEditor::proximaTela()
 	if (teclas[C2D2_R].pressionado)
 		return new MapEditor();
 	if (teclas[C2D2_M].pressionado || btnTD->getEstado() == SOLTO)
-		return new TowerDefense();
+		return new TowerDefense(mapaTD.getNome().c_str());
 	if(btnBack->getEstado() == SOLTO)
 		return new MenuInicial();
 	return this;

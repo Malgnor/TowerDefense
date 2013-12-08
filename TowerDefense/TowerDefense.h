@@ -5,10 +5,6 @@
 
 class TowerDefense : public TDBase
 {
-private:
-#ifdef DEBUG
-	MenuButton* btnME;
-#endif // DEBUG
 
 public:
 	TowerDefense();

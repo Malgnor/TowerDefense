@@ -23,6 +23,7 @@ private:
 	MenuButton* btnTD;
 	MenuButton* btnExit;
 	MenuButton* btnTUTO;
+	MenuButton* btnME;
 	MenuButton* btnMS;
 	std::vector <Menu*> menus;
 	std::vector <Menu*> menusMS;

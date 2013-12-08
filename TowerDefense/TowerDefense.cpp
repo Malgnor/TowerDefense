@@ -13,9 +13,6 @@
 #include <c2d2\chien2d2.h>
 #include <c2d2\chien2d2primitivas.h>
 
-#ifdef DEBUG
-#include "MapEditor.h"
-#endif
 
 TowerDefense::TowerDefense()
 {
@@ -38,18 +35,11 @@ Tela* TowerDefense::proximaTela(){
 		return new TowerDefense(mapaTD.getNome().c_str());
 	if (teclas[C2D2_R].pressionado && estado != PAUSE)
 		return new TowerDefense();
-#ifdef DEBUG
-	if ((teclas[C2D2_M].pressionado && estado != PAUSE) || btnME->getEstado() == SOLTO)
-		return new MapEditor();
-#endif
 	return this;
 }
 
 void TowerDefense::inicializar(){
 	TDBase::inicializar();
-#ifdef DEBUG
-		menus.push_back(btnME = new MenuButton("MapEditor", 700, 460, tahoma16));
-#endif
 }
 
 void TowerDefense::atualizar(){
@@ -478,7 +468,7 @@ void TowerDefense::atualizar(){
 
 #ifdef DEBUG
 		if(m->botoes[C2D2_MDIREITO].pressionado && teclas[C2D2_LSHIFT].ativo)
-			gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, -16, 304, 1, 50, 10, 1, this));
+			gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 0, 0, 1, 50, 10, 1, this));
 
 		if(teclas[C2D2_Z].pressionado)
 			chances--;
@@ -505,7 +495,7 @@ void TowerDefense::desenhar(){
 	TDBase::desenhar();
 
 	C2D2_DesenhaTexto(tahoma32, 600, 16, "Drone Attack", C2D2_TEXTO_ESQUERDA);
-	int ytxt;
+	int ytxt = 1;
 	char txt[99];
 	switch (estado)
 	{
@@ -516,7 +506,6 @@ void TowerDefense::desenhar(){
 	case PAUSEF1:
 		C2D2_DesenhaTexto(tahoma16, 300, 220, "R - Reset", C2D2_TEXTO_ESQUERDA);
 #ifdef DEBUG
-		ytxt = 1;
 		sprintf_s(txt, "(%d,%d) (%d,%d)[%d] Chances: %d Dinheiro: %d", mouseX, mouseY, mouseX < 576 && mouseY < 576 ? mouseX/32 : 0, mouseY < 576 && mouseX < 576 ? mouseY/32 : 0, mouseY < 576 && mouseX < 576 ? mapaTD.conteudo(mouseX, mouseY) : 0, chances, gold);
 		C2D2_DesenhaTexto(tahoma16, 120, 500, txt, C2D2_TEXTO_ESQUERDA);
 		C2D2_DesenhaTexto(tahoma16, 300, 220+ytxt++*16, "Mouse Direito + Shift - Cria Inimigo", C2D2_TEXTO_ESQUERDA);

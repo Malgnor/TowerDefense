@@ -6,11 +6,8 @@
 #include "MenuInicial.h"
 #include "TowerDefense.h"
 
-#ifdef DEBUG
 #include "MapEditor.h"
-#else
 #include "Tutorial.h"
-#endif
 
 #include "MenuToggle.h"
 #include "MenuText.h"
@@ -38,11 +35,9 @@ Tela* MenuInicial::proximaTela()
 		return mapSelected == "" ? new TowerDefense() : new TowerDefense(mapSelected.c_str());
 
 	if(btnTUTO->getEstado() == SOLTO)
-#ifdef DEBUG
-		return new MapEditor();
-#else
 		return new Tutorial();
-#endif // DEBUG
+	if(btnME->getEstado() == SOLTO)
+		return new MapEditor();
 
 	return this;
 }
@@ -60,13 +55,10 @@ void MenuInicial::inicializar()
 	tahoma64 = C2D2_CarregaFonte("imgs/tahoma64.bmp", 64);
 
 	menus.push_back(new MenuText("Drone Attack", 400, 100, tahoma64, "Verde-limao"));
-	menus.push_back(btnTD = new MenuButton("Jogar", 400, 250, tahoma32, "purple"));
-	menus.push_back(btnMS = new MenuButton("Selecionar Mapa", 400, 300, tahoma32, "indigo"));
-#ifdef DEBUG
-	menus.push_back(btnTUTO = new MenuButton("MapEditor", 400, 350, tahoma32, "purple1"));
-#else
-	menus.push_back(btnTUTO = new MenuButton("Tutorial", 400, 350, tahoma32, "purple1"));
-#endif
+	menus.push_back(btnTD = new MenuButton("Jogar", 400, 200, tahoma32, "purple"));
+	menus.push_back(btnMS = new MenuButton("Selecionar Mapa", 400, 250, tahoma32, "indigo"));
+	menus.push_back(btnTUTO = new MenuButton("Tutorial", 400, 300, tahoma32, "purple1"));
+	menus.push_back(btnME = new MenuButton("MapEditor", 400, 350, tahoma32, "purple1"));
 	menus.push_back(btnExit = new MenuButton("Sair!", 400, 490, tahoma32));
 
 	gAtor.adicionar(new InimigoDemo(gAtor, Mapa(), 51, 549, iDIREITA, new TowerDefense()));
@@ -176,7 +168,7 @@ void MenuInicial::desenhar()
 		C2D2P_Retangulo(624, 424, 698, 498, 0, 0, 255);
 		for (int x = 0; x < 18; x++){
 			for (int y = 0; y < 18; y++){
-				m.sprite32(x, y) == 1 ? C2D2P_RetanguloPintado(625+x*4, 425+y*4, 625+x*4+4, 425+y*4+4, 255, 255, 255) : m.sprite32(x, y) ==  2 ? C2D2P_RetanguloPintado(625+x*4, 425+y*4, 625+x*4+4, 425+y*4+4, 200, 200, 200):  C2D2P_RetanguloPintado(625+x*4, 425+y*4, 625+x*4+4, 425+y*4+4, 0, 0, 0);
+				m.sprite32(x, y) == 1 ? C2D2P_RetanguloPintado(625+x*4, 425+y*4, 625+x*4+4, 425+y*4+4, 255, 255, 255) : m.sprite32(x, y) ==  2 ? C2D2P_RetanguloPintado(625+x*4, 425+y*4, 625+x*4+4, 425+y*4+4, 200, 200, 200) : C2D2P_RetanguloPintado(625+x*4, 425+y*4, 625+x*4+4, 425+y*4+4, 0, 0, 0);
 			}
 		}
 	}
