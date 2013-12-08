@@ -1,6 +1,7 @@
 #include "TDBase.h"
 
 #include "TorreB.h"
+#include "TorreF.h"
 #include "TorreMulti.h"
 #include "Torre2.h"
 #include "Torre3.h"
@@ -124,6 +125,11 @@ void TDBase::atualizar()
 					mapaTD.addTorre(mouseX, mouseY);
 					gAtor.adicionar(new TorreMulti(gAtor, mouseX, mouseY));
 					break;
+				case 5:
+					gold -= 250;
+					mapaTD.addTorre(mouseX, mouseY);
+					gAtor.adicionar(new TorreF(gAtor, mouseX, mouseY));
+					break;
 				default:
 					break;
 				}
@@ -162,6 +168,11 @@ void TDBase::atualizar()
 				tAlcance = 125;
 				tRoF = 90;
 				tCusto = 200;
+				break;
+			case 5:
+				tAlcance = 125;
+				tRoF = 30;
+				tCusto = 250;
 				break;
 			default:
 				break;

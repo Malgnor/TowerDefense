@@ -153,6 +153,12 @@
     <ClCompile Include="TorreMulti.cpp">
       <Filter>Source Files\Atores\Torres</Filter>
     </ClCompile>
+    <ClCompile Include="ProjetilF.cpp">
+      <Filter>Source Files\Atores\Projéteis</Filter>
+    </ClCompile>
+    <ClCompile Include="TorreF.cpp">
+      <Filter>Source Files\Atores\Torres</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameLoop.h">
@@ -255,6 +261,12 @@
       <Filter>Header Files\Atores\Projéteis</Filter>
     </ClInclude>
     <ClInclude Include="TorreMulti.h">
+      <Filter>Header Files\Atores\Torres</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjetilF.h">
+      <Filter>Header Files\Atores\Projéteis</Filter>
+    </ClInclude>
+    <ClInclude Include="TorreF.h">
       <Filter>Header Files\Atores\Torres</Filter>
     </ClInclude>
   </ItemGroup>

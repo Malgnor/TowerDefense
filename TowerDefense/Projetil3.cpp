@@ -2,6 +2,7 @@
 #include "GerenteAtor.h"
 #include <c2d2\chien2d2.h>
 #include <c2d2\chienaudio2.h>
+#include <c2d2\chien2d2primitivas.h>
 #include <math.h>
 
 using namespace std;
@@ -58,6 +59,10 @@ void Projetil3::atualizar(){
 
 void Projetil3::desenhar(){
 	C2D2_DesenhaSpriteCentro(pSprite, 0, posX, posY, l(), a());
+#ifdef DEBUG	
+	if(alvo != nullptr)
+		C2D2P_Linha(posX, posY, alvo->x(), alvo->y(), 0, 255, 0);
+#endif
 }
 
 void Projetil3::finalizar(){

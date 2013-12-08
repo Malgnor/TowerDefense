@@ -3,6 +3,6 @@
 
 #define DEBUG
 
-#define QTDTORRES 4
+#define QTDTORRES 5
 
 #endif

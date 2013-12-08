@@ -97,6 +97,7 @@
     <ClCompile Include="MenuToggle.cpp" />
     <ClCompile Include="Projetil3.cpp" />
     <ClCompile Include="ProjetilAOE.cpp" />
+    <ClCompile Include="ProjetilF.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Mapa.cpp" />
     <ClCompile Include="Projetil.cpp" />
@@ -107,6 +108,7 @@
     <ClCompile Include="Torre3.cpp" />
     <ClCompile Include="TorreB.cpp" />
     <ClCompile Include="TorreDemo.cpp" />
+    <ClCompile Include="TorreF.cpp" />
     <ClCompile Include="TorreMulti.cpp" />
     <ClCompile Include="TowerDefense.cpp" />
     <ClCompile Include="Tutorial.cpp" />
@@ -136,6 +138,7 @@
     <ClInclude Include="Projetil3.h" />
     <ClInclude Include="Projetil1.h" />
     <ClInclude Include="ProjetilAOE.h" />
+    <ClInclude Include="ProjetilF.h" />
     <ClInclude Include="TDBase.h" />
     <ClInclude Include="Tela.h" />
     <ClInclude Include="Torre.h" />
@@ -143,6 +146,7 @@
     <ClInclude Include="Torre3.h" />
     <ClInclude Include="TorreB.h" />
     <ClInclude Include="TorreDemo.h" />
+    <ClInclude Include="TorreF.h" />
     <ClInclude Include="TorreMulti.h" />
     <ClInclude Include="TowerDefense.h" />
     <ClInclude Include="Tutorial.h" />

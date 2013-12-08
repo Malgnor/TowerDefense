@@ -3,6 +3,7 @@
 #include "GerenteAtor.h"
 
 #include <c2d2\chien2d2.h>
+#include <c2d2\chien2d2primitivas.h>
 
 #include <math.h>
 
@@ -53,6 +54,10 @@ void Projetil1::atualizar(){
 		
 void Projetil1::desenhar(){
 	C2D2_DesenhaSpriteCentro(pSprite, 0, posX, posY, l(), a());
+#ifdef DEBUG	
+	if(alvo != nullptr)
+		C2D2P_Linha(posX, posY, alvo->x(), alvo->y(), 0, 255, 0);
+#endif
 }
 
 void Projetil1::finalizar(){
