@@ -30,7 +30,7 @@ void Torre2::inicializar(){
 }
 
 void Torre2::atualizar(){
-	Ator* alvo = gerente.maisPerto(posX, posY, alcance, INIMIGO);
+	alvo = gerente.maisPerto(posX, posY, alcance, INIMIGO);
 	switch (estado)
 	{
 	case RTF:
@@ -52,6 +52,11 @@ void Torre2::atualizar(){
 
 void Torre2::desenhar(){
 	C2D2_DesenhaSpriteCentro(tSprite, ind, posX, posY, largura, altura);
+#ifdef DEBUG
+	if(alvo != nullptr)
+		C2D2P_Linha(posX, posY, alvo->x(), alvo->y(), 255, 255, 255);
+	C2D2P_Linha(posX-largura/2, posY, posX-largura/2+(int)((float)cd/(float)RoF*32.0), posY, 255, 0, 0);
+#endif
 }
 
 void Torre2::finalizar(){

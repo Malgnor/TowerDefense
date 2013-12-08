@@ -11,8 +11,6 @@ Torre3::Torre3(GerenteAtor& _gerente, int _x, int _y)
 {
 }
 
-
-
 void Torre3::aoColidir(Ator* ator){
 
 }
@@ -32,7 +30,7 @@ void Torre3::inicializar(){
 }
 
 void Torre3::atualizar(){
-	Ator* alvo = gerente.maisPerto(posX, posY, alcance, INIMIGO);
+	alvo = gerente.maisPerto(posX, posY, alcance, INIMIGO);
 	switch (estado)
 	{
 	case RTF:
@@ -54,6 +52,11 @@ void Torre3::atualizar(){
 
 void Torre3::desenhar(){
 	C2D2_DesenhaSpriteCentro(tSprite, ind, posX, posY, largura, altura);
+#ifdef DEBUG
+	if(alvo != nullptr)
+		C2D2P_Linha(posX, posY, alvo->x(), alvo->y(), 255, 255, 255);
+	C2D2P_Linha(posX-largura/2, posY, posX-largura/2+(int)((float)cd/(float)RoF*32.0), posY, 255, 0, 0);
+#endif
 }
 
 void Torre3::finalizar(){

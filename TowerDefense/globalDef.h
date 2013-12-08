@@ -2,6 +2,6 @@
 #define _GLOBALDEF_H_
 
 //Habilita/desabilita o editor de mapa
-//#define DEBUG
+#define DEBUG
 
 #endif

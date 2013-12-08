@@ -8,7 +8,7 @@
 #include <c2d2\chien2d2primitivas.h>
 
 InimigoDrone::InimigoDrone(GerenteAtor& _gerente, Mapa& _map, int _x, int _y, int _vel, int _vida, int _dinheiro, int _sprite, TDBase* _td)
-	: Inimigo(_gerente, _map, _x, _y, _vel, _vida, _dinheiro, _td), sprite(_sprite)
+	: Inimigo(_gerente, _map, _x, _y, _vel, _vida, _dinheiro, _td), sprite(_sprite), vidaMax(_vida)
 {
 }
 
@@ -93,6 +93,10 @@ void InimigoDrone::atualizar(){
 		
 void InimigoDrone::desenhar(){
 	C2D2_DesenhaSpriteCentro(iSprite, indiceVar, posX, posY, l(), a());
+#ifdef DEBUG
+	C2D2P_Retangulo(posX-9, posY-altura/2-9, posX+9, posY-altura/2-5, 0, 0, 0);
+	C2D2P_RetanguloPintado(posX-8, posY-altura/2-8, posX-8+(int)((float)vida/(float)vidaMax*16.0), posY-altura/2-6, 0, 255, 0);
+#endif
 }
 
 void InimigoDrone::finalizar(){

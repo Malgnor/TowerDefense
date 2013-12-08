@@ -23,7 +23,7 @@ bool TorreB::estaNoJogo(){
 
 void TorreB::inicializar(){
 	aTiro = CA2_CarregaEfeito("audio/tiro.ogg");
-	alcance = 100;
+	alcance = 70;
 	RoF = 60;
 	cd = RoF;
 	tSprite = C2D2_CarregaSpriteSet("imgs/TorreB.png", 32, 32);	
@@ -31,14 +31,15 @@ void TorreB::inicializar(){
 }
 
 void TorreB::atualizar(){
-	Ator* alvo = gerente.maisPerto(posX, posY, alcance, INIMIGO);
+	alvo = gerente.maisPerto(posX, posY, alcance, INIMIGO);
 	switch (estado)
 	{
 	case RTF:
 		if(alvo != nullptr){
-			for(int r = 0; r <= 359; r+=15){
-				gerente.adicionar(new ProjetilB(gerente, posX, posY, 10, 25*(ind+1), 1, cos(r), sin(r)));
-			}
+			//for(int r = 0; r <= 359; r+=15){
+			//	gerente.adicionar(new ProjetilB(gerente, posX, posY, 10, 25*(ind+1), 1, cos(r), sin(r)));
+			//}
+			gerente.adicionar(new ProjetilB(gerente, posX, posY, 10*(ind+1)));
 			CA2_TocaEfeito(aTiro, 0);
 			cd = RoF;
 			estado = COOLDOWN;
@@ -55,6 +56,11 @@ void TorreB::atualizar(){
 
 void TorreB::desenhar(){
 	C2D2_DesenhaSpriteCentro(tSprite, ind, posX, posY, largura, altura);
+#ifdef DEBUG
+	if(alvo != nullptr)
+		C2D2P_Linha(posX, posY, alvo->x(), alvo->y(), 255, 255, 255);
+	C2D2P_Linha(posX-largura/2, posY, posX-largura/2+(int)((float)cd/(float)RoF*32.0), posY, 255, 0, 0);
+#endif
 }
 
 void TorreB::finalizar(){
@@ -66,13 +72,13 @@ void TorreB::upgrade()
 	switch (ind)
 	{
 	case 0:
-		RoF = 55;
+		RoF = 60;
 		ind++;
 		valor += custo;
 		custo = 150;
 		break;
 	case 1:
-		RoF = 45;
+		RoF = 60;
 		ind++;
 		valor += custo;
 		custo = 0;

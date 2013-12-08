@@ -8,8 +8,8 @@
 
 using namespace std;
 
-ProjetilB::ProjetilB(GerenteAtor& _gerente, int _x, int _y, int _vel, int _dano, int _hp, double _dirx, double _diry)
-	: Projetil(_gerente, _x, _y, _vel, nullptr, _dano, _hp), decay(11), dirx(_dirx), diry(_diry)
+ProjetilB::ProjetilB(GerenteAtor& _gerente, int _x, int _y, int _dano)
+	: Projetil(_gerente, _x, _y, 1, nullptr, _dano, 1), decay(16)
 {
 }
 
@@ -21,18 +21,14 @@ void ProjetilB::aoColidir(Ator* ator){
 }
 
 void ProjetilB::hit(){
-	if(--hp <= 0)
-		alive = false;
 }
 
 void ProjetilB::inicializar(){
-	pSprite = C2D2_CarregaSpriteSet("imgs/projB.png" , 0, 0);
+	pSprite = C2D2_CarregaSpriteSet("imgs/projAOE.png" , 0, 0);
 	Projetil::inicializar();
 }
 		
 void ProjetilB::atualizar(){
-	posY-=(int)(vel*dirx);	
-	posX-=(int)(vel*diry);
 	if(--decay <= 0)
 		alive = false;
 }

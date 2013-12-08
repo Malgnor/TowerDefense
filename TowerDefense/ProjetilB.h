@@ -7,9 +7,8 @@ class ProjetilB : public Projetil
 {
 private:
 	int decay;
-	double dirx, diry;
 public:
-	ProjetilB(GerenteAtor& _gerente, int _x, int _y, int _vel, int _dano, int _hp, double _dirx, double _diry);
+	ProjetilB(GerenteAtor& _gerente, int _x, int _y, int _dano);
 
 	int indice();
 	

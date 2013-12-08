@@ -40,6 +40,7 @@ int Torre::indice(){
 void Torre::inicializar()
 {
 	C2D2_DimensoesSprite(tSprite, &largura, &altura);
+	alvo = nullptr;
 }
 
 void Torre::vender()

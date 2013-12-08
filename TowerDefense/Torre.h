@@ -26,6 +26,8 @@ protected:
 	//Cooldown
 	int cd;
 
+	Ator* alvo;
+
 	bool alive;
 
 public:

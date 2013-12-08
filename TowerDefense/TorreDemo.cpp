@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 #include <c2d2/chien2d2.h>
+#include <c2d2\chien2d2primitivas.h>
 
 TorreDemo::TorreDemo(GerenteAtor& _gerente, int _x, int _y)
 	:Torre(_gerente, _x, _y, 0, 0)
@@ -44,7 +45,7 @@ void TorreDemo::inicializar(){
 }
 
 void TorreDemo::atualizar(){
-	Ator* alvo = gerente.maisPerto(posX, posY, alcance, INIMIGO);
+	alvo = gerente.maisPerto(posX, posY, alcance, INIMIGO);
 	switch (estado)
 	{
 	case RTF:
@@ -63,8 +64,13 @@ void TorreDemo::atualizar(){
 	}
 }
 
-void TorreDemo::desenhar(){	
+void TorreDemo::desenhar(){
 	C2D2_DesenhaSpriteCentro(tSprite, ind, posX, posY, largura, altura);
+#ifdef DEBUG
+	if(alvo != nullptr)
+		C2D2P_Linha(posX, posY, alvo->x(), alvo->y(), 255, 255, 255);
+	C2D2P_Linha(posX-largura/2, posY, posX-largura/2+(int)((float)cd/(float)RoF*32.0), posY, 255, 0, 0);
+#endif
 }
 
 void TorreDemo::finalizar(){
