@@ -31,6 +31,10 @@ void Projetil1::inicializar(){
 }
 		
 void Projetil1::atualizar(){
+	if(alvo == nullptr){
+		alive = false;
+		return;
+	}
 	if(!alvo->estaNoJogo()){
 		alvo = gerente.maisPerto(posX, posY, 100, INIMIGO);
 		if(alvo == nullptr){

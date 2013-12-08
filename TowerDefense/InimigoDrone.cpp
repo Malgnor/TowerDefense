@@ -93,10 +93,8 @@ void InimigoDrone::atualizar(){
 		
 void InimigoDrone::desenhar(){
 	C2D2_DesenhaSpriteCentro(iSprite, indiceVar, posX, posY, l(), a());
-#ifdef DEBUG
 	C2D2P_Retangulo(posX-9, posY-altura/2-9, posX+9, posY-altura/2-5, 0, 0, 0);
 	C2D2P_RetanguloPintado(posX-8, posY-altura/2-8, posX-8+(int)((float)vida/(float)vidaMax*16.0), posY-altura/2-6, 0, 255, 0);
-#endif
 }
 
 void InimigoDrone::finalizar(){

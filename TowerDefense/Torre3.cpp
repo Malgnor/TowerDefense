@@ -41,6 +41,7 @@ void Torre3::atualizar(){
 			estado = COOLDOWN;
 		} else {
 			cd = RoF/10;
+			estado = COOLDOWN;
 		}
 		break;
 	case COOLDOWN:

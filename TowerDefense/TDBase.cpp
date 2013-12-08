@@ -1,6 +1,7 @@
 #include "TDBase.h"
 
 #include "TorreB.h"
+#include "TorreMulti.h"
 #include "Torre2.h"
 #include "Torre3.h"
 
@@ -86,7 +87,7 @@ void TDBase::atualizar()
 	case PLAY:
 		timer++;
 		if(m->botoes[C2D2_MESQUERDO].ativo && mouseX > 575){
-			for(int j = 0; j < 3; j++){
+			for(int j = 0; j < QTDTORRES; j++){
 				if(C2D2_ColidiuQuadrados(625+j%2*75, 100+j/2*48, 32, 32, mouseX, mouseY, 1, 1)){
 					torreSelecionada = j+1;
 					pTorre = nullptr;
@@ -118,6 +119,11 @@ void TDBase::atualizar()
 					mapaTD.addTorre(mouseX, mouseY);
 					gAtor.adicionar(new TorreB(gAtor, mouseX, mouseY));
 					break;
+				case 4:
+					gold -= 200;
+					mapaTD.addTorre(mouseX, mouseY);
+					gAtor.adicionar(new TorreMulti(gAtor, mouseX, mouseY));
+					break;
 				default:
 					break;
 				}
@@ -148,9 +154,14 @@ void TDBase::atualizar()
 				tCusto = 100;
 				break;
 			case 3:
-				tAlcance = 100;
+				tAlcance = 70;
 				tRoF = 60;
 				tCusto = 150;
+				break;
+			case 4:
+				tAlcance = 125;
+				tRoF = 90;
+				tCusto = 200;
 				break;
 			default:
 				break;
@@ -278,7 +289,7 @@ void TDBase::desenhar()
 		C2D2_DesenhaSprite(heart, 1, 415+i*16, 580);
 	}
 
-	for(int j = 0; j < 3; j++)
+	for(int j = 0; j < QTDTORRES; j++)
 		C2D2_DesenhaSprite(torreSprite, j, 625+j%2*75, 100+j/2*48);
 	
 	if (torreSelecionada!=0)

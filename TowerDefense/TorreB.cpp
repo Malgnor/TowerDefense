@@ -1,5 +1,5 @@
 #include "TorreB.h"
-#include "ProjetilB.h"
+#include "ProjetilAOE.h"
 #include "GerenteAtor.h"
 
 #include <c2d2\chien2d2.h>
@@ -37,14 +37,15 @@ void TorreB::atualizar(){
 	case RTF:
 		if(alvo != nullptr){
 			//for(int r = 0; r <= 359; r+=15){
-			//	gerente.adicionar(new ProjetilB(gerente, posX, posY, 10, 25*(ind+1), 1, cos(r), sin(r)));
+			//	gerente.adicionar(new ProjetilAOE(gerente, posX, posY, 10, 25*(ind+1), 1, cos(r), sin(r)));
 			//}
-			gerente.adicionar(new ProjetilB(gerente, posX, posY, 10*(ind+1)));
+			gerente.adicionar(new ProjetilAOE(gerente, posX, posY, 10*(ind+1)));
 			CA2_TocaEfeito(aTiro, 0);
 			cd = RoF;
 			estado = COOLDOWN;
 		} else {
 			cd = RoF/10;
+			estado = COOLDOWN;
 		}
 	break;
 	case COOLDOWN:

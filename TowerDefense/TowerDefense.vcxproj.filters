@@ -144,10 +144,13 @@
     <ClCompile Include="Projetil1.cpp">
       <Filter>Source Files\Atores\Projéteis</Filter>
     </ClCompile>
-    <ClCompile Include="ProjetilB.cpp">
+    <ClCompile Include="TorreB.cpp">
+      <Filter>Source Files\Atores\Torres</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjetilAOE.cpp">
       <Filter>Source Files\Atores\Projéteis</Filter>
     </ClCompile>
-    <ClCompile Include="TorreB.cpp">
+    <ClCompile Include="TorreMulti.cpp">
       <Filter>Source Files\Atores\Torres</Filter>
     </ClCompile>
   </ItemGroup>
@@ -245,10 +248,13 @@
     <ClInclude Include="Projetil1.h">
       <Filter>Header Files\Atores\Projéteis</Filter>
     </ClInclude>
-    <ClInclude Include="ProjetilB.h">
+    <ClInclude Include="TorreB.h">
+      <Filter>Header Files\Atores\Torres</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjetilAOE.h">
       <Filter>Header Files\Atores\Projéteis</Filter>
     </ClInclude>
-    <ClInclude Include="TorreB.h">
+    <ClInclude Include="TorreMulti.h">
       <Filter>Header Files\Atores\Torres</Filter>
     </ClInclude>
   </ItemGroup>

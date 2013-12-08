@@ -4,4 +4,6 @@
 //Habilita/desabilita o editor de mapa
 #define DEBUG
 
+#define QTDTORRES 4
+
 #endif

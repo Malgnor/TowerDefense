@@ -2,7 +2,6 @@
 #include "Projetil1.h"
 #include "GerenteAtor.h"
 
-
 #include <c2d2\chien2d2.h>
 #include <c2d2\chien2d2primitivas.h>
 #include <c2d2\chienaudio2.h>
@@ -41,6 +40,7 @@ void Torre2::atualizar(){
 			estado = COOLDOWN;
 		} else {
 			cd = RoF/10;
+			estado = COOLDOWN;
 		}
 	break;
 	case COOLDOWN:

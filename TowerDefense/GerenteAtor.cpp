@@ -106,12 +106,12 @@ void GerenteAtor::desenhar()
 	}
 }
 
-Ator* GerenteAtor::maisPerto(int x, int y, int alcance, Tipo tipo){
+Ator* GerenteAtor::maisPerto(int x, int y, int alcance, Tipo tipo, Ator* notTarget){
 	float dis = (float)alcance;
 	Ator* alvo = nullptr;
 	for (Ator* ator : atores) 
 	{
-		if(ator->tipo() == tipo && ator->estaNoJogo()){
+		if(ator->tipo() == tipo && ator->estaNoJogo() && ator != notTarget){
 			int dx = x-ator->x();
 			int dy = y-ator->y();
 			float dd = sqrt((float)dx*dx+dy*dy);
@@ -124,6 +124,33 @@ Ator* GerenteAtor::maisPerto(int x, int y, int alcance, Tipo tipo){
 	return alvo;
 }
 
+Ator* GerenteAtor::maisPerto(int x, int y, int alcance, Tipo tipo, std::vector<Ator*> notTargets){
+	float dis = (float)alcance;
+	Ator* alvo = nullptr;
+	bool newTarget = true;
+	for (Ator* ator : atores) 
+	{
+		newTarget = true;
+		if(ator->tipo() == tipo && ator->estaNoJogo()){
+			if(!notTargets.empty())
+				for(Ator* notAtor : notTargets)
+					if(ator == notAtor){
+						newTarget = false;
+						break;
+					}
+			if(newTarget){
+				int dx = x-ator->x();
+				int dy = y-ator->y();
+				float dd = sqrt((float)dx*dx+dy*dy);
+				if ( dd <= dis){ 
+					dis = dd;
+					alvo = ator;
+				}
+			}
+		}
+	}
+	return alvo;
+}
 GerenteAtor::~GerenteAtor()
 {
 	if(atores.empty())

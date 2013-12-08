@@ -251,7 +251,7 @@ void Tutorial::desenhar()
 		case INTRO:
 			break;
 		case PRIMEIROSPASSOS:
-			for(int j = 1; j < 3; j++)
+			for(int j = 1; j < QTDTORRES; j++)
 				if(timer % 30 >= 15)
 					C2D2P_Retangulo(625+(j - 1) % 2 * 75, 100 + (j - 1) / 2 * 48, 658+(j - 1) % 2 * 75, 133 + (j - 1) / 2 * 48, 255, 0, 0);
 			break;

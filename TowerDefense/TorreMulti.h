@@ -1,12 +1,16 @@
-#ifndef _TORRE2_H_
-#define _TORRE2_H_
+#ifndef _TORREMULTI_H_
+#define _TORREMULTI_H_
 
 #include "torre.h"
+#include <vector>
 
-class Torre2 : public Torre
+class TorreMulti : public Torre
 {
+private:
+	std::vector<Ator*> alvos;
+
 public:	
-	Torre2(GerenteAtor& _gerente, int _x, int _y);
+	TorreMulti(GerenteAtor& _gerente, int _x, int _y);
 	
 	void aoColidir(Ator* ator);
 

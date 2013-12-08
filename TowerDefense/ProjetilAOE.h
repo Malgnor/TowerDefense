@@ -1,14 +1,14 @@
-#ifndef _ProjetilB_H_
-#define _ProjetilB_H_
+#ifndef _ProjetilAOE_H_
+#define _ProjetilAOE_H_
 
 #include "Projetil.h"
 
-class ProjetilB : public Projetil
+class ProjetilAOE : public Projetil
 {
 private:
 	int decay;
 public:
-	ProjetilB(GerenteAtor& _gerente, int _x, int _y, int _dano);
+	ProjetilAOE(GerenteAtor& _gerente, int _x, int _y, int _dano);
 
 	int indice();
 	
