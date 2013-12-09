@@ -10,6 +10,7 @@
 #include "Menu.h"
 #include "MenuButton.h"
 #include "MenuToggle.h"
+#include "MenuInicial.h"
 
 class MapEditor : public Tela
 {
@@ -19,6 +20,7 @@ private:
 	int tile, id;
 	int tahoma16, tahoma32, tahoma16r;
 	int qtdTiles;
+	miEstado estado;
 	std::string nomeMapa;
 	Mapa mapaTD;
 	MenuButton* btnExit;
@@ -27,8 +29,14 @@ private:
 	MenuButton* btnNew;
 	MenuButton* btnSave;
 	MenuButton* btnLoad;
+	MenuButton* btn0;
+	MenuButton* btn1;
+	MenuButton* btn2;
+	MenuButton* btn3;
+	MenuButton* btn4;
 	MenuToggle* btnNM;
 	std::vector <Menu*> menus;
+	std::vector <Menu*> menusMS;
 
 public:
 	Tela* proximaTela();

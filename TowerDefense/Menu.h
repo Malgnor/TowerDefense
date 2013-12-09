@@ -20,6 +20,8 @@ public:
 	std::string getName();
 	int altura();
 	int largura();
+	int x();
+	int y();
 	void mover(int x, int y);
 	void mudarCor(char* cor);
 	void mudarCor(double r, double g, double b);

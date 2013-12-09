@@ -30,6 +30,14 @@ int Menu::largura(){
 	return l;
 }
 
+int Menu::x(){
+	return posX;
+}
+
+int Menu::y(){
+	return posY;
+}
+
 void Menu::mover( int x, int y )
 {
 	posX = x;

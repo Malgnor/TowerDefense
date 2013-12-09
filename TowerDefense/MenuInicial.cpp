@@ -70,6 +70,7 @@ void MenuInicial::inicializar()
 	gAtor.adicionar(new TorreDemo(gAtor, 780, 580));
 	gAtor.adicionar(new TorreDemo(gAtor, 780, 20));
 	
+	menusMS.push_back(new MenuButton("Voltar", 400, 500, tahoma32));
 	string buffer = "";
 	int xpos = 0;
 	int ypos = -1;
@@ -93,7 +94,7 @@ void MenuInicial::inicializar()
 				if(buffer[buffer.size()-1] != '.')
 					continue;
 				buffer.pop_back(); //.
-				while(buffer.size() > 9) // Max 9 char
+				while(buffer.size() > 8) // Max 8 char
 					buffer.pop_back();
 				menusMS.push_back(new MenuButton(buffer, 140+xpos++%5*130, 90+(xpos % 5 == 0 ? ++ypos : ypos)*75, tahoma32));
 			}
@@ -102,7 +103,6 @@ void MenuInicial::inicializar()
 		}
 	}
 	closedir(dir);
-	menusMS.push_back(new MenuButton("Voltar", 400, 500, tahoma32));
 }
 
 void MenuInicial::atualizar()
