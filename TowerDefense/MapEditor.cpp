@@ -2,6 +2,7 @@
 #include "MapEditor.h"
 #include "TowerDefense.h"
 #include "MenuInicial.h"
+#include "c2d2f.h"
 
 #include <stdio.h>
 
@@ -14,9 +15,7 @@ Tela* MapEditor::proximaTela()
 
 	if (teclas[C2D2_ENCERRA].pressionado || btnExit->getEstado() == SOLTO)
 		return nullptr;	
-	if (teclas[C2D2_R].pressionado)
-		return new MapEditor();
-	if (teclas[C2D2_M].pressionado || btnTD->getEstado() == SOLTO)
+	if (btnTD->getEstado() == SOLTO)
 		return new TowerDefense(mapaTD.getNome().c_str());
 	if(btnBack->getEstado() == SOLTO)
 		return new MenuInicial();
@@ -37,9 +36,14 @@ void MapEditor::inicializar()
 	qtdTiles = 3;
 	id = 0;
 	tile = 0;
-
-	menus.push_back(btnTD = new MenuButton("TowerDefense", 700, 490, tahoma16));
-	menus.push_back(btnBack = new MenuButton("Menu Inicial", 700, 530, tahoma16));
+	nomeMapa = "";
+	
+	menus.push_back(btnNM = new MenuToggle("Clique aqui para nomear o mapa", 700, 390, tahoma16, DESATIVADO));
+	menus.push_back(btnNew = new MenuButton("Novo Mapa", 700, 420, tahoma16));
+	menus.push_back(btnLoad = new MenuButton("Carregar mapa", 700, 450, tahoma16));
+	menus.push_back(btnSave = new MenuButton("Salvar mapa", 700, 480, tahoma16));
+	menus.push_back(btnTD = new MenuButton("TowerDefense", 700, 510, tahoma16));
+	menus.push_back(btnBack = new MenuButton("Menu Inicial", 700, 540, tahoma16));
 	menus.push_back(btnExit = new MenuButton("Sair", 700, 570, tahoma16));
 }
 
@@ -49,13 +53,20 @@ void MapEditor::atualizar()
 	C2D2_Botao* teclas = C2D2_PegaTeclas();
 	mouseX = m->x;
 	mouseY = m->y;
-
-	if(teclas[C2D2_S].pressionado)
-		mapaTD.save();
-	if(teclas[C2D2_D].pressionado)
-		mapaTD.load();
-	if(teclas[C2D2_N].pressionado){
+	if(btnNM->getEstado() == ATIVADO){
+		stringInput(nomeMapa);
+		btnNM->mudarNome(nomeMapa);
+	}
+	if(btnSave->getEstado() == SOLTO)
+		mapaTD.save(nomeMapa);
+	if(btnLoad->getEstado() == SOLTO)
+		mapaTD.load(nomeMapa);
+	if(btnNew->getEstado() == SOLTO){
+		mapaTD.finalizar();
 		mapaTD = Mapa();
+		mapaTD.inicializar();
+		nomeMapa = "";
+		btnNM->mudarNome(nomeMapa);
 	}
 	if(teclas[C2D2_0].pressionado)
 		id = 0;
@@ -99,20 +110,18 @@ void MapEditor::desenhar()
 	for(int j = 0; j < qtdTiles; j++)
 		C2D2_DesenhaSprite(mapSprite, j, 625+j%2*75, 100+j/2*48);
 	C2D2P_Retangulo(625+tile % 2 * 75, 100 + tile / 2 * 48, 658+tile % 2 * 75, 133 + tile / 2 * 48, 0, 255, 0);
+
 	if(mouseX < 576 && mouseY < 576){
 		C2D2P_Retangulo((16+mouseX-mouseX%32)-16, (16+mouseY-mouseY%32)-16, (16+mouseX-mouseX%32)+16, (16+mouseY-mouseY%32)+16, 0, 255, 0);
 	}
+
 	int ytxt = 15;
 	C2D2_DesenhaTexto(tahoma32, 600, 32, "Map Editor", C2D2_TEXTO_ESQUERDA);
 	C2D2_DesenhaTexto(tahoma16, 32, 580, txttile, C2D2_TEXTO_ESQUERDA);
 	C2D2_DesenhaTexto(tahoma16, 600, ytxt++*20, "Mouse Esquerdo - Coloca tile", C2D2_TEXTO_ESQUERDA);
 	C2D2_DesenhaTexto(tahoma16, 600, ytxt++*20, "Mouse Direiro - Remove Tile", C2D2_TEXTO_ESQUERDA);
 	C2D2_DesenhaTexto(tahoma16, 600, ytxt++*20, "0-4 - Muda id", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(tahoma16, 600, ytxt++*20, "S - Salvar mapa", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(tahoma16, 600, ytxt++*20, "D - Carregar mapa", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(tahoma16, 600, ytxt++*20, "N - Novo mapa", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(tahoma16, 600, ytxt++*20, "R - Reset", C2D2_TEXTO_ESQUERDA);
-	C2D2_DesenhaTexto(tahoma16, 600, ytxt++*20, "M - Retorna ao TD", C2D2_TEXTO_ESQUERDA);
+
 	for(Menu* menu : menus){
 		menu->desenhar();
 	}

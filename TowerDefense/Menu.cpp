@@ -49,3 +49,8 @@ void Menu::mudarCor( double r, double g, double b )
 	this->g = g;
 	this->b = b;
 }
+
+void Menu::mudarNome(std::string _nome){
+	name = _nome;
+	C2D2_DimensoesTexto(fonte, name.c_str(), &l, &a);
+}

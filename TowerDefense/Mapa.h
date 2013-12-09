@@ -25,6 +25,7 @@ public:
 	void construir(int x, int y, int sprite, int id);
 	void save();
 	void load();
+	void save(std::string _nome);
 	void load(std::string _nome);
 	void finalizar();
 };

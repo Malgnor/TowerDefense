@@ -23,6 +23,7 @@ public:
 	void mover(int x, int y);
 	void mudarCor(char* cor);
 	void mudarCor(double r, double g, double b);
+	void mudarNome(std::string _nome);
 	virtual void atualizar() = 0;
 	virtual void desenhar() = 0;
 	virtual ~Menu(){};
