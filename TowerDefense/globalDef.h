@@ -5,4 +5,6 @@
 
 #define QTDTORRES 5
 
+enum mToggle { DESATIVADO, ATIVADO };
+
 #endif

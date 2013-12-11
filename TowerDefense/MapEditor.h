@@ -10,6 +10,7 @@
 #include "Menu.h"
 #include "MenuButton.h"
 #include "MenuToggle.h"
+#include "MenuMToggle.h"
 #include "MenuInicial.h"
 
 class MapEditor : public Tela
@@ -29,13 +30,14 @@ private:
 	MenuButton* btnNew;
 	MenuButton* btnSave;
 	MenuButton* btnLoad;
-	MenuButton* btn0;
-	MenuButton* btn1;
-	MenuButton* btn2;
-	MenuButton* btn3;
-	MenuButton* btn4;
+	MenuMToggle* btn0;
+	MenuMToggle* btn1;
+	MenuMToggle* btn2;
+	MenuMToggle* btn3;
+	MenuMToggle* btn4;
 	MenuToggle* btnNM;
 	std::vector <Menu*> menus;
+	std::vector <MenuMToggle*> menusID;
 	std::vector <Menu*> menusMS;
 
 public:

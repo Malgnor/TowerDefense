@@ -18,7 +18,9 @@ mToggle MenuToggle::getEstado()
 void MenuToggle::atualizar()
 {
 	C2D2_Mouse* m = C2D2_PegaMouse();
-	estado = C2D2_ColidiuQuadrados((int)(posX-l/2-3), posY, (int)((posX+l/2+3)-(posX-l/2-3)), a, m->x, m->y, 1, 1) && m->botoes[C2D2_MESQUERDO].pressionado ? estado == ATIVADO ? DESATIVADO : ATIVADO : estado;
+	if (C2D2_ColidiuQuadrados((int)(posX - l / 2 - 3), posY, (int)((posX + l / 2 + 3) - (posX - l / 2 - 3)), a, m->x, m->y, 1, 1) && m->botoes[C2D2_MESQUERDO].pressionado){
+		estado = estado == ATIVADO ? DESATIVADO : ATIVADO;
+	}
 }
 
 void MenuToggle::desenhar()

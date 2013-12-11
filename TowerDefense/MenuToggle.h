@@ -2,8 +2,7 @@
 #define _MENUTOGGLE_H_
 
 #include "Menu.h"
-
-enum mToggle {DESATIVADO, ATIVADO};
+#include "globalDef.h"
 
 class MenuToggle : public Menu
 {

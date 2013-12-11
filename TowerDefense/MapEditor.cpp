@@ -44,11 +44,11 @@ void MapEditor::inicializar()
 	menus.push_back(btnTD = new MenuButton("TowerDefense", 700, 510, tahoma16));
 	menus.push_back(btnBack = new MenuButton("Menu Inicial", 700, 540, tahoma16));
 	menus.push_back(btnExit = new MenuButton("Sair", 700, 570, tahoma16));
-	menus.push_back(btn0 = new MenuButton("0", 625, 350, tahoma16));
-	menus.push_back(btn1 = new MenuButton("1", 650, 350, tahoma16));
-	menus.push_back(btn2 = new MenuButton("2", 675, 350, tahoma16));
-	menus.push_back(btn3 = new MenuButton("3", 700, 350, tahoma16));
-	menus.push_back(btn4 = new MenuButton("4", 725, 350, tahoma16));
+	menus.push_back(btn0 = new MenuMToggle("0", 625, 350, tahoma16, menusID, ATIVADO));
+	menus.push_back(btn1 = new MenuMToggle("1", 650, 350, tahoma16, menusID));
+	menus.push_back(btn2 = new MenuMToggle("2", 675, 350, tahoma16, menusID));
+	menus.push_back(btn3 = new MenuMToggle("3", 700, 350, tahoma16, menusID));
+	menus.push_back(btn4 = new MenuMToggle("4", 725, 350, tahoma16, menusID));
 	
 	menusMS.push_back(new MenuButton("Voltar", 400, 500, tahoma32));
 	string buffer = "";
@@ -120,15 +120,15 @@ void MapEditor::atualizar()
 			nomeMapa = "";
 			btnNM->mudarNome("Clique aqui para nomear o mapa");
 		}
-		if(btn0->getEstado() == SOLTO)
+		if (btn0->getEstado() == ATIVADO)
 			id = 0;
-		if(btn1->getEstado() == SOLTO)
+		if (btn1->getEstado() == ATIVADO)
 			id = 1;
-		if(btn2->getEstado() == SOLTO)
+		if (btn2->getEstado() == ATIVADO)
 			id = 2;
-		if(btn3->getEstado() == SOLTO)
+		if (btn3->getEstado() == ATIVADO)
 			id = 3;
-		if(btn4->getEstado() == SOLTO)
+		if (btn4->getEstado() == ATIVADO)
 			id = 4;
 		if(m->botoes[C2D2_MESQUERDO].ativo && mouseX > 575){
 			for(int j = 0; j < qtdTiles; j++){

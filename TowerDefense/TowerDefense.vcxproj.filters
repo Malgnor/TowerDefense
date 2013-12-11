@@ -159,6 +159,9 @@
     <ClCompile Include="TorreF.cpp">
       <Filter>Source Files\Atores\Torres</Filter>
     </ClCompile>
+    <ClCompile Include="MenuMToggle.cpp">
+      <Filter>Source Files\Menus</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameLoop.h">
@@ -268,6 +271,9 @@
     </ClInclude>
     <ClInclude Include="TorreF.h">
       <Filter>Header Files\Atores\Torres</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuMToggle.h">
+      <Filter>Header Files\Menus</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
