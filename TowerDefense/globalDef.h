@@ -12,6 +12,8 @@ enum Tipo { TORRE, PROJETIL, INIMIGO, COIN, SCOLISAO };
 
 enum iDirecao { iCIMA, iBAIXO, iESQUERDA, iDIREITA, iPARADO };
 
+enum orientacao {HORIZONTAL, VERTICAL};
+
 enum mToggle { DESATIVADO, ATIVADO };
 
 enum mButton { NAOPRESSIONADO, PRESSIONADO, SOLTO };

@@ -534,31 +534,57 @@ void TowerDefense::formation1()
 
 void TowerDefense::formation2()
 {
-	gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 0, 8, 1, 250*(timer/3600+1), 25, 2, this));
-	gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 0, -8, 1, 250*(timer/3600+1), 25, 2, this));
+	if (mapaTD.getOrientacao() == HORIZONTAL){
+		gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 0, 8, 1, 250 * (timer / 3600 + 1), 25, 2, this));
+		gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 0, -8, 1, 250 * (timer / 3600 + 1), 25, 2, this));
+	} else{
+		gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 8, 0, 1, 250 * (timer / 3600 + 1), 25, 2, this));
+		gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, -8, 0, 1, 250 * (timer / 3600 + 1), 25, 2, this));
+	}
 }
 
 void TowerDefense::formation3()
 {
-	gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 15, 0, 1, 450*(timer/3600+1), 35, 3, this));
-	gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 0, 8, 1, 450*(timer/3600+1), 35, 3, this));
-	gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 0, -8, 1, 450*(timer/3600+1), 35, 3, this));
+	if (mapaTD.getOrientacao() == HORIZONTAL){
+		gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 15, 0, 1, 450 * (timer / 3600 + 1), 35, 3, this));
+		gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 0, 8, 1, 450 * (timer / 3600 + 1), 35, 3, this));
+		gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 0, -8, 1, 450 * (timer / 3600 + 1), 35, 3, this));
+	} else{
+		gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 0, 15, 1, 450 * (timer / 3600 + 1), 35, 3, this));
+		gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 8, 0, 1, 450 * (timer / 3600 + 1), 35, 3, this));
+		gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, -8, 0, 1, 450 * (timer / 3600 + 1), 35, 3, this));
+	}
 }
 
 void TowerDefense::formation4()
 {
-    gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 0, 0, 1, 600*(timer/3600+1), 50, 4, this));
-    gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 30, 0, 1, 600*(timer/3600+1), 50, 4, this));
-    gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 15, 8, 1, 600*(timer/3600+1), 50, 4, this));
-    gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 15, -8, 1, 600*(timer/3600+1), 50, 4, this));
+	if (mapaTD.getOrientacao() == HORIZONTAL){
+		gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 0, 0, 1, 600 * (timer / 3600 + 1), 50, 4, this));
+		gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 30, 0, 1, 600 * (timer / 3600 + 1), 50, 4, this));
+		gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 15, 8, 1, 600 * (timer / 3600 + 1), 50, 4, this));
+		gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 15, -8, 1, 600 * (timer / 3600 + 1), 50, 4, this));
+	} else {
+		gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 0, 0, 1, 600 * (timer / 3600 + 1), 50, 4, this));
+		gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 0, 30, 1, 600 * (timer / 3600 + 1), 50, 4, this));
+		gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 8, 15, 1, 600 * (timer / 3600 + 1), 50, 4, this));
+		gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, -8, 15, 1, 600 * (timer / 3600 + 1), 50, 4, this));
+	}
+
 }
 
 void TowerDefense::formation5()
 {
-	gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 0, 8, 1, 720*(timer/3600+1), 50, 5, this));
-	gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 0, -8, 1, 720*(timer/3600+1), 50, 5, this));
-	gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 15, 8, 1, 720*(timer/3600+1), 50, 5, this));
-	gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 15, -8, 1, 720*(timer/3600+1), 50, 5, this));
+	if (mapaTD.getOrientacao() == HORIZONTAL){
+		gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 0, 8, 1, 720 * (timer / 3600 + 1), 50, 5, this));
+		gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 0, -8, 1, 720 * (timer / 3600 + 1), 50, 5, this));
+		gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 15, 8, 1, 720 * (timer / 3600 + 1), 50, 5, this));
+		gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 15, -8, 1, 720 * (timer / 3600 + 1), 50, 5, this));
+	} else{
+		gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 8, 0, 1, 720 * (timer / 3600 + 1), 50, 5, this));
+		gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, -8, 0, 1, 720 * (timer / 3600 + 1), 50, 5, this));
+		gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, 8, 15, 1, 720 * (timer / 3600 + 1), 50, 5, this));
+		gAtor.adicionar(new InimigoDrone(gAtor, mapaTD, -8, 15, 1, 720 * (timer / 3600 + 1), 50, 5, this));
+	}
 }
 
 void TowerDefense::queen()

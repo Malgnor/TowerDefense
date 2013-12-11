@@ -11,7 +11,7 @@
 using namespace std;
 
 Mapa::Mapa()
-	:initX(16), initY(304), nome("")
+:initX(16), initY(304), nome(""), ori(HORIZONTAL)
 {
 	for(int x = 0; x < 18; x++){
 		for(int y = 0; y < 18; y++){
@@ -41,6 +41,10 @@ void Mapa::getInit(int &x, int &y){
 
 string Mapa::getNome(){
 	return nome;
+}
+
+orientacao Mapa::getOrientacao(){
+	return ori;
 }
 
 unsigned int Mapa::conteudo( int x, int y )
@@ -93,6 +97,7 @@ void Mapa::save()
 	}
 	ofile << "]" << endl;
 	ofile << "( " << initX << " , " << initY << " )" << endl;
+	ofile << (ori == HORIZONTAL ? "H" : "V") << endl;
 	ofile.close();
 	/*
 	C2D2_RemoveSpriteSet(sprite);
@@ -117,6 +122,8 @@ void Mapa::load()
 	}
 	ifile >> buffer;
 	ifile >> buffer >> initX >> buffer >> initY >> buffer;
+	ifile >> buffer;
+	ori = buffer == "H" ? HORIZONTAL : VERTICAL;
 	ifile.close();
 	/*
 	C2D2_RemoveSpriteSet(sprite);
@@ -148,6 +155,7 @@ void Mapa::save(string _nome)
 	}
 	ofile << "]" << endl;
 	ofile << "( " << initX << " , " << initY << " )" << endl;
+	ofile << (ori == HORIZONTAL ? "H" : "V") << endl;
 	ofile.close();
 }
 
@@ -165,6 +173,8 @@ void Mapa::load(string _nome)
 	}
 	ifile >> buffer;
 	ifile >> buffer >> initX >> buffer >> initY >> buffer;
+	ifile >> buffer;
+	ori = buffer == "H" ? HORIZONTAL : VERTICAL;
 	ifile.close();
 	/*
 	C2D2_RemoveSpriteSet(sprite);

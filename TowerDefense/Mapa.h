@@ -2,6 +2,7 @@
 #define _MAPA_H_
 
 #include <string>
+#include "globalDef.h"
 
 class Mapa
 {
@@ -10,6 +11,7 @@ private:
 	int initX, initY;
 	int sprite;
 	std::string nome;
+	orientacao ori;
 
 public:
 	Mapa();
@@ -17,6 +19,7 @@ public:
 	void desenhar();
 	void getInit(int &x, int &y);
 	std::string getNome();
+	orientacao getOrientacao();
 	unsigned int conteudo(int x, int y);
 	unsigned int conteudo32(int x, int y);
 	int sprite32(int x, int y);
