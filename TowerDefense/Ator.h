@@ -5,8 +5,6 @@
 
 class GerenteAtor;
 
-enum Tipo {TORRE, PROJETIL, INIMIGO, COIN, SCOLISAO};
-
 class Ator
 {
 	protected:

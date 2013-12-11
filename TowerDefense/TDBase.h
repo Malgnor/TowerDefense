@@ -10,10 +10,9 @@
 #include "ControladorVolume.h"
 #include "Menu.h"
 #include "MenuButton.h"
+#include "globalDef.h"
 
 class Torre;
-
-enum tdEstado {PLAY, PAUSE, PAUSEF1, GAVEOVER, WIN};
 
 class TDBase : public Tela
 {

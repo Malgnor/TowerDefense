@@ -2,6 +2,7 @@
 #define _MENU_H_
 
 #include <string>
+
 class Menu
 {
 protected:

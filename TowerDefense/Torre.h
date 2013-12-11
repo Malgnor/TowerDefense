@@ -4,14 +4,11 @@
 #include "Ator.h"
 #include "Projetil.h"
 
-//RTF = Ready to fire
-enum tESTADO { RTF, COOLDOWN };
-
 class Torre : public Ator
 {
 protected:
 	int posX, posY, alcance;
-	tESTADO estado;
+	tEstado estado;
 	int tSprite;
 	int ind;
 	int largura;

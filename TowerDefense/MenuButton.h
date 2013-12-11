@@ -2,8 +2,7 @@
 #define _MENUBUTTON_H_
 
 #include "Menu.h"
-
-enum mButton { NAOPRESSIONADO, PRESSIONADO, SOLTO};
+#include "globalDef.h"
 
 class MenuButton : public Menu
 {
