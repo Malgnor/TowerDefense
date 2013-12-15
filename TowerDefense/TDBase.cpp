@@ -346,6 +346,9 @@ void TDBase::desenhar()
 	for(Menu* menu : menus){
 		menu->desenhar();
 	}
+	if (magMenu){
+		C2D2P_Circulo(mouseX, mouseY, magneticRadius, 255, 255, 255);
+	}
 }
 
 void TDBase::finalizar()
@@ -362,14 +365,6 @@ void TDBase::finalizar()
 	C2D2_RemoveSpriteSet(torreSprite);
 	C2D2_RemoveFonte(tahoma16);
 	C2D2_RemoveFonte(tahoma32);
-}
-
-void TDBase::desenhaMouse()
-{
-	if(magMenu){
-		C2D2P_Circulo(mouseX, mouseY, magneticRadius, 255, 255, 255);
-	}
-	C2D2_DesenhaSprite(mouseSprite, 0, mouseX, mouseY);
 }
 
 void TDBase::posMouse(int &x, int &y){

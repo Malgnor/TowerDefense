@@ -2,7 +2,6 @@
 #define _MENUTOGGLE_H_
 
 #include "Menu.h"
-#include "globalDef.h"
 
 class MenuToggle : public Menu
 {

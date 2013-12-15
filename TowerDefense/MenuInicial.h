@@ -7,7 +7,6 @@
 #include "MenuButton.h"
 #include "GerenteAtor.h"
 #include "ControladorVolume.h"
-#include "globalDef.h"
 
 #include <vector>
 

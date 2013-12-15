@@ -339,6 +339,6 @@ void Tutorial::desenhar()
 	case WIN:
 		break;
 	}
-	desenhaMouse();
+	desenhaMouse(mouseSprite);
 }
 

@@ -3,6 +3,8 @@
 
 #include <c2d2/chien2d2.h>
 
+#include "globalDef.h"
+
 #include <string>
 
 using namespace std;
@@ -11,8 +13,10 @@ bool stringInput(string& x);
 bool stringFInput(string& x, char* txt = "", char* sufixo = "", char* prefixo = "");
 string stringFInput(char* txt = "", char* sufixo = "", char* prefixo = "");
 
-bool desenhaTextoML(unsigned int fonte, int x, int y, char* texto, int alinhamento = C2D2_TEXTO_CENTRALIZADO, char split = '\n');
-bool dimensoesTextoML(unsigned int fonte, char* texto, int &a, char split = '\n');
+bool desenhaTextoML(int& fonte, int x, int y, char* texto, int alinhamento = C2D2_TEXTO_CENTRALIZADO, char split = '\n');
+bool dimensoesTextoML(int& fonte, char* texto, int &a, char split = '\n');
+
+bool desenhaMouse(int& sprite);
 
 /*
 void dRetangulo(int x, int y, int largura, int altura, char* cor);

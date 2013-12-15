@@ -1,9 +1,8 @@
 #include "c2d2f.h"
 
-#include "globalDef.h"
-
 #include "color.h"
 
+#include <stdlib.h>
 #include <c2d2/chien2d2primitivas.h>
 
 bool stringInput( string& x ){
@@ -120,7 +119,7 @@ std::string stringFInput( char* txt , char* sufixo, char* prefixo)
 	return stringFInput(x, txt, sufixo, prefixo) ? x : "";
 }
 
-bool desenhaTextoML( unsigned int fonte, int x, int y, char* texto, int alinhamento /*= C2D2_TEXTO_CENTRALIZADO*/, char split /*= '\n'*/ )
+bool desenhaTextoML( int& fonte, int x, int y, char* texto, int alinhamento /*= C2D2_TEXTO_CENTRALIZADO*/, char split /*= '\n'*/ )
 {
 	if(fonte == 0)
 		return false;
@@ -143,7 +142,7 @@ bool desenhaTextoML( unsigned int fonte, int x, int y, char* texto, int alinhame
 	return true;
 }
 
-bool dimensoesTextoML(unsigned int fonte, char* texto, int &a, char split){
+bool dimensoesTextoML(int& fonte, char* texto, int &a, char split){
 	if(fonte == 0)
 		return false;
 	int h = 0;
@@ -161,6 +160,16 @@ bool dimensoesTextoML(unsigned int fonte, char* texto, int &a, char split){
 		i++;
 	}
 	a = h*aa;
+	return true;
+}
+
+bool desenhaMouse(int& sprite){
+	C2D2_Mouse* mouse = C2D2_PegaMouse();
+	if (sprite == 0){
+		C2D2P_RetanguloPintado(mouse->x-1, mouse->y-1, mouse->x + 1, mouse->y + 1, rand() % 256, rand() % 256, rand() % 256);
+		return false;
+	}
+	C2D2_DesenhaSprite(sprite, 0, mouse->x, mouse->y);
 	return true;
 }
 

@@ -4,7 +4,6 @@
 #include "TDBase.h"
 #include "Inimigo.h"
 #include "Coin.h"
-#include "globalDef.h"
 
 class Tutorial : public TDBase
 {

@@ -17,9 +17,9 @@ class MapEditor : public Tela
 {
 private:
 	int mapSprite, mouseSprite;
+	int tahoma16, tahoma32, tahoma16r;
 	int mouseX, mouseY;
 	int tile, id;
-	int tahoma16, tahoma32, tahoma16r;
 	int qtdTiles;
 	miEstado estado;
 	std::string nomeMapa;

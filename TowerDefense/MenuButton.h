@@ -2,7 +2,6 @@
 #define _MENUBUTTON_H_
 
 #include "Menu.h"
-#include "globalDef.h"
 
 class MenuButton : public Menu
 {

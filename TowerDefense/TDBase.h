@@ -10,7 +10,6 @@
 #include "ControladorVolume.h"
 #include "Menu.h"
 #include "MenuButton.h"
-#include "globalDef.h"
 
 class Torre;
 
@@ -22,12 +21,9 @@ protected:
 	tdEstado estado;
 	int mouseX, mouseY;
 	int magneticRadius;
-	int magnet;
-	bool magMenu;
-	int mouseSprite;
-	int torreSprite;
+	int magnet, mouseSprite, torreSprite, eheart, heart, goldcoins;
 	int tahoma16, tahoma32;
-	int eheart, heart, goldcoins;
+	bool magMenu;
 	int chances;
 	int gold;
 	int torreSelecionada;
@@ -52,7 +48,6 @@ public:
 
 	void Lucro(int money);
 	void DanoRecebido(int porrada);
-	void desenhaMouse();
 	void posMouse(int &x, int &y);
 	int magRadius();
 

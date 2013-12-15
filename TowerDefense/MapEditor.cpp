@@ -1,4 +1,3 @@
-#include "globalDef.h"
 #include "MapEditor.h"
 #include "TowerDefense.h"
 #include "c2d2f.h"
@@ -222,7 +221,7 @@ void MapEditor::desenhar()
 		}
 		break;
 	}
-	C2D2_DesenhaSprite(mouseSprite, 0, mouseX, mouseY);
+	desenhaMouse(mouseSprite);
 }
 
 void MapEditor::finalizar()

@@ -1,5 +1,5 @@
-#include "globalDef.h"
 #include "color.h"
+#include "c2d2f.h"
 
 #include "dirent.h"
 
@@ -172,7 +172,7 @@ void MenuInicial::desenhar()
 			}
 		}
 	}
-	C2D2_DesenhaSprite(mouseSprite, 0, mouseX, mouseY);
+	desenhaMouse(mouseSprite);
 }
 
 void MenuInicial::finalizar()

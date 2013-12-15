@@ -1,6 +1,8 @@
 #ifndef _CONTROLADORVOLUME_H_
 #define _CONTROLADORVOLUME_H_
 
+#include "globalDef.h"
+
 class ControladorVolume
 {
 private:

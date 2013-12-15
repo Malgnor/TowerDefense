@@ -1,5 +1,7 @@
 #pragma once
 
+#include "globalDef.h"
+
 class Tela
 {
 	public:

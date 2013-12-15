@@ -1,5 +1,3 @@
-#include "globalDef.h"
-
 #include "c2d2f.h"
 #include "color.h"
 
@@ -524,7 +522,7 @@ void TowerDefense::desenhar(){
 	sprintf_s(txt, "%02d:%02d", timer/3600, (timer/60)%60);
 	C2D2_DesenhaTexto(tahoma16, 240, 580, txt, C2D2_TEXTO_CENTRALIZADO);
 
-	desenhaMouse();
+	desenhaMouse(mouseSprite);
 }
 
 void TowerDefense::formation1()
